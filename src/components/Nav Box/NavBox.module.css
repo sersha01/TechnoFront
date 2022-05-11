@@ -1,0 +1,9 @@
+.navItems:hover {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+.navSelected {
+    height: 100%;
+    background: var(--info);
+}
