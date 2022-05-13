@@ -5,3 +5,12 @@ p {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
 }
+
+svg{
+    fill: var(--dark)
+}
+
+
+.hoverdiv:hover{
+    background-color: var(--grey)
+}

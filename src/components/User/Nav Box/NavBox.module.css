@@ -6,4 +6,10 @@
 .navSelected {
     height: 100%;
     background: var(--info);
+    z-index: 1;
+}
+
+a{
+    text-decoration: none;
+    color: var(--dark);
 }

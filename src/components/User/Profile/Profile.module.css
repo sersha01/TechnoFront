@@ -25,11 +25,14 @@
 
 .inputField {
     background: var(--light);
+
 }
 
 .label {
     color: var(--dark);
     font-size: 12px;
+    padding: 0;
+    margin: 0;
 }
 
 .textarea {
