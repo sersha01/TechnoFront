@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom'
 
 function Tasks() {
   return (
-    <Row className={`m-0 px-3 rounded-2 py-3 ${style.tasks}`}>
+    <Row className={`m-0 px-3 rounded-2 bg py-3 ${style.tasks}`}>
       <Col xs={12} className="text-start">
         <h2>Tasks</h2>
       </Col>

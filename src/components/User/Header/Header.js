@@ -1,11 +1,7 @@
 //Bootstrap
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-// icons
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
-import ForumRoundedIcon from "@mui/icons-material/ForumRounded";
-import BookmarkRoundedIcon from "@mui/icons-material/BookmarkRounded";
+
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
@@ -18,26 +14,12 @@ function Header() {
     <Row className={`mx-0 px-5 bs py-2 ${style.header}`}>
       <Col md={6}>
         <Row className="m-0">
-          <Col md={5}>
-            <img src={light} width="55%" height="100%" className="cp"></img>
+          <Col md={6} className="d-flex">
+            <img src={light} width="35%" className="cp me-2"></img>
+            <h3>BROCAMP</h3>
           </Col>
-          <Col md={7} className="d-flex justify-contend-start">
-            <HomeRoundedIcon
-              className={`cp p-2 rounded-3 mx-2 ${style.icons}`}
-              sx={{ fontSize: 40 }}
-            />
-            <GroupsRoundedIcon
-              className={`cp p-2 rounded-3 mx-2 ${style.icons}`}
-              sx={{ fontSize: 40 }}
-            />
-            <ForumRoundedIcon
-              className={`cp p-2 rounded-3 mx-2 ${style.icons}`}
-              sx={{ fontSize: 40 }}
-            />
-            <BookmarkRoundedIcon
-              className={`cp p-2 rounded-3 mx-2 ${style.icons}`}
-              sx={{ fontSize: 40 }}
-            />
+          <Col md={6} className="d-flex">
+            <h3 className="ms-5">Hello Wafi</h3>
           </Col>
         </Row>
       </Col>
@@ -77,8 +59,34 @@ function Header() {
           </Col>
         </Row>
       </Col>
+      
     </Row>
   );
 }
 
 export default Header;
+
+// icons
+// import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+// import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
+// import ForumRoundedIcon from "@mui/icons-material/ForumRounded";
+// import BookmarkRoundedIcon from "@mui/icons-material/BookmarkRounded";
+
+{
+  /* <HomeRoundedIcon
+              className={`cp p-2 rounded-3 mx-2 ${style.icons}`}
+              sx={{ fontSize: 40 }}
+            />
+            <GroupsRoundedIcon
+              className={`cp p-2 rounded-3 mx-2 ${style.icons}`}
+              sx={{ fontSize: 40 }}
+            />
+            <ForumRoundedIcon
+              className={`cp p-2 rounded-3 mx-2 ${style.icons}`}
+              sx={{ fontSize: 40 }}
+            />
+            <BookmarkRoundedIcon
+              className={`cp p-2 rounded-3 mx-2 ${style.icons}`}
+              sx={{ fontSize: 40 }}
+            /> */
+}

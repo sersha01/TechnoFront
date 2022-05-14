@@ -20,7 +20,7 @@ const UserTasksList = () => {
         </Col>
         <Col
           md={8}
-          className="bg rounded-3 p-0 mx-5 pb-5 mb-3 bs bglight"
+          className="bg rounded-3 p-0 mx-5 pb-5 mb-3 bs bg"
         >
 
           <Tasks/>

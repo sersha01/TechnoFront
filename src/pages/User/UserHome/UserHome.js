@@ -1,8 +1,10 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Header from "../../../components/User/Header/Header";
+import Header2 from "../../../components/User/Header2/Header2";
 import NavBox from "../../../components/User/Nav Box/NavBox";
-import Notification from "../../../components/User/Notification/Notification"
+import Notification from "../../../components/User/Notification/Notification";
+import MySpace from "../../../components/User/Space/MySpace";
 
 const UserHome = () => {
   return (
@@ -14,11 +16,14 @@ const UserHome = () => {
             <NavBox />
           </Row>
           <Row className="mt-4 bg rounded-3 mb-5 bs">
-            <Notification/>
+            <Notification />
           </Row>
         </Col>
-        <Col md={8} className="bg rounded-3 p-0 mx-5 pb-5 mb-3 bs rightdiv">
-          
+        <Col
+          md={8}
+          className="bg rounded-3 p-0 mx-5 pb-5 mb-3 bs rightdiv"
+        >
+          <MySpace/>
         </Col>
       </Row>
     </Container>
