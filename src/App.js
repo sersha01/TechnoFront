@@ -6,6 +6,7 @@ import UserProfile from "./pages/User/UserProfile/UserProfile";
 import UserTasks from "./pages/User/UserTasks/UserTasks";
 import UserTasksList from "./pages/User/UserTasksList/UserTasksList";
 import UserPayments from "./pages/User/UserPayments/UserPayments";
+import UserReg from "./pages/User/UserLogin/UserReg";
 import "./App.css";
 
 function App() {

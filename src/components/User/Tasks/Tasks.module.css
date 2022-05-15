@@ -8,6 +8,7 @@
 
 .tableHeadText {
     color: var(--light);
+    
 }
 
 .tableBody {
@@ -16,6 +17,7 @@
 
 .tableBodyText {
     color: var(--dark);
+    font-size: 18px;
 }
 
 /* {

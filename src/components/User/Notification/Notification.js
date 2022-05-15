@@ -3,12 +3,14 @@ import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import style from "./Notification.module.css"
 import style from "./Notification.module.css";
+import { FaBell } from 'react-icons/fa'
+
 
 function Notification() {
   return (
     <Row className="m-0 rounded-3 py-4  ">
       <Col className={style.notification}>
-        <h5 className="ms-3 mb-3">Notification</h5>
+        <h5 className="ms-3 mb-3">Notifications <FaBell/></h5>
       </Col>
 
       <Col
@@ -57,7 +59,7 @@ function Notification() {
             </svg>
           </Col>
           <Col className="text-start" xs={10}>
-            <h6 className="m-0">Notification</h6>
+            <h6 className="m-0">Notification </h6>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           </Col>
         </Row>
