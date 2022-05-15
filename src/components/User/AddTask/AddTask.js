@@ -59,7 +59,7 @@ const AddTask = () => {
                   variant="outlined"
                 />
               </Row>
-              <Row className="my-5 ">
+              <Row className="">
                 <CreateTodo/>
               </Row>
             </Box>

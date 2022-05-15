@@ -60,3 +60,8 @@ Link {
   color: var(--light)!important;
   width: 150px;
 }
+
+.navitems{
+  font-size: 17px;
+  font-weight: 700;
+}

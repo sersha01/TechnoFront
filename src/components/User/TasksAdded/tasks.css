@@ -58,7 +58,6 @@ p {
   grid-template-columns: repeat(1, minmax(auto, 320px));
   row-gap: 2em;
   column-gap: 3em;
-  margin: 3em 0;
 }
 
 .grid .flex {

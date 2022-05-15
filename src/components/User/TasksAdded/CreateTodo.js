@@ -55,7 +55,7 @@ function CreateTodo() {
 
   return (
     <>
-      <div className="box ">
+      <div className="box">
         <div className="container-fluid m-0 p-0 d-flex justify-content-center">
           <TextField
             id="outlined-basic"

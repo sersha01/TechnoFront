@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import style from NavBox.module.css
 import style from "./NavBox.module.css";
 import { Link } from "react-router-dom";
-import { FaHome, FaRupeeSign, FaTasks, FaUserAlt } from "react-icons/fa";
 
 function NavBox() {
   return (
@@ -15,9 +14,9 @@ function NavBox() {
             xs={12}
           >
             <Col className="my-2 p-0" xs={11}>
-              <b>
-                <FaHome className="iconss" /> My Space 
-              </b>
+              <p className="navitems">
+                My Space 
+              </p>
             </Col>
             <Col className="ps-2 " xs={1}>
               <div
@@ -32,9 +31,9 @@ function NavBox() {
             xs={12}
           >
             <Col className="my-2 p-0" xs={11}>
-              <b>
-                <FaUserAlt className="iconss" /> My Profile 
-              </b>
+              <p className="navitems">
+                 My Profile 
+              </p>
             </Col>
             <Col className="ps-2 " xs={1}>
               <div className={`px-2  ${(style.navSelected, style.navItems)}`}>
@@ -49,9 +48,9 @@ function NavBox() {
             xs={12}
           >
             <Col className="my-2 p-0" xs={11}>
-              <b>
-                 <FaTasks className="iconss" /> My Tasks
-              </b>
+              <p className="navitems">
+                My Tasks
+              </p>
             </Col>
             <Col className="ps-2 " xs={1}>
               <div className={`px-2  ${(style.navSelected, style.navItems)}`}>
@@ -66,9 +65,9 @@ function NavBox() {
             xs={12}
           >
             <Col className="my-2 p-0" xs={11}>
-              <b>
-                <FaRupeeSign className="iconss" /> My Payments
-              </b>
+              <p className="navitems">
+                My Payments
+              </p>
             </Col>
             <Col className="ps-2 " xs={1}>
               <div className={`px-2  ${(style.navSelected, style.navItems)}`}>
