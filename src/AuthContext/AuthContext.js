@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
         const password= e.target.password.value;
         await axios.post('http://127.0.0.1:8000/token/', {username,password}).then((res)=>{
             setAuthTokens(res.data);
-            setUser(JSON.stringify(res.data));
+            setUser(jwt_decode(JSON.stringify(res.data)));
             localStorage.setItem('authTokens', JSON.stringify(res.data));
             navigate('/');
         })
