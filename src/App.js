@@ -11,11 +11,16 @@ import UserReg from "./pages/User/UserLogin/UserReg";
 import { AuthProvider } from "./AuthContext/AuthContext";
 import { PrivateRoute } from "./Utils/PrivateRoute";
 import "./App.css";
+import AdvisorHome from "./pages/Advisor/AdvisorHome/AdvisorHome";
+import AdvisorProfile from "./pages/Advisor/AdvisorProfile/AdvisorProfile";
+import AdvisorStudents from "./pages/Advisor/AdvisorStudents/AdvisorStudents";
+import AdvisorWork from "./pages/Advisor/AdvisorWork/AdvisorWork";
+import AdvisorTasksList from "./pages/Advisor/AdvisorTasksList/AdvisorTasksList";
+import AdvisorTask from "./pages/Advisor/AdvisorTask/AdvisorTask";
 
 function App() {
   return (
     <>
-    
       <BrowserRouter>
         <AuthProvider>
           <Routes>
@@ -35,13 +40,15 @@ function App() {
                 </PrivateRoute>
               }
             />
-            {/* <PrivateRoute>
-            <Route path="/" element={<UserHome />} />
-            <Route path="/taskslist" element={<UserTasksList />} />
-            <Route path="/taskslist/task" element={<UserTasks />} />
-            <Route path="/profile" element={<UserProfile />} />
-            <Route path="/payment" element={<UserPayments />} />
-            </PrivateRoute> */}
+
+
+          <Route path="/advisors" element={<AdvisorHome />}></Route>
+          <Route path="/advisors/profile" element={<AdvisorProfile />}></Route>
+          <Route path="/advisors/students"  element={<AdvisorStudents />}></Route>
+          <Route path="/advisors/work" element={<AdvisorWork />}></Route>
+          <Route path="/advisors/work/taskslist" element={<AdvisorTasksList />}></Route>
+          <Route path="/advisors/work/tasks" element={<AdvisorTask />}></Route>
+
           </Routes>
         </AuthProvider>
       </BrowserRouter>

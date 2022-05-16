@@ -38,6 +38,30 @@ body {
   background: var(--grey);
 }
 
+.bgdark {
+  background: var(--dark);
+}
+
 Link {
   text-decoration: none;
+}
+
+.submitProfileDiv {
+  display: flex;
+  justify-content: center;
+}
+
+.submitProfile {
+  width: 150px;
+}
+
+.addtask{
+  background: var(--dark)!important;
+  color: var(--light)!important;
+  width: 150px;
+}
+
+.navitems{
+  font-size: 17px;
+  font-weight: 700;
 }

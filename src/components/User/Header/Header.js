@@ -17,7 +17,7 @@ function Header() {
   const { logoutUser } = useContext(AuthContext);
 
   return (
-    <Row className={`mx-0 px-5 bs py-2 ${style.header}`}>
+    <Row className={`mx-0 d-none d-lg-flex px-5 bs py-2 ${style.header}`}>
       <Col md={6}>
         <Row className="m-0">
           <Col md={6} className="d-flex">
