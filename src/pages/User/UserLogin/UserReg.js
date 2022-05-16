@@ -32,10 +32,10 @@ const UserReg = () => {
         style={{ height: "100%" }}
       >
         <Header />
-
+        <div className="d-flex w-100 vh-75 justify-content-center align-items-center pt-5">
         <div
-          className="container w-25 bg-dark p-5 text-white text-left"
-          style={{ marginTop: "150px", borderRadius: "2px" }}
+          className="container w-25 bg-dark p-5 pb-0 mb-5 text-white text-left"
+          style={{ borderRadius: "2px" }}
         >
           <form 
           onSubmit={handleSubmit(signupUser)}
@@ -111,6 +111,7 @@ const UserReg = () => {
               </div>
             </div>
           </form>
+        </div>
         </div>
       </div>
     </div>

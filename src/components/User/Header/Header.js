@@ -14,7 +14,7 @@ import AuthContext from "../../../AuthContext/AuthContext";
 
 function Header() {
 
-  const { logoutUser } = useContext(AuthContext);
+  const { logoutUser, user } = useContext(AuthContext);
 
   return (
     <Row className={`mx-0 d-none d-lg-flex px-5 bs py-2 ${style.header}`}>
@@ -25,7 +25,7 @@ function Header() {
             <h3>BROCAMP</h3>
           </Col>
           <Col md={6} className="d-flex">
-            <h3 className="ms-5">Hello Wafi</h3>
+            {user && <h3 className="ms-5">Hello {user.username}</h3>}
           </Col>
         </Row>
       </Col>

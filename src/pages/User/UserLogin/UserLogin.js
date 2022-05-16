@@ -2,6 +2,7 @@ import Header from "../../../components/User/Header/Header";
 import AuthContext from "../../../AuthContext/AuthContext";
 import { Link } from 'react-router-dom';
 import { useContext } from "react";
+import { Container } from "react-bootstrap";
 
 
 
@@ -16,10 +17,10 @@ const UserLogin = () => {
         style={{ height: "100vh" }}
       >
         <Header />
-
-        <div
-          className="container w-25 bg-dark p-5 text-white text-left"
-          style={{ marginTop: "150px", borderRadius: "2px" }}
+        <div className="d-flex w-100 vh-75 justify-content-center align-items-center pt-5">
+        <Container
+          className=" w-25 bg-dark p-5 text-white text-left mt-5"
+          style={{borderRadius: "2px" }}
         >
           <form onSubmit={(e)=>{e.preventDefault();
              loginUser(e)
@@ -57,7 +58,8 @@ const UserLogin = () => {
               </button>
             </div>
           </form>
-        </div>
+        </Container>
+      </div>
       </div>
     </>
   );

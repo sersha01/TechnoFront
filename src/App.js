@@ -26,28 +26,19 @@ function App() {
           <Routes>
             <Route path="/signup" element={<UserReg />} />
             <Route path="/signin" element={<UserLogin />} />
-            <Route
-              path="/"
-              element={
-                <PrivateRoute>
-                  <Routes>
-                  <Route path="" element={<UserHome />} />
-                  <Route path="taskslist" element={<UserTasksList />} />
-                  <Route path="taskslist/task" element={<UserTasks />} />
-                  <Route path="profile" element={<UserProfile />} />
-                  <Route path="payment" element={<UserPayments />} />
-                  </Routes>
-                </PrivateRoute>
-              }
-            />
+            <Route path="/" element={ <PrivateRoute> <UserHome /> </PrivateRoute>} />
+            <Route path="/taskslist" element={ <PrivateRoute> <UserTasksList /> </PrivateRoute>} />
+            <Route path="/taskslist/task" element={ <PrivateRoute> <UserTasks /> </PrivateRoute>} />
+            <Route path="/profile" element={ <PrivateRoute> <UserProfile /> </PrivateRoute>} />
+            <Route path="/payment" element={ <PrivateRoute> <UserPayments /> </PrivateRoute>} />
 
 
-          <Route path="/advisors" element={<AdvisorHome />}></Route>
-          <Route path="/advisors/profile" element={<AdvisorProfile />}></Route>
-          <Route path="/advisors/students"  element={<AdvisorStudents />}></Route>
-          <Route path="/advisors/work" element={<AdvisorWork />}></Route>
-          <Route path="/advisors/work/taskslist" element={<AdvisorTasksList />}></Route>
-          <Route path="/advisors/work/tasks" element={<AdvisorTask />}></Route>
+            <Route path="/advisors" element={<AdvisorHome />}></Route>
+            <Route path="/advisors/profile" element={<AdvisorProfile />}></Route>
+            <Route path="/advisors/students"  element={<AdvisorStudents />}></Route>
+            <Route path="/advisors/work" element={<AdvisorWork />}></Route>
+            <Route path="/advisors/work/taskslist" element={<AdvisorTasksList />}></Route>
+            <Route path="/advisors/work/tasks" element={<AdvisorTask />}></Route>
 
           </Routes>
         </AuthProvider>
