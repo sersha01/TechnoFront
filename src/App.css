@@ -48,7 +48,7 @@ Link {
 
 .submitProfileDiv {
   display: flex;
-  justify-content: end;
+  justify-content: center;
 }
 
 .submitProfile {

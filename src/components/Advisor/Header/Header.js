@@ -19,7 +19,7 @@ function Header() {
             <h3>BROCAMP</h3>
           </Col>
           <Col md={6} className="d-flex">
-            <h3 className="ms-5">Hello Wafi</h3>
+            <h3 className="ms-5">Hi Aneesha</h3>
           </Col>
         </Row>
       </Col>
