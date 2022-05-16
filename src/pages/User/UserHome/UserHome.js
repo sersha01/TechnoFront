@@ -1,5 +1,7 @@
-import React from "react";
+import axios from "axios";
+import React, { useContext, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import AuthContext from "../../../AuthContext/AuthContext";
 import Header from "../../../components/User/Header/Header";
 import Header2 from "../../../components/User/Header2/Header2";
 import NavBox from "../../../components/User/Nav Box/NavBox";
@@ -7,6 +9,8 @@ import Notification from "../../../components/User/Notification/Notification";
 import MySpace from "../../../components/User/Space/MySpace";
 
 const UserHome = () => {
+
+
   return (
     <Container fluid className="mx-0 p-0">
       <Header />

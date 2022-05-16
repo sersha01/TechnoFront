@@ -8,8 +8,14 @@ import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 // import style from Header.module.css
 import style from "./Header.module.css";
 import light from "./light.jpg";
+import { useContext } from "react";
+import AuthContext from "../../../AuthContext/AuthContext";
+
 
 function Header() {
+
+  const { logoutUser } = useContext(AuthContext);
+
   return (
     <Row className={`mx-0 px-5 bs py-2 ${style.header}`}>
       <Col md={6}>
@@ -53,7 +59,7 @@ function Header() {
             />
           </Col>
           <Col md={2} className=" px-3 p-0">
-            <svg height={40} width={40}>
+            <svg height={40} width={40} onClick={ logoutUser }>
               <circle cx="20" cy="20" r="20" fill="#334A52" />
             </svg>
           </Col>
