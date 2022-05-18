@@ -16,14 +16,19 @@ export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
 
     const signupUser = async ({username,email,password}) => {
-        const response = await axios.post('http://127.0.0.1:8000/signup/', {username,email,password});
+        // const response = 
+        await axios.post('http://127.0.0.1:8000/user/signup', {username,email,password}).then(res=>{
+            console.log(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
     }
 
     const loginUser = async (e) => {
         e.preventDefault();
         const username= e.target.username.value;
         const password= e.target.password.value;
-        await axios.post('http://127.0.0.1:8000/token/', {username,password}).then((res)=>{
+        await axios.post('http://127.0.0.1:8000/user/token', {username,password}).then((res)=>{
             setAuthTokens(res.data);
             setUser(jwt_decode(JSON.stringify(res.data)));
             localStorage.setItem('authTokens', JSON.stringify(res.data));
