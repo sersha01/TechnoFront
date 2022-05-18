@@ -3,8 +3,11 @@ import { Row, Col, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import style from './Payment.module.css';
 import style from "./Payment.module.css";
+import { useState } from "react";
 
 function Payment() {
+  const [btn, setBtn] = useState(true);
+
   return (
     <Row className={`m-0 rounded-2 px-3 ${style.payment}`}>
       <Col className="text-start pt-4 pb-2" xs={12}>
@@ -25,51 +28,66 @@ function Payment() {
             <h5 className={`${style.lastDate}`}>03/01/2022</h5>
           </Col>
         </Row>
-        <Row className="mx-0 my-2">
-          <Col xs={4}>
-            <Button size="lg" className={`w-100 ${style.btn}`}>
-              UPI
-            </Button>
-          </Col>
-          <Col xs={4}>
-            <Button size="lg" className={`w-100 ${style.btn}`}>
-              Cash
-            </Button>
-          </Col>
-          <Col xs={4}>
-            <Button size="lg" className={`w-100 ${style.btn}`}>
-              Both
-            </Button>
-          </Col>
-        </Row>
-        <Row className="mx-0">
-          <Col md={4} xs={6}>
-            <input
-              type="text"
-              className={`w-100 ps-2 pt-2 pb-3 rounded-3 ${style.input}`}
-              placeholder="Enter UPI Amount"
-            />
-          </Col>
-          <Col md={4} xs={6}>
-            <input
-              type="text"
-              className={`w-100 ps-2 pt-2 pb-3 rounded-3 ${style.input}`}
-              placeholder="Enter Cash Amount"
-            />
-          </Col>
-          <Col className="row m-0" md={4} xs={12}>
-            <Col className="ps-0 pe-1" md={6} xs={6}>
+        {btn ? (
+          <Row className="mx-0 my-2 paybutton">
+            <Col xs={4}>
               <Button size="lg" className={`w-100 ${style.btn}`}>
-                Submit
+                UPI
               </Button>
             </Col>
-            <Col className="ps-1 pe-0" md={6} xs={6}>
-              <Button size="lg" className={`w-100 ${style.btnCancel}`}>
-                Cancel
+            <Col xs={4}>
+              <Button size="lg" className={`w-100 ${style.btn}`}>
+                Cash
               </Button>
             </Col>
-          </Col>
-        </Row>
+            <Col xs={4}>
+              <Button
+                size="lg"
+                className={`w-100 ${style.btn}`}
+                onClick={() => {
+                  setBtn(false);
+                }}
+              >
+                Both
+              </Button>
+            </Col>
+          </Row>
+        ) : (
+          <Row className="mx-0 d-none amount">
+            <Col md={4} xs={6}>
+              <input
+                type="text"
+                className={`w-100 ps-2 pt-2 pb-3 rounded-3 ${style.input}`}
+                placeholder="Enter UPI Amount"
+              />
+            </Col>
+            <Col md={4} xs={6}>
+              <input
+                type="text"
+                className={`w-100 ps-2 pt-2 pb-3 rounded-3 ${style.input}`}
+                placeholder="Enter Cash Amount"
+              />
+            </Col>
+            <Col className="row m-0" md={4} xs={12}>
+              <Col className="ps-0 pe-1" md={6} xs={6}>
+                <Button size="lg" className={`w-100 ${style.btn}`}>
+                  Submit
+                </Button>
+              </Col>
+              <Col className="ps-1 pe-0" md={6} xs={6}>
+                <Button
+                  size="lg"
+                  className={`w-100 ${style.btnCancel}`}
+                  onClick={() => {
+                    setBtn(true);
+                  }}
+                >
+                  Cancel
+                </Button>
+              </Col>
+            </Col>
+          </Row>
+        )}
       </Col>
       <Col
         xs={12}

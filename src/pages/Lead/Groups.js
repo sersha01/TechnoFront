@@ -1,12 +1,11 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Header from "../../../components/Advisor/Header/Header";
-import Header2 from "../../../components/Advisor/Header2/Header2";
-import NavBox from "../../../components/Staff/NavBox/NavBox";
-import Notification from "../../../components/Advisor/Notification/Notification";
-import MySpace from "../../../components/Advisor/Space/MySpace";
-
-const AdvisorHome = () => {
+import Header from "../../components/Advisor/Header/Header";
+import Header2 from "../../components/Advisor/Header2/Header2";
+import NavBox from "../../components/Staff/NavBox/NavBox";
+import Notification from "../../components/Advisor/Notification/Notification";
+import MySpace from "../../components/Advisor/Space/MySpace";
+const Groups = () => {
   return (
     <Container fluid className="mx-0 p-0">
       <Header />
@@ -28,7 +27,7 @@ const AdvisorHome = () => {
         <MySpace />
       </Row>
     </Container>
-  );
-};
+  )
+}
 
-export default AdvisorHome;
+export default Groups

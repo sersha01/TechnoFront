@@ -1,0 +1,38 @@
+#mySidenav #about {
+  z-index: 1000;
+  position: fixed;
+  right: -250px;
+  transition: 0.3s;
+  padding: 15px;
+  width: 300px;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  border-radius: 0 5px 5px 0;
+}
+
+#mySidenav #about:hover {
+  right: 0px;
+}
+
+#about {
+  top: 300px;
+  color: rgb(255, 255, 255);
+  background-color: var(--dark);
+}
+
+.pendingt {
+  writing-mode: vertical-rl;
+  color: var(--light);
+  position: absolute;
+  top: 50px;
+}
+
+.pendings {
+  overflow-y: scroll;
+  height: 200px;
+}
+
+.pendings::-webkit-scrollbar {
+  display: none;
+}

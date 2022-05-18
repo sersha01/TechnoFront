@@ -30,6 +30,10 @@ body {
   background: var(--white);
 }
 
+.bginfo {
+  background: var(--info);
+}
+
 .bglight {
   background: var(--light);
 }
@@ -64,4 +68,8 @@ Link {
 .navitems{
   font-size: 17px;
   font-weight: 700;
+}
+
+.displayname{
+  text-transform: capitalize;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Accordion, Table } from "react-bootstrap";
 import draw from "./draw.svg";
+import './MySpace.css'
 
 const MySpace = () => {
   return (

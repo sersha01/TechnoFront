@@ -1,12 +1,12 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Header from "../../../components/Advisor/Header/Header";
-import Header2 from "../../../components/Advisor/Header2/Header2";
-import NavBox from "../../../components/Staff/NavBox/NavBox";
-import Notification from "../../../components/Advisor/Notification/Notification";
-import MySpace from "../../../components/Advisor/Space/MySpace";
+import Header from "../../components/Advisor/Header/Header";
+import Header2 from "../../components/Advisor/Header2/Header2";
+import NavBox from "../../components/Staff/NavBox/NavBox";
+import Notification from "../../components/Advisor/Notification/Notification";
+import Payment from "../../components/Staff/Payment/Payment";
 
-const AdvisorHome = () => {
+const Payments = () => {
   return (
     <Container fluid className="mx-0 p-0">
       <Header />
@@ -21,14 +21,14 @@ const AdvisorHome = () => {
           </Row>
         </Col>
         <Col md={8} className="bg rounded-3 p-0 mx-5 me-0 pb-5 mb-3 bs">
-          <MySpace />
+          <Payment />
         </Col>
       </Row>
       <Row className="d-md-flex d-lg-none ">
-        <MySpace />
+        <Payment />
       </Row>
     </Container>
-  );
-};
+  )
+}
 
-export default AdvisorHome;
+export default Payments

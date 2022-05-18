@@ -24,7 +24,7 @@ function Header() {
             <img src={light} width="35%" className="cp me-2"></img>
             <h3>BROCAMP</h3>
           </Col>
-          <Col md={6} className="d-flex">
+          <Col md={6} className="d-flex displayname">  
             {user && <h3 className="ms-5">Hello {user.username}</h3>}
           </Col>
         </Row>

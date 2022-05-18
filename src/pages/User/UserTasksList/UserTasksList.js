@@ -5,6 +5,7 @@ import Header2 from "../../../components/User/Header2/Header2";
 import NavBox from "../../../components/User/Nav Box/NavBox";
 import Notification from "../../../components/User/Notification/Notification";
 import Tasks from "../../../components/User/Tasks/Tasks";
+import Pending from "../../../components/Pending/Pending";
 
 const UserTasksList = () => {
   return (
@@ -22,12 +23,13 @@ const UserTasksList = () => {
         </Col>
         <Col
           md={8} 
-          className="bg rounded-3 p-0 mx-5 me-0 pb-5 mb-3 bs"
+          className="bg rounded-3 p-0 bglight  mx-5 me-0 pb-5 mb-3 bs"
         >
           <Tasks/>
+          <Pending/>
         </Col>
       </Row>
-      <Row className="d-md-flex d-lg-none ">
+      <Row className="d-md-flex bglight d-lg-none ">
         <Tasks/>
       </Row>
     </Container>
