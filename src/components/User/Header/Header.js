@@ -62,6 +62,7 @@ function Header() {
             <svg height={40} width={40} onClick={ logoutUser }>
               <circle cx="20" cy="20" r="20" fill="#334A52" />
             </svg>
+            <input type="checkbox" id="checkbox" className="d-none" />
           </Col>
         </Row>
       </Col>
