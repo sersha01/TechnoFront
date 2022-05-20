@@ -5,8 +5,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import style from "./Profile.module.css";
 import wafi from "./wafi.jpg";
 import Button from "@mui/material/Button";
+import React, { useEffect } from "react";
 
 function Profile() {
+
+  useEffect (() => {
+    console.log("Profile");
+  },[])
+
   return (
     <Row className={`m-0 px-3 py-3 rounded-2 ${style.profile}`}>
       <Col className="text-start ps-2" xs={12}>
@@ -127,4 +133,6 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default React.memo(Profile, (prevProps, nextProps) => {
+  return true;
+});
