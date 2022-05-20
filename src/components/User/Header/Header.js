@@ -16,6 +16,14 @@ function Header() {
 
   const { logoutUser, user } = useContext(AuthContext);
 
+  const handleDarkMode = (e) => {
+    if (e.target.checked) {
+      document.body.classList.add("dark");
+    }else{
+      document.body.classList.remove("dark");
+    }
+  }
+
   return (
     <Row className={`mx-0 d-none d-lg-flex px-5 bs py-2 ${style.header}`}>
       <Col md={6}>
@@ -62,7 +70,7 @@ function Header() {
             <svg height={40} width={40} onClick={ logoutUser }>
               <circle cx="20" cy="20" r="20" fill="#334A52" />
             </svg>
-            <input type="checkbox" id="checkbox" className="d-none" />
+            <input type="checkbox" id="checkbox" onChange={handleDarkMode} />
           </Col>
         </Row>
       </Col>
@@ -72,28 +80,3 @@ function Header() {
 }
 
 export default Header;
-
-// icons
-// import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-// import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
-// import ForumRoundedIcon from "@mui/icons-material/ForumRounded";
-// import BookmarkRoundedIcon from "@mui/icons-material/BookmarkRounded";
-
-{
-  /* <HomeRoundedIcon
-              className={`cp p-2 rounded-3 mx-2 ${style.icons}`}
-              sx={{ fontSize: 40 }}
-            />
-            <GroupsRoundedIcon
-              className={`cp p-2 rounded-3 mx-2 ${style.icons}`}
-              sx={{ fontSize: 40 }}
-            />
-            <ForumRoundedIcon
-              className={`cp p-2 rounded-3 mx-2 ${style.icons}`}
-              sx={{ fontSize: 40 }}
-            />
-            <BookmarkRoundedIcon
-              className={`cp p-2 rounded-3 mx-2 ${style.icons}`}
-              sx={{ fontSize: 40 }}
-            /> */
-}

@@ -26,16 +26,16 @@ body {
   background-color: var(--light);
 }
 
-/* body.dark{
+body.dark{
   --text-light: #334A52;
   --text-dark: #E9F1F3;
-  --bg-white: #000;
-  --bg-light: #334A52;
-  --bg-info: #01829B;
-  --bg-grey: #F5F5F5;
-  --bg-secondary: #7CB4C5;
-  --bg-dark: #E9F1F3;
-  --bg-black: #fff;
+  --white: #000;
+  --light: #334A52;
+  --info: #01829B;
+  --grey: #F5F5F5;
+  --secondary: #7CB4C5;
+  --dark: #E9F1F3;
+  --black: #fff;
 }
 
 .colors {
@@ -45,4 +45,4 @@ body {
   --secondary : #7CB4C5;
   --info : #01829B;
   --dark : #334A52;
-} */
+}
