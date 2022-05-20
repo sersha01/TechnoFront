@@ -5,6 +5,8 @@ import Header2 from "../../../components/Advisor/Header2/Header2";
 import NavBox from "../../../components/Advisor/NavBox/NavBox";
 import Notification from "../../../components/Advisor/Notification/Notification";
 import Manifest from "../../../components/Advisor/Manifest/Manifest";
+import Pending from "../../../components/Pending/Pending"
+
 
 const AdvisorTask = () => {
   return (
@@ -22,10 +24,12 @@ const AdvisorTask = () => {
         </Col>
         <Col md={8} className="bglight rounded-3 p-0 mx-5 me-0 pb-5 mb-3 bs">
           <Manifest />
+          <Pending/>
         </Col>
       </Row>
       <Row className="d-md-flex d-lg-none ">
         <Manifest />
+        <Pending/>
       </Row>
     </Container>
   )

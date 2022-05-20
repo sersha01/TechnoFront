@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Header from "../../../components/Advisor/Header/Header";
 import Header2 from "../../../components/Advisor/Header2/Header2";
-import NavBox from "../../../components/Staff/NavBox/NavBox";
+import NavBox from "../../../components/Advisor/NavBox/NavBox";
 import Notification from "../../../components/Advisor/Notification/Notification";
 import MySpace from "../../../components/Advisor/Space/MySpace";
 

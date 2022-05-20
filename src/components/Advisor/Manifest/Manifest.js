@@ -6,6 +6,8 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 // import style from './Manifest.module.css';
 import style from './Manifest.module.css';
 import Button from "@mui/material/Button";
+import AddTask from "../AddTask/AddTask";
+
 
 
 function Manifest() {
@@ -32,18 +34,8 @@ function Manifest() {
             </Col>
             
         </Col>
-        <Col className={`row mx-0 my-1 text-start`} xs={12}>
-            <Col className={`py-2 ps-5`} xs={4}>
-                <h6 className={`ps-3 ${style.label}`}>Reveiwer</h6>
-            </Col>
-            <Col className={`row m-0 p-0 pe-4`} xs={8}><input type="text" className={`col-11 rounded-3 ${style.input}`}  /></Col>
-        </Col>
-        <Col className={`row mx-0 my-1 text-start`} xs={12}>
-            <Col className={`py-2 ps-5`} xs={4}>
-                <h6 className={`ps-3 ${style.label}`}>Reveiw Date</h6>
-            </Col>
-            <Col className={`row m-0 p-0 pe-4`} xs={8}><input type="text" className={`col-11 rounded-3 ${style.input}`}  /></Col>
-        </Col>
+       
+        
         <Col className={`row mx-0 my-1 text-start`} xs={12}>
             <Col className={`py-2 ps-5`} xs={4}>
                 <h6 className={`ps-3 ${style.label}`}>Personal Workout</h6>
@@ -56,12 +48,7 @@ function Manifest() {
             </Col>
             <Col className={`row m-0 p-0 pe-4`} xs={8}><textarea rows={3} className={`col-11 rounded-3 ${style.input}`}  /></Col>
         </Col>
-        <Col className={`row mx-0 my-1 text-start`} xs={12}>
-            <Col className={`py-2 ps-5`} xs={4}>
-                <h6 className={`ps-3 ${style.label}`}>Next Review</h6>
-            </Col>
-            <Col className={`row m-0 p-0 pe-4`} xs={8}><input type="text" className={`col-11 rounded-3 ${style.input}`}  /></Col>
-        </Col>
+        
         <Col className={`row mx-0 my-1 text-start`} xs={12}>
             <Col className={`py-2 ps-5`} xs={4}>
                 <h6 className={`ps-3 ${style.label}`}>English Review</h6>
@@ -92,21 +79,10 @@ function Manifest() {
 
 
         <Col className="my-3 p-0 ">
-          <div className="submitProfileDiv mt-3">
-            <Button
-              className="submitProfile"
-              variant="contained"
-              color="primary"
-            >
-              Submit
-            </Button>
-            <Button
-              className="submitProfile ms-3 bg-dark text-white"
-             
-              color="primary"
-            >
-              Cancel
-            </Button>
+          <div className="submitProfileDiv mt-3 ">
+            <AddTask title="Completed" className="mx-3" />
+            <AddTask title="Repeat" color="error"  />
+            
           </div>
         </Col>
       

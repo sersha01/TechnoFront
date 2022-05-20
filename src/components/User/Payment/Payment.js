@@ -6,7 +6,7 @@ import style from "./Payment.module.css";
 import { useState } from "react";
 
 function Payment() {
-  const [btn, setBtn] = useState(true);
+  const [btn, setBtn] = useState("True");
 
   return (
     <Row className={`m-0 rounded-2 px-3 ${style.payment}`}>
@@ -28,7 +28,8 @@ function Payment() {
             <h5 className={`${style.lastDate}`}>03/01/2022</h5>
           </Col>
         </Row>
-        {btn ? (
+
+        {btn === "True" && (
           <Row className="mx-0 my-2 paybutton">
             <Col xs={4}>
               <Button size="lg" className={`w-100 ${style.btn}`}>
@@ -45,15 +46,18 @@ function Payment() {
                 size="lg"
                 className={`w-100 ${style.btn}`}
                 onClick={() => {
-                  setBtn(false);
+                  setBtn("False");
                 }}
               >
                 Both
               </Button>
             </Col>
           </Row>
-        ) : (
-          <Row className="mx-0 d-none amount">
+        )}
+        
+
+        {btn === "False" && (
+          <Row className="mx-0 amount">
             <Col md={4} xs={6}>
               <input
                 type="text"
@@ -79,7 +83,7 @@ function Payment() {
                   size="lg"
                   className={`w-100 ${style.btnCancel}`}
                   onClick={() => {
-                    setBtn(true);
+                    setBtn("True");
                   }}
                 >
                   Cancel
@@ -88,6 +92,7 @@ function Payment() {
             </Col>
           </Row>
         )}
+
       </Col>
       <Col
         xs={12}

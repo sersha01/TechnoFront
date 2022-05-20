@@ -59,11 +59,11 @@ Link {
   width: 150px;
 }
 
-.addtask{
-  background: var(--dark)!important;
-  color: var(--light)!important;
-  width: 150px;
+.textlight{
+  color: var(--light)
 }
+
+
 
 .navitems{
   font-size: 17px;
@@ -72,4 +72,24 @@ Link {
 
 .displayname{
   text-transform: capitalize;
+}
+
+.paymentpendingbutton{
+  background-color: var(--dark) !important;
+  color: var(--light) !important;
+}
+
+.sendform , .completed{
+  background-color: var(--dark) !important;
+  color: var(--light) !important;
+
+}
+
+.coh{
+  background-color: var(--info) !important;
+  color: var(--light) !important;
+}
+
+tr{
+  border: none !important;
 }

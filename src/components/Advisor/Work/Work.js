@@ -88,7 +88,7 @@ const Work = () => {
               </Row>
             </Col>
             </Link>
-            <Link to='/advisors/work/taskslist'>
+          <Link to='/advisors/work/taskslist'>
             <Col
               sm={12}
               className={`py-2 mb-2 cp bgred rounded-3 ${style.tableBody}`}
@@ -119,6 +119,38 @@ const Work = () => {
               </Row>
             </Col>
             </Link>
+          <Link to='/advisors/work/taskslist'>
+            <Col
+              sm={12}
+              className={`py-2 mb-2 cp bgred rounded-3 ${style.tableBody}`}
+            >
+              <Row className="m-0">
+                <Col className={`${style.tableBodyText}`} sm={1}>
+                  #1
+                </Col>
+                <Col className={`${style.tableBodyText}`} sm={2}>
+                 Hrishi
+                </Col>
+                <Col className={`${style.tableBodyText}`} sm={2}>
+                  17
+                </Col>
+                <Col className={`${style.tableBodyText}`} sm={2}>
+                  4
+                </Col>
+                
+                <Col className={`${style.tableBodyText}`} sm={2}>
+                  Python
+                </Col>
+                <Col className={`${style.tableBodyText} d-flex`} sm={2}>
+                  15
+                </Col>
+                <Col className={`${style.tableBodyText} d-flex`} sm={1}>
+                  A
+                </Col>
+              </Row>
+            </Col>
+            </Link>
+            
             
           
         </>

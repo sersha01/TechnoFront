@@ -20,11 +20,11 @@ const Payments = () => {
             <Notification />
           </Row>
         </Col>
-        <Col md={8} className="bg rounded-3 p-0 mx-5 me-0 pb-5 mb-3 bs">
+        <Col md={8} className="bglight rounded-3 p-0 mx-5 me-0 pb-5 mb-3 bs">
           <Payment />
         </Col>
       </Row>
-      <Row className="d-md-flex d-lg-none ">
+      <Row className="d-md-flex bglight  d-lg-none ">
         <Payment />
       </Row>
     </Container>

@@ -37,7 +37,7 @@ const AddTask = ({ title, color }) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">Schedule next review</DialogTitle>
+        <DialogTitle id="alert-dialog-title">Add new domain here</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <Box
@@ -45,12 +45,11 @@ const AddTask = ({ title, color }) => {
               noValidate
               autoComplete="off"
               className="d-block p-3 px-5"
-              style={{ width: "500px", height: "fit-content" }}
+              style={{ width: "200px", height: "fit-content" }}
             >
               <Row className="my-2">
                 <TextField
-                  label="Date"
-                  type="date"
+                  label="Domain name"
                   variant="standard"
                   focused
                 />

@@ -5,7 +5,7 @@ import Header2 from "../../components/Advisor/Header2/Header2";
 import NavBox from "../../components/Staff/NavBox/NavBox";
 
 import Notification from "../../components/Advisor/Notification/Notification";
-import MySpace from "../../components/Advisor/Space/MySpace";
+import DomainComponent from "../../components/Staff/Domain/Domain";
 
 const Domain = () => {
   return (
@@ -21,12 +21,12 @@ const Domain = () => {
             <Notification />
           </Row>
         </Col>
-        <Col md={8} className="bg rounded-3 p-0 mx-5 me-0 pb-5 mb-3 bs">
-          <MySpace />
+        <Col md={8} className="bglight rounded-3 p-0 mx-5 me-0 pb-5 mb-3 bs">
+          <DomainComponent />
         </Col>
       </Row>
-      <Row className="d-md-flex d-lg-none ">
-        <MySpace />
+      <Row className="d-md-flex bglight d-lg-none ">
+        <DomainComponent />
       </Row>
     </Container>
   )

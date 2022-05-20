@@ -4,7 +4,7 @@ import Header from "../../components/Advisor/Header/Header";
 import Header2 from "../../components/Advisor/Header2/Header2";
 import NavBox from "../../components/Staff/NavBox/NavBox";
 import Notification from "../../components/Advisor/Notification/Notification";
-import MySpace from "../../components/Advisor/Space/MySpace";
+import Batchs from "../../components/Staff/Batch/Batch";
 
 const Batch = () => {
   return (
@@ -20,12 +20,12 @@ const Batch = () => {
             <Notification />
           </Row>
         </Col>
-        <Col md={8} className="bg rounded-3 p-0 mx-5 me-0 pb-5 mb-3 bs">
-          <MySpace />
+        <Col md={8} className="bglight rounded-3 p-0 mx-5 me-0 pb-5 mb-3 bs">
+          <Batchs />
         </Col>
       </Row>
-      <Row className="d-md-flex d-lg-none ">
-        <MySpace />
+      <Row className="d-md-flex bglight d-lg-none ">
+        <Batchs />
       </Row>
     </Container>
   )
