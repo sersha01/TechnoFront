@@ -1,13 +1,15 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Header from "../../../components/User/Header/Header";
-import Manifest from "../../../components/User/Manifest/Manifest";
-import NavBox from "../../../components/User/Nav Box/NavBox";
-import Notification from "../../../components/User/Notification/Notification"
+import Header from "../../../components/Common/Header/Header";
+import Header2 from "../../../components/Common/Header2/Header2";
+import NavBox from "../../../components/Common/Nav Box/NavBox";
+import Notification from "../../../components/Common/Notification/Notification";
+import Manifest from "../../../components/Common/Manifest/Manifest";
 
 const UserTasks = () => {
   return <Container fluid className="mx-0 p-0">
   <Header />
+  <Header2/>
   <Row className="mx-5 mt-4 ">
     <Col md={3}>
       <Row className="bg rounded-3 bs">

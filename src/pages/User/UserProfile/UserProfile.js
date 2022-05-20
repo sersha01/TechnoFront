@@ -1,10 +1,10 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Header from "../../../components/User/Header/Header";
-import Profile from "../../../components/User/Profile/Profile";
-import NavBox from "../../../components/User/Nav Box/NavBox";
-import Notification from "../../../components/User/Notification/Notification";
-import Header2 from "../../../components/User/Header2/Header2";
+import Header from "../../../components/Common/Header/Header";
+import Header2 from "../../../components/Common/Header2/Header2";
+import NavBox from "../../../components/Common/Nav Box/NavBox";
+import Notification from "../../../components/Common/Notification/Notification";
+import Profile from "../../../components/Common/Profile/Profile";
 
 const UserProfile = () => {
   return (

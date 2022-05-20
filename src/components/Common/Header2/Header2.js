@@ -17,27 +17,27 @@ const Header2 = () => {
               <ul id="menu">
                 <Link to="/">
                   <li>
-                    <a>Home</a>
+                    <p>Home</p>
                   </li>
                 </Link>
                 <Link to="/taskslist">
                   <li>
-                    <a>Tasks</a>
+                    <p>Tasks</p>
                   </li>
                 </Link>
                 <Link to="/profile">
                   <li>
-                    <a>Profile</a>
+                    <p>Profile</p>
                   </li>
                 </Link>
                 <Link to="/payment">
                   <li>
-                    <a>Payments</a>
+                    <p>Payments</p>
                   </li>
                 </Link>
                 <Link to="/">
                   <li>
-                    <a>Leave application</a>
+                    <p>Leave application</p>
                   </li>
                 </Link>
               </ul>

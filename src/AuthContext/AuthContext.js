@@ -12,12 +12,22 @@ export const AuthProvider = ({ children }) => {
     const [authTokens, setAuthTokens] = useState(()=>localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
     const [user, setUser] = useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null);
     const [errUser, setErrUser] = useState(false);
+    const [user_is, setUser_is] = useState(null);
 
     const navigate = useNavigate();
 
     const signupUser = async ({username,email,password}) => {
         // const response = 
         await axios.post('http://127.0.0.1:8000/user/signup', {username,email,password}).then(res=>{
+            console.log(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
+    const userDept = async () => {
+        await axios.post('http://127.0.0.1:8000/user/notification',{},
+        {headers: {Authorization : `Bearer ${authTokens.access}`}}).then(res=>{
             console.log(res.data)
         }).catch(err=>{
             console.log(err)
@@ -32,7 +42,8 @@ export const AuthProvider = ({ children }) => {
             setAuthTokens(res.data);
             setUser(jwt_decode(JSON.stringify(res.data)));
             localStorage.setItem('authTokens', JSON.stringify(res.data));
-            navigate('/');
+            userDept();
+            // navigate('/');
         })
     }
 

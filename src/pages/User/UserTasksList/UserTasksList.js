@@ -1,12 +1,11 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Header from "../../../components/User/Header/Header";
-import Header2 from "../../../components/User/Header2/Header2";
-import NavBox from "../../../components/User/Nav Box/NavBox";
-import Notification from "../../../components/User/Notification/Notification";
-import Tasks from "../../../components/User/Tasks/Tasks";
-import Pending from "../../../components/Pending/Pending";
-
+import Header from "../../../components/Common/Header/Header";
+import Header2 from "../../../components/Common/Header2/Header2";
+import NavBox from "../../../components/Common/Nav Box/NavBox";
+import Notification from "../../../components/Common/Notification/Notification";
+import Tasks from "../../../components/Common/Tasks/Tasks";
+import Pending from "../../../components/Common/Pending/Pending";
 const UserTasksList = () => {
   return (
     <Container fluid className="mx-0 p-0">

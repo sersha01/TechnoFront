@@ -1,11 +1,11 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Header from "../../../components/Advisor/Header/Header";
-import Header2 from "../../../components/Advisor/Header2/Header2";
-import NavBox from "../../../components/Advisor/NavBox/NavBox";
-import Notification from "../../../components/Advisor/Notification/Notification";
-import Manifest from "../../../components/Advisor/Manifest/Manifest";
-import Pending from "../../../components/Pending/Pending"
+import Header from "../../../components/Common/Header/Header";
+import Header2 from "../../../components/Common/Header2/Header2";
+import NavBox from "../../../components/Common/Nav Box/NavBox";
+import Notification from "../../../components/Common/Notification/Notification";
+import Manifest from "../../../components/Common/Manifest/Manifest";
+import Pending from "../../../components/Common/Pending/Pending";
 
 
 const AdvisorTask = () => {

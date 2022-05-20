@@ -1,4 +1,5 @@
-import Header from "../../../components/User/Header/Header";
+import Header from "../../../components/Common/Header/Header";
+import Header2 from "../../../components/Common/Header2/Header2";
 import AuthContext from "../../../AuthContext/AuthContext";
 import { Link } from 'react-router-dom';
 import { useContext } from "react";
@@ -17,6 +18,7 @@ const UserLogin = () => {
         style={{ height: "100vh" }}
       >
         <Header />
+        <Header2/>
         <div className="d-flex w-100 vh-75 justify-content-center align-items-center pt-5">
         <Container
           className=" w-25 bg-dark p-5 text-white text-left mt-5"

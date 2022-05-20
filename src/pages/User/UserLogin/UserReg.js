@@ -1,5 +1,6 @@
 import React from "react";
-import Header from "../../../components/User/Header/Header";
+import Header from "../../../components/Common/Header/Header";
+import Header2 from "../../../components/Common/Header2/Header2";
 import { useContext } from "react";
 import AuthContext from "../../../AuthContext/AuthContext";
 import { Link } from "react-router-dom";
@@ -32,6 +33,7 @@ const UserReg = () => {
         style={{ height: "100%" }}
       >
         <Header />
+        <Header2/>
         <div className="d-flex w-100 vh-75 justify-content-center align-items-center pt-5">
         <div
           className="container w-25 bg-dark p-5 pb-0 mb-5 text-white text-left"

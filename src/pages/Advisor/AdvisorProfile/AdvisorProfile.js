@@ -1,10 +1,10 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Header from "../../../components/Advisor/Header/Header";
-import Header2 from "../../../components/Advisor/Header2/Header2";
-import NavBox from "../../../components/Advisor/NavBox/NavBox";
-import Notification from "../../../components/Advisor/Notification/Notification";
-import Profile from "../../../components/Advisor/Profile/Profile";
+import Header from "../../../components/Common/Header/Header";
+import Header2 from "../../../components/Common/Header2/Header2";
+import NavBox from "../../../components/Common/Nav Box/NavBox";
+import Notification from "../../../components/Common/Notification/Notification";
+import Profile from "../../../components/Common/Profile/Profile";
 
 const AdvisorProfile = () => {
   return (

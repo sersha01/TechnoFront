@@ -20,7 +20,7 @@ function Profile() {
       <Col className="p-0 d-flex mb-4" xs={12}>
         <div className="d-flex justify-content-center">
           <img
-            
+            src={wafi}
             className="imgss"
             width="50%"
             style={{ borderRadius: "50%" }}
