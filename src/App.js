@@ -9,7 +9,7 @@ import UserPayments from "./pages/User/UserPayments/UserPayments";
 import UserLogin from "./pages/User/UserLogin/UserLogin";
 import UserReg from "./pages/User/UserLogin/UserReg";
 import { AuthProvider } from "./AuthContext/AuthContext";
-import { PrivateRoute } from "./Utils/PrivateRoute";
+import { PrivateRouteStudent, PrivateRouteAdvisor, PrivateRouteLead } from "./Utils/PrivateRoute";
 import "./App.css";
 
 import AdvisorHome from "./pages/Advisor/AdvisorHome/AdvisorHome";
@@ -33,84 +33,153 @@ function App() {
       <BrowserRouter>
         <AuthProvider>
           <Routes>
+
+            {/* STUDENT */}
             <Route path="/signup" element={<UserReg />} />
             <Route path="/signin" element={<UserLogin />} />
             <Route
               path="/"
               element={
-                <PrivateRoute>
-                  {" "}
-                  <UserHome />{" "}
-                </PrivateRoute>
+                <PrivateRouteStudent>
+                  <UserHome />
+                </PrivateRouteStudent>
               }
             />
             <Route
               path="/taskslist"
               element={
-                <PrivateRoute>
-                  {" "}
-                  <UserTasksList />{" "}
-                </PrivateRoute>
+                <PrivateRouteStudent>
+                  <UserTasksList />
+                </PrivateRouteStudent>
               }
             />
             <Route
               path="/taskslist/task"
               element={
-                <PrivateRoute>
-                  {" "}
-                  <UserTasks />{" "}
-                </PrivateRoute>
+                <PrivateRouteStudent>
+                  <UserTasks />
+                </PrivateRouteStudent>
               }
             />
             <Route
               path="/profile"
               element={
-                <PrivateRoute>
-                  {" "}
-                  <UserProfile />{" "}
-                </PrivateRoute>
+                <PrivateRouteStudent>
+                  <UserProfile />
+                </PrivateRouteStudent>
               }
             />
             <Route
               path="/payment"
               element={
-                <PrivateRoute>
-                  {" "}
-                  <UserPayments />{" "}
-                </PrivateRoute>
+                <PrivateRouteStudent>
+                  <UserPayments />
+                </PrivateRouteStudent>
               }
             />
 
-            <Route path="/advisors" element={<AdvisorHome />}></Route>
+            {/* ADVISOR */}
+            <Route 
+            path="/advisor" 
+            element={
+              <PrivateRouteAdvisor>
+                <AdvisorHome />
+              </PrivateRouteAdvisor>}
+            />
             <Route
-              path="/advisors/profile"
-              element={<AdvisorProfile />}
-            ></Route>
+              path="/advisor/profile"
+              element={
+                <PrivateRouteAdvisor>
+                  <AdvisorProfile />
+                </PrivateRouteAdvisor>}
+            />
             <Route
-              path="/advisors/students"
-              element={<AdvisorStudents />}
-            ></Route>
-            <Route path="/advisors/work" element={<AdvisorWork />}></Route>
+              path="/advisor/students"
+              element={
+                <PrivateRouteAdvisor>
+                  <AdvisorStudents />
+                </PrivateRouteAdvisor>}
+            />
+            <Route 
+            path="/advisor/work" 
+            element={
+              <PrivateRouteAdvisor>
+                <AdvisorWork />
+              </PrivateRouteAdvisor>}
+            />
             <Route
-              path="/advisors/work/taskslist"
-              element={<AdvisorTasksList />}
-            ></Route>
+              path="/advisor/work/taskslist"
+              element={
+                <PrivateRouteAdvisor>
+                  <AdvisorTasksList />
+                </PrivateRouteAdvisor>}
+            />
             <Route
-              path="/advisors/work/tasks"
-              element={<AdvisorTask />}
-            ></Route>
+              path="/advisor/work/tasks"
+              element={
+              <PrivateRouteAdvisor>
+                <AdvisorTask />
+              </PrivateRouteAdvisor>}
+            />
 
-            <Route path="/lead" element={<LeadHome />}></Route>
-            <Route path="/lead/payments" element={<LeadPayments />}></Route>
-            <Route path="/lead/batch" element={<LeadBatch />}></Route>
-            <Route path="/lead/domain" element={<LeadDomain />}></Route>
+            {/* LEAD */}
+            <Route 
+            path="/lead" 
+            element={
+              <PrivateRouteLead>
+                <LeadHome />
+              </PrivateRouteLead>}
+            />
+            <Route 
+            path="/lead/payments" 
+            element={
+            <PrivateRouteLead>
+              <LeadPayments />
+            </PrivateRouteLead>}
+            />
+            <Route 
+            path="/lead/batch" 
+            element={
+              <PrivateRouteLead>
+              <LeadBatch />
+            </PrivateRouteLead>}
+            />
+            <Route 
+            path="/lead/domain" 
+            element={
+              <PrivateRouteLead>
+              <LeadDomain />
+            </PrivateRouteLead>}
+            />
             <Route
               path="/lead/students"
-              element={<LeadStudents />}
-            ></Route>
-            <Route path="/lead/groups" element={<LeadGroups />}></Route>
-            <Route path="/lead/advisors" element={<LeadAdvisors />}></Route>
-            <Route path="/lead/placements" element={<LeadAdvisors />}></Route>
+              element={
+                <PrivateRouteLead>
+                  <LeadStudents />
+                </PrivateRouteLead>}
+            />
+            <Route 
+            path="/lead/groups" 
+            element={
+              <PrivateRouteLead>
+                <LeadGroups />
+              </PrivateRouteLead>}
+            />
+            <Route 
+            path="/lead/advisor" 
+            element={
+              <PrivateRouteLead>
+                <LeadAdvisors />
+              </PrivateRouteLead>}
+            />
+            <Route 
+            path="/lead/placements" 
+            element={
+              <PrivateRouteLead>
+                <LeadAdvisors />
+              </PrivateRouteLead>}
+            />
+
           </Routes>
         </AuthProvider>
       </BrowserRouter>
