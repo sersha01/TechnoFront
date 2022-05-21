@@ -4,8 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import style from "./Tasks.module.css"
 import style from "./Tasks.module.css";
 import { Link } from "react-router-dom";
-// import Button from "@mui/material/Button";
-// import AddTask from "../AddTask/AddTask";
 
 function Tasks() {
   return (

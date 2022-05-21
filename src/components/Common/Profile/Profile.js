@@ -24,6 +24,7 @@ function Profile() {
             className="imgss"
             width="50%"
             style={{ borderRadius: "50%" }}
+            alt='profile pic'
           ></img>
         </div>
       </Col>

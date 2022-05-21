@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Header from "../../components/Common/Header/Header";
 import Header2 from "../../components/Common/Header2/Header2";
-import NavBox from "../../components/Common/Nav Box/NavBox";
+import NavBox from "../../components/Staff/NavBox/NavBox";
 import Notification from "../../components/Common/Notification/Notification";
 import MySpace from "../../components/Advisor/Space/MySpace";
 const Advisors = () => {
