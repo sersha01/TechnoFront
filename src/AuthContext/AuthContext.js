@@ -12,7 +12,8 @@ export const AuthProvider = ({ children }) => {
     const [authTokens, setAuthTokens] = useState(()=>localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
     const [user, setUser] = useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null);
     const [errUser, setErrUser] = useState(false);
-    const [user_is, setUser_is] = useState(null);
+    const [user_is, setUser_is] = useState(()=>localStorage.getItem('user_is') ? JSON.parse(localStorage.getItem('user_is')) :null);
+    const [notification, setNotification] = useState(()=>localStorage.getItem('notification') ? JSON.parse(localStorage.getItem('notification')) : null);
 
     const navigate = useNavigate();
 
@@ -25,11 +26,23 @@ export const AuthProvider = ({ children }) => {
         })
     }
 
-    const userDept = async () => {
-        await axios.post('http://127.0.0.1:8000/user/notification',{},
-        {headers: {Authorization : `Bearer ${authTokens.access}`}}).then(res=>{
-            console.log(res.data)
+    const userDept = async (link) => {
+        await axios.post('http://127.0.0.1:8000/user/notification',{},{
+            headers: {Authorization : `Bearer ${link.access}`}
+        }).then(res=>{
+            setUser_is(res.data.dept) 
+            setNotification(res.data.notification)
+            localStorage.setItem('user_is',JSON.stringify(res.data.dept))
+            localStorage.setItem('notification',JSON.stringify(res.data.notification))
+            if (res.data.dept == 'lead') {
+                navigate('/lead')
+            } else if (res.data.dept == 'advisor') {
+                navigate('/advisor')
+            } else if (res.data.dept == 'student') {
+                navigate('/')
+            }
         }).catch(err=>{
+            console.log('error adichu');
             console.log(err)
         })
     }
@@ -42,8 +55,7 @@ export const AuthProvider = ({ children }) => {
             setAuthTokens(res.data);
             setUser(jwt_decode(JSON.stringify(res.data)));
             localStorage.setItem('authTokens', JSON.stringify(res.data));
-            userDept();
-            // navigate('/');
+            userDept(res.data);
         })
     }
 
@@ -51,6 +63,8 @@ export const AuthProvider = ({ children }) => {
       setAuthTokens(null);
       setUser(null);
       localStorage.removeItem('authTokens');
+      localStorage.removeItem('user_is');
+        localStorage.removeItem('notification');
       navigate('/signin');
     }
 
@@ -74,7 +88,9 @@ export const AuthProvider = ({ children }) => {
             loginUser,
             logoutUser,
             get_data,
+            notification,
             errUser,
+            user_is,
             user,
         };
 
