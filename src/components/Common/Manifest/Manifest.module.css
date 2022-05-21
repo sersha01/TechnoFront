@@ -20,6 +20,7 @@ h6{
 .input {
     background: var(--light); 
     border: none;
+    color: var(--dark);
 }
 
 .todoDiv {

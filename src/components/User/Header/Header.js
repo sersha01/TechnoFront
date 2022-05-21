@@ -11,18 +11,10 @@ import light from "./light.jpg";
 import { useContext } from "react";
 import AuthContext from "../../../AuthContext/AuthContext";
 
-
 function Header() {
-
   const { logoutUser, user } = useContext(AuthContext);
 
-  const handleDarkMode = (e) => {
-    if (e.target.checked) {
-      document.body.classList.add("dark");
-    }else{
-      document.body.classList.remove("dark");
-    }
-  }
+  
 
   return (
     <Row className={`mx-0 d-none d-lg-flex px-5 bs py-2 ${style.header}`}>
@@ -32,7 +24,7 @@ function Header() {
             <img src={light} width="35%" className="cp me-2"></img>
             <h3>BROCAMP</h3>
           </Col>
-          <Col md={6} className="d-flex displayname">  
+          <Col md={6} className="d-flex displayname">
             {user && <h3 className="ms-5">Hello {user.username}</h3>}
           </Col>
         </Row>
@@ -67,14 +59,12 @@ function Header() {
             />
           </Col>
           <Col md={2} className=" px-3 p-0">
-            <svg height={40} width={40} onClick={ logoutUser }>
+            <svg height={40} width={40} onClick={logoutUser}>
               <circle cx="20" cy="20" r="20" fill="#334A52" />
             </svg>
-            <input type="checkbox" id="checkbox" onChange={handleDarkMode} />
           </Col>
         </Row>
       </Col>
-      
     </Row>
   );
 }

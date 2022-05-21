@@ -10,11 +10,21 @@ import style from "./Header.module.css";
 import light from "./light.jpg";
 import { useContext } from "react";
 import AuthContext from "../../../AuthContext/AuthContext";
+import Button from "@mui/material/Button";
+
 
 
 function Header() {
 
   const { logoutUser, user } = useContext(AuthContext);
+
+  const handleDarkMode = (e) => {
+    if (e.target.checked) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  };
 
   return (
     <Row className={`mx-0 d-none d-lg-flex px-5 bs py-2 ${style.header}`}>
@@ -48,21 +58,12 @@ function Header() {
               </Col>
             </Row>
           </Col>
-          <Col md={4} className="p-0">
-            <FavoriteRoundedIcon
-              className={`p-2 rounded-3 mx-2 ${style.opIcons}`}
-              sx={{ fontSize: 40 }}
-            />
-            <NotificationsRoundedIcon
-              className={`p-2 rounded-3 mx-2 ${style.opIcons}`}
-              sx={{ fontSize: 40 }}
-            />
-          </Col>
-          <Col md={2} className=" px-3 p-0">
+          
+          <Col md={6} className="d-flex justify-content-between px-3 p-0">
             <svg height={40} width={40} onClick={ logoutUser }>
               <circle cx="20" cy="20" r="20" fill="#334A52" />
             </svg>
-            <input type="checkbox"  />
+            <input type="checkbox" id="checkbox" onChange={handleDarkMode} />
           </Col>
         </Row>
       </Col>

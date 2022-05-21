@@ -43,10 +43,10 @@ function Tasks() {
 
           <Col sm={12} className={`py-2 mb-2 cp rounded-3 ${style.tableBody}`}>
             <Row className="m-0 ">
-              <Accordion defaultActiveKey="0" flush>
+              <Accordion defaultActiveKey="0" flush  className="bg">
                 <Accordion.Item eventKey="0">
                   <Accordion.Header style={{ height: "fit-content" }}>
-                    <Row className="m-0 w-100">
+                    <Row className="m-0 w-100 bg">
                       <Col className={`${style.tableBodyText}`} sm={2}>
                         Week 21
                       </Col>
@@ -65,8 +65,8 @@ function Tasks() {
                       </Col>
                     </Row>
                   </Accordion.Header>
-                  <Accordion.Body>
-                    <Table >
+                  <Accordion.Body  className="bg">
+                    <Table>
                       <tbody>
               <Link to="/taskslist/task">
 
