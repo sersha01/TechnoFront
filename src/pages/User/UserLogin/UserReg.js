@@ -13,6 +13,7 @@ const schema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Email is required"),
   password: yup.string().min(6, "Password should contain 6 characters").required("Password is required"),
   cpassword: yup.string().oneOf([yup.ref("password"), null]),
+  batch: yup.number().required("Batch is required"),
 });
 
 const UserReg = () => {
@@ -58,6 +59,19 @@ const UserReg = () => {
                 <label className="text-danger">
                   {errUser}
                   {errors.username?.message}
+                </label>
+              </div>
+              <div className="form-group">
+                <label>Batch</label>
+                <input
+                  type="text"
+                  name="batch"
+                  className="form-control"
+                  {...register("batch")}
+                  placeholder="batch"
+                />
+                <label className="text-danger">
+                  {errors.batch?.message}
                 </label>
               </div>
               <div className="form-group">

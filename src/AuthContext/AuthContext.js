@@ -17,11 +17,20 @@ export const AuthProvider = ({ children }) => {
 
     const navigate = useNavigate();
 
-    const signupUser = async ({username,email,password}) => {
+    const signupUser = async ({username,email,password,batch}) => {
         // const response = 
-        await axios.post('http://127.0.0.1:8000/user/signup', {username,email,password}).then(res=>{
+        console.log(username,email,password,batch);
+        await axios.post('http://127.0.0.1:8000/user/signup', {
+            'username':username,
+            'email':email,
+            'password':password,
+            'batch':batch,
+            'is_student':true,
+            'is_staff':false
+        }).then(res=>{
             console.log(res.data)
         }).catch(err=>{
+            console.log(err.response.data);
             console.log(err)
         })
     }
