@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
     const [errUser, setErrUser] = useState(false);
     const [user_is, setUser_is] = useState(()=>localStorage.getItem('user_is') ? JSON.parse(localStorage.getItem('user_is')) :null);
     const [notification, setNotification] = useState(()=>localStorage.getItem('notification') ? JSON.parse(localStorage.getItem('notification')) : null);
+    const [profile, setProfile] = useState(null);
 
     const navigate = useNavigate();
 
@@ -77,6 +78,47 @@ export const AuthProvider = ({ children }) => {
       navigate('/signin');
     }
 
+    const getProfile = async () => {
+        await axios.post('http://127.0.0.1:8000/user/view/profile',{},{
+            headers: {Authorization : `Bearer ${authTokens.access}`}
+        }).then(res=>{
+            setProfile(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
+    const updateProfile = async (e) => {
+        e.preventDefault()
+        console.log('present here');
+        console.log(e.target);
+
+        await axios.post('http://127.0.0.1:8000/user/update/profile',{
+            'first_name':e.target.first_name.value,
+            'last_name':e.target.last_name.value,
+            'domain':e.target.domain.value,
+            'dob':e.target.dob.value,
+            'address':e.target.address.value,
+            'education':e.target.education.value,
+            'college':e.target.college.value,
+            'experience':e.target.experience.value,
+            'company':e.target.company.value,
+            'email':e.target.email.value,
+            'mobile':e.target.mobile.value,
+            'village':e.target.village.value,
+            'designation':e.target.designation.value,
+            // 'gender':'Male',
+
+        },{
+            headers: {Authorization : `Bearer ${authTokens.access}`}
+        }).then(res=>{
+            console.log(res.data)
+            setProfile(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
     const get_data =  async () => {
       axios.post('http://127.0.0.1:8000/don/' ,{
         username: 'username',
@@ -94,11 +136,14 @@ export const AuthProvider = ({ children }) => {
 
         const contextData = {
             signupUser,
+            getProfile,
+            updateProfile,
             loginUser,
             logoutUser,
             get_data,
             notification,
             errUser,
+            profile,
             user_is,
             user,
         };
