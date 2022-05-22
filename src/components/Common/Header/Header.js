@@ -8,8 +8,8 @@ import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 // import style from Header.module.css
 import style from "./Header.module.css";
 import light from "./light.jpg";
-import { useContext } from "react";
-import AuthContext from "../../../AuthContext/AuthContext";
+import { useContext, useState } from "react";
+import AuthContext from "../../../Context/AuthContext";
 import Button from "@mui/material/Button";
 
 
@@ -18,9 +18,11 @@ function Header() {
 
   const { logoutUser, user } = useContext(AuthContext);
 
+
   const handleDarkMode = (e) => {
     if (e.target.checked) {
       document.body.classList.add("dark");
+      
     } else {
       document.body.classList.remove("dark");
     }
@@ -31,11 +33,10 @@ function Header() {
       <Col md={6}>
         <Row className="m-0">
           <Col md={6} className="d-flex">
-            <img src={light} width="35%" className="cp me-2"></img>
             <h3>BROCAMP</h3>
           </Col>
           <Col md={6} className="d-flex displayname">  
-            {user && <h3 className="ms-5">Hello {user.username}</h3>}
+            {user ? <h3 className="ms-5">Hello {user.username}</h3> : <h3 className="ms-5">Welcome </h3> }
           </Col>
         </Row>
       </Col>
@@ -59,11 +60,11 @@ function Header() {
             </Row>
           </Col>
           
-          <Col md={6} className="d-flex justify-content-between px-3 p-0">
+          <Col md={5} className="d-flex justify-content-between px-3 p-0">
+            <input type="checkbox" id="checkbox"  onChange={handleDarkMode} />
             <svg height={40} width={40} onClick={ logoutUser }>
-              <circle cx="20" cy="20" r="20" fill="#334A52" />
+              <circle cx="20" cy="20" r="20"  />
             </svg>
-            <input type="checkbox" id="checkbox" onChange={handleDarkMode} />
           </Col>
         </Row>
       </Col>

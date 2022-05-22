@@ -11,6 +11,8 @@ svg{
 }
 
 
+
 .hoverdiv:hover{
-    background-color: var(--grey)
+    background-color: var(--grey);
+    color: var(--dark);
 }

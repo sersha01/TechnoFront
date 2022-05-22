@@ -8,9 +8,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Row } from "react-bootstrap";
-import CreateTodo from '../TasksAdded/CreateTodo'
 
-const AddTask = () => {
+const AddTask = ({title,value}) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -24,7 +23,7 @@ const AddTask = () => {
   return (
     <div>
       <Button variant="outlined" className="addtask" onClick={handleClickOpen}>
-        Add Task
+        {title}
       </Button>
       <Dialog
         open={open}
@@ -34,7 +33,7 @@ const AddTask = () => {
         
       >
         <DialogTitle id="alert-dialog-title">
-          {"Add Task"}
+          {title}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -45,22 +44,74 @@ const AddTask = () => {
               className="d-block p-3 px-5"
               style={{width: '500px', height: 'fit-content'}}
             >
-              <Row className="my-2">
+
+              {value ==="domain" && <Row className="my-2">
                 <TextField
                   id="outlined-basic"
-                  label="Week "
+                  label="Domain name"
                   variant="outlined"
+                  placeholder="Enter domain name here"
                 />
-              </Row>
-              <Row className="my-2">
+              </Row>}
+              {value ==="batch" && <Row className="my-2">
+                <TextField
+                  id="outlined-basic"
+                  label="Batch number"
+                  variant="outlined"
+                  placeholder="Enter batch number here.."
+                />
+              </Row>}
+              {value ==="advisor" && <Row className="my-2">
+                <TextField
+                  id="outlined-basic"
+                  label="Advisor"
+                  variant="outlined"
+                  placeholder="Enter name here.."
+                />
+              </Row>}
+              {value ==="group" && <Row className="my-2">
+              <TextField
+                  id="outlined-basic"
+                  label="Name"
+                  variant="outlined"
+                  placeholder="Enter name here.."
+                />
                 <TextField
                   id="outlined-basic"
                   label="Advisor"
                   variant="outlined"
                 />
-              </Row>
+                <TextField
+                  id="outlined-basic"
+                  label="Domain"
+                  variant="outlined"
+                />
+              </Row>}
+              {value ==="group" && <Row className="my-2">
+              <TextField
+                  id="outlined-basic"
+                  label="Batch"
+                  variant="outlined"
+                />
+              <TextField
+                  id="outlined-basic"
+                  label="Name"
+                  variant="outlined"
+                  placeholder="Enter name here.."
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Advisor"
+                  variant="outlined"
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Domain"
+                  variant="outlined"
+                />
+              </Row>}
+              
               <Row className="">
-                <CreateTodo/>
               </Row>
             </Box>
           </DialogContentText>

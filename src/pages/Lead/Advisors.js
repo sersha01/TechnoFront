@@ -4,7 +4,8 @@ import Header from "../../components/Common/Header/Header";
 import Header2 from "../../components/Common/Header2/Header2";
 import NavBox from "../../components/Staff/NavBox/NavBox";
 import Notification from "../../components/Common/Notification/Notification";
-import MySpace from "../../components/Advisor/Space/MySpace";
+import Advisor from "../../components/Staff/Advisors/Advisors";
+
 const Advisors = () => {
   return (
     <Container fluid className="mx-0 p-0">
@@ -19,12 +20,12 @@ const Advisors = () => {
             <Notification />
           </Row>
         </Col>
-        <Col md={8} className="bg rounded-3 p-0 mx-5 me-0 pb-5 mb-3 bs">
-          <MySpace />
+        <Col md={8} className="bg rounded-3 p-0 mx-5 bglight me-0 pb-5 mb-3 bs">
+          <Advisor />
         </Col>
       </Row>
-      <Row className="d-md-flex d-lg-none ">
-        <MySpace />
+      <Row className="d-md-flex d-lg-none bglight">
+        <Advisor />
       </Row>
     </Container>
   )

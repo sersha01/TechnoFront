@@ -4,6 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
+import AddTask from "../../Common/AddTask/AddTask";
 
 const Batch = () => {
   return (
@@ -13,13 +14,12 @@ const Batch = () => {
           <h2>Batch</h2>
         </div>
         <div>
-            <Button></Button>
+          <AddTask title="Add Batch" value="batch" />
         </div>
       </Col>
 
       <Col sm={12} className="py-2 my-2 bgdark  px-4 rounded-3">
         <Row className="m-0 textlight" xs={0}>
-          
           <Col className="bgdark" sm={2}>
             Batch
           </Col>
@@ -42,182 +42,174 @@ const Batch = () => {
       </Col>
 
       <Col className="m-0 row ">
-            <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-              <Row className="m-0">
-                <Col className="textdark" sm={2}>
-                  #20
-                </Col>
-                <Col className="textdark" sm={2}>
-                  Aneesha
-                </Col>
-                <Col className="textdark" sm={2}>
-                  23
-                </Col>
-                <Col className="textdark" sm={2}>
-                  5
-                </Col>
-                
-                <Col className="textdark" sm={2}>
-                  Kochi
-                </Col>
-                <Col className="textdark d-flex" sm={2}>
-                  
-                  <Button className="sendform mx-2">Edit</Button>
-                  <Button className="coh">Delete</Button>
-                </Col>
-              </Row>
+        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+          <Row className="m-0">
+            <Col className="textdark" sm={2}>
+              #20
             </Col>
-            <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-              <Row className="m-0">
-                <Col className="textdark" sm={2}>
-                  #20
-                </Col>
-                <Col className="textdark" sm={2}>
-                  Aneesha
-                </Col>
-                <Col className="textdark" sm={2}>
-                  23
-                </Col>
-                <Col className="textdark" sm={2}>
-                  5
-                </Col>
-                
-                <Col className="textdark" sm={2}>
-                  Kochi
-                </Col>
-                <Col className="textdark d-flex" sm={2}>
-                  
-                  <Button className="sendform mx-2">Edit</Button>
-                  <Button className="coh">Delete</Button>
-                </Col>
-              </Row>
+            <Col className="textdark" sm={2}>
+              Aneesha
             </Col>
-            <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-              <Row className="m-0">
-                <Col className="textdark" sm={2}>
-                  #20
-                </Col>
-                <Col className="textdark" sm={2}>
-                  Aneesha
-                </Col>
-                <Col className="textdark" sm={2}>
-                  23
-                </Col>
-                <Col className="textdark" sm={2}>
-                  5
-                </Col>
-                
-                <Col className="textdark" sm={2}>
-                  Kochi
-                </Col>
-                <Col className="textdark d-flex" sm={2}>
-                  
-                  <Button className="sendform mx-2">Edit</Button>
-                  <Button className="coh">Delete</Button>
-                </Col>
-              </Row>
+            <Col className="textdark" sm={2}>
+              23
             </Col>
-            <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-              <Row className="m-0">
-                <Col className="textdark" sm={2}>
-                  #20
-                </Col>
-                <Col className="textdark" sm={2}>
-                  Aneesha
-                </Col>
-                <Col className="textdark" sm={2}>
-                  23
-                </Col>
-                <Col className="textdark" sm={2}>
-                  5
-                </Col>
-                
-                <Col className="textdark" sm={2}>
-                  Kochi
-                </Col>
-                <Col className="textdark d-flex" sm={2}>
-                  
-                  <Button className="sendform mx-2">Edit</Button>
-                  <Button className="coh">Delete</Button>
-                </Col>
-              </Row>
+            <Col className="textdark" sm={2}>
+              5
             </Col>
-            <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-              <Row className="m-0">
-                <Col className="textdark" sm={2}>
-                  #20
-                </Col>
-                <Col className="textdark" sm={2}>
-                  Aneesha
-                </Col>
-                <Col className="textdark" sm={2}>
-                  23
-                </Col>
-                <Col className="textdark" sm={2}>
-                  5
-                </Col>
-                
-                <Col className="textdark" sm={2}>
-                  Kochi
-                </Col>
-                <Col className="textdark d-flex" sm={2}>
-                  
-                  <Button className="sendform mx-2">Edit</Button>
-                  <Button className="coh">Delete</Button>
-                </Col>
-              </Row>
+
+            <Col className="textdark" sm={2}>
+              Kochi
             </Col>
-            <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-              <Row className="m-0">
-                <Col className="textdark" sm={2}>
-                  #20
-                </Col>
-                <Col className="textdark" sm={2}>
-                  Aneesha
-                </Col>
-                <Col className="textdark" sm={2}>
-                  23
-                </Col>
-                <Col className="textdark" sm={2}>
-                  5
-                </Col>
-                
-                <Col className="textdark" sm={2}>
-                  Kochi
-                </Col>
-                <Col className="textdark d-flex" sm={2}>
-                  
-                  <Button className="sendform mx-2">Edit</Button>
-                  <Button className="coh">Delete</Button>
-                </Col>
-              </Row>
+            <Col className="textdark d-flex" sm={2}>
+              <Button className="sendform mx-2">Edit</Button>
+              <Button className="coh">Delete</Button>
             </Col>
-            <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-              <Row className="m-0">
-                <Col className="textdark" sm={2}>
-                  #20
-                </Col>
-                <Col className="textdark" sm={2}>
-                  Aneesha
-                </Col>
-                <Col className="textdark" sm={2}>
-                  23
-                </Col>
-                <Col className="textdark" sm={2}>
-                  5
-                </Col>
-                
-                <Col className="textdark" sm={2}>
-                  Kochi
-                </Col>
-                <Col className="textdark d-flex" sm={2}>
-                  
-                  <Button className="sendform mx-2">Edit</Button>
-                  <Button className="coh">Delete</Button>
-                </Col>
-              </Row>
+          </Row>
+        </Col>
+        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+          <Row className="m-0">
+            <Col className="textdark" sm={2}>
+              #20
             </Col>
-            
+            <Col className="textdark" sm={2}>
+              Aneesha
+            </Col>
+            <Col className="textdark" sm={2}>
+              23
+            </Col>
+            <Col className="textdark" sm={2}>
+              5
+            </Col>
+
+            <Col className="textdark" sm={2}>
+              Kochi
+            </Col>
+            <Col className="textdark d-flex" sm={2}>
+              <Button className="sendform mx-2">Edit</Button>
+              <Button className="coh">Delete</Button>
+            </Col>
+          </Row>
+        </Col>
+        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+          <Row className="m-0">
+            <Col className="textdark" sm={2}>
+              #20
+            </Col>
+            <Col className="textdark" sm={2}>
+              Aneesha
+            </Col>
+            <Col className="textdark" sm={2}>
+              23
+            </Col>
+            <Col className="textdark" sm={2}>
+              5
+            </Col>
+
+            <Col className="textdark" sm={2}>
+              Kochi
+            </Col>
+            <Col className="textdark d-flex" sm={2}>
+              <Button className="sendform mx-2">Edit</Button>
+              <Button className="coh">Delete</Button>
+            </Col>
+          </Row>
+        </Col>
+        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+          <Row className="m-0">
+            <Col className="textdark" sm={2}>
+              #20
+            </Col>
+            <Col className="textdark" sm={2}>
+              Aneesha
+            </Col>
+            <Col className="textdark" sm={2}>
+              23
+            </Col>
+            <Col className="textdark" sm={2}>
+              5
+            </Col>
+
+            <Col className="textdark" sm={2}>
+              Kochi
+            </Col>
+            <Col className="textdark d-flex" sm={2}>
+              <Button className="sendform mx-2">Edit</Button>
+              <Button className="coh">Delete</Button>
+            </Col>
+          </Row>
+        </Col>
+        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+          <Row className="m-0">
+            <Col className="textdark" sm={2}>
+              #20
+            </Col>
+            <Col className="textdark" sm={2}>
+              Aneesha
+            </Col>
+            <Col className="textdark" sm={2}>
+              23
+            </Col>
+            <Col className="textdark" sm={2}>
+              5
+            </Col>
+
+            <Col className="textdark" sm={2}>
+              Kochi
+            </Col>
+            <Col className="textdark d-flex" sm={2}>
+              <Button className="sendform mx-2">Edit</Button>
+              <Button className="coh">Delete</Button>
+            </Col>
+          </Row>
+        </Col>
+        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+          <Row className="m-0">
+            <Col className="textdark" sm={2}>
+              #20
+            </Col>
+            <Col className="textdark" sm={2}>
+              Aneesha
+            </Col>
+            <Col className="textdark" sm={2}>
+              23
+            </Col>
+            <Col className="textdark" sm={2}>
+              5
+            </Col>
+
+            <Col className="textdark" sm={2}>
+              Kochi
+            </Col>
+            <Col className="textdark d-flex" sm={2}>
+              <Button className="sendform mx-2">Edit</Button>
+              <Button className="coh">Delete</Button>
+            </Col>
+          </Row>
+        </Col>
+        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+          <Row className="m-0">
+            <Col className="textdark" sm={2}>
+              #20
+            </Col>
+            <Col className="textdark" sm={2}>
+              Aneesha
+            </Col>
+            <Col className="textdark" sm={2}>
+              23
+            </Col>
+            <Col className="textdark" sm={2}>
+              5
+            </Col>
+
+            <Col className="textdark" sm={2}>
+              Kochi
+            </Col>
+            <Col className="textdark d-flex" sm={2}>
+              <Button className="sendform mx-2">Edit</Button>
+              <Button className="coh">Delete</Button>
+            </Col>
+          </Row>
+        </Col>
       </Col>
     </Row>
   );

@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import style from "./Notification.module.css";
 import { FaBell } from 'react-icons/fa'
 import { useContext } from "react";
-import AuthContext from "../../../AuthContext/AuthContext";
+import AuthContext from "../../../Context/AuthContext";
 
 
 function Notification() {
@@ -44,7 +44,7 @@ function Notification() {
         xs={12}
       >
         <Row className="m-0">
-          <Col className="text-center pb-3" xs={10}>
+          <Col className="text-center pb-3" xs={12}>
             <h6 className="m-0">See all</h6>
           </Col>
         </Row>

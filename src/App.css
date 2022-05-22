@@ -1,7 +1,5 @@
-
-
 .cp {
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 body {
@@ -57,38 +55,37 @@ Link {
   width: 150px;
 }
 
-.textlight{
-  color: var(--light)
+.textlight {
+  color: var(--light);
 }
 
-
-
-.navitems{
+.navitems {
   font-size: 17px;
   font-weight: 700;
+  margin: 10px 10px;
 }
 
-.displayname{
+.displayname {
   text-transform: capitalize;
 }
 
-.paymentpendingbutton{
+.paymentpendingbutton {
   background-color: var(--dark) !important;
   color: var(--light) !important;
 }
 
-.sendform , .completed{
+.sendform,
+.completed {
   background-color: var(--dark) !important;
   color: var(--light) !important;
-
 }
 
-.coh{
+.coh {
   background-color: var(--info) !important;
   color: var(--light) !important;
 }
 
-tr{
+tr {
   border: none !important;
 }
 
@@ -133,5 +130,27 @@ input[type="checkbox"]:checked {
 }
 
 
+.addtask{
+  background-color: var(--dark) !important;
+  color: var(--light) !important;
+}
 
+.searchbtn{
+  background-color: var(--dark) !important;
+  color: var(--light) !important;
+}
 
+.txt:active {
+  outline: var(--info) !important;
+  color: var(--info) !important;
+}
+
+.txt:focus  {
+  outline: none !important;
+  color: var(--info) !important;
+  background-color: var(--info) !important;
+}
+
+.txt{
+  outline: none !important;
+}

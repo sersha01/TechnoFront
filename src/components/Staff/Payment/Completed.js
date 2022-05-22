@@ -34,8 +34,8 @@ const Completed = () => {
       </Col>
 
       <Col className="m-0 row">
-        <b>
-          <Link to="/advisor/work/tasks">
+        <>
+          
             <Col sm={12} className="py-2 mb-2 cp bg rounded-3">
               <Row className="m-0">
                 <Col sm={1}>#1 </Col>
@@ -47,8 +47,8 @@ const Completed = () => {
                 <Col sm={2}>Completed</Col>
               </Row>
             </Col>
-          </Link>
-          <Link to="/advisor/work/tasks">
+          
+          
             <Col sm={12} className="py-2 mb-2 cp bg rounded-3">
               <Row className="m-0">
                 <Col sm={1}>#1 </Col>
@@ -60,8 +60,8 @@ const Completed = () => {
                 <Col sm={2}>Completed</Col>
               </Row>
             </Col>
-          </Link>
-          <Link to="/advisor/work/tasks">
+          
+          
             <Col sm={12} className="py-2 mb-2 cp bg rounded-3">
               <Row className="m-0">
                 <Col sm={1}>#1 </Col>
@@ -73,8 +73,8 @@ const Completed = () => {
                 <Col sm={2}>Completed</Col>
               </Row>
             </Col>
-          </Link>
-          <Link to="/advisor/work/tasks">
+          
+          
             <Col sm={12} className="py-2 mb-2 cp bg rounded-3">
               <Row className="m-0">
                 <Col sm={1}>#1 </Col>
@@ -86,8 +86,8 @@ const Completed = () => {
                 <Col sm={2}>Completed</Col>
               </Row>
             </Col>
-          </Link>
-          <Link to="/advisor/work/tasks">
+          
+          
             <Col sm={12} className="py-2 mb-2 cp bg rounded-3">
               <Row className="m-0">
                 <Col sm={1}>#1 </Col>
@@ -99,8 +99,8 @@ const Completed = () => {
                 <Col sm={2}>Completed</Col>
               </Row>
             </Col>
-          </Link>
-        </b>
+          
+        </>
       </Col>
     </>
   );

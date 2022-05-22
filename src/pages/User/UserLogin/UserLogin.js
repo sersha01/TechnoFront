@@ -1,6 +1,6 @@
 import Header from "../../../components/Common/Header/Header";
 import Header2 from "../../../components/Common/Header2/Header2";
-import AuthContext from "../../../AuthContext/AuthContext";
+import AuthContext from "../../../Context/AuthContext";
 import { Link } from 'react-router-dom';
 import { useContext } from "react";
 import { Container } from "react-bootstrap";

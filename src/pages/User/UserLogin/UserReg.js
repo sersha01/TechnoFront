@@ -1,8 +1,7 @@
-import React from "react";
+import React,{ useContext } from "react";
 import Header from "../../../components/Common/Header/Header";
 import Header2 from "../../../components/Common/Header2/Header2";
-import { useContext } from "react";
-import AuthContext from "../../../AuthContext/AuthContext";
+import AuthContext from "../../../Context/AuthContext";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
