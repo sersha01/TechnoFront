@@ -8,13 +8,34 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Row } from "react-bootstrap";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
 
-const AddTask = ({title,value}) => {
+const AddTask = ({ title, value }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
+
+  const [age, setAge] = React.useState("");
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+
+  const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
   const handleClose = () => {
     setOpen(false);
@@ -30,11 +51,8 @@ const AddTask = ({title,value}) => {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        
       >
-        <DialogTitle id="alert-dialog-title">
-          {title}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <Box
@@ -42,77 +60,118 @@ const AddTask = ({title,value}) => {
               noValidate
               autoComplete="off"
               className="d-block p-3 px-5"
-              style={{width: '500px', height: 'fit-content'}}
+              style={{ width: "500px", height: "fit-content" }}
             >
+              {value === "domain" && (
+                <Row className="my-2">
+                  <TextField
+                    id="outlined-basic"
+                    label="Domain name"
+                    variant="outlined"
+                    placeholder="Enter domain name here"
+                  />
+                </Row>
+              )}
+              {value === "batch" && (
+                <Row className="my-2">
+                  <TextField
+                    id="outlined-basic"
+                    label="Batch number"
+                    variant="outlined"
+                    placeholder="Enter batch number here.."
+                  />
+                  <FormControl className="my-4">
+                    <InputLabel id="demo-simple-select-autowidth-label">
+                      Advisor
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-autowidth-label"
+                      id="demo-simple-select-autowidth"
+                      value={age}
+                      onChange={handleChange}
+                      autoWidth
+                      label="Advisor name"
+                      maxHeight="200px"
+                      MenuProps={MenuProps}
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                     
+                    </Select>
+                  </FormControl>
+                </Row>
+              )}
+              {value === "advisor" && (
+                <Row className="my-2">
+                  <TextField
+                    id="outlined-basic"
+                    label="Advisor"
+                    variant="outlined"
+                    placeholder="Enter name here.."
+                  />
+                </Row>
+              )}
+              {value === "group" && (
+                <Row className="my-2">
+                  <TextField
+                    id="outlined-basic"
+                    label="Name"
+                    variant="outlined"
+                    placeholder="Enter name here.."
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    label="Advisor"
+                    variant="outlined"
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    label="Domain"
+                    variant="outlined"
+                  />
+                </Row>
+              )}
+              {value === "group" && (
+                <Row className="my-2">
+                  <TextField
+                    id="outlined-basic"
+                    label="Batch"
+                    variant="outlined"
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    label="Name"
+                    variant="outlined"
+                    placeholder="Enter name here.."
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    label="Advisor"
+                    variant="outlined"
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    label="Domain"
+                    variant="outlined"
+                  />
+                </Row>
+              )}
 
-              {value ==="domain" && <Row className="my-2">
-                <TextField
-                  id="outlined-basic"
-                  label="Domain name"
-                  variant="outlined"
-                  placeholder="Enter domain name here"
-                />
-              </Row>}
-              {value ==="batch" && <Row className="my-2">
-                <TextField
-                  id="outlined-basic"
-                  label="Batch number"
-                  variant="outlined"
-                  placeholder="Enter batch number here.."
-                />
-              </Row>}
-              {value ==="advisor" && <Row className="my-2">
-                <TextField
-                  id="outlined-basic"
-                  label="Advisor"
-                  variant="outlined"
-                  placeholder="Enter name here.."
-                />
-              </Row>}
-              {value ==="group" && <Row className="my-2">
-              <TextField
-                  id="outlined-basic"
-                  label="Name"
-                  variant="outlined"
-                  placeholder="Enter name here.."
-                />
-                <TextField
-                  id="outlined-basic"
-                  label="Advisor"
-                  variant="outlined"
-                />
-                <TextField
-                  id="outlined-basic"
-                  label="Domain"
-                  variant="outlined"
-                />
-              </Row>}
-              {value ==="group" && <Row className="my-2">
-              <TextField
-                  id="outlined-basic"
-                  label="Batch"
-                  variant="outlined"
-                />
-              <TextField
-                  id="outlined-basic"
-                  label="Name"
-                  variant="outlined"
-                  placeholder="Enter name here.."
-                />
-                <TextField
-                  id="outlined-basic"
-                  label="Advisor"
-                  variant="outlined"
-                />
-                <TextField
-                  id="outlined-basic"
-                  label="Domain"
-                  variant="outlined"
-                />
-              </Row>}
-              
-              <Row className="">
-              </Row>
+              <Row className=""></Row>
             </Box>
           </DialogContentText>
         </DialogContent>

@@ -6,7 +6,7 @@ import style from "./Profile.module.css";
 import wafi from "./wafi.jpg";
 import Button from "@mui/material/Button";
 import { useContext, useEffect } from "react";
-import AuthContext from "../../../AuthContext/AuthContext";
+import AuthContext from "../../../Context/AuthContext";
 
 function Profile() {
 
