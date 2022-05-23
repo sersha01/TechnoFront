@@ -28,6 +28,7 @@ import LeadAdvisors from "./pages/Lead/Advisors";
 import LeadBatch from "./pages/Lead/Batch";
 import LeadDomain from "./pages/Lead/Domain";
 import LeadGroups from "./pages/Lead/Groups";
+import GroupManage from "./pages/Lead/ManageGroup";
 import LeadPayments from "./pages/Lead/Payments";
 import LeadStudents from "./pages/Lead/Students";
 import { StyleProvider } from "./Context/StyleContext";
@@ -179,6 +180,14 @@ function App() {
                 element={
                   <PrivateRouteLead>
                     <LeadGroups />
+                  </PrivateRouteLead>
+                }
+              />
+              <Route
+                path="/lead/groups/manage"
+                element={
+                  <PrivateRouteLead>
+                    <GroupManage />
                   </PrivateRouteLead>
                 }
               />

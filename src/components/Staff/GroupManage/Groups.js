@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ManageSearchRoundedIcon from "@mui/icons-material/ManageSearchRounded";
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -9,8 +9,9 @@ import TextField from "@mui/material/TextField";
 import style from "./Groups.module.css";
 
 const Groups = () => {
-  return (
+  const [add, setAdd] = useState("dont");
 
+  return (
     <Row className="m-0 px-3 rounded-2 bglight py-3">
       <Col sm={12} className="d-flex justify-content-between mb-2">
         <div className="d-flex">
@@ -45,9 +46,7 @@ const Groups = () => {
           <Col className="bgdark" sm={2}>
             Batch
           </Col>
-          <Col className="bgdark" sm={2}>
-            Advisor
-          </Col>
+
           <Col className="bgdark" sm={2}>
             Name
           </Col>
@@ -58,140 +57,156 @@ const Groups = () => {
             Students
           </Col>
 
-          <Col className="bgdark" sm={2}>
-            Actions
-          </Col>
+          <Col className="bgdark" sm={2}></Col>
         </Row>
       </Col>
 
       <Col className="m-0 row ">
-          <Link to="/lead/groups/manage">
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
-              #1
+              #20
             </Col>
+
             <Col className="textdark" sm={2}>
-              Aneesha
-            </Col>
-            <Col className="textdark" sm={2}>
-              20A
+              Wafi
             </Col>
             <Col className="textdark" sm={2}>
               Python
             </Col>
             <Col className="textdark" sm={2}>
-              8
+              18
             </Col>
 
-            <Col className="textdark d-flex" sm={2}>
-              <AddTask title="Manage" value="group" />
+            <Col className="textdark d-flex justify-content-end" sm={4}>
+              <Button className="completed w-50">Remove</Button>
             </Col>
           </Row>
         </Col>
-        </Link>
-          <Link to="/lead/groups/manage">
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
-              #1
+              #20
             </Col>
+
             <Col className="textdark" sm={2}>
-              Aneesha
-            </Col>
-            <Col className="textdark" sm={2}>
-              20A
+              Wafi
             </Col>
             <Col className="textdark" sm={2}>
               Python
             </Col>
             <Col className="textdark" sm={2}>
-              8
+              18
             </Col>
 
-            <Col className="textdark d-flex" sm={2}>
-              <AddTask title="Manage" value="group" />
+            <Col className="textdark d-flex justify-content-end" sm={4}>
+              <Button className="completed w-50">Remove</Button>
             </Col>
           </Row>
         </Col>
-        </Link>
-          <Link to="/lead/groups/manage">
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
-              #1
+              #20
             </Col>
+
             <Col className="textdark" sm={2}>
-              Aneesha
-            </Col>
-            <Col className="textdark" sm={2}>
-              20A
+              Wafi
             </Col>
             <Col className="textdark" sm={2}>
               Python
             </Col>
             <Col className="textdark" sm={2}>
-              8
+              18
             </Col>
 
-            <Col className="textdark d-flex" sm={2}>
-              <AddTask title="Manage" value="group" />
+            <Col className="textdark d-flex justify-content-end" sm={4}>
+              <Button className="completed w-50">Remove</Button>
             </Col>
           </Row>
         </Col>
-        </Link>
-          <Link to="/lead/groups/manage">
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #1
-            </Col>
-            <Col className="textdark" sm={2}>
-              Aneesha
-            </Col>
-            <Col className="textdark" sm={2}>
-              20A
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              8
-            </Col>
-
-            <Col className="textdark d-flex" sm={2}>
-              <AddTask title="Manage" value="group" />
-            </Col>
-          </Row>
-        </Col>
-        </Link>
-          <Link to="/lead/groups/manage">
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #1
-            </Col>
-            <Col className="textdark" sm={2}>
-              Aneesha
-            </Col>
-            <Col className="textdark" sm={2}>
-              20A
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              8
-            </Col>
-
-            <Col className="textdark d-flex" sm={2}>
-              <AddTask title="Manage" value="group" />
-            </Col>
-          </Row>
-        </Col>
-        </Link>
-        
       </Col>
+      <Row>
+        <Col className="m-0 my-3 row d-flex justify-content-end">
+          {add === "dont" ? (
+            <Button className="completed w-25" onClick={() => setAdd("show")}>
+              Add more
+            </Button>
+          ) : (
+            <Button className="completed w-25" onClick={() => setAdd("dont")}>
+              Back
+            </Button>
+          )}
+        </Col>
+      </Row>
+
+      {add === "show" && (
+        <Col className="m-0 row ">
+          <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+            <Row className="m-0">
+              <Col className="textdark" sm={2}>
+                #20
+              </Col>
+
+              <Col className="textdark" sm={2}>
+                Wafi
+              </Col>
+              <Col className="textdark" sm={2}>
+                Python
+              </Col>
+              <Col className="textdark" sm={2}>
+                18
+              </Col>
+
+              <Col className="textdark d-flex justify-content-end" sm={4}>
+                <Button className="completed w-50">Add</Button>
+              </Col>
+            </Row>
+          </Col>
+          <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+            <Row className="m-0">
+              <Col className="textdark" sm={2}>
+                #20
+              </Col>
+
+              <Col className="textdark" sm={2}>
+                Wafi
+              </Col>
+              <Col className="textdark" sm={2}>
+                Python
+              </Col>
+              <Col className="textdark" sm={2}>
+                18
+              </Col>
+
+              <Col className="textdark d-flex justify-content-end" sm={4}>
+                <Button className="completed w-50">Add</Button>
+              </Col>
+            </Row>
+          </Col>
+          <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+            <Row className="m-0">
+              <Col className="textdark" sm={2}>
+                #20
+              </Col>
+
+              <Col className="textdark" sm={2}>
+                Wafi
+              </Col>
+              <Col className="textdark" sm={2}>
+                Python
+              </Col>
+              <Col className="textdark" sm={2}>
+                18
+              </Col>
+
+              <Col className="textdark d-flex justify-content-end" sm={4}>
+                <Button className="completed w-50">Add</Button>
+              </Col>
+            </Row>
+          </Col>
+        </Col>
+      )}
     </Row>
   );
 };
