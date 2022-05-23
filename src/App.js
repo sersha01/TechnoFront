@@ -31,6 +31,7 @@ import LeadGroups from "./pages/Lead/Groups";
 import GroupManage from "./pages/Lead/ManageGroup";
 import LeadPayments from "./pages/Lead/Payments";
 import LeadStudents from "./pages/Lead/Students";
+import LeadPlacements from "./pages/Lead/Placements";
 import { StyleProvider } from "./Context/StyleContext";
 
 function App() {
@@ -203,7 +204,7 @@ function App() {
                 path="/lead/placements"
                 element={
                   <PrivateRouteLead>
-                    <LeadAdvisors />
+                    <LeadPlacements />
                   </PrivateRouteLead>
                 }
               />

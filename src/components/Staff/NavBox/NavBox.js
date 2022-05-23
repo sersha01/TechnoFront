@@ -5,17 +5,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import style from "./NavBox.module.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import {useContext} from "react"
+import { useContext } from "react";
 import StyleContext from "../../../Context/StyleContext";
 
-
-
-
 function NavBox() {
-  let {activeNav} = useContext(StyleContext)
+  let { activeNav } = useContext(StyleContext);
 
-
-  
   return (
     <Row className="m-0 rounded-3 py-4">
       <Link to="/lead">
@@ -27,7 +22,7 @@ function NavBox() {
           <Col className="my-2 p-0" xs={11}>
             <p className="navitems">Home</p>
           </Col>
-          
+
           <Col className="ps-2 opacity-0 " xs={1}>
             <div className={`px-2 ${style.navSelected}`}></div>
           </Col>
@@ -112,7 +107,7 @@ function NavBox() {
           </Col>
         </Col>
       </Link>
-      <Link to="/lead/students">
+      <Link to="/lead/placements">
         <Col
           className={`pe-0 row m-0 justify-content-end text-center position-relative cp ${style.navItems}`}
           xs={12}
