@@ -65,7 +65,7 @@ const Students = () => {
       </Col>
 
       <Col className="m-0 row ">
-          <Link to="/lead/groups/manage">
+          
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bggreen">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
@@ -89,8 +89,8 @@ const Students = () => {
             </Col>
           </Row>
         </Col>
-        </Link>
-          <Link to="/lead/groups/manage">
+        
+          
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bgred">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
@@ -114,8 +114,8 @@ const Students = () => {
             </Col>
           </Row>
         </Col>
-        </Link>
-          <Link to="/lead/groups/manage">
+        
+          
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
@@ -139,8 +139,8 @@ const Students = () => {
             </Col>
           </Row>
         </Col>
-        </Link>
-          <Link to="/lead/groups/manage">
+        
+          
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
@@ -164,8 +164,8 @@ const Students = () => {
             </Col>
           </Row>
         </Col>
-        </Link>
-          <Link to="/lead/groups/manage">
+        
+          
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
@@ -189,8 +189,8 @@ const Students = () => {
             </Col>
           </Row>
         </Col>
-        </Link>
-          <Link to="/lead/groups/manage">
+        
+          
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bgyellow">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
@@ -214,8 +214,8 @@ const Students = () => {
             </Col>
           </Row>
         </Col>
-        </Link>
-          <Link to="/lead/groups/manage">
+        
+          
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bgyellow">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
@@ -239,8 +239,8 @@ const Students = () => {
             </Col>
           </Row>
         </Col>
-        </Link>
-          <Link to="/lead/groups/manage">
+        
+          
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
@@ -264,7 +264,7 @@ const Students = () => {
             </Col>
           </Row>
         </Col>
-        </Link>
+        
          
       </Col>
     </Row>
