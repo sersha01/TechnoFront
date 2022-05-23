@@ -5,6 +5,8 @@ import Header2 from "../../components/Common/Header2/Header2";
 import NavBox from "../../components/Staff/NavBox/NavBox";
 import Notification from "../../components/Common/Notification/Notification";
 import Group from "../../components/Staff/Groups/Groups";
+
+
 const Groups = () => {
   return (
     <Container fluid className="mx-0 p-0">
