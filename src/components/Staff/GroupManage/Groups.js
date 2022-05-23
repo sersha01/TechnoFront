@@ -15,8 +15,8 @@ const Groups = () => {
     <Row className="m-0 px-3 rounded-2 bglight py-3">
       <Col sm={12} className="d-flex justify-content-between mb-2">
         <div className="d-flex">
-          <h2 className="me-4">Groups</h2>
-          <AddTask title="Add" value="addgroup" />
+          <h2 className="me-4">#20 A</h2>
+          <Button color="error" variant="contained" size="small" className="h-50" >Delete</Button>
         </div>
 
         <div className="d-flex justify-content-end textlight">
