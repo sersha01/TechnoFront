@@ -90,6 +90,106 @@ const Groups = () => {
           </Row>
         </Col>
         </Link>
+          <Link to="/lead/groups/manage">
+        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+          <Row className="m-0">
+            <Col className="textdark" sm={2}>
+              #1
+            </Col>
+            <Col className="textdark" sm={2}>
+              Aneesha
+            </Col>
+            <Col className="textdark" sm={2}>
+              20A
+            </Col>
+            <Col className="textdark" sm={2}>
+              Python
+            </Col>
+            <Col className="textdark" sm={2}>
+              8
+            </Col>
+
+            <Col className="textdark d-flex" sm={2}>
+              <AddTask title="Manage" value="group" />
+            </Col>
+          </Row>
+        </Col>
+        </Link>
+          <Link to="/lead/groups/manage">
+        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+          <Row className="m-0">
+            <Col className="textdark" sm={2}>
+              #1
+            </Col>
+            <Col className="textdark" sm={2}>
+              Aneesha
+            </Col>
+            <Col className="textdark" sm={2}>
+              20A
+            </Col>
+            <Col className="textdark" sm={2}>
+              Python
+            </Col>
+            <Col className="textdark" sm={2}>
+              8
+            </Col>
+
+            <Col className="textdark d-flex" sm={2}>
+              <AddTask title="Manage" value="group" />
+            </Col>
+          </Row>
+        </Col>
+        </Link>
+          <Link to="/lead/groups/manage">
+        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+          <Row className="m-0">
+            <Col className="textdark" sm={2}>
+              #1
+            </Col>
+            <Col className="textdark" sm={2}>
+              Aneesha
+            </Col>
+            <Col className="textdark" sm={2}>
+              20A
+            </Col>
+            <Col className="textdark" sm={2}>
+              Python
+            </Col>
+            <Col className="textdark" sm={2}>
+              8
+            </Col>
+
+            <Col className="textdark d-flex" sm={2}>
+              <AddTask title="Manage" value="group" />
+            </Col>
+          </Row>
+        </Col>
+        </Link>
+          <Link to="/lead/groups/manage">
+        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+          <Row className="m-0">
+            <Col className="textdark" sm={2}>
+              #1
+            </Col>
+            <Col className="textdark" sm={2}>
+              Aneesha
+            </Col>
+            <Col className="textdark" sm={2}>
+              20A
+            </Col>
+            <Col className="textdark" sm={2}>
+              Python
+            </Col>
+            <Col className="textdark" sm={2}>
+              8
+            </Col>
+
+            <Col className="textdark d-flex" sm={2}>
+              <AddTask title="Manage" value="group" />
+            </Col>
+          </Row>
+        </Col>
+        </Link>
         
       </Col>
     </Row>
