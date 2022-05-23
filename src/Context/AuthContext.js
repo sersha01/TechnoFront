@@ -15,11 +15,16 @@ export const AuthProvider = ({ children }) => {
     const [user_is, setUser_is] = useState(()=>localStorage.getItem('user_is') ? JSON.parse(localStorage.getItem('user_is')) :null);
     const [notification, setNotification] = useState(()=>localStorage.getItem('notification') ? JSON.parse(localStorage.getItem('notification')) : null);
     const [profile, setProfile] = useState(null);
+    const [advisors, setAdvisors] = useState(null);
+    const [advisor, setAdvisor] = useState("");
+    const [location, setLocation] = useState("");
+    const [batchno, setBatchno] = useState("");
+    const [batch, setBatch] = useState(null);
+    const [domain, setDomain] = useState(null);
 
     const navigate = useNavigate();
 
     const signupUser = async ({username,email,password,batch}) => {
-        // const response = 
         console.log(username,email,password,batch);
         await axios.post('http://127.0.0.1:8000/user/signup', {
             'username':username,
@@ -37,6 +42,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     const userDept = async (link) => {
+        console.log(link.access)
         await axios.post('http://127.0.0.1:8000/user/notification',{},{
             headers: {Authorization : `Bearer ${link.access}`}
         }).then(res=>{
@@ -83,6 +89,89 @@ export const AuthProvider = ({ children }) => {
             headers: {Authorization : `Bearer ${authTokens.access}`}
         }).then(res=>{
             setProfile(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
+    const getAdvisors = async () => {
+        await axios.post('http://127.0.0.1:8000/admins/view/advisors',{},{
+            headers: {Authorization : `Bearer ${authTokens.access}`}
+        }).then(res=>{
+            setAdvisors(res.data)
+            console.log(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
+    const getBatches = async () => {
+        await axios.post('http://127.0.0.1:8000/batch/view/batch',{},{
+            headers: {Authorization : `Bearer ${authTokens.access}`}
+        }).then(res=>{
+            setBatch(res.data)
+            console.log(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
+    const deleteBatch = async (batchId) => {
+        await axios.post('http://127.0.0.1:8000/batch/delete/batch',{'id':batchId},{
+            headers: {Authorization : `Bearer ${authTokens.access}`}
+        }).then(res=>{
+            console.log(res.data)
+            getBatches()
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
+    const createBatch = async () => {
+        await axios.post('http://127.0.0.1:8000/batch/create/batch',{
+            'advisor':advisor,
+            'location':location,
+            'batchno':batchno
+        },{
+            headers: {Authorization : `Bearer ${authTokens.access}`}
+        }).then(res=>{
+            console.log(res.data)
+            getBatches()
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
+    const getDomains = async () => {
+        await axios.post('http://127.0.0.1:8000/user/view/domain',{},{
+            headers: {Authorization : `Bearer ${authTokens.access}`}
+        }).then(res=>{
+            setDomain(res.data)
+            console.log(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
+    const createDomain = async (domain) => {
+        await axios.post('http://127.0.0.1.:8000/user/create/domain',{
+            'name':domain
+        },{
+            headers: {Authorization : `Bearer ${authTokens.access}`}
+        }).then(res=>{
+            console.log(res.data)
+            getDomains()
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
+    const deleteDomain = async (domainId) => {
+        await axios.post('http://127.0.0.1:8000/user/delete/domain',{'id':domainId},{
+            headers: {Authorization : `Bearer ${authTokens.access}`}
+        }).then(res=>{
+            console.log(res.data)
+            getDomains()
         }).catch(err=>{
             console.log(err)
         })
@@ -138,10 +227,26 @@ export const AuthProvider = ({ children }) => {
             signupUser,
             getProfile,
             updateProfile,
+            setAdvisor,
+            deleteBatch,
+            setLocation,
+            createDomain,
+            deleteDomain,
+            getDomains,
+            setBatchno,
+            createBatch,
+            getAdvisors,
             loginUser,
             logoutUser,
+            getBatches,
             get_data,
             notification,
+            advisor,
+            location,
+            batch,
+            domain,
+            batchno,
+            advisors,
             errUser,
             profile,
             user_is,
@@ -149,8 +254,8 @@ export const AuthProvider = ({ children }) => {
         };
 
     return (
-        <AuthContext.Provider value={contextData}>
-            {children}
-        </AuthContext.Provider>
+            <AuthContext.Provider value={contextData}>
+                {children}
+            </AuthContext.Provider>
     )
 }
