@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 // Bootstrap
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import AddTask from "../../Common/AddTask/AddTask"
+import AuthContext from "../../../Context/AuthContext";
 
 const Domain = () => {
+
+  const { getDomains, domain, deleteDomain } = useContext(AuthContext);
+
+  useEffect(() => {
+    getDomains();
+  },[])
+
   return (
     <Row className="m-0 px-3 rounded-2 bglight py-3">
       <Col sm={9} className="d-flex justify-content-between">
@@ -17,7 +25,7 @@ const Domain = () => {
          <AddTask title="Add Domain" value="domain" />
         </div>
       </Col>
-      <Col sm={6} className="d-flex justify-content-between"/>
+      {/* <Col sm={6} className="d-flex justify-content-between"/> */}
       
 
       <Col sm={9} className="py-2 my-2 bgdark  px-4 rounded-3">
@@ -28,107 +36,31 @@ const Domain = () => {
           <Col className="bgdark" sm={4}>
             Name
           </Col>
-          <Col className="bgdark" sm={6}>
+          <Col className="bgdark text-center" sm={6}>
             Actions
           </Col>
         </Row>
       </Col>
 
-      <Row>
-        <Col className="m-0  ">
+      {domain && domain.map((domain, index) => (
+        <Col className="m-0" sm={12}>
           <Col sm={9} className="py-2 mb-2 cp rounded-3 bg">
             <Row className="m-0">
               <Col className="textdark" sm={2}>
-                #1
+                #{index + 1}
               </Col>
               <Col className="textdark" sm={4}>
-                Python
+                {domain.name}
               </Col>
 
-              <Col className="textdark d-flex" sm={6}>
-                <Button className="sendform me-2">Edit</Button>
-                <Button className="coh">Delete</Button>
+              <Col className="textdark d-flex justify-content-center" sm={6}>
+                <Button className="sendform me-2 px-4">Edit</Button>
+                <Button className="coh px-4" onClick={()=>{deleteDomain(domain.id)}}>Delete</Button>
               </Col>
             </Row>
           </Col>
         </Col>
-      </Row>
-      <Row>
-        <Col className="m-0  ">
-          <Col sm={9} className="py-2 mb-2 cp rounded-3 bg">
-            <Row className="m-0">
-              <Col className="textdark" sm={2}>
-                #1
-              </Col>
-              <Col className="textdark" sm={4}>
-                Python
-              </Col>
-
-              <Col className="textdark d-flex" sm={6}>
-                <Button className="sendform me-2">Edit</Button>
-                <Button className="coh">Delete</Button>
-              </Col>
-            </Row>
-          </Col>
-        </Col>
-      </Row>
-      <Row>
-        <Col className="m-0  ">
-          <Col sm={9} className="py-2 mb-2 cp rounded-3 bg">
-            <Row className="m-0">
-              <Col className="textdark" sm={2}>
-                #1
-              </Col>
-              <Col className="textdark" sm={4}>
-                Python
-              </Col>
-
-              <Col className="textdark d-flex" sm={6}>
-                <Button className="sendform me-2">Edit</Button>
-                <Button className="coh">Delete</Button>
-              </Col>
-            </Row>
-          </Col>
-        </Col>
-      </Row>
-      <Row>
-        <Col className="m-0  ">
-          <Col sm={9} className="py-2 mb-2 cp rounded-3 bg">
-            <Row className="m-0">
-              <Col className="textdark" sm={2}>
-                #1
-              </Col>
-              <Col className="textdark" sm={4}>
-                Python
-              </Col>
-
-              <Col className="textdark d-flex" sm={6}>
-                <Button className="sendform me-2">Edit</Button>
-                <Button className="coh">Delete</Button>
-              </Col>
-            </Row>
-          </Col>
-        </Col>
-      </Row>
-      <Row>
-        <Col className="m-0  ">
-          <Col sm={9} className="py-2 mb-2 cp rounded-3 bg">
-            <Row className="m-0">
-              <Col className="textdark" sm={2}>
-                #1
-              </Col>
-              <Col className="textdark" sm={4}>
-                Python
-              </Col>
-
-              <Col className="textdark d-flex" sm={6}>
-                <Button className="sendform me-2">Edit</Button>
-                <Button className="coh">Delete</Button>
-              </Col>
-            </Row>
-          </Col>
-        </Col>
-      </Row>
+      ))}
       
     </Row>
   );
