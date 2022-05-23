@@ -13,7 +13,7 @@ const Placement = () => {
     <Row className="m-0 px-3 rounded-2 bglight py-3">
       <Col sm={12} className="d-flex justify-content-between mb-2">
         <div className="d-flex">
-          <h2 className="me-4">Students</h2>
+          <h2 className="me-4">Placements</h2>
         </div>
 
         <div className="d-flex justify-content-end textlight">
@@ -51,13 +51,14 @@ const Placement = () => {
             Domain
           </Col>
           <Col className="bgdark" sm={2}>
-            Week
+            LPA
           </Col>
           <Col className="bgdark" sm={2}>
-            Group
+            Location
           </Col>
+          
           <Col className="bgdark" sm={2}>
-            Advisor
+            Designation
           </Col>
 
         
@@ -65,61 +66,10 @@ const Placement = () => {
       </Col>
 
       <Col className="m-0 row ">
-          <Link to="/lead/groups/manage">
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bggreen">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #1
-            </Col>
-            <Col className="textdark" sm={2}>
-              Wafi
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              22
-            </Col>
-            <Col className="textdark" sm={2}>
-              20A
-            </Col>
-
-            <Col className="textdark d-flex" sm={2}>
-              Aneesha
-            </Col>
-          </Row>
-        </Col>
-        </Link>
-          <Link to="/lead/groups/manage">
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bgred">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #1
-            </Col>
-            <Col className="textdark" sm={2}>
-              Wafi
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              22
-            </Col>
-            <Col className="textdark" sm={2}>
-              20A
-            </Col>
-
-            <Col className="textdark d-flex" sm={2}>
-              Aneesha
-            </Col>
-          </Row>
-        </Col>
-        </Link>
-          <Link to="/lead/groups/manage">
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
-              #1
+              #20
             </Col>
             <Col className="textdark" sm={2}>
               Wafi
@@ -128,23 +78,21 @@ const Placement = () => {
               Python
             </Col>
             <Col className="textdark" sm={2}>
-              22
+              8.2
             </Col>
             <Col className="textdark" sm={2}>
-              20A
+              Banglore
             </Col>
 
             <Col className="textdark d-flex" sm={2}>
-              Aneesha
+              Full-Stack
             </Col>
           </Row>
         </Col>
-        </Link>
-          <Link to="/lead/groups/manage">
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
-              #1
+              #20
             </Col>
             <Col className="textdark" sm={2}>
               Wafi
@@ -153,23 +101,21 @@ const Placement = () => {
               Python
             </Col>
             <Col className="textdark" sm={2}>
-              22
+              8.2
             </Col>
             <Col className="textdark" sm={2}>
-              20A
+              Banglore
             </Col>
 
             <Col className="textdark d-flex" sm={2}>
-              Aneesha
+              Full-Stack
             </Col>
           </Row>
         </Col>
-        </Link>
-          <Link to="/lead/groups/manage">
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
-              #1
+              #20
             </Col>
             <Col className="textdark" sm={2}>
               Wafi
@@ -178,73 +124,21 @@ const Placement = () => {
               Python
             </Col>
             <Col className="textdark" sm={2}>
-              22
+              8.2
             </Col>
             <Col className="textdark" sm={2}>
-              20A
+              Banglore
             </Col>
 
             <Col className="textdark d-flex" sm={2}>
-              Aneesha
+              Full-Stack
             </Col>
           </Row>
         </Col>
-        </Link>
-          <Link to="/lead/groups/manage">
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bgyellow">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #1
-            </Col>
-            <Col className="textdark" sm={2}>
-              Wafi
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              22
-            </Col>
-            <Col className="textdark" sm={2}>
-              20A
-            </Col>
-
-            <Col className="textdark d-flex" sm={2}>
-              Aneesha
-            </Col>
-          </Row>
-        </Col>
-        </Link>
-          <Link to="/lead/groups/manage">
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bgyellow">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #1
-            </Col>
-            <Col className="textdark" sm={2}>
-              Wafi
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              22
-            </Col>
-            <Col className="textdark" sm={2}>
-              20A
-            </Col>
-
-            <Col className="textdark d-flex" sm={2}>
-              Aneesha
-            </Col>
-          </Row>
-        </Col>
-        </Link>
-          <Link to="/lead/groups/manage">
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
-              #1
+              #20
             </Col>
             <Col className="textdark" sm={2}>
               Wafi
@@ -253,18 +147,64 @@ const Placement = () => {
               Python
             </Col>
             <Col className="textdark" sm={2}>
-              22
+              8.2
             </Col>
             <Col className="textdark" sm={2}>
-              20A
+              Banglore
             </Col>
 
             <Col className="textdark d-flex" sm={2}>
-              Aneesha
+              Full-Stack
             </Col>
           </Row>
         </Col>
-        </Link>
+        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+          <Row className="m-0">
+            <Col className="textdark" sm={2}>
+              #20
+            </Col>
+            <Col className="textdark" sm={2}>
+              Wafi
+            </Col>
+            <Col className="textdark" sm={2}>
+              Python
+            </Col>
+            <Col className="textdark" sm={2}>
+              8.2
+            </Col>
+            <Col className="textdark" sm={2}>
+              Banglore
+            </Col>
+
+            <Col className="textdark d-flex" sm={2}>
+              Full-Stack
+            </Col>
+          </Row>
+        </Col>
+        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+          <Row className="m-0">
+            <Col className="textdark" sm={2}>
+              #20
+            </Col>
+            <Col className="textdark" sm={2}>
+              Wafi
+            </Col>
+            <Col className="textdark" sm={2}>
+              Python
+            </Col>
+            <Col className="textdark" sm={2}>
+              8.2
+            </Col>
+            <Col className="textdark" sm={2}>
+              Banglore
+            </Col>
+
+            <Col className="textdark d-flex" sm={2}>
+              Full-Stack
+            </Col>
+          </Row>
+        </Col>
+         
          
       </Col>
     </Row>
