@@ -139,18 +139,3 @@ input[type="checkbox"]:checked {
   background-color: var(--dark) !important;
   color: var(--light) !important;
 }
-
-.txt:active {
-  outline: var(--info) !important;
-  color: var(--info) !important;
-}
-
-.txt:focus  {
-  outline: none !important;
-  color: var(--info) !important;
-  background-color: var(--info) !important;
-}
-
-.txt{
-  outline: none !important;
-}

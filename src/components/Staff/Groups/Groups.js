@@ -8,32 +8,33 @@ import AddTask from "../../Common/AddTask/AddTask";
 import TextField from "@mui/material/TextField";
 import style from "./Groups.module.css";
 
-
 const Groups = () => {
   return (
+
     <Row className="m-0 px-3 rounded-2 bglight py-3">
       <Col sm={12} className="d-flex justify-content-between mb-2">
         <div className="d-flex">
           <h2 className="me-4">Groups</h2>
           <AddTask title="Add" value="addgroup" />
         </div>
-        <div>
-        <Col
-          xs={3}
-          className={`py-1 my-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
-        >
-          <label className={`${style.label}`}>Collage</label>
-          <input type="text" className={`w-100 ${style.input}`} />
-        </Col>
-        <Col
-          xs={3}
-          className={`py-1 my-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
-        >
-          <label className={`${style.label}`}>Collage</label>
-          <input type="text" className={`w-100 ${style.input}`} />
-        </Col>
-          
-          <Button className="py-2 mx-1 searchbtn">
+
+        <div className="d-flex justify-content-end textlight">
+          <Col
+            xs={4}
+            className={`py-1 my-1 textwhite mx-2 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
+          >
+            <label className={`${style.label}`}>Collage</label>
+            <input type="text" className={`w-100 ${style.input}`} />
+          </Col>
+          <Col
+            xs={4}
+            className={`py-1 textwhite my-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
+          >
+            <label className={`${style.label}`}>Collage</label>
+            <input type="text" className={`w-100 ${style.input}`} />
+          </Col>
+
+          <Button className=" mx-1 searchbtn">
             <ManageSearchRoundedIcon />
           </Button>
         </div>
@@ -64,6 +65,7 @@ const Groups = () => {
       </Col>
 
       <Col className="m-0 row ">
+          <Link to="/lead/groups/manage">
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
@@ -87,6 +89,8 @@ const Groups = () => {
             </Col>
           </Row>
         </Col>
+        </Link>
+        
       </Col>
     </Row>
   );

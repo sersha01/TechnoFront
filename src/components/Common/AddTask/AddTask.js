@@ -32,7 +32,7 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+      width: 450,
     },
   },
 };
@@ -133,41 +133,169 @@ const MenuProps = {
                     variant="outlined"
                     placeholder="Enter name here.."
                   />
-                  <TextField
-                    id="outlined-basic"
-                    label="Advisor"
-                    variant="outlined"
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="Domain"
-                    variant="outlined"
-                  />
+                  <FormControl className="my-4">
+                    <InputLabel id="demo-simple-select-autowidth-label">
+                      Advisor
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-autowidth-label"
+                      id="demo-simple-select-autowidth"
+                      value={age}
+                      onChange={handleChange}
+                      autoWidth
+                      label="Advisor name"
+                      maxHeight="200px"
+                      MenuProps={MenuProps}
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                     
+                    </Select>
+                  </FormControl>
+                  <FormControl >
+                    <InputLabel id="demo-simple-select-autowidth-label">
+                      Domain
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-autowidth-label"
+                      id="demo-simple-select-autowidth"
+                      value={age}
+                      onChange={handleChange}
+                      autoWidth
+                      label="Domain name"
+                      maxHeight="200px"
+                      MenuProps={MenuProps}
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value={10}>Python</MenuItem>
+                      <MenuItem value={10}>Python</MenuItem>
+                      <MenuItem value={10}>Python</MenuItem>
+                      <MenuItem value={10}>Python</MenuItem>
+                      <MenuItem value={10}>Python</MenuItem>
+                      <MenuItem value={10}>Python</MenuItem>
+                      
+                     
+                    </Select>
+                  </FormControl>
                 </Row>
               )}
-              {value === "group" && (
+              {value === "addgroup" && (
                 <Row className="my-2">
-                  <TextField
-                    id="outlined-basic"
-                    label="Batch"
-                    variant="outlined"
-                  />
+                  <FormControl className="my-4">
+                    <InputLabel id="demo-simple-select-autowidth-label">
+                      Batch
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-autowidth-label"
+                      id="demo-simple-select-autowidth"
+                      value={age}
+                      onChange={handleChange}
+                      autoWidth
+                      label="Batch name"
+                      maxHeight="200px"
+                      MenuProps={MenuProps}
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value={10}>20</MenuItem>
+                      <MenuItem value={10}>20</MenuItem>
+                      <MenuItem value={10}>20</MenuItem>
+                      <MenuItem value={10}>20</MenuItem>
+                      <MenuItem value={10}>20</MenuItem>
+                      <MenuItem value={10}>20</MenuItem>
+                      <MenuItem value={10}>20</MenuItem>
+                      <MenuItem value={10}>20</MenuItem>
+                      <MenuItem value={10}>20</MenuItem>
+                      <MenuItem value={10}>20</MenuItem>
+                      
+                     
+                    </Select>
+                  </FormControl>
                   <TextField
                     id="outlined-basic"
                     label="Name"
                     variant="outlined"
                     placeholder="Enter name here.."
+                    className="my-2"
+
                   />
-                  <TextField
-                    id="outlined-basic"
-                    label="Advisor"
-                    variant="outlined"
-                  />
-                  <TextField
-                    id="outlined-basic"
-                    label="Domain"
-                    variant="outlined"
-                  />
+                   <FormControl className="my-4">
+                    <InputLabel id="demo-simple-select-autowidth-label">
+                      Advisor
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-autowidth-label"
+                      id="demo-simple-select-autowidth"
+                      value={age}
+                      onChange={handleChange}
+                      autoWidth
+                      label="Advisor name"
+                      maxHeight="200px"
+                      MenuProps={MenuProps}
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                      <MenuItem value={10}>Aneesha</MenuItem>
+                     
+                    </Select>
+                  </FormControl>
+                  <FormControl className="my-4">
+                    <InputLabel id="demo-simple-select-autowidth-label">
+                      Domain
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-autowidth-label"
+                      id="demo-simple-select-autowidth"
+                      value={age}
+                      onChange={handleChange}
+                      autoWidth
+                      label="Domain name"
+                      maxHeight="200px"
+                      MenuProps={MenuProps}
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value={10}>Python</MenuItem>
+                      <MenuItem value={10}>Python</MenuItem>
+                      <MenuItem value={10}>Python</MenuItem>
+                      <MenuItem value={10}>Python</MenuItem>
+                      <MenuItem value={10}>Python</MenuItem>
+                      <MenuItem value={10}>Python</MenuItem>
+                      
+                     
+                    </Select>
+                  </FormControl>
                 </Row>
               )}
 
