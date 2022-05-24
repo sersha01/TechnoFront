@@ -9,7 +9,30 @@ const Pending = () => {
           <div className="justify-content-center my-auto ">
             <h4 className="pendingt">Pending</h4>
           </div>
-          <div className="pendings py-2 ms-5">
+          <div className="pendings  py-2 ms-5">
+              <h6>Hellooooooooo</h6>
+              <h6>Hello</h6>
+              <h6>Hello</h6>
+              <h6>Hello</h6>
+              <h6>Hello</h6>
+              <h6>Hello</h6>
+              <h6>Hello</h6>
+              <h6>Hellooooooooo</h6>
+              <h6>Hellooooooooo</h6>
+              <h6>Hello</h6>
+              <h6>Hello</h6>
+              <h6>Hello</h6>
+              <h6>Hello</h6>
+              <h6>Hello</h6>
+              <h6>Hello</h6>
+              <h6>Hellooooooooo</h6>
+              <h6>Hellooooooooo</h6>
+              <h6>Hello</h6>
+              <h6>Hello</h6>
+              <h6>Hello</h6>
+              <h6>Hello</h6>
+              <h6>Hello</h6>
+              <h6>Hello</h6>
               <h6>Hellooooooooo</h6>
               <h6>Hello</h6>
               <h6>Hello</h6>

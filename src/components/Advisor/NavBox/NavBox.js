@@ -68,7 +68,6 @@ function NavBox() {
           </Col>
         </Col>
       </Link>
-      
     </Row>
   );
 }
