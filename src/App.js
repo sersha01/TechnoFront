@@ -126,14 +126,7 @@ function App() {
                   </PrivateRouteAdvisor>
                 }
               />
-              <Route
-                path="/advisor/work/tasks"
-                element={
-                  <PrivateRouteAdvisor>
-                    <AdvisorTask />
-                  </PrivateRouteAdvisor>
-                }
-              />
+              <Route path="/advisor/work/tasks" element={<AdvisorTask />} />
 
               {/* LEAD */}
               <Route

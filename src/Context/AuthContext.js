@@ -46,8 +46,8 @@ export const AuthProvider = ({ children }) => {
         email: email,
         password: password,
         batch: batch,
-        is_student: true,
-        is_staff: false,
+        is_student: false,
+        is_staff: true,
       })
       .then((res) => {
         console.log(res.data);
@@ -85,7 +85,7 @@ export const AuthProvider = ({ children }) => {
         }
       })
       .catch((err) => {
-        console.log("error adichu");
+        console.log("error called");
         console.log(err);
       });
   };
