@@ -9,7 +9,7 @@ import AuthContext from "../../../Context/AuthContext";
 
 const Batch = () => {
 
-  const { getBatches, batch, deleteBatch } = useContext(AuthContext);
+  const { getBatches, batches, deleteBatch } = useContext(AuthContext);
 
   useEffect(() => {
     getBatches();
@@ -49,7 +49,7 @@ const Batch = () => {
         </Row>
       </Col>
 
-      {batch && batch.map((batch) => (
+      {batches && batches.map((batch) => (
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg" key={batch.id}>
           <Row className="m-0">
             <Col className="textdark" sm={2}>

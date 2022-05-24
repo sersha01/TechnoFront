@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 // Bootstrap
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,10 +7,16 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import AddTask from "../../Common/AddTask/AddTask";
 
-
-import { useState } from "react";
+import AuthContext from "../../../Context/AuthContext";
 
 const Advisors = () => {
+
+  const { getAdvisors, advisors } = useContext(AuthContext);
+
+  useEffect(() => {
+    getAdvisors();
+  },[])
+
   return (
     <Row className="m-0 px-3 rounded-2 bglight py-3">
       <Col sm={12} className="d-flex justify-content-between">
@@ -44,6 +50,7 @@ const Advisors = () => {
       </Col>
 
       <Col className="m-0 row ">
+      {advisors && advisors.map((advisor) => (
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
@@ -53,7 +60,7 @@ const Advisors = () => {
               Aneesha
             </Col>
             <Col className="textdark" sm={2}>
-              23
+              {advisor && advisor.batch}
             </Col>
             <Col className="textdark" sm={3}>
               5
@@ -65,6 +72,7 @@ const Advisors = () => {
             </Col>
           </Row>
         </Col>
+        ))}
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>

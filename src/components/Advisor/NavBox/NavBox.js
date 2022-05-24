@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 function NavBox() {
   return (
     <Row className="m-0 rounded-3 py-4">
-      <Link to="/advisors">
+      <Link to="/advisor">
         <Col
           className={`pe-0 row m-0 justify-content-end text-center position-relative cp  ${style.navItems}`}
           xs={12}
@@ -23,7 +23,7 @@ function NavBox() {
           </Col>
         </Col>
       </Link>
-      <Link to="/advisors/profile">
+      <Link to="/advisor/profile">
         <Col
           className={`pe-0 row m-0 justify-content-end text-center position-relative cp  ${style.navItems}`}
           xs={12}
@@ -38,7 +38,7 @@ function NavBox() {
           </Col>
         </Col>
       </Link>
-      <Link to="/advisors/students">
+      <Link to="/advisor/students">
         <Col
           className={`pe-0 row m-0 justify-content-end text-center position-relative cp ${style.navItems}`}
           xs={12}
@@ -53,7 +53,7 @@ function NavBox() {
           </Col>
         </Col>
       </Link>
-      <Link to="/advisors/work">
+      <Link to="/advisor/work">
         <Col
           className={`pe-0 row m-0 justify-content-end text-center position-relative cp ${style.navItems}`}
           xs={12}

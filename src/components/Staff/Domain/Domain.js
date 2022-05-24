@@ -9,7 +9,7 @@ import AuthContext from "../../../Context/AuthContext";
 
 const Domain = () => {
 
-  const { getDomains, domain, deleteDomain } = useContext(AuthContext);
+  const { getDomains, domains, deleteDomain } = useContext(AuthContext);
 
   useEffect(() => {
     getDomains();
@@ -42,7 +42,7 @@ const Domain = () => {
         </Row>
       </Col>
 
-      {domain && domain.map((domain, index) => (
+      {domains && domains.map((domain, index) => (
         <Col className="m-0" sm={12}>
           <Col sm={9} className="py-2 mb-2 cp rounded-3 bg">
             <Row className="m-0">

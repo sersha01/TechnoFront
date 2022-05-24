@@ -59,7 +59,7 @@ function Profile() {
             className={`py-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
           >
             <label className={`${style.label}`}>Domain</label>
-            <input type="text"  name='domain' className={`w-100  ${style.input}`} defaultValue={profile && profile.domain.id} />
+            <input type="text"  name='domain' className={`w-100  ${style.input}`} defaultValue={profile && profile.domain} />
           </Col>
         </Col>
         <Col xs={12} md={6} className="my-1 pb-3 ps-1 pe-0">

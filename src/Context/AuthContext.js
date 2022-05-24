@@ -15,12 +15,11 @@ export const AuthProvider = ({ children }) => {
     const [user_is, setUser_is] = useState(()=>localStorage.getItem('user_is') ? JSON.parse(localStorage.getItem('user_is')) :null);
     const [notification, setNotification] = useState(()=>localStorage.getItem('notification') ? JSON.parse(localStorage.getItem('notification')) : null);
     const [profile, setProfile] = useState(null);
+    const [advisorsNmaes, setAdvisorsNames] = useState(null);
+    const [batches, setBatches] = useState(null);
+    const [domains, setDomains] = useState(null);
+    const [groups, setGroups] = useState(null);
     const [advisors, setAdvisors] = useState(null);
-    const [advisor, setAdvisor] = useState("");
-    const [location, setLocation] = useState("");
-    const [batchno, setBatchno] = useState("");
-    const [batch, setBatch] = useState(null);
-    const [domain, setDomain] = useState(null);
 
     const navigate = useNavigate();
 
@@ -94,11 +93,11 @@ export const AuthProvider = ({ children }) => {
         })
     }
 
-    const getAdvisors = async () => {
-        await axios.post('http://127.0.0.1:8000/admins/view/advisors',{},{
+    const getAdvisorsNames = async () => {
+        await axios.post('http://127.0.0.1:8000/admins/view/advisors/names',{},{
             headers: {Authorization : `Bearer ${authTokens.access}`}
         }).then(res=>{
-            setAdvisors(res.data)
+            setAdvisorsNames(res.data)
             console.log(res.data)
         }).catch(err=>{
             console.log(err)
@@ -109,7 +108,7 @@ export const AuthProvider = ({ children }) => {
         await axios.post('http://127.0.0.1:8000/batch/view/batch',{},{
             headers: {Authorization : `Bearer ${authTokens.access}`}
         }).then(res=>{
-            setBatch(res.data)
+            setBatches(res.data)
             console.log(res.data)
         }).catch(err=>{
             console.log(err)
@@ -127,11 +126,12 @@ export const AuthProvider = ({ children }) => {
         })
     }
 
-    const createBatch = async () => {
+    const createBatch = async (batch, advisor, location) => {
+        console.log(advisor, location, batch)
         await axios.post('http://127.0.0.1:8000/batch/create/batch',{
             'advisor':advisor,
             'location':location,
-            'batchno':batchno
+            'batchno':batch
         },{
             headers: {Authorization : `Bearer ${authTokens.access}`}
         }).then(res=>{
@@ -146,8 +146,47 @@ export const AuthProvider = ({ children }) => {
         await axios.post('http://127.0.0.1:8000/user/view/domain',{},{
             headers: {Authorization : `Bearer ${authTokens.access}`}
         }).then(res=>{
-            setDomain(res.data)
+            setDomains(res.data)
             console.log(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
+    const getGroups = async () => {
+        await axios.post('http://127.0.0.1:8000/batch/view/group',{},{
+            headers: {Authorization : `Bearer ${authTokens.access}`}
+        }).then(res=>{
+            setGroups(res.data)
+            console.log(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
+    const createGroup = async (batch, name, advisor, domain) => {
+        console.log(batch, name, advisor, domain);
+        await axios.post('http://127.0.0.1:8000/batch/create/group',{
+            'batch':batch,
+            'name':name,
+            'advisor':advisor,
+            'domain':domain
+        },{
+            headers: {Authorization : `Bearer ${authTokens.access}`}
+        }).then(res=>{
+            console.log(res.data)
+            getGroups()
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
+    const deleteGroup = async (groupId) => {
+        await axios.post('http://127.0.0.1:8000/batch/delete/group',{'id':groupId},{
+            headers: {Authorization : `Bearer ${authTokens.access}`}
+        }).then(res=>{
+            console.log(res.data)
+            getGroups()
         }).catch(err=>{
             console.log(err)
         })
@@ -161,6 +200,17 @@ export const AuthProvider = ({ children }) => {
         }).then(res=>{
             console.log(res.data)
             getDomains()
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
+    const getAdvisors = async () => {
+        await axios.post('http://127.0.0.1:8000/admins/view/advisors',{},{
+            headers: {Authorization : `Bearer ${authTokens.access}`}
+        }).then(res=>{
+            setAdvisors(res.data)
+            console.log(res.data)
         }).catch(err=>{
             console.log(err)
         })
@@ -225,28 +275,28 @@ export const AuthProvider = ({ children }) => {
 
         const contextData = {
             signupUser,
+            getAdvisorsNames,
             getProfile,
+            getGroups,
             updateProfile,
-            setAdvisor,
             deleteBatch,
-            setLocation,
             createDomain,
             deleteDomain,
             getDomains,
-            setBatchno,
             createBatch,
+            createGroup,
+            deleteGroup,
             getAdvisors,
             loginUser,
             logoutUser,
             getBatches,
             get_data,
             notification,
-            advisor,
-            location,
-            batch,
-            domain,
-            batchno,
+            advisorsNmaes,
+            batches,
+            domains,
             advisors,
+            groups,
             errUser,
             profile,
             user_is,

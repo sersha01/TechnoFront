@@ -16,35 +16,29 @@ import AuthContext from "../../../Context/AuthContext";
 
 const AddTask = ({ title, value }) => {
 
-  const { getAdvisors, advisors, createBatch, advisor, location, batchno, setAdvisor, setLocation, setBatchno, createDomain } = useContext(AuthContext);
+  const { getAdvisors, getDomains, getBatches, advisors, domains, batches, createBatch, createDomain, createGroup } = useContext(AuthContext);
 
   const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
   const [domain, setDomain] = useState("");
-  const [dom, setDom] = useState("");
-  const [adv, setAdv] = useState("");
-  const [bat, setBat] = useState("");
+  const [advisor, setAdvisor] = useState("");
+  const [location, setLocation] = useState("");
+  const [batch, setBatch] = useState("");
 
   const handleClickOpen = () => {
+    if (value === "batch") {
     getAdvisors()
+    }else if(value === "addgroup"){
+      getAdvisors()
+      getDomains()
+      getBatches()
+    }
+    setName("")
     setDomain("")
+    setAdvisor("")
+    setLocation("")
+    setBatch("")
     setOpen(true);
-  };
-
-
-  const handleAdvisorChange = (event) => {
-    setAdvisor(event.target.value);
-  };
-  const handleLocationChange = (event) => {
-    setLocation(event.target.value);
-  };
-  const handleDomChange = (event) => {
-    setDom(event.target.value);
-  };
-  const handleAdvChange = (event) => {
-    setAdv(event.target.value);
-  };
-  const handleBatChange = (event) => {
-    setBat(event.target.value);
   };
 
   const ITEM_HEIGHT = 48;
@@ -64,9 +58,11 @@ const AddTask = ({ title, value }) => {
 
   const handleSubmit = () => {
     if (value === "batch"){
-      createBatch();
+      createBatch(batch, advisor, location);
     }else if(value === "domain"){
       createDomain(domain);
+    }else if (value === "addgroup"){
+      createGroup(batch, name, advisor, domain);
     }
     setOpen(false);
   }
@@ -110,8 +106,8 @@ const AddTask = ({ title, value }) => {
                     id="outlined-basic"
                     label="Batch number"
                     variant="outlined"
-                    value={batchno}
-                    onChange={(e)=>setBatchno(e.target.value)}
+                    value={batch}
+                    onChange={(e)=>setBatch(e.target.value)}
                     placeholder="Enter batch number here.."
                   />
                   <FormControl className="my-4">
@@ -122,7 +118,7 @@ const AddTask = ({ title, value }) => {
                       labelId="demo-simple-select-autowidth-label"
                       id="demo-simple-select-autowidth"
                       value={advisor}
-                      onChange={handleAdvisorChange}
+                      onChange={(e) => setAdvisor(e.target.value)}
                       autoWidth
                       label="Advisor name"
                       maxHeight="200px"
@@ -133,7 +129,6 @@ const AddTask = ({ title, value }) => {
                           {advisor.username}
                         </MenuItem>
                       ))}
-                      {/* <MenuItem value={10}>Aneesha</MenuItem> */}
                      
                     </Select>
                   </FormControl>
@@ -145,7 +140,7 @@ const AddTask = ({ title, value }) => {
                       labelId="location-label"
                       id="location-selected"
                       value={location}
-                      onChange={handleLocationChange}
+                      onChange={(e) => setLocation(e.target.value)}
                       autoWidth
                       label="Advisor name"
                       maxHeight="200px"
@@ -184,29 +179,18 @@ const AddTask = ({ title, value }) => {
                     <Select
                       labelId="demo-simple-select-autowidth-label"
                       id="demo-simple-select-autowidth"
-                      value={adv}
-                      onChange={handleAdvChange}
+                      value={advisor}
+                      onChange={(e) => setAdvisor(e.target.value)}
                       autoWidth
                       label="Advisor name"
                       maxHeight="200px"
                       MenuProps={MenuProps}
                     >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
+                      {advisors && advisors.map((advisor) => (
+                        <MenuItem key={advisor.id} value={advisor.id}>
+                          {advisor.username}
+                        </MenuItem>
+                      ))}
                      
                     </Select>
                   </FormControl>
@@ -217,8 +201,8 @@ const AddTask = ({ title, value }) => {
                     <Select
                       labelId="demo-simple-select-autowidth-label"
                       id="demo-simple-select-autowidth"
-                      value={dom}
-                      onChange={handleDomChange}
+                      value={domain}
+                      onChange={(e) => setDomain(e.target.value)}
                       autoWidth
                       label="Domain name"
                       maxHeight="200px"
@@ -248,27 +232,18 @@ const AddTask = ({ title, value }) => {
                     <Select
                       labelId="demo-simple-select-autowidth-label"
                       id="demo-simple-select-autowidth"
-                      value={bat}
-                      onChange={handleBatChange}
+                      value={batch}
+                      onChange={(e) => setBatch(e.target.value)}
                       autoWidth
                       label="Batch name"
                       maxHeight="200px"
                       MenuProps={MenuProps}
                     >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value={10}>20</MenuItem>
-                      <MenuItem value={10}>20</MenuItem>
-                      <MenuItem value={10}>20</MenuItem>
-                      <MenuItem value={10}>20</MenuItem>
-                      <MenuItem value={10}>20</MenuItem>
-                      <MenuItem value={10}>20</MenuItem>
-                      <MenuItem value={10}>20</MenuItem>
-                      <MenuItem value={10}>20</MenuItem>
-                      <MenuItem value={10}>20</MenuItem>
-                      <MenuItem value={10}>20</MenuItem>
-                      
+                      {batches && batches.map((batch) => (
+                        <MenuItem key={batch.id} value={batch.id}>
+                          {batch.batchno}
+                        </MenuItem>
+                      ))}
                      
                     </Select>
                   </FormControl>
@@ -276,40 +251,31 @@ const AddTask = ({ title, value }) => {
                     id="outlined-basic"
                     label="Name"
                     variant="outlined"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     placeholder="Enter name here.."
                     className="my-2"
 
                   />
-                   <FormControl className="my-4">
+                   <FormControl className="mt-4 mb-2">
                     <InputLabel id="demo-simple-select-autowidth-label">
                       Advisor
                     </InputLabel>
                     <Select
                       labelId="demo-simple-select-autowidth-label"
                       id="demo-simple-select-autowidth"
-                      value={adv}
-                      onChange={handleAdvChange}
+                      value={advisor}
+                      onChange={(e) => setAdvisor(e.target.value)}
                       autoWidth
                       label="Advisor name"
                       maxHeight="200px"
                       MenuProps={MenuProps}
                     >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
-                      <MenuItem value={10}>Aneesha</MenuItem>
+                      {advisors && advisors.map((advisor) => (
+                        <MenuItem key={advisor.id} value={advisor.id}>
+                          {advisor.username}
+                        </MenuItem>
+                      ))}
                      
                     </Select>
                   </FormControl>
@@ -320,23 +286,18 @@ const AddTask = ({ title, value }) => {
                     <Select
                       labelId="demo-simple-select-autowidth-label"
                       id="demo-simple-select-autowidth"
-                      value={dom}
-                      onChange={handleDomChange}
+                      value={domain}
+                      onChange={(e) => setDomain(e.target.value)}
                       autoWidth
                       label="Domain name"
                       maxHeight="200px"
                       MenuProps={MenuProps}
                     >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value={10}>Python</MenuItem>
-                      <MenuItem value={10}>Python</MenuItem>
-                      <MenuItem value={10}>Python</MenuItem>
-                      <MenuItem value={10}>Python</MenuItem>
-                      <MenuItem value={10}>Python</MenuItem>
-                      <MenuItem value={10}>Python</MenuItem>
-                      
+                      {domains && domains.map((domain) => (
+                        <MenuItem key={domain.id} value={domain.id}>
+                          {domain.name}
+                        </MenuItem>
+                      ))}
                      
                     </Select>
                   </FormControl>
