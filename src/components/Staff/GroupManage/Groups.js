@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ManageSearchRoundedIcon from "@mui/icons-material/ManageSearchRounded";
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,16 +7,26 @@ import Button from "@mui/material/Button";
 import AddTask from "../../Common/AddTask/AddTask";
 import TextField from "@mui/material/TextField";
 import style from "./Groups.module.css";
+import AuthContext from "../../../Context/AuthContext";
 
 const Groups = () => {
+
+  const { deleteGroup, groupDetails, getGroupLess, groupLessers, addInGroup, rmFromGroup } = useContext(AuthContext);
+
   const [add, setAdd] = useState("dont");
+
+  const handleShow = () => {
+    getGroupLess();
+    setAdd("show");
+  };
 
   return (
     <Row className="m-0 px-3 rounded-2 bglight py-3">
       <Col sm={12} className="d-flex justify-content-between mb-2">
         <div className="d-flex">
           <h2 className="me-4">#20 A</h2>
-          <Button color="error" variant="contained" size="small" className="h-50" >Delete</Button>
+          <AddTask title="Edit" value="group" />
+          <Button color="error" variant="contained" size="small" className="h-50 ms-2" onClick={()=>{deleteGroup(groupDetails.id)}} >Delete</Button>
         </div>
 
         <div className="d-flex justify-content-end textlight">
@@ -62,74 +72,33 @@ const Groups = () => {
       </Col>
 
       <Col className="m-0 row ">
+        { groupDetails && groupDetails.student.map((student, index) => (
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
-              #20
+              #{index + 1}
             </Col>
 
             <Col className="textdark" sm={2}>
-              Wafi
+              {student.user}
             </Col>
             <Col className="textdark" sm={2}>
-              Python
+              {groupDetails.domain}
             </Col>
             <Col className="textdark" sm={2}>
-              18
+              {student.week}
             </Col>
-
             <Col className="textdark d-flex justify-content-end" sm={4}>
-              <Button className="completed w-50">Remove</Button>
+              <Button className="completed w-50" onClick={()=>{rmFromGroup(student.id)}}>Remove</Button>
             </Col>
           </Row>
         </Col>
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #20
-            </Col>
-
-            <Col className="textdark" sm={2}>
-              Wafi
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              18
-            </Col>
-
-            <Col className="textdark d-flex justify-content-end" sm={4}>
-              <Button className="completed w-50">Remove</Button>
-            </Col>
-          </Row>
-        </Col>
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #20
-            </Col>
-
-            <Col className="textdark" sm={2}>
-              Wafi
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              18
-            </Col>
-
-            <Col className="textdark d-flex justify-content-end" sm={4}>
-              <Button className="completed w-50">Remove</Button>
-            </Col>
-          </Row>
-        </Col>
+            ))}
       </Col>
       <Row>
         <Col className="m-0 my-3 row d-flex justify-content-end">
           {add === "dont" ? (
-            <Button className="completed w-25" onClick={() => setAdd("show")}>
+            <Button className="completed w-25" onClick={() => {handleShow()}}>
               Add more
             </Button>
           ) : (
@@ -142,7 +111,30 @@ const Groups = () => {
 
       {add === "show" && (
         <Col className="m-0 row ">
-          <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+          { groupLessers && groupLessers.map((student, index) => (
+            <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+            <Row className="m-0">
+              <Col className="textdark" sm={2}>
+                #{index + 1}
+              </Col>
+
+              <Col className="textdark" sm={2}>
+                {student.user}
+              </Col>
+              <Col className="textdark" sm={2}>
+                {groupDetails.domain}
+              </Col>
+              <Col className="textdark" sm={2}>
+                {student.week}
+              </Col>
+
+              <Col className="textdark d-flex justify-content-end" sm={4}>
+                <Button className="completed w-50" onClick={()=>{addInGroup(student.id)}}>Add</Button>
+              </Col>
+            </Row>
+          </Col>
+          ))}
+          {/* <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
             <Row className="m-0">
               <Col className="textdark" sm={2}>
                 #20
@@ -162,8 +154,8 @@ const Groups = () => {
                 <Button className="completed w-50">Add</Button>
               </Col>
             </Row>
-          </Col>
-          <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+          </Col> */}
+          {/* <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
             <Row className="m-0">
               <Col className="textdark" sm={2}>
                 #20
@@ -183,28 +175,7 @@ const Groups = () => {
                 <Button className="completed w-50">Add</Button>
               </Col>
             </Row>
-          </Col>
-          <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-            <Row className="m-0">
-              <Col className="textdark" sm={2}>
-                #20
-              </Col>
-
-              <Col className="textdark" sm={2}>
-                Wafi
-              </Col>
-              <Col className="textdark" sm={2}>
-                Python
-              </Col>
-              <Col className="textdark" sm={2}>
-                18
-              </Col>
-
-              <Col className="textdark d-flex justify-content-end" sm={4}>
-                <Button className="completed w-50">Add</Button>
-              </Col>
-            </Row>
-          </Col>
+          </Col> */}
         </Col>
       )}
     </Row>

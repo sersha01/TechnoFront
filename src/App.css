@@ -7,43 +7,43 @@ body {
 }
 
 .bgred {
-  background-color: rgb(255, 195, 195);
+  background-color: rgb(255, 195, 195) !important;
 }
 
 .bggreen {
-  background-color: rgb(149, 255, 139);
+  background-color: rgb(149, 255, 139) !important;
 }
 
 .bgblue {
-  background-color: rgb(182, 254, 255);
+  background-color: rgb(182, 254, 255) !important;
 }
 
 .bgyellow {
-  background-color: rgb(251, 255, 182);
+  background-color: rgb(251, 255, 182) !important;
 }
 
 .bg {
-  background: var(--white);
+  background: var(--white) !important;
 }
 
 .bginfo {
-  background: var(--info);
+  background: var(--info) !important;
 }
 
 .bglight {
-  background: var(--light);
+  background: var(--light) !important;
 }
 
 .bggrey {
-  background: var(--grey);
+  background: var(--grey) !important;
 }
 
 .bgdark {
-  background: var(--dark);
+  background: var(--dark) !important;
 }
 
 Link {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .submitProfileDiv {

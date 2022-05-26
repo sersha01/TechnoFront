@@ -194,33 +194,6 @@ const AddTask = ({ title, value }) => {
                      
                     </Select>
                   </FormControl>
-                  <FormControl >
-                    <InputLabel id="demo-simple-select-autowidth-label">
-                      Domain
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-autowidth-label"
-                      id="demo-simple-select-autowidth"
-                      value={domain}
-                      onChange={(e) => setDomain(e.target.value)}
-                      autoWidth
-                      label="Domain name"
-                      maxHeight="200px"
-                      MenuProps={MenuProps}
-                    >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value={10}>Python</MenuItem>
-                      <MenuItem value={10}>Python</MenuItem>
-                      <MenuItem value={10}>Python</MenuItem>
-                      <MenuItem value={10}>Python</MenuItem>
-                      <MenuItem value={10}>Python</MenuItem>
-                      <MenuItem value={10}>Python</MenuItem>
-                      
-                     
-                    </Select>
-                  </FormControl>
                 </Row>
               )}
               {value === "addgroup" && (

@@ -19,6 +19,8 @@ export const AuthProvider = ({ children }) => {
     const [domains, setDomains] = useState(null);
     const [groups, setGroups] = useState(null);
     const [advisors, setAdvisors] = useState(null);
+    const [groupDetails, setGroupDetails] = useState(null);
+    const [groupLessers, setGroupLessers] = useState(null);
 
     const navigate = useNavigate();
 
@@ -94,7 +96,6 @@ export const AuthProvider = ({ children }) => {
     navigate("/signin");
   };
 
-// <<<<<<< HEAD
     const getAdvisorsNames = async () => {
         await axios.post('http://127.0.0.1:8000/admins/view/advisors/names',{},{
             headers: {Authorization : `Bearer ${authTokens.access}`}
@@ -107,7 +108,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     const getBatches = async () => {
-        await axios.post('http://127.0.0.1:8000/batch/view/batch',{},{
+        await axios.post('http://127.0.0.1:8000/batch/view/batches',{},{
             headers: {Authorization : `Bearer ${authTokens.access}`}
         }).then(res=>{
             setBatches(res.data)
@@ -116,7 +117,7 @@ export const AuthProvider = ({ children }) => {
             console.log(err)
         })
     }
-// =======
+
   const getProfile = async () => {
     await axios
       .post(
@@ -162,7 +163,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     const getGroups = async () => {
-        await axios.post('http://127.0.0.1:8000/batch/view/group',{},{
+        await axios.post('http://127.0.0.1:8000/batch/view/groups',{},{
             headers: {Authorization : `Bearer ${authTokens.access}`}
         }).then(res=>{
             setGroups(res.data)
@@ -189,12 +190,14 @@ export const AuthProvider = ({ children }) => {
         })
     }
 
+
     const deleteGroup = async (groupId) => {
         await axios.post('http://127.0.0.1:8000/batch/delete/group',{'id':groupId},{
             headers: {Authorization : `Bearer ${authTokens.access}`}
         }).then(res=>{
             console.log(res.data)
             getGroups()
+            navigate('/lead/groups')
         }).catch(err=>{
             console.log(err)
         })
@@ -218,7 +221,7 @@ export const AuthProvider = ({ children }) => {
             headers: {Authorization : `Bearer ${authTokens.access}`}
         }).then(res=>{
             setAdvisors(res.data)
-            console.log(res.data)
+            console.log('qwertyuiop',res.data)
         }).catch(err=>{
             console.log(err)
         })
@@ -234,6 +237,63 @@ export const AuthProvider = ({ children }) => {
             console.log(err)
         })
     }
+
+
+  const getGroupDetails = async (groupId) => {
+    await axios.post('http://127.0.0.1:8000/batch/view/group/details',{'id':groupId},{
+        headers: {Authorization : `Bearer ${authTokens.access}`}
+    }).then(res=>{
+        setGroupDetails(res.data)
+        console.log('datas',res.data)
+        navigate('/lead/groups/manage')
+    }).catch(err=>{
+        console.log(err)
+    })
+  }
+
+  const getGroupLess = async () => {
+    await axios.post('http://127.0.0.1:8000/batch/view/group/less',{
+        'domain': groupDetails.domain,
+        'batch': groupDetails.batch,
+    },{
+        headers: {Authorization : `Bearer ${authTokens.access}`}
+    }).then(res=>{
+        setGroupLessers(res.data)
+        console.log('datas',res.data)
+    }).catch(err=>{
+        console.log(err)
+    })
+  }
+
+  const addInGroup = async (userId) => {
+    await axios.post('http://127.0.0.1:8000/batch/add/group',{
+        'student':userId,
+        'group':groupDetails.id
+    },{
+        headers: {Authorization : `Bearer ${authTokens.access}`}
+    }).then(res=>{
+        console.log(res.data)
+        getGroupDetails(groupDetails.id)
+        getGroupLess(groupDetails.domain)
+    }).catch(err=>{
+        console.log(err)
+    })
+  }
+
+  const rmFromGroup = async (userId) => {
+    await axios.post('http://127.0.0.1:8000/batch/remove/group',{
+        'student':userId
+    },{
+        headers: {Authorization : `Bearer ${authTokens.access}`}
+    }).then(res=>{
+        console.log(res.data)
+        getGroupDetails(groupDetails.id)
+        getGroupLess(groupDetails.domain)
+    }).catch(err=>{
+        console.log(err)
+    })
+  }
+
   const deleteBatch = async (batchId) => {
     await axios
       .post(
@@ -311,15 +371,20 @@ export const AuthProvider = ({ children }) => {
             getAdvisorsNames,
             getProfile,
             getGroups,
+            getGroupDetails,
             updateProfile,
             deleteBatch,
             createDomain,
+            addInGroup,
+            rmFromGroup,
             deleteDomain,
             getDomains,
             createBatch,
+            deleteGroup,
             createGroup,
             deleteGroup,
             getAdvisors,
+            getGroupLess,
             loginUser,
             logoutUser,
             getBatches,
@@ -329,6 +394,8 @@ export const AuthProvider = ({ children }) => {
             batches,
             domains,
             advisors,
+            groupDetails,
+            groupLessers,
             groups,
             errUser,
             profile,

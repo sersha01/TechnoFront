@@ -11,7 +11,7 @@ import AuthContext from "../../../Context/AuthContext";
 
 const Groups = () => {
 
-  const { groups, getGroups } = useContext(AuthContext);
+  const { groups, getGroups, getGroupDetails } = useContext(AuthContext);
 
   useEffect(() => {
     getGroups();
@@ -75,7 +75,6 @@ const Groups = () => {
       <Col className="m-0 row ">
 
         {groups && groups.map((group, index) => (
-        <Link to="/lead/groups/manage">
           <Col Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
             <Row className="m-0">
               <Col className="textdark" sm={2}>
@@ -94,11 +93,10 @@ const Groups = () => {
                 {group.student}
               </Col>
               <Col className="textdark d-flex" sm={2}>
-                <AddTask title="Manage" value="group" />
+                  <Button variant="contained" size="medium" className="h-100 bginfo" onClick={()=>{getGroupDetails(group.id)}}>Manage</Button>
               </Col>
             </Row>
           </Col>
-        </Link>
         ))}
         
       </Col>

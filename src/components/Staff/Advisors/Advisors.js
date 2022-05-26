@@ -50,20 +50,20 @@ const Advisors = () => {
       </Col>
 
       <Col className="m-0 row ">
-      {advisors && advisors.map((advisor) => (
+      {advisors && advisors.map((advisor, index) => (
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
-              #1
+              #{index + 1}
             </Col>
             <Col className="textdark" sm={2}>
-              Aneesha
+              {advisor.username}
             </Col>
             <Col className="textdark" sm={2}>
-              {advisor && advisor.batch}
+              {advisor.batch[0]} {advisor.batch[1] && "-"} {advisor.batch[1]}
             </Col>
             <Col className="textdark" sm={3}>
-              5
+              {advisor.groups}
             </Col>
 
             <Col className="textdark d-flex" sm={3}>
@@ -72,70 +72,7 @@ const Advisors = () => {
             </Col>
           </Row>
         </Col>
-        ))}
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #1
-            </Col>
-            <Col className="textdark" sm={2}>
-              Aneesha
-            </Col>
-            <Col className="textdark" sm={2}>
-              23
-            </Col>
-            <Col className="textdark" sm={3}>
-              5
-            </Col>
-
-            <Col className="textdark d-flex" sm={3}>
-              <AddTask title="Edit" value="advisor" />
-              <Button className="coh mx-2">Profile</Button>
-            </Col>
-          </Row>
-        </Col>
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #1
-            </Col>
-            <Col className="textdark" sm={2}>
-              Aneesha
-            </Col>
-            <Col className="textdark" sm={2}>
-              23
-            </Col>
-            <Col className="textdark" sm={3}>
-              5
-            </Col>
-
-            <Col className="textdark d-flex" sm={3}>
-              <AddTask title="Edit" value="advisor" />
-              <Button className="coh mx-2">Profile</Button>
-            </Col>
-          </Row>
-        </Col>
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #1
-            </Col>
-            <Col className="textdark" sm={2}>
-              Aneesha
-            </Col>
-            <Col className="textdark" sm={2}>
-              23
-            </Col>
-            <Col className="textdark" sm={3}>
-              5
-            </Col>
-
-            <Col className="textdark d-flex" sm={3}>
-              <AddTask title="Edit" value="advisor" />
-              <Button className="coh mx-2">Profile</Button>
-            </Col>
-          </Row>
-        </Col>
+      ))}
         
       </Col>
     </Row>
