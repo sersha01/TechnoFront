@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useContext} from "react";
 // Bootstrap
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -9,8 +9,16 @@ import style from "./Work.module.css";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
+import AuthContext from "../../../Context/AuthContext";
 
 const Work = () => {
+
+  const { getMyGroups, myGroups, getMyGroupDetails } = useContext(AuthContext);
+
+  useEffect(() => {
+    getMyGroups();
+  },[])
+
   return (
     <Row className={`m-0 px-3 rounded-2 bg py-3 ${style.tasks}`}>
       <Col sm={12} className="d-flex justify-content-between">
@@ -40,119 +48,50 @@ const Work = () => {
              Batch
           </Col>
           <Col className={`${style.tableHeadText}`} sm={2}>
-            Pending
+            Students
           </Col>
           
           <Col className={`${style.tableHeadText}`} sm={2}>
             Domain
           </Col>
-          <Col className={`${style.tableHeadText}`} sm={2}>
-            Week
-          </Col>
-          <Col className={`${style.tableHeadText}`} sm={1}>
-            Group
+          <Col className={`${style.tableHeadText}`} sm={3}>
+            Review
           </Col>
         </Row>
       </Col>
 
       <Col className="m-0 row">
         <>
-          <Link to='/advisor/work/taskslist'>
-            <Col
+            {myGroups && myGroups.map((group, index) => {
+              return (
+              <Col
               sm={12}
-              className={`py-2 mb-2 cp bgred rounded-3 ${style.tableBody}`}
+              className={`py-2 mb-2 cp bglight rounded-3 ${style.tableBody}`}
+              onClick={() => {getMyGroupDetails(group.id)}}
             >
               <Row className="m-0">
                 <Col className={`${style.tableBodyText}`} sm={1}>
-                  #1
+                  #{index + 1}
                 </Col>
                 <Col className={`${style.tableBodyText}`} sm={2}>
-                 Hrishi
+                  {group.name}
                 </Col>
                 <Col className={`${style.tableBodyText}`} sm={2}>
-                  17
+                  {group.batch}
                 </Col>
                 <Col className={`${style.tableBodyText}`} sm={2}>
-                  4
+                  {group.student}
                 </Col>
                 
                 <Col className={`${style.tableBodyText}`} sm={2}>
-                  Python
+                  {group.domain}
                 </Col>
-                <Col className={`${style.tableBodyText} d-flex`} sm={2}>
-                  15
-                </Col>
-                <Col className={`${style.tableBodyText} d-flex`} sm={1}>
-                  A
+                <Col className={`${style.tableBodyText} d-flex`} sm={3}>
+                  {Date().split(' ')[0]}
                 </Col>
               </Row>
             </Col>
-            </Link>
-          <Link to='/advisor/work/taskslist'>
-            <Col
-              sm={12}
-              className={`py-2 mb-2 cp bgred rounded-3 ${style.tableBody}`}
-            >
-              <Row className="m-0">
-                <Col className={`${style.tableBodyText}`} sm={1}>
-                  #1
-                </Col>
-                <Col className={`${style.tableBodyText}`} sm={2}>
-                 Hrishi
-                </Col>
-                <Col className={`${style.tableBodyText}`} sm={2}>
-                  17
-                </Col>
-                <Col className={`${style.tableBodyText}`} sm={2}>
-                  4
-                </Col>
-                
-                <Col className={`${style.tableBodyText}`} sm={2}>
-                  Python
-                </Col>
-                <Col className={`${style.tableBodyText} d-flex`} sm={2}>
-                  15
-                </Col>
-                <Col className={`${style.tableBodyText} d-flex`} sm={1}>
-                  A
-                </Col>
-              </Row>
-            </Col>
-            </Link>
-          <Link to='/advisor/work/taskslist'>
-            <Col
-              sm={12}
-              className={`py-2 mb-2 cp bgred rounded-3 ${style.tableBody}`}
-            >
-              <Row className="m-0">
-                <Col className={`${style.tableBodyText}`} sm={1}>
-                  #1
-                </Col>
-                <Col className={`${style.tableBodyText}`} sm={2}>
-                 Hrishi
-                </Col>
-                <Col className={`${style.tableBodyText}`} sm={2}>
-                  17
-                </Col>
-                <Col className={`${style.tableBodyText}`} sm={2}>
-                  4
-                </Col>
-                
-                <Col className={`${style.tableBodyText}`} sm={2}>
-                  Python
-                </Col>
-                <Col className={`${style.tableBodyText} d-flex`} sm={2}>
-                  15
-                </Col>
-                <Col className={`${style.tableBodyText} d-flex`} sm={1}>
-                  A
-                </Col>
-              </Row>
-            </Col>
-            </Link>
-            
-            
-          
+            )})}
         </>
       </Col>
     </Row>

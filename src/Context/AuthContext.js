@@ -21,6 +21,9 @@ export const AuthProvider = ({ children }) => {
     const [advisors, setAdvisors] = useState(null);
     const [groupDetails, setGroupDetails] = useState(null);
     const [groupLessers, setGroupLessers] = useState(null);
+    const [myStudents, setMyStudents] = useState(null);
+    const [myGroups, setMyGroups] = useState(null);
+    const [myGroupDetails, setMyGroupDetails] = useState(null);
 
     const navigate = useNavigate();
 
@@ -238,6 +241,39 @@ export const AuthProvider = ({ children }) => {
         })
     }
 
+  const getMyStudents = async () => {
+    await axios.post('http://127.0.0.1:8000/student/view/mystudents',{},{
+        headers: {Authorization : `Bearer ${authTokens.access}`}
+    }).then(res=>{
+        setMyStudents(res.data)
+        console.log(res.data)
+    }).catch(err=>{
+        console.log(err)
+    })
+  };
+
+  const getMyGroupDetails = async (groupId) => {
+    await axios.post('http://127.0.0.1:8000/batch/view/mygroup/details',{'id':groupId},{
+        headers: {Authorization : `Bearer ${authTokens.access}`}
+    }).then(res=>{
+        setMyGroupDetails(res.data)
+        console.log(res.data)
+    }).catch(err=>{
+        console.log(err)
+    })
+  }
+
+  const getMyGroups = async () => {
+    await axios.post('http://127.0.0.1:8000/batch/view/mygroups',{},{
+        headers: {Authorization : `Bearer ${authTokens.access}`}
+    }).then(res=>{
+        setMyGroups(res.data)
+        console.log(res.data)
+    }).catch(err=>{
+        console.log(err)
+    })
+  };
+
 
   const getGroupDetails = async (groupId) => {
     await axios.post('http://127.0.0.1:8000/batch/view/group/details',{'id':groupId},{
@@ -372,11 +408,14 @@ export const AuthProvider = ({ children }) => {
             getProfile,
             getGroups,
             getGroupDetails,
+            getMyStudents,
             updateProfile,
             deleteBatch,
             createDomain,
+            getMyGroups,
             addInGroup,
             rmFromGroup,
+            getMyGroupDetails,
             deleteDomain,
             getDomains,
             createBatch,
@@ -391,9 +430,12 @@ export const AuthProvider = ({ children }) => {
             get_data,
             notification,
             advisorsNmaes,
+            myStudents,
+            myGroups,
             batches,
             domains,
             advisors,
+            myGroupDetails,
             groupDetails,
             groupLessers,
             groups,

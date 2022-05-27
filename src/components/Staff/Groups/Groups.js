@@ -74,7 +74,8 @@ const Groups = () => {
 
       <Col className="m-0 row ">
 
-        {groups && groups.map((group, index) => (
+        {groups && groups.map((group, index) => {
+          return (
           <Col Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
             <Row className="m-0">
               <Col className="textdark" sm={2}>
@@ -97,7 +98,7 @@ const Groups = () => {
               </Col>
             </Row>
           </Col>
-        ))}
+        )})}
         
       </Col>
     </Row>
