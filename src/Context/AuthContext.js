@@ -24,6 +24,8 @@ export const AuthProvider = ({ children }) => {
     const [myStudents, setMyStudents] = useState(null);
     const [myGroups, setMyGroups] = useState(null);
     const [myGroupDetails, setMyGroupDetails] = useState(null);
+    const [studentTasks, setStudentTasks] = useState(null);
+    const [studentManifest, setStudentManifest] = useState(null);
 
     const navigate = useNavigate();
 
@@ -62,7 +64,7 @@ export const AuthProvider = ({ children }) => {
           "notification",
           JSON.stringify(res.data.notification)
         );
-        if (res.data.dept == "lead") {
+        if (res.data.dept === "Lead") {
           navigate("/lead");
         } else if (res.data.dept == "advisor") {
           navigate("/advisor");
@@ -84,6 +86,8 @@ export const AuthProvider = ({ children }) => {
       .post("http://127.0.0.1:8000/user/token", { username, password })
       .then((res) => {
         setAuthTokens(res.data);
+        console.log(JSON.stringify(res.data));
+        console.log(jwt_decode(JSON.stringify(res.data)).position);
         setUser(jwt_decode(JSON.stringify(res.data)));
         localStorage.setItem("authTokens", JSON.stringify(res.data));
         userDept(res.data);
@@ -258,6 +262,19 @@ export const AuthProvider = ({ children }) => {
     }).then(res=>{
         setMyGroupDetails(res.data)
         console.log(res.data)
+        navigate('/advisor/group')
+    }).catch(err=>{
+        console.log(err)
+    })
+  }
+
+  const getStudentTasks = async (studentId) => {
+    await axios.post('http://127.0.0.1:8000/manifest/view/tasklist',{'id':studentId},{
+        headers: {Authorization : `Bearer ${authTokens.access}`}
+    }).then(res=>{
+        setStudentTasks(res.data)
+        console.log(res.data)
+        navigate('/advisor/group/taskslist')
     }).catch(err=>{
         console.log(err)
     })
@@ -274,6 +291,17 @@ export const AuthProvider = ({ children }) => {
     })
   };
 
+  const getStudentManifest = async (manifestId) => {
+    await axios.post('http://127.0.0.1:8000/manifest/view/manifest',{'id':manifestId},{
+        headers: {Authorization : `Bearer ${authTokens.access}`}
+    }).then(res=>{
+        setStudentManifest(res.data)
+        console.log(res.data)
+        navigate('/advisor/group/manifest')
+    }).catch(err=>{
+        console.log(err)
+    })
+  };
 
   const getGroupDetails = async (groupId) => {
     await axios.post('http://127.0.0.1:8000/batch/view/group/details',{'id':groupId},{
@@ -416,6 +444,8 @@ export const AuthProvider = ({ children }) => {
             addInGroup,
             rmFromGroup,
             getMyGroupDetails,
+            getStudentTasks,
+            getStudentManifest,
             deleteDomain,
             getDomains,
             createBatch,
@@ -430,6 +460,8 @@ export const AuthProvider = ({ children }) => {
             get_data,
             notification,
             advisorsNmaes,
+            studentTasks,
+            studentManifest,
             myStudents,
             myGroups,
             batches,
