@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import style from NavBox.module.css
 import style from "./NavBox.module.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+// import { useState } from "react";
 import { useContext } from "react";
 import StyleContext from "../../../Context/StyleContext";
 
@@ -32,7 +32,7 @@ function NavBox() {
         <Col
           className={`pe-0 row m-0 justify-content-end text-center position-relative cp  ${style.navItems}`}
           xs={12}
-          onClick={activeNav("Payments")}
+          onClick={()=>{activeNav("Payments")}}
         >
           <Col className="my-2 p-0" xs={11}>
             <p className="navitems">Payments</p>
