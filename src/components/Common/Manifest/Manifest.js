@@ -8,6 +8,7 @@ import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRou
 import style from './Manifest.module.css';
 import { useContext, useEffect } from 'react';
 import AuthContext from '../../../Context/AuthContext';
+import AddTask from '../AddTask/AddTask';
 
 function Manifest({manifestId}) {
 
@@ -20,7 +21,7 @@ function Manifest({manifestId}) {
   return (
     <Row className={`m-0 ${style.manifest}`}>
         <Col className={`text-center py-2 mb-4 rounded-3 ${style.head}`} xs={12}>
-            {studentManifest && studentManifest.title}
+            {studentManifest ? studentManifest.title : 'Week'}
         </Col>
         
         <Col className={`row mx-0 my-3 text-start`} xs={12}>
@@ -72,6 +73,13 @@ function Manifest({manifestId}) {
        
         <Col className='mt-5 d-flex justify-content-center' xs={12}><Col xs={9}><input type="text" className={`w-100 py-2 rounded-3 ${style.input}`} /></Col></Col>
         <Col className='my-2 d-flex justify-content-center' xs={12}><Col xs={9}><input type="text" className={`w-100 py-2 rounded-3 ${style.input}`} /></Col></Col>
+
+
+        <div className='d-flex justify-content-center'>
+            <div><AddTask title="Repeat" value="repeated" /></div>
+            <div> <AddTask title="Completed" value="completed" /></div>
+           
+        </div>
         
       
     </Row>

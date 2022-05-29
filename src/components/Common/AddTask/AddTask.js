@@ -15,8 +15,17 @@ import FormControl from "@mui/material/FormControl";
 import AuthContext from "../../../Context/AuthContext";
 
 const AddTask = ({ title, value }) => {
-
-  const { getAdvisors, getDomains, getBatches, advisors, domains, batches, createBatch, createDomain, createGroup } = useContext(AuthContext);
+  const {
+    getAdvisors,
+    getDomains,
+    getBatches,
+    advisors,
+    domains,
+    batches,
+    createBatch,
+    createDomain,
+    createGroup,
+  } = useContext(AuthContext);
 
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
@@ -27,27 +36,27 @@ const AddTask = ({ title, value }) => {
 
   const handleClickOpen = () => {
     if (value === "batch") {
-    getAdvisors()
-    }else if(value === "addgroup"){
-      getAdvisors()
-      getDomains()
-      getBatches()
+      getAdvisors();
+    } else if (value === "addgroup") {
+      getAdvisors();
+      getDomains();
+      getBatches();
     }
-    setName("")
-    setDomain("")
-    setAdvisor("")
-    setLocation("")
-    setBatch("")
+    setName("");
+    setDomain("");
+    setAdvisor("");
+    setLocation("");
+    setBatch("");
     setOpen(true);
   };
 
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
   const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 450,
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 450,
       },
     },
   };
@@ -57,15 +66,15 @@ const AddTask = ({ title, value }) => {
   };
 
   const handleSubmit = () => {
-    if (value === "batch"){
+    if (value === "batch") {
       createBatch(batch, advisor, location);
-    }else if(value === "domain"){
+    } else if (value === "domain") {
       createDomain(domain);
-    }else if (value === "addgroup"){
+    } else if (value === "addgroup") {
       createGroup(batch, name, advisor, domain);
     }
     setOpen(false);
-  }
+  };
 
   return (
     <div>
@@ -100,6 +109,16 @@ const AddTask = ({ title, value }) => {
                   />
                 </Row>
               )}
+              {value === "completed" && (
+                <Row className="my-2">
+                  <input type="date"></input>
+                </Row>
+              )}
+              {value === "repeated" && (
+                <Row className="my-2">
+                  <input type="date"></input>
+                </Row>
+              )}
               {value === "batch" && (
                 <Row className="my-2">
                   <TextField
@@ -107,7 +126,7 @@ const AddTask = ({ title, value }) => {
                     label="Batch number"
                     variant="outlined"
                     value={batch}
-                    onChange={(e)=>setBatch(e.target.value)}
+                    onChange={(e) => setBatch(e.target.value)}
                     placeholder="Enter batch number here.."
                   />
                   <FormControl className="my-4">
@@ -124,18 +143,16 @@ const AddTask = ({ title, value }) => {
                       maxHeight="200px"
                       MenuProps={MenuProps}
                     >
-                      {advisors && advisors.map((advisor) => (
-                        <MenuItem key={advisor.id} value={advisor.id}>
-                          {advisor.username}
-                        </MenuItem>
-                      ))}
-                     
+                      {advisors &&
+                        advisors.map((advisor) => (
+                          <MenuItem key={advisor.id} value={advisor.id}>
+                            {advisor.username}
+                          </MenuItem>
+                        ))}
                     </Select>
                   </FormControl>
                   <FormControl className="mb-4">
-                    <InputLabel id="location-label">
-                      Location
-                    </InputLabel>
+                    <InputLabel id="location-label">Location</InputLabel>
                     <Select
                       labelId="location-label"
                       id="location-selected"
@@ -146,10 +163,10 @@ const AddTask = ({ title, value }) => {
                       maxHeight="200px"
                       MenuProps={MenuProps}
                     >
-                      <MenuItem value={'kochi'}>Kochi</MenuItem>
-                      <MenuItem value={'calicut'}>Calicut</MenuItem>
-                      <MenuItem value={'trivandrum'}>Trivandrum</MenuItem>
-                      <MenuItem value={'dubai'}>Dubai</MenuItem>  
+                      <MenuItem value={"kochi"}>Kochi</MenuItem>
+                      <MenuItem value={"calicut"}>Calicut</MenuItem>
+                      <MenuItem value={"trivandrum"}>Trivandrum</MenuItem>
+                      <MenuItem value={"dubai"}>Dubai</MenuItem>
                     </Select>
                   </FormControl>
                 </Row>
@@ -186,12 +203,12 @@ const AddTask = ({ title, value }) => {
                       maxHeight="200px"
                       MenuProps={MenuProps}
                     >
-                      {advisors && advisors.map((advisor) => (
-                        <MenuItem key={advisor.id} value={advisor.id}>
-                          {advisor.username}
-                        </MenuItem>
-                      ))}
-                     
+                      {advisors &&
+                        advisors.map((advisor) => (
+                          <MenuItem key={advisor.id} value={advisor.id}>
+                            {advisor.username}
+                          </MenuItem>
+                        ))}
                     </Select>
                   </FormControl>
                 </Row>
@@ -212,12 +229,12 @@ const AddTask = ({ title, value }) => {
                       maxHeight="200px"
                       MenuProps={MenuProps}
                     >
-                      {batches && batches.map((batch) => (
-                        <MenuItem key={batch.id} value={batch.id}>
-                          {batch.batchno}
-                        </MenuItem>
-                      ))}
-                     
+                      {batches &&
+                        batches.map((batch) => (
+                          <MenuItem key={batch.id} value={batch.id}>
+                            {batch.batchno}
+                          </MenuItem>
+                        ))}
                     </Select>
                   </FormControl>
                   <TextField
@@ -228,9 +245,8 @@ const AddTask = ({ title, value }) => {
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Enter name here.."
                     className="my-2"
-
                   />
-                   <FormControl className="mt-4 mb-2">
+                  <FormControl className="mt-4 mb-2">
                     <InputLabel id="demo-simple-select-autowidth-label">
                       Advisor
                     </InputLabel>
@@ -244,12 +260,12 @@ const AddTask = ({ title, value }) => {
                       maxHeight="200px"
                       MenuProps={MenuProps}
                     >
-                      {advisors && advisors.map((advisor) => (
-                        <MenuItem key={advisor.id} value={advisor.id}>
-                          {advisor.username}
-                        </MenuItem>
-                      ))}
-                     
+                      {advisors &&
+                        advisors.map((advisor) => (
+                          <MenuItem key={advisor.id} value={advisor.id}>
+                            {advisor.username}
+                          </MenuItem>
+                        ))}
                     </Select>
                   </FormControl>
                   <FormControl className="my-4">
@@ -266,12 +282,12 @@ const AddTask = ({ title, value }) => {
                       maxHeight="200px"
                       MenuProps={MenuProps}
                     >
-                      {domains && domains.map((domain) => (
-                        <MenuItem key={domain.id} value={domain.id}>
-                          {domain.name}
-                        </MenuItem>
-                      ))}
-                     
+                      {domains &&
+                        domains.map((domain) => (
+                          <MenuItem key={domain.id} value={domain.id}>
+                            {domain.name}
+                          </MenuItem>
+                        ))}
                     </Select>
                   </FormControl>
                 </Row>
