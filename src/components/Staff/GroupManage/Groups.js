@@ -72,7 +72,7 @@ const Groups = () => {
       </Col>
 
       <Col className="m-0 row ">
-        { groupDetails && groupDetails.student.map((student, index) => (
+        { groupDetails ? groupDetails.student.map((student, index) => (
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
@@ -93,7 +93,7 @@ const Groups = () => {
             </Col>
           </Row>
         </Col>
-            ))}
+            )): null}
       </Col>
       <Row>
         <Col className="m-0 my-3 row d-flex justify-content-end">

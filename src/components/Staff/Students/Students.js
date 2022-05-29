@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext,useEffect} from "react";
 import ManageSearchRoundedIcon from "@mui/icons-material/ManageSearchRounded";
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,8 +7,18 @@ import Button from "@mui/material/Button";
 import AddTask from "../../Common/AddTask/AddTask";
 import TextField from "@mui/material/TextField";
 import style from "./Students.module.css";
+import AuthContext from "../../../Context/AuthContext";
 
 const Students = () => {
+
+
+  const { viewStudents , students } = useContext(AuthContext); 
+
+  useEffect(() => {
+    viewStudents();
+  },[]);
+
+
   return (
     <Row className="m-0 px-3 rounded-2 bglight py-3">
       <Col sm={12} className="d-flex justify-content-between mb-2">
@@ -65,30 +75,34 @@ const Students = () => {
       </Col>
 
       <Col className="m-0 row ">
-          
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bggreen">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #1
-            </Col>
-            <Col className="textdark" sm={2}>
-              Wafi
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              22
-            </Col>
-            <Col className="textdark" sm={2}>
-              20A
-            </Col>
 
-            <Col className="textdark d-flex" sm={2}>
-              Aneesha
-            </Col>
-          </Row>
-        </Col>
+      { students ? students.map((student, index) => (
+        <Col sm={12} className="py-2 mb-2 cp rounded-3 bggreen">
+        <Row className="m-0">
+          <Col className="textdark" sm={2}>
+          #{index + 1}
+          </Col>
+          <Col className="textdark" sm={2}>
+            {student.name}
+          </Col>
+          <Col className="textdark" sm={2}>
+            Python
+          </Col>
+          <Col className="textdark" sm={2}>
+            22
+          </Col>
+          <Col className="textdark" sm={2}>
+            20A
+          </Col>
+
+          <Col className="textdark d-flex" sm={2}>
+            Aneesha
+          </Col>
+        </Row>
+      </Col>
+      ) ) : null }
+          
+        
         
           
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bgred">
