@@ -34,6 +34,8 @@ import LeadStudents from "./pages/Lead/Students";
 import LeadPlacements from "./pages/Lead/Placements";
 import { StyleProvider } from "./Context/StyleContext";
 
+import Home from "./pages/Home/Home";
+
 function App() {
   return (
     <>
@@ -44,6 +46,8 @@ function App() {
               {/* STUDENT */}
               <Route path="/signup" element={<UserReg />} />
               <Route path="/signin" element={<UserLogin />} />
+
+              <Route path="/home" element={<Home />} />
               <Route
                 path="/"
                 element={

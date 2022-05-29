@@ -1,0 +1,57 @@
+#bro {
+  background-color: black;
+  color: white;
+}
+
+#h11 {
+  font-weight: 1000;
+}
+
+#sub {
+  vertical-align: sub;
+  font-size: smaller;
+  font-size: 20px;
+}
+
+#h {
+  font-size: 40px;
+  font-weight: 900;
+}
+
+#a {
+  font-size: 20px;
+  color: grey;
+}
+
+#btn1 {
+  background-color: #00d2b5;
+  border-radius: 20px;
+  padding: 15px 25px;
+  font-size: 20px;
+  color: black;
+  border: 2px solid #00d2b5;
+
+  border-style: solid;
+}
+
+#btn1:hover {
+  color: black;
+
+  background-color: white;
+  border: 2px solid #00d2b5;
+}
+
+.boxes {
+  background-color: var(--white);
+  background-color: white;
+
+  align-items: center;
+
+  border-radius: 10px;
+}
+
+.c2{
+    background-color: var(--grey);
+    padding: 0;
+    margin: 0;
+}
