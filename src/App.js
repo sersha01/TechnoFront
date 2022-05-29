@@ -20,6 +20,7 @@ import AdvisorHome from "./pages/Advisor/AdvisorHome/AdvisorHome";
 import AdvisorProfile from "./pages/Advisor/AdvisorProfile/AdvisorProfile";
 import AdvisorStudents from "./pages/Advisor/AdvisorStudents/AdvisorStudents";
 import AdvisorWork from "./pages/Advisor/AdvisorWork/AdvisorWork";
+import AdvisorGroup from "./pages/Advisor/AdvisorGroup/AdvisorGroup";
 import AdvisorTasksList from "./pages/Advisor/AdvisorTasksList/AdvisorTasksList";
 import AdvisorTask from "./pages/Advisor/AdvisorTask/AdvisorTask";
 
@@ -119,14 +120,22 @@ function App() {
                 }
               />
               <Route
-                path="/advisor/work/taskslist"
+                path="/advisor/group"
+                element={
+                  <PrivateRouteAdvisor>
+                    <AdvisorGroup />
+                  </PrivateRouteAdvisor>
+                }
+              />
+              <Route
+                path="/advisor/group/taskslist"
                 element={
                   <PrivateRouteAdvisor>
                     <AdvisorTasksList />
                   </PrivateRouteAdvisor>
                 }
               />
-              <Route path="/advisor/work/tasks" element={<AdvisorTask />} />
+              <Route path="/advisor/group/manifest" element={<AdvisorTask />} />
 
               {/* LEAD */}
               <Route

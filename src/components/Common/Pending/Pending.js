@@ -3,8 +3,8 @@ import "./Pending.css";
 
 const Pending = () => {
   return (
-    <div id="mySidenav" class="sidenav p-5">
-      <div id="about" class="p-3">
+    <div id="mySidenav" className="sidenav p-5">
+      <div id="about" className="p-3">
         <div className="d-flex ">
           <div className="justify-content-center my-auto ">
             <h4 className="pendingt">Pending</h4>

@@ -4,11 +4,10 @@ import Header from "../../../components/Common/Header/Header";
 import Header2 from "../../../components/Common/Header2/Header2";
 import NavBox from "../../../components/Advisor/NavBox/NavBox";
 import Notification from "../../../components/Common/Notification/Notification";
-import Manifest from "../../../components/Common/Manifest/Manifest";
-import Pending from "../../../components/Common/Pending/Pending";
+import Group from "../../../components/Advisor/Group/Group";
 
 
-const AdvisorTask = () => {
+const AdvisorGroup = () => {
   return (
     <Container fluid className="mx-0 p-0">
       <Header />
@@ -22,17 +21,15 @@ const AdvisorTask = () => {
             <Notification />
           </Row>
         </Col>
-        <Col md={8} className="bg rounded-3 p-0 mx-5 me-0 pb-5 mb-3 bs">
-          <Manifest />
-          <Pending/>
+        <Col md={8} className="bglight rounded-3 p-0 mx-5 me-0 pb-5 mb-3 bs">
+          <Group />
         </Col>
       </Row>
       <Row className="d-md-flex d-lg-none ">
-        <Manifest />
-        <Pending/>
+        <Group />
       </Row>
     </Container>
   )
 }
 
-export default AdvisorTask
+export default AdvisorGroup
