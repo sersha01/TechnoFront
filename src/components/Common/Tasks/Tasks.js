@@ -4,13 +4,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import style from "./Tasks.module.css"
 import style from "./Tasks.module.css";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import AuthContext from "../../../Context/AuthContext";
 
 function Tasks() {
 
-  const { studentTasks } = useContext(AuthContext);
-
+  const { studentTasks, user_is, user, getStudentTasks } = useContext(AuthContext);
+  useEffect(() => {
+    if (user_is === 'student') {
+      getStudentTasks(user.user_id);
+    }
+  },[])
   return (
     <Row className={`m-0 px-3 bglight rounded-2 bg py-3 ${style.tasks}`}>
       <Col sm={12} className="d-flex justify-content-between">
@@ -70,7 +74,7 @@ function Tasks() {
                   </Accordion.Header>
                   <Accordion.Body className="bg">
                     <Table>
-                        <Link to="/advisor/group/manifest">
+                        <Link to={`/${user_is == "advisor" ? "advisor/group/manifest" : "manifest"}`}>
                             <Row>
                               <Col
                                 sm={12}
@@ -107,7 +111,7 @@ function Tasks() {
                               {task.reviews.map((review, index) => {
                                 return (
                               <Col className="m-0 row">
-                                  <Link to="/advisor/group/manifest">
+                                  <Link to={`/${user_is == "advisor" ? "advisor/group/manifest" : "manifest"}`}>
                                     <Col
                                       sm={12}
                                       className={`py-2 mb-2 cp rounded-3 ${style.tableBody}`}

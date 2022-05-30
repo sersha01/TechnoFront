@@ -15,7 +15,7 @@ function Manifest({manifestId}) {
   const { getStudentManifest, studentManifest } = useContext(AuthContext);
 
   useEffect(()=>{
-      getStudentManifest(45);
+      getStudentManifest(46);
   },[])
 
   return (
@@ -29,17 +29,11 @@ function Manifest({manifestId}) {
                 <h6 className={`ps-3 ${style.label}`}>Tasks</h6>
             </Col>
             <Col className={`row`} xs={8}>
-                {studentManifest && studentManifest.tasks.map((task, index) => {
+                {studentManifest && studentManifest.tasks && studentManifest.tasks.map((task, index) => {
                     return (
                 <Col xs={11} className={`rounded-3 py-2 my-1 ${style.todoDiv}`}><input type="text" defaultValue={"Task 1"} className={`col-11 ${style.input}`}  />
                 <CheckCircleIcon className='col-1'/>
                 </Col>
-                // <Col xs={11} className={`rounded-3 py-2 my-1 ${style.todoDiv}`}><input type="text" defaultValue={"Task 2"} className={`col-11 ${style.input}`} />
-                // <CheckCircleIcon className='col-1'/>
-                // </Col>
-                // <Col xs={11} className={`rounded-3 py-2 my-1 ${style.todoDiv}`}><input type="text" defaultValue={"Task 3"} className={`col-11 ${style.input}`} />
-                // <CheckCircleIcon className='col-1'/>
-                // </Col>
                 )})}
                 <Col xs={11} className={`rounded-3 py-2 my-1 ${style.todoDiv}`}><input type="text" defaultValue={'Add New Task'} className={`col-11 ${style.input}`}  />
                 <AddCircleOutlineRoundedIcon className='col-1'/>

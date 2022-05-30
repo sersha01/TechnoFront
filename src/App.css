@@ -99,6 +99,10 @@ tr {
   font-family: "Poppins", cursive;
 }
 
+input[type="text"], textarea {
+  outline: none;
+}
+
 /* variables */
 
 input[type="checkbox"] {

@@ -1,38 +1,43 @@
 // Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import UserHome from "./pages/User/UserHome/UserHome";
-import UserProfile from "./pages/User/UserProfile/UserProfile";
-import UserTasks from "./pages/User/UserTasks/UserTasks";
-import UserTasksList from "./pages/User/UserTasksList/UserTasksList";
-import UserPayments from "./pages/User/UserPayments/UserPayments";
+
+//////////////########//////////////
+import Profile from "./components/Common/Profile/Profile";
+import Manifest from "./components/Common/Manifest/Manifest";
+import Tasks from "./components/Common/Tasks/Tasks"; 
+import Pending from "./components/Common/Pending/Pending";
+////////////////////////////////////
+import Student from "./pages/User/Student";
+import StudentSpace from "./components/User/Space/MySpace";
+import MyPayment from "./components/User/Payment/Payment"
+////////////////////////////////////
+import Advisor from "./pages/Advisor/Advisor";
+import MyGroup from "./components/Advisor/Group/Group";
+import AdvisorSpace from "./components/Advisor/Space/MySpace";
+import MyStudents from "./components/Advisor/Students/Students";
+import Work from "./components/Advisor/Work/Work";
+////////////////////////////////////
+import Lead from "./pages/Lead/Lead";
+import Advisors from "./components/Staff/Advisors/Advisors";
+import Batch from "./components/Staff/Batch/Batch";
+import DomainComponent from "./components/Staff/Domain/Domain";
+import Group from "./components/Staff/Groups/Groups";
+import GroupManage from "./components/Staff/GroupManage/Groups";
+import Payments from "./components/Staff/Payment/Payment";
+import Placement from "./components/Staff/Placement/Placement";
+import Students from "./components/Staff/Students/Students";
+////////////////////////////////////
+
+
+
+
 import UserLogin from "./pages/User/UserLogin/UserLogin";
 import UserReg from "./pages/User/UserLogin/UserReg";
 import { AuthProvider } from "./Context/AuthContext";
-import {
-  PrivateRouteStudent,
-  PrivateRouteAdvisor,
-  PrivateRouteLead,
-} from "./Utils/PrivateRoute";
+
 import "./App.css";
 
-import AdvisorHome from "./pages/Advisor/AdvisorHome/AdvisorHome";
-import AdvisorProfile from "./pages/Advisor/AdvisorProfile/AdvisorProfile";
-import AdvisorStudents from "./pages/Advisor/AdvisorStudents/AdvisorStudents";
-import AdvisorWork from "./pages/Advisor/AdvisorWork/AdvisorWork";
-import AdvisorGroup from "./pages/Advisor/AdvisorGroup/AdvisorGroup";
-import AdvisorTasksList from "./pages/Advisor/AdvisorTasksList/AdvisorTasksList";
-import AdvisorTask from "./pages/Advisor/AdvisorTask/AdvisorTask";
-
-import LeadHome from "./pages/Lead/Home";
-import LeadAdvisors from "./pages/Lead/Advisors";
-import LeadBatch from "./pages/Lead/Batch";
-import LeadDomain from "./pages/Lead/Domain";
-import LeadGroups from "./pages/Lead/Groups";
-import GroupManage from "./pages/Lead/ManageGroup";
-import LeadPayments from "./pages/Lead/Payments";
-import LeadStudents from "./pages/Lead/Students";
-import LeadPlacements from "./pages/Lead/Placements";
 import { StyleProvider } from "./Context/StyleContext";
 
 import Home from "./pages/Home/Home";
@@ -52,41 +57,31 @@ function App() {
               <Route
                 path="/"
                 element={
-                  <PrivateRouteStudent>
-                    <UserHome />
-                  </PrivateRouteStudent>
+                  <Student child={<StudentSpace />} />
                 }
               />
               <Route
                 path="/taskslist"
                 element={
-                  <PrivateRouteStudent>
-                    <UserTasksList />
-                  </PrivateRouteStudent>
+                  <Student child={<><Tasks /><Pending /></>} />
                 }
               />
               <Route
-                path="/taskslist/task"
+                path="/manifest"
                 element={
-                  <PrivateRouteStudent>
-                    <UserTasks />
-                  </PrivateRouteStudent>
+                  <Student child={<><Manifest /><Pending /></>} />
                 }
               />
               <Route
                 path="/profile"
                 element={
-                  <PrivateRouteStudent>
-                    <UserProfile />
-                  </PrivateRouteStudent>
+                  <Student child={<Profile />} />
                 }
               />
               <Route
                 path="/payment"
                 element={
-                  <PrivateRouteStudent>
-                    <UserPayments />
-                  </PrivateRouteStudent>
+                  <Student child={<MyPayment />} />
                 }
               />
 
@@ -94,124 +89,99 @@ function App() {
               <Route
                 path="/advisor"
                 element={
-                  <PrivateRouteAdvisor>
-                    <AdvisorHome />
-                  </PrivateRouteAdvisor>
+                  <Advisor child={<AdvisorSpace />}/>
                 }
               />
               <Route
                 path="/advisor/profile"
                 element={
-                  <PrivateRouteAdvisor>
-                    <AdvisorProfile />
-                  </PrivateRouteAdvisor>
+                  <Advisor child={<Profile />}/>
                 }
               />
               <Route
                 path="/advisor/students"
                 element={
-                  <PrivateRouteAdvisor>
-                    <AdvisorStudents />
-                  </PrivateRouteAdvisor>
+                  <Advisor child={<MyStudents />}/>
                 }
               />
               <Route
                 path="/advisor/work"
                 element={
-                  <PrivateRouteAdvisor>
-                    <AdvisorWork />
-                  </PrivateRouteAdvisor>
+                  <Advisor child={<Work />}/>
                 }
               />
               <Route
                 path="/advisor/group"
                 element={
-                  <PrivateRouteAdvisor>
-                    <AdvisorGroup />
-                  </PrivateRouteAdvisor>
+                  <Advisor child={<MyGroup />}/>
                 }
               />
               <Route
                 path="/advisor/group/taskslist"
                 element={
-                  <PrivateRouteAdvisor>
-                    <AdvisorTasksList />
-                  </PrivateRouteAdvisor>
+                  <Advisor child={<Tasks />}/>
                 }
               />
-              <Route path="/advisor/group/manifest" element={<AdvisorTask />} />
+              <Route
+                path="/advisor/group/manifest"
+                element={
+                  <Advisor child={<Manifest />}/>
+                }
+              />
 
               {/* LEAD */}
               <Route
                 path="/lead"
                 element={
-                  <PrivateRouteLead>
-                    <LeadHome />
-                  </PrivateRouteLead>
+                  <Lead child={<AdvisorSpace />}/>
                 }
               />
               <Route
                 path="/lead/payments"
                 element={
-                  <PrivateRouteLead>
-                    <LeadPayments />
-                  </PrivateRouteLead>
+                  <Lead child={<Payments />}/>
                 }
               />
               <Route
                 path="/lead/batch"
                 element={
-                  <PrivateRouteLead>
-                    <LeadBatch />
-                  </PrivateRouteLead>
+                  <Lead child={<Batch />}/>
                 }
               />
               <Route
                 path="/lead/domain"
                 element={
-                  <PrivateRouteLead>
-                    <LeadDomain />
-                  </PrivateRouteLead>
+                  <Lead child={<DomainComponent />}/>
                 }
               />
               <Route
                 path="/lead/students"
                 element={
-                  <PrivateRouteLead>
-                    <LeadStudents />
-                  </PrivateRouteLead>
+                  <Lead child={<Students />}/>
                 }
               />
               <Route
                 path="/lead/groups"
                 element={
-                  <PrivateRouteLead>
-                    <LeadGroups />
-                  </PrivateRouteLead>
+                  <Lead child={<Group />}/>
                 }
               />
               <Route
                 path="/lead/groups/manage"
                 element={
-                  <PrivateRouteLead>
-                    <GroupManage />
-                  </PrivateRouteLead>
+                  <Lead child={<GroupManage />}/>
                 }
               />
               <Route
                 path="/lead/advisors"
                 element={
-                  <PrivateRouteLead>
-                    <LeadAdvisors />
-                  </PrivateRouteLead>
+                  <Lead child={<Advisors />}/>
                 }
               />
               <Route
                 path="/lead/placements"
                 element={
-                  <PrivateRouteLead>
-                    <LeadPlacements />
-                  </PrivateRouteLead>
+                  <Lead child={<Placement />}/>
                 }
               />
             </Routes>

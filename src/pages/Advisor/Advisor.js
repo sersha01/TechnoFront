@@ -1,13 +1,14 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import Header from "../../../components/Common/Header/Header";
-import Header2 from "../../../components/Common/Header2/Header2";
-import NavBox from "../../../components/Advisor/NavBox/NavBox";
-import Notification from "../../../components/Common/Notification/Notification";
-import Students from "../../../components/Advisor/Students/Students";
+import Header from "../../components/Common/Header/Header";
+import Header2 from "../../components/Common/Header2/Header2";
+import NavBox from "../../components/Advisor/NavBox/NavBox";
+import Notification from "../../components/Common/Notification/Notification";
+import { PrivateRouteAdvisor } from "../../Utils/PrivateRoute";
 
-const AdvisorStudents = () => {
+const Advisor = ({child}) => {
   return (
+    <PrivateRouteAdvisor>
     <Container fluid className="mx-0 p-0">
       <Header />
       <Header2 />
@@ -20,15 +21,16 @@ const AdvisorStudents = () => {
             <Notification />
           </Row>
         </Col>
-        <Col md={8} className="bglight rounded-3 p-0 mx-5 me-0 pb-5 mb-3 bs">
-          <Students />
+        <Col md={8} className="bg rounded-3 p-0 mx-5 me-0 pb-5 mb-3 bs">
+            {child} 
         </Col>
       </Row>
       <Row className="d-md-flex d-lg-none ">
-        <Students />
+        {child}
       </Row>
     </Container>
+    </PrivateRouteAdvisor>
   );
 };
 
-export default AdvisorStudents;
+export default Advisor;

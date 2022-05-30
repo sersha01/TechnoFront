@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }) => {
           "notification",
           JSON.stringify(res.data.notification)
         );
-        if (res.data.dept === "lead") {
+        if (res.data.dept == "lead") {
           navigate("/lead");
         } else if (res.data.dept == "advisor") {
           navigate("/advisor");
@@ -351,7 +351,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const getMyGroupDetails = async (groupId) => {
-// <<<<<<< HEAD
     await axios
       .post(
         "http://127.0.0.1:8000/batch/view/mygroup/details",
@@ -363,6 +362,7 @@ export const AuthProvider = ({ children }) => {
       .then((res) => {
         setMyGroupDetails(res.data);
         console.log(res.data);
+        navigate("/advisor/group");
       })
       .catch((err) => {
         console.log(err);
@@ -375,12 +375,15 @@ export const AuthProvider = ({ children }) => {
     }).then(res=>{
         setStudentTasks(res.data)
         console.log(res.data)
+        if (user_is == "student") {
+          navigate('/taskslist')
+        }else {
         navigate('/advisor/group/taskslist')
+        }
     }).catch(err=>{
         console.log(err)
     })
   }
-// >>>>>>> manifest
 
   const getMyGroups = async () => {
     await axios
@@ -406,7 +409,11 @@ export const AuthProvider = ({ children }) => {
     }).then(res=>{
         setStudentManifest(res.data)
         console.log(res.data)
+        if (user_is == "student") {
+          navigate('/manifest')
+        }else {
         navigate('/advisor/group/manifest')
+        }
     }).catch(err=>{
         console.log(err)
     })

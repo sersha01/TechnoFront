@@ -2,12 +2,13 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Header from "../../components/Common/Header/Header";
 import Header2 from "../../components/Common/Header2/Header2";
-import NavBox from "../../components/Staff/NavBox/NavBox";
+import NavBox from "../../components/User/NavBox/NavBox";
 import Notification from "../../components/Common/Notification/Notification";
-import Advisor from "../../components/Staff/Advisors/Advisors";
+import { PrivateRouteStudent } from "../../Utils/PrivateRoute";
 
-const Advisors = () => {
+const Lead = ({child}) => {
   return (
+    // <PrivateRouteStudent>
     <Container fluid className="mx-0 p-0">
       <Header />
       <Header2 />
@@ -20,15 +21,16 @@ const Advisors = () => {
             <Notification />
           </Row>
         </Col>
-        <Col md={8} className="bg rounded-3 p-0 mx-5 bglight me-0 pb-5 mb-3 bs">
-          <Advisor />
+        <Col md={8} className="bg rounded-3 p-0 mx-5 me-0 pb-5 mb-3 bs">
+            {child} 
         </Col>
       </Row>
-      <Row className="d-md-flex d-lg-none bglight">
-        <Advisor />
+      <Row className="d-md-flex d-lg-none ">
+        {child}
       </Row>
     </Container>
-  )
-}
+    // </PrivateRouteStudent>
+  );
+};
 
-export default Advisors
+export default Lead;
