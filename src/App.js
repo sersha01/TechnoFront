@@ -44,7 +44,6 @@ function App() {
         <AuthProvider>
           <StyleProvider>
             <Routes>
-              {/* STUDENT */}
               <Route path="/signup" element={<UserReg />} />
               <Route path="/signin" element={<UserLogin />} />
 

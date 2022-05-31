@@ -59,6 +59,10 @@ Link {
   color: var(--light);
 }
 
+.textdark {
+  color: var(--dark) !important;
+}
+
 .navitems {
   font-size: 17px;
   font-weight: 700;
@@ -129,13 +133,22 @@ input[type="checkbox"]:checked {
   background-image: url(https://i.postimg.cc/Hn0nstVK/Screenshot-2020-04-16-at-1-07-19-PM.png);
 }
 
-
-.addtask{
+.addtask {
   background-color: var(--dark) !important;
   color: var(--light) !important;
 }
 
-.searchbtn{
+.searchbtn {
   background-color: var(--dark) !important;
   color: var(--light) !important;
 }
+
+body::-webkit-scrollbar {
+  display: none;
+}
+body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+  

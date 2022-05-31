@@ -7,44 +7,68 @@ const AuthContext = createContext();
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
-    const [authTokens, setAuthTokens] = useState(()=>localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
-    const [user, setUser] = useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null);
-    const [errUser, setErrUser] = useState(false);
-    const [user_is, setUser_is] = useState(()=>localStorage.getItem('user_is') ? JSON.parse(localStorage.getItem('user_is')) :null);
-    const [notification, setNotification] = useState(()=>localStorage.getItem('notification') ? JSON.parse(localStorage.getItem('notification')) : null);
-    const [profile, setProfile] = useState(null);
-    const [advisorsNmaes, setAdvisorsNames] = useState(null);
-    const [batches, setBatches] = useState(null);
-    const [domains, setDomains] = useState(null);
-    const [groups, setGroups] = useState(null);
-    const [advisors, setAdvisors] = useState(null);
-    const [groupDetails, setGroupDetails] = useState(null);
-    const [groupLessers, setGroupLessers] = useState(null);
-    const [myStudents, setMyStudents] = useState(null);
-    const [myGroups, setMyGroups] = useState(null);
-    const [myGroupDetails, setMyGroupDetails] = useState(null);
-    const [students, setStudents] = useState(null);
-    const [studentTasks, setStudentTasks] = useState(null);
-    const [studentManifest, setStudentManifest] = useState(null);
+  const [authTokens, setAuthTokens] = useState(() =>
+    localStorage.getItem("authTokens")
+      ? JSON.parse(localStorage.getItem("authTokens"))
+      : null
+  );
+  const [user, setUser] = useState(() =>
+    localStorage.getItem("authTokens")
+      ? jwt_decode(localStorage.getItem("authTokens"))
+      : null
+  );
+  const [errUser, setErrUser] = useState(false);
+  const [user_is, setUser_is] = useState(() =>
+    localStorage.getItem("user_is")
+      ? JSON.parse(localStorage.getItem("user_is"))
+      : null
+  );
+  const [notification, setNotification] = useState(() =>
+    localStorage.getItem("notification")
+      ? JSON.parse(localStorage.getItem("notification"))
+      : null
+  );
+  const [profile, setProfile] = useState(null);
+  const [advisorsNmaes, setAdvisorsNames] = useState(null);
+  const [batches, setBatches] = useState(null);
+  const [domains, setDomains] = useState(null);
+  const [groups, setGroups] = useState(null);
+  const [advisors, setAdvisors] = useState(null);
+  const [groupDetails, setGroupDetails] = useState(null);
+  const [groupLessers, setGroupLessers] = useState(null);
+  const [myStudents, setMyStudents] = useState(null);
+  const [myGroups, setMyGroups] = useState(null);
+  const [myGroupDetails, setMyGroupDetails] = useState(null);
+  const [students, setStudents] = useState(null);
+  const [studentTasks, setStudentTasks] = useState(null);
+  const [studentManifest, setStudentManifest] = useState(null);
+  const [swap, setSwap] = useState("video");
+  const [swap2, setSwap2] = useState("video");
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const signupUser = async ({username,email,password,batch}) => {
-        console.log(username,email,password,batch);
-        await axios.post('http://127.0.0.1:8000/user/signup', {
-            'username':username,
-            'email':email,
-            'password':password,
-            'batch':batch,
-            'is_student':true,
-            'is_staff':false
-        }).then(res=>{
-            console.log(res.data)
-        }).catch(err=>{
-            console.log(err.response.data);
-            console.log(err)
-        })
-    }
+  const signupUser = async ({ username, email, password, batch }) => {
+    console.log(username, email, password);
+    await axios
+      .post("http://127.0.0.1:8000/user/signup", {
+        username: username,
+        email: email,
+        password: password,
+        batch: 1,
+        is_student: true,
+        is_staff: false,
+      })
+      .then((res) => {
+        console.log(res.data);
+        navigate("/home");
+        setSwap("video");
+        setSwap2("video");
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        console.log(err);
+      });
+  };
 
   const userDept = async (link) => {
     console.log(link.access);
@@ -125,7 +149,7 @@ export const AuthProvider = ({ children }) => {
     const res = await axios
       .get(
         "http://127.0.0.1:8000/student/view/students",
-        
+
         {
           headers: { Authorization: `Bearer ${authTokens.access}` },
         }
@@ -351,7 +375,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const getMyGroupDetails = async (groupId) => {
-// <<<<<<< HEAD
+    // <<<<<<< HEAD
     await axios
       .post(
         "http://127.0.0.1:8000/batch/view/mygroup/details",
@@ -370,17 +394,24 @@ export const AuthProvider = ({ children }) => {
   };
 
   const getStudentTasks = async (studentId) => {
-    await axios.post('http://127.0.0.1:8000/manifest/view/tasklist',{'id':studentId},{
-        headers: {Authorization : `Bearer ${authTokens.access}`}
-    }).then(res=>{
-        setStudentTasks(res.data)
-        console.log(res.data)
-        navigate('/advisor/group/taskslist')
-    }).catch(err=>{
-        console.log(err)
-    })
-  }
-// >>>>>>> manifest
+    await axios
+      .post(
+        "http://127.0.0.1:8000/manifest/view/tasklist",
+        { id: studentId },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        setStudentTasks(res.data);
+        console.log(res.data);
+        navigate("/advisor/group/taskslist");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  // >>>>>>> manifest
 
   const getMyGroups = async () => {
     await axios
@@ -401,15 +432,22 @@ export const AuthProvider = ({ children }) => {
   };
 
   const getStudentManifest = async (manifestId) => {
-    await axios.post('http://127.0.0.1:8000/manifest/view/manifest',{'id':manifestId},{
-        headers: {Authorization : `Bearer ${authTokens.access}`}
-    }).then(res=>{
-        setStudentManifest(res.data)
-        console.log(res.data)
-        navigate('/advisor/group/manifest')
-    }).catch(err=>{
-        console.log(err)
-    })
+    await axios
+      .post(
+        "http://127.0.0.1:8000/manifest/view/manifest",
+        { id: manifestId },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        setStudentManifest(res.data);
+        console.log(res.data);
+        navigate("/advisor/group/manifest");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const getGroupDetails = async (groupId) => {
@@ -567,54 +605,58 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-        const contextData = {
-            signupUser,
-            getAdvisorsNames,
-            getProfile,
-            getGroups,
-            getGroupDetails,
-            getMyStudents,
-            updateProfile,
-            deleteBatch,
-            createDomain,
-            getMyGroups,
-            addInGroup,
-            rmFromGroup,
-            getMyGroupDetails,
-            getStudentTasks,
-            getStudentManifest,
-            deleteDomain,
-            getDomains,
-            createBatch,
-            deleteGroup,
-            createGroup,
-            deleteGroup,
-            getAdvisors,
-            getGroupLess,
-            loginUser,
-            logoutUser,
-            getBatches,
-            get_data,
-            viewStudents,
-            students,
-            notification,
-            advisorsNmaes,
-            studentTasks,
-            studentManifest,
-            myStudents,
-            myGroups,
-            batches,
-            domains,
-            advisors,
-            myGroupDetails,
-            groupDetails,
-            groupLessers,
-            groups,
-            errUser,
-            profile,
-            user_is,
-            user,
-        };
+  const contextData = {
+    signupUser,
+    getAdvisorsNames,
+    getProfile,
+    getGroups,
+    getGroupDetails,
+    getMyStudents,
+    updateProfile,
+    deleteBatch,
+    createDomain,
+    getMyGroups,
+    addInGroup,
+    rmFromGroup,
+    getMyGroupDetails,
+    getStudentTasks,
+    getStudentManifest,
+    deleteDomain,
+    getDomains,
+    createBatch,
+    deleteGroup,
+    createGroup,
+    deleteGroup,
+    getAdvisors,
+    getGroupLess,
+    loginUser,
+    logoutUser,
+    getBatches,
+    get_data,
+    viewStudents,
+    students,
+    notification,
+    advisorsNmaes,
+    studentTasks,
+    studentManifest,
+    myStudents,
+    myGroups,
+    batches,
+    domains,
+    advisors,
+    myGroupDetails,
+    groupDetails,
+    groupLessers,
+    groups,
+    errUser,
+    profile,
+    user_is,
+    user,
+    swap,
+    setSwap,
+    swap2,
+    setSwap2,
+  };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>
   );

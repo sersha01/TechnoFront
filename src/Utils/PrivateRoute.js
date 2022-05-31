@@ -4,7 +4,6 @@ import AuthContext from "../Context/AuthContext";
 
 export function PrivateRouteStudent({ children }) {
   const { user, user_is } = useContext(AuthContext);
-  console.log(user.position)
   return user && user_is === "student" ? children : children;
 }
 

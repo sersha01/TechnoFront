@@ -75,8 +75,8 @@ function Manifest({manifestId}) {
         <Col className='my-2 d-flex justify-content-center' xs={12}><Col xs={9}><input type="text" className={`w-100 py-2 rounded-3 ${style.input}`} /></Col></Col>
 
 
-        <div className='d-flex justify-content-center'>
-            <div><AddTask title="Repeat" value="repeated" /></div>
+        <div className='d-flex justify-content-center mt-3'>
+            <div className="mx-3"><AddTask title="Repeat" value="repeated"  /></div>
             <div> <AddTask title="Completed" value="completed" /></div>
            
         </div>
