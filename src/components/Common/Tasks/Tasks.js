@@ -91,11 +91,10 @@ function Tasks() {
                                   </Col>
                                 </Row>
                               </Col>
-                              {task.reviews.map((review) => {
+                              {task.reviews.length != 0 ? task.reviews.map((review) => {
                                 return (
                               <Col className="m-0 row"
                               onClick={()=>{setCurr_manifest(task.id)
-                                console.log(task.id);
                                 navigate(`/${user_is == "advisor" ? "advisor/group/manifest" : "manifest"}`)}}>
                                     <Col
                                       sm={12}
@@ -122,8 +121,10 @@ function Tasks() {
                                         </Col>
                                       </Row>
                                     </Col>
-                              </Col>
-                                )})}
+                              </Col> 
+                                )}): <Col className="text-center h5 mt-3 mb-0" onClick={()=>{setCurr_manifest(task.id)
+                                  navigate(`/${user_is == "advisor" ? "advisor/group/manifest" : "manifest"}`)}}>No Reviews Yet,
+                                  <b className="text-dark">Go to Manifest</b> </Col>}
                             </Row>
                     </Table>
                   </Accordion.Body>
