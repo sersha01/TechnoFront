@@ -26,6 +26,9 @@ export const AuthProvider = ({ children }) => {
     const [students, setStudents] = useState(null);
     const [studentTasks, setStudentTasks] = useState(null);
     const [studentManifest, setStudentManifest] = useState(null);
+    const [curr_manifest, setCurr_manifest] = useState(null);
+    const [curr_student, setCurr_student] = useState(null);
+    const [curr_group, setCurr_group] = useState(null);
 
     const navigate = useNavigate();
 
@@ -173,6 +176,24 @@ export const AuthProvider = ({ children }) => {
         console.log(err);
       });
   };
+
+  const addTask = async (task) => {
+    await axios.post("http://127.0.0.1:8000/manifest/add/task", {
+      'task':task,
+      // 'batch':curr_batch,
+      // 'group':curr_group,
+      // 'student':curr_student,
+      'manifest':curr_manifest
+    },{
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+    }).then(res=>{
+      getStudentManifest(curr_manifest);
+      console.log(res.data)
+    }).catch(err=>{
+      console.log(err.response.data);
+      console.log(err)
+    })
+  }
 
   const createBatch = async (batch, advisor, location) => {
     console.log(advisor, location, batch);
@@ -362,7 +383,6 @@ export const AuthProvider = ({ children }) => {
       .then((res) => {
         setMyGroupDetails(res.data);
         console.log(res.data);
-        navigate("/advisor/group");
       })
       .catch((err) => {
         console.log(err);
@@ -409,11 +429,11 @@ export const AuthProvider = ({ children }) => {
     }).then(res=>{
         setStudentManifest(res.data)
         console.log(res.data)
-        if (user_is == "student") {
-          navigate('/manifest')
-        }else {
-        navigate('/advisor/group/manifest')
-        }
+        // if (user_is == "student") {
+        //   navigate('/manifest')
+        // }else {
+        // navigate('/advisor/group/manifest')
+        // }
     }).catch(err=>{
         console.log(err)
     })
@@ -520,6 +540,17 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const taskComplete = async (taskId) => {
+    await axios.post('http://127.0.0.1:8000/manifest/complete/task',{'task':taskId},{
+        headers: {Authorization : `Bearer ${authTokens.access}`}
+    }).then(res=>{
+        console.log(res.data)
+        getStudentManifest(curr_manifest)
+    }).catch(err=>{
+        console.log(err)
+    })
+  }
+
   const updateProfile = async (e) => {
     e.preventDefault();
     console.log("present here");
@@ -574,54 +605,62 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-        const contextData = {
-            signupUser,
-            getAdvisorsNames,
-            getProfile,
-            getGroups,
-            getGroupDetails,
-            getMyStudents,
-            updateProfile,
-            deleteBatch,
-            createDomain,
-            getMyGroups,
-            addInGroup,
-            rmFromGroup,
-            getMyGroupDetails,
-            getStudentTasks,
-            getStudentManifest,
-            deleteDomain,
-            getDomains,
-            createBatch,
-            deleteGroup,
-            createGroup,
-            deleteGroup,
-            getAdvisors,
-            getGroupLess,
-            loginUser,
-            logoutUser,
-            getBatches,
-            get_data,
-            viewStudents,
-            students,
-            notification,
-            advisorsNmaes,
-            studentTasks,
-            studentManifest,
-            myStudents,
-            myGroups,
-            batches,
-            domains,
-            advisors,
-            myGroupDetails,
-            groupDetails,
-            groupLessers,
-            groups,
-            errUser,
-            profile,
-            user_is,
-            user,
-        };
+  const contextData = {
+      signupUser,
+      getAdvisorsNames,
+      getProfile,
+      getGroups,
+      getGroupDetails,
+      getMyStudents,
+      updateProfile,
+      deleteBatch,
+      createDomain,
+      getMyGroups,
+      addInGroup,
+      rmFromGroup,
+      getMyGroupDetails,
+      getStudentTasks,
+      getStudentManifest,
+      deleteDomain,
+      getDomains,
+      createBatch,
+      deleteGroup,
+      setCurr_manifest,
+      setCurr_group,
+      setCurr_student,
+      createGroup,
+      deleteGroup,
+      getAdvisors,
+      getGroupLess,
+      loginUser,
+      logoutUser,
+      getBatches,
+      get_data,
+      viewStudents,
+      addTask,
+      taskComplete,
+      students,
+      notification,
+      advisorsNmaes,
+      studentTasks,
+      studentManifest,
+      curr_manifest,
+      curr_group,
+      curr_student,
+      myStudents,
+      myGroups,
+      batches,
+      domains,
+      advisors,
+      myGroupDetails,
+      groupDetails,
+      groupLessers,
+      groups,
+      errUser,
+      profile,
+      user_is,
+      user,
+  };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>
   );

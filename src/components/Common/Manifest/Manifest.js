@@ -4,18 +4,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import check icon
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 // import style from './Manifest.module.css';
 import style from './Manifest.module.css';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../../Context/AuthContext';
 import AddTask from '../AddTask/AddTask';
 
-function Manifest({manifestId}) {
+function Manifest() {
 
-  const { getStudentManifest, studentManifest } = useContext(AuthContext);
+  const [task, setTask] = useState(null);
+
+  const { getStudentManifest, studentManifest, curr_manifest, user_is, addTask, taskComplete } = useContext(AuthContext);
 
   useEffect(()=>{
-      getStudentManifest(46);
+      getStudentManifest(curr_manifest);
   },[])
 
   return (
@@ -31,12 +34,15 @@ function Manifest({manifestId}) {
             <Col className={`row`} xs={8}>
                 {studentManifest && studentManifest.tasks && studentManifest.tasks.map((task, index) => {
                     return (
-                <Col xs={11} className={`rounded-3 py-2 my-1 ${style.todoDiv}`}><input type="text" defaultValue={"Task 1"} className={`col-11 ${style.input}`}  />
-                <CheckCircleIcon className='col-1'/>
+                        <Col xs={11} className={`rounded-3 py-2 my-1 ${style.todoDiv}`}><input type="text" value={task.taskname} className={`col-11 ${style.input}`} disabled />
+                {task.status == true ? <CheckCircleIcon className='col-1'/> :<CheckCircleOutlineIcon className='col-1' onClick={()=>{
+                    taskComplete(task.id);
+                }}/>}
                 </Col>
                 )})}
-                <Col xs={11} className={`rounded-3 py-2 my-1 ${style.todoDiv}`}><input type="text" defaultValue={'Add New Task'} className={`col-11 ${style.input}`}  />
-                <AddCircleOutlineRoundedIcon className='col-1'/>
+                <Col xs={11} className={`rounded-3 py-2 my-1 ${style.todoDiv}`}><input type="text" placeholder={'Add New Task'} className={`col-11 ${style.input}`} value={task} onChange={(e)=>{setTask(e.target.value)}}/>
+                {user_is != "student" && <AddCircleOutlineRoundedIcon className='col-1' onClick={()=>{addTask(task)
+                setTask('')}} />}
                 </Col>
             </Col>
         </Col>
@@ -69,11 +75,10 @@ function Manifest({manifestId}) {
         <Col className='my-2 d-flex justify-content-center' xs={12}><Col xs={9}><input type="text" className={`w-100 py-2 rounded-3 ${style.input}`} /></Col></Col>
 
 
-        <div className='d-flex justify-content-center'>
+        {user_is != "student" && <div className='d-flex justify-content-center'>
             <div><AddTask title="Repeat" value="repeated" /></div>
             <div> <AddTask title="Completed" value="completed" /></div>
-           
-        </div>
+        </div>}
         
       
     </Row>

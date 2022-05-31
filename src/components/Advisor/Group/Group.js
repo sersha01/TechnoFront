@@ -14,11 +14,12 @@ import AuthContext from "../../../Context/AuthContext";
 
 const Work = () => {
 
+  const { myGroupDetails, setCurr_student, getMyGroupDetails, curr_group } = useContext(AuthContext);
+  
   const navigate = useNavigate();
-  const { myGroupDetails, getStudentTasks } = useContext(AuthContext);
 
   useEffect(() => {
-    // getMyGroups();
+    getMyGroupDetails(curr_group)
   },[])
 
   return (
@@ -69,8 +70,8 @@ const Work = () => {
               <Col
               sm={12}
               className={`py-2 mb-2 cp bglight rounded-3 ${style.tableBody}`}
-              onClick={() => {getStudentTasks(student.id)}}
-            >
+              onClick={() => {setCurr_student(student.id)
+              navigate('/advisor/group/taskslist')}} >
               <Row className="m-0">
                 <Col className={`${style.tableBodyText}`} sm={1}>
                   #{index + 1}
