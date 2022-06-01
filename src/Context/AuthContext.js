@@ -29,6 +29,7 @@ export const AuthProvider = ({ children }) => {
     const [curr_manifest, setCurr_manifest] = useState(null);
     const [curr_student, setCurr_student] = useState(null);
     const [curr_group, setCurr_group] = useState(null);
+    const [reviewers, setReviewers] = useState(null);
 
     const navigate = useNavigate();
 
@@ -201,9 +202,9 @@ export const AuthProvider = ({ children }) => {
       .post(
         "http://127.0.0.1:8000/batch/create/batch",
         {
-          advisor: advisor,
-          location: location,
-          batchno: batch,
+          'advisor': advisor,
+          'location': location,
+          'name': batch,
         },
         {
           headers: { Authorization: `Bearer ${authTokens.access}` },
@@ -328,12 +329,64 @@ export const AuthProvider = ({ children }) => {
       )
       .then((res) => {
         setAdvisors(res.data);
-        console.log("qwertyuiop", res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  const getReviewers = async () => {
+    await axios
+      .post(
+        "http://127.0.0.1:8000/admins/view/reviewers",
+        {},
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        setReviewers(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const reviewPassed = async (form, reviewer, remark, date) => {
+    await axios.post("http://127.0.0.1:8000/manifest/review/passed", {
+      'form':form,
+      'reviewer':reviewer,
+      'remark':remark,
+      'next_review':date,
+      'manifest':curr_manifest
+    },{
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+    }).then(res=>{
+      getStudentManifest(curr_manifest);
+      console.log(res.data)
+    }).catch(err=>{
+      console.log(err.response.data);
+      console.log(err)
+    })
+  }
+
+  const reviewRepeated = async (form, reviewer, remark, date) => {
+    await axios.post("http://127.0.0.1:8000/manifest/review/repeated", {
+      'form':form,
+      'reviewer':reviewer,
+      'remark':remark,
+      'next_review':date,
+      'manifest':curr_manifest
+    },{
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+    }).then(res=>{
+      getStudentManifest(curr_manifest);
+      console.log(res.data)
+    }).catch(err=>{
+      console.log(err.response.data);
+      console.log(err)
+    })
+  }
 
   const deleteDomain = async (domainId) => {
     await axios
@@ -429,11 +482,6 @@ export const AuthProvider = ({ children }) => {
     }).then(res=>{
         setStudentManifest(res.data)
         console.log(res.data)
-        // if (user_is == "student") {
-        //   navigate('/manifest')
-        // }else {
-        // navigate('/advisor/group/manifest')
-        // }
     }).catch(err=>{
         console.log(err)
     })
@@ -639,6 +687,9 @@ export const AuthProvider = ({ children }) => {
       viewStudents,
       addTask,
       taskComplete,
+      getReviewers,
+      reviewPassed,
+      reviewRepeated,
       students,
       notification,
       advisorsNmaes,
@@ -652,6 +703,7 @@ export const AuthProvider = ({ children }) => {
       batches,
       domains,
       advisors,
+      reviewers,
       myGroupDetails,
       groupDetails,
       groupLessers,

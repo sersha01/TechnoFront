@@ -41,6 +41,7 @@ const UserReg = () => {
         >
           <form 
           onSubmit={handleSubmit(signupUser)}
+          autoComplete="off"
           >
             <div className="">
               <h1 className="mb-0 fs-3 text-center">Sign Up</h1>

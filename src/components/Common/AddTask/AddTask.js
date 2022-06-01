@@ -14,17 +14,21 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import AuthContext from "../../../Context/AuthContext";
 
-const AddTask = ({ title, value }) => {
+const AddTask = ({ title, value, form }) => {
   const {
     getAdvisors,
     getDomains,
     getBatches,
     advisors,
+    reviewers,
     domains,
     batches,
     createBatch,
     createDomain,
     createGroup,
+    getReviewers,
+    reviewPassed,
+    reviewRepeated,
   } = useContext(AuthContext);
 
   const [open, setOpen] = useState(false);
@@ -33,6 +37,10 @@ const AddTask = ({ title, value }) => {
   const [advisor, setAdvisor] = useState("");
   const [location, setLocation] = useState("");
   const [batch, setBatch] = useState("");
+  const [reviewer, setReviewer] = useState("");
+  const [remark, setRemark] = useState("");
+  const [date, setDate] = useState("");
+
 
   const handleClickOpen = () => {
     if (value === "batch") {
@@ -41,12 +49,17 @@ const AddTask = ({ title, value }) => {
       getAdvisors();
       getDomains();
       getBatches();
+    } else if (value === "completed" || value === "repeated") {
+      getReviewers()
     }
     setName("");
     setDomain("");
     setAdvisor("");
     setLocation("");
     setBatch("");
+    setReviewer("");
+    setRemark("");
+    setDate("");
     setOpen(true);
   };
 
@@ -65,6 +78,19 @@ const AddTask = ({ title, value }) => {
     setOpen(false);
   };
 
+  // const handleDate = (date) => {
+  //   console.log(date);
+  //   var d = new Date(date),
+  //       month = '' + (d.getMonth() + 1),
+  //       day = '' + d.getDate(),
+  //       year = d.getFullYear();
+  //   if (month.length < 2) 
+  //       month = '0' + month;
+  //   if (day.length < 2) 
+  //       day = '0' + day;
+  //   return [day, month, year].join('/');
+  // };
+
   const handleSubmit = () => {
     if (value === "batch") {
       createBatch(batch, advisor, location);
@@ -72,6 +98,10 @@ const AddTask = ({ title, value }) => {
       createDomain(domain);
     } else if (value === "addgroup") {
       createGroup(batch, name, advisor, domain);
+    } else if (value === "completed" ) {
+      reviewPassed(form, reviewer, remark, date)
+    } else if (value === "repeated") {
+      reviewRepeated(form, reviewer, remark, date)
     }
     setOpen(false);
   };
@@ -109,14 +139,41 @@ const AddTask = ({ title, value }) => {
                   />
                 </Row>
               )}
-              {value === "completed" && (
+              {(value === "completed" || value === "repeated") && (
                 <Row className="my-2">
-                  <input type="date"></input>
-                </Row>
-              )}
-              {value === "repeated" && (
-                <Row className="my-2">
-                  <input type="date"></input>
+                  {console.log(reviewers)}
+                  <FormControl className="my-4">
+                    <InputLabel id="demo-simple-select-autowidth-label">
+                      Reviewer
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-autowidth-label"
+                      id="demo-simple-select-autowidth"
+                      value={reviewer}
+                      onChange={(e) => setReviewer(e.target.value)}
+                      autoWidth
+                      label="Reviewer name"
+                      maxHeight="200px"
+                      MenuProps={MenuProps}
+                    >
+                      {reviewers &&
+                        reviewers.map((reviewer) => (
+                          <MenuItem key={reviewer.id} value={reviewer.id}>
+                            {reviewer.name}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                  <TextField
+                    id="outlined-basic"
+                    label="Remark"
+                    variant="outlined"
+                    value={remark}
+                    onChange={(e) => setRemark(e.target.value)}
+                    placeholder="Enter remark here"
+                  />
+                  <input type="date" className="mt-4 py-3 rounded border-1" value={date}
+                    onChange={(e) => {setDate(e.target.value)}}></input>
                 </Row>
               )}
               {value === "batch" && (
@@ -232,7 +289,7 @@ const AddTask = ({ title, value }) => {
                       {batches &&
                         batches.map((batch) => (
                           <MenuItem key={batch.id} value={batch.id}>
-                            {batch.batchno}
+                            {batch.name}
                           </MenuItem>
                         ))}
                     </Select>

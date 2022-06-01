@@ -31,7 +31,7 @@ const Batch = () => {
           <Col className="bgdark" sm={2}>
             Batch
           </Col>
-          <Col className="bgdark" sm={2}>
+          <Col className="bgdark" sm={3}>
             Advisor
           </Col>
           <Col className="bgdark" sm={2}>
@@ -40,10 +40,7 @@ const Batch = () => {
           <Col className="bgdark" sm={2}>
             Placed
           </Col>
-          <Col className="bgdark" sm={2}>
-            Location
-          </Col>
-          <Col className="bgdark" sm={2}>
+          <Col className="bgdark text-center" sm={3}>
             Actions
           </Col>
         </Row>
@@ -53,9 +50,9 @@ const Batch = () => {
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg" key={batch.id}>
           <Row className="m-0">
             <Col className="textdark" sm={2}>
-              {batch.batchno}
+              {batch.name}
             </Col>
-            <Col className="textdark" sm={2}>
+            <Col className="textdark" sm={3}>
               {batch.advisor}
             </Col>
             <Col className="textdark" sm={2}>
@@ -64,10 +61,7 @@ const Batch = () => {
             <Col className="textdark" sm={2}>
               {batch.placement}
             </Col>
-            <Col className="textdark" sm={2}>
-              {batch.location}
-            </Col>
-            <Col className="textdark d-flex" sm={2}>
+            <Col className="textdark d-flex" sm={3}>
               <Button className="sendform mx-2">Edit</Button>
               <Button className="coh" onClick={()=>{deleteBatch(batch.id)}}>Delete</Button>
             </Col>

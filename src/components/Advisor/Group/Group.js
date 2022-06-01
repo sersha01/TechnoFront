@@ -58,7 +58,7 @@ const Work = () => {
             Count
           </Col>
           <Col className={`${style.tableHeadText}`} sm={2}>
-            Review vann
+            Review
           </Col>
         </Row>
       </Col>

@@ -1,5 +1,5 @@
 // Bootstrap
-import { Row, Col, Accordion, Table, Toast } from "react-bootstrap";
+import { Row, Col, Accordion, Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import style from "./Tasks.module.css"
 import style from "./Tasks.module.css";
@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 
 function Tasks() {
 
-  const { studentTasks, user_is, user, getStudentTasks, setCurr_manifest, curr_student } = useContext(AuthContext);
+  const { studentTasks, user_is, getStudentTasks, setCurr_manifest, curr_student } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -36,16 +36,16 @@ function Tasks() {
             Marks
           </Col>
           <Col className={`${style.tableHeadText}`} sm={3}>
-            Next
+            Next Review
           </Col>
         </Row>
       </Col>
       <Col className="m-0 row">
-          { studentTasks && studentTasks.map((task) => {
+          { studentTasks && studentTasks.map((task, index) => {
             return (
           <Col sm={12} className={`py-2 mb-2 cp rounded-3 ${style.tableBody}`}>
             <Row className="m-0 ">
-              <Accordion defaultActiveKey="0" flush className="bg">
+              <Accordion defaultActiveKey={index == 0 && "0"} flush className="bg">
                 <Accordion.Item eventKey="0">
                   <Accordion.Header style={{ height: "fit-content" }}>
                     <Row className="m-0 w-100 bg">
@@ -59,7 +59,7 @@ function Tasks() {
                         {task.tech_mark + task.misc_mark}
                       </Col>
                       <Col className={`${style.tableBodyText} ps-md-4`} sm={3}>
-                        14/05/2022
+                        {task.next_review}
                       </Col>
                     </Row>
                   </Accordion.Header>
@@ -93,7 +93,7 @@ function Tasks() {
                               </Col>
                               {task.reviews.length != 0 ? task.reviews.map((review) => {
                                 return (
-                              <Col className="m-0 row"
+                              <Col className="m-0 row" sm={12}
                               onClick={()=>{setCurr_manifest(task.id)
                                 navigate(`/${user_is == "advisor" ? "advisor/group/manifest" : "manifest"}`)}}>
                                     <Col
