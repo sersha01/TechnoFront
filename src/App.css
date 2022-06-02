@@ -103,6 +103,21 @@ tr {
   font-family: "Poppins", cursive;
 }
 
+input[type="text"], textarea {
+  outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  outline: none;
+  -moz-appearance: textfield;
+}
 /* variables */
 
 input[type="checkbox"] {

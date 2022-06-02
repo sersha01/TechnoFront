@@ -7,45 +7,35 @@ const AuthContext = createContext();
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
+    const [authTokens, setAuthTokens] = useState(()=>localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
+    const [user, setUser] = useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null);
+    const [errUser, setErrUser] = useState(false);
+    const [user_is, setUser_is] = useState(()=>localStorage.getItem('user_is') ? JSON.parse(localStorage.getItem('user_is')) :null);
+    const [notification, setNotification] = useState(()=>localStorage.getItem('notification') ? JSON.parse(localStorage.getItem('notification')) : null);
+    const [profile, setProfile] = useState(null);
+    const [advisorsNames, setAdvisorsNames] = useState(null);
+    const [batches, setBatches] = useState(null);
+    const [domains, setDomains] = useState(null);
+    const [groups, setGroups] = useState(null);
+    const [advisors, setAdvisors] = useState(null);
+    const [groupDetails, setGroupDetails] = useState(null);
+    const [groupLessers, setGroupLessers] = useState(null);
+    const [myStudents, setMyStudents] = useState(null);
+    const [myGroups, setMyGroups] = useState(null);
+    const [myGroupDetails, setMyGroupDetails] = useState(null);
+    const [students, setStudents] = useState(null);
+    const [studentTasks, setStudentTasks] = useState(null);
+    const [studentManifest, setStudentManifest] = useState(null);
+    const [curr_manifest, setCurr_manifest] = useState(null);
+    const [curr_student, setCurr_student] = useState(null);
+    const [curr_group, setCurr_group] = useState(null);
+    const [reviewers, setReviewers] = useState(null);
+    const [swap, setSwap] = useState("video");
+    const [swap2, setSwap2] = useState("video");
 
   
-  const [authTokens, setAuthTokens] = useState(() =>
-    localStorage.getItem("authTokens")
-      ? JSON.parse(localStorage.getItem("authTokens"))
-      : null
-  );
-  const [user, setUser] = useState(() =>
-    localStorage.getItem("authTokens")
-      ? jwt_decode(localStorage.getItem("authTokens"))
-      : null
-  );
-  const [errUser, setErrUser] = useState(false);
-  const [user_is, setUser_is] = useState(() =>
-    localStorage.getItem("user_is")
-      ? JSON.parse(localStorage.getItem("user_is"))
-      : null
-  );
-  const [notification, setNotification] = useState(() =>
-    localStorage.getItem("notification")
-      ? JSON.parse(localStorage.getItem("notification"))
-      : null
-  );
-  const [profile, setProfile] = useState(null);
-  const [advisorsNmaes, setAdvisorsNames] = useState(null);
-  const [batches, setBatches] = useState(null);
-  const [domains, setDomains] = useState(null);
-  const [groups, setGroups] = useState(null);
-  const [advisors, setAdvisors] = useState(null);
-  const [groupDetails, setGroupDetails] = useState(null);
-  const [groupLessers, setGroupLessers] = useState(null);
-  const [myStudents, setMyStudents] = useState(null);
-  const [myGroups, setMyGroups] = useState(null);
-  const [myGroupDetails, setMyGroupDetails] = useState(null);
-  const [students, setStudents] = useState(null);
-  const [studentTasks, setStudentTasks] = useState(null);
-  const [studentManifest, setStudentManifest] = useState(null);
-  const [swap, setSwap] = useState("video");
-  const [swap2, setSwap2] = useState("video");
+
+
 
   const navigate = useNavigate();
 
@@ -90,7 +80,7 @@ export const AuthProvider = ({ children }) => {
           "notification",
           JSON.stringify(res.data.notification)
         );
-        if (res.data.dept === "lead") {
+        if (res.data.dept == "lead") {
           navigate("/lead");
         } else if (res.data.dept == "advisor") {
           navigate("/advisor");
@@ -200,15 +190,33 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const addTask = async (task) => {
+    await axios.post("http://127.0.0.1:8000/manifest/add/task", {
+      'task':task,
+      // 'batch':curr_batch,
+      // 'group':curr_group,
+      // 'student':curr_student,
+      'manifest':curr_manifest
+    },{
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+    }).then(res=>{
+      getStudentManifest(curr_manifest);
+      console.log(res.data)
+    }).catch(err=>{
+      console.log(err.response.data);
+      console.log(err)
+    })
+  }
+
   const createBatch = async (batch, advisor, location) => {
     console.log(advisor, location, batch);
     await axios
       .post(
         "http://127.0.0.1:8000/batch/create/batch",
         {
-          advisor: advisor,
-          location: location,
-          batchno: batch,
+          'advisor': advisor,
+          'location': location,
+          'name': batch,
         },
         {
           headers: { Authorization: `Bearer ${authTokens.access}` },
@@ -333,12 +341,64 @@ export const AuthProvider = ({ children }) => {
       )
       .then((res) => {
         setAdvisors(res.data);
-        console.log("qwertyuiop", res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  const getReviewers = async () => {
+    await axios
+      .post(
+        "http://127.0.0.1:8000/admins/view/reviewers",
+        {},
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        setReviewers(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const reviewPassed = async (form, reviewer, remark, date) => {
+    await axios.post("http://127.0.0.1:8000/manifest/review/passed", {
+      'form':form,
+      'reviewer':reviewer,
+      'remark':remark,
+      'next_review':date,
+      'manifest':curr_manifest
+    },{
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+    }).then(res=>{
+      getStudentManifest(curr_manifest);
+      console.log(res.data)
+    }).catch(err=>{
+      console.log(err.response.data);
+      console.log(err)
+    })
+  }
+
+  const reviewRepeated = async (form, reviewer, remark, date) => {
+    await axios.post("http://127.0.0.1:8000/manifest/review/repeated", {
+      'form':form,
+      'reviewer':reviewer,
+      'remark':remark,
+      'next_review':date,
+      'manifest':curr_manifest
+    },{
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+    }).then(res=>{
+      getStudentManifest(curr_manifest);
+      console.log(res.data)
+    }).catch(err=>{
+      console.log(err.response.data);
+      console.log(err)
+    })
+  }
 
   const deleteDomain = async (domainId) => {
     await axios
@@ -377,7 +437,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const getMyGroupDetails = async (groupId) => {
-    // <<<<<<< HEAD
     await axios
       .post(
         "http://127.0.0.1:8000/batch/view/mygroup/details",
@@ -396,24 +455,20 @@ export const AuthProvider = ({ children }) => {
   };
 
   const getStudentTasks = async (studentId) => {
-    await axios
-      .post(
-        "http://127.0.0.1:8000/manifest/view/tasklist",
-        { id: studentId },
-        {
-          headers: { Authorization: `Bearer ${authTokens.access}` },
+    await axios.post('http://127.0.0.1:8000/manifest/view/tasklist',{'id':studentId},{
+        headers: {Authorization : `Bearer ${authTokens.access}`}
+    }).then(res=>{
+        setStudentTasks(res.data)
+        console.log(res.data)
+        if (user_is == "student") {
+          navigate('/taskslist')
+        }else {
+        navigate('/advisor/group/taskslist')
         }
-      )
-      .then((res) => {
-        setStudentTasks(res.data);
-        console.log(res.data);
-        navigate("/advisor/group/taskslist");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  // >>>>>>> manifest
+    }).catch(err=>{
+        console.log(err)
+    })
+  }
 
   const getMyGroups = async () => {
     await axios
@@ -434,22 +489,15 @@ export const AuthProvider = ({ children }) => {
   };
 
   const getStudentManifest = async (manifestId) => {
-    await axios
-      .post(
-        "http://127.0.0.1:8000/manifest/view/manifest",
-        { id: manifestId },
-        {
-          headers: { Authorization: `Bearer ${authTokens.access}` },
-        }
-      )
-      .then((res) => {
-        setStudentManifest(res.data);
-        console.log(res.data);
-        navigate("/advisor/group/manifest");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    await axios.post('http://127.0.0.1:8000/manifest/view/manifest',{'id':manifestId},{
+        headers: {Authorization : `Bearer ${authTokens.access}`}
+    }).then(res=>{
+        setStudentManifest(res.data)
+        console.log(res.data)
+    }).catch(err=>{
+        console.log(err)
+    })
+
   };
 
   const getGroupDetails = async (groupId) => {
@@ -553,6 +601,17 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const taskComplete = async (taskId) => {
+    await axios.post('http://127.0.0.1:8000/manifest/complete/task',{'task':taskId},{
+        headers: {Authorization : `Bearer ${authTokens.access}`}
+    }).then(res=>{
+        console.log(res.data)
+        getStudentManifest(curr_manifest)
+    }).catch(err=>{
+        console.log(err)
+    })
+  }
+
   const updateProfile = async (e) => {
     e.preventDefault();
     console.log("present here");
@@ -608,6 +667,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const contextData = {
+
     signupUser,
     getAdvisorsNames,
     getProfile,
@@ -638,7 +698,7 @@ export const AuthProvider = ({ children }) => {
     viewStudents,
     students,
     notification,
-    advisorsNmaes,
+    advisorsNames,
     studentTasks,
     studentManifest,
     myStudents,
@@ -658,6 +718,19 @@ export const AuthProvider = ({ children }) => {
     setSwap,
     swap2,
     setSwap2,
+      setCurr_manifest,
+      setCurr_group,
+      setCurr_student,
+      addTask,
+      taskComplete,
+      getReviewers,
+      reviewPassed,
+      reviewRepeated,
+      advisorsNames,
+      curr_manifest,
+      curr_group,
+      curr_student,
+      reviewers,
   };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>

@@ -1,16 +1,21 @@
 // Bootstrap
-import { Row, Col, Accordion, Table, Toast } from "react-bootstrap";
+import { Row, Col, Accordion, Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import style from "./Tasks.module.css"
 import style from "./Tasks.module.css";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import AuthContext from "../../../Context/AuthContext";
+import { useNavigate } from "react-router";
 
 function Tasks() {
 
-  const { studentTasks } = useContext(AuthContext);
+  const { studentTasks, user_is, getStudentTasks, setCurr_manifest, curr_student } = useContext(AuthContext);
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getStudentTasks(curr_student);
+  },[])
   return (
     <Row className={`m-0 px-3 bglight rounded-2 bg py-3 ${style.tasks}`}>
       <Col sm={12} className="d-flex justify-content-between">
@@ -21,93 +26,76 @@ function Tasks() {
       </Col>
       <Col sm={12} className={`py-2 my-2  px-4 rounded-3 ${style.tableHead}`}>
         <Row className="m-0 " xs={0}>
-          <Col className={`${style.tableHeadText} `} sm={2}>
+          <Col className={`${style.tableHeadText} `} sm={3}>
             <span className="ms-3">Week</span>
           </Col>
-          <Col className={`${style.tableHeadText}`} sm={2}>
-            Updations
-          </Col>
-          <Col className={`${style.tableHeadText}`} sm={2}>
+          <Col className={`${style.tableHeadText}`} sm={3}>
             Pending
           </Col>
-          <Col className={`${style.tableHeadText} `} sm={2}>
+          <Col className={`${style.tableHeadText} `} sm={3}>
             Marks
           </Col>
-
-          <Col className={`${style.tableHeadText}`} sm={2}>
-            Next
+          <Col className={`${style.tableHeadText}`} sm={3}>
+            Next Review
           </Col>
         </Row>
       </Col>
-
       <Col className="m-0 row">
-        <b>
           { studentTasks && studentTasks.map((task, index) => {
             return (
           <Col sm={12} className={`py-2 mb-2 cp rounded-3 ${style.tableBody}`}>
             <Row className="m-0 ">
-              <Accordion defaultActiveKey="0" flush className="bg">
+              <Accordion defaultActiveKey={index == 0 && "0"} flush className="bg">
                 <Accordion.Item eventKey="0">
                   <Accordion.Header style={{ height: "fit-content" }}>
                     <Row className="m-0 w-100 bg">
-                      <Col className={`${style.tableBodyText}`} sm={2}>
+                      <Col className={`${style.tableBodyText}`} sm={3}>
                         {task.week}
                       </Col>
-
-                      <Col className={`${style.tableBodyText}`} sm={2}>
-                        Payments
-                      </Col>
-                      <Col className={`${style.tableBodyText}`} sm={2}>
+                      <Col className={`${style.tableBodyText}`} sm={3}>
                         {task.pending}
                       </Col>
-                      <Col className={`${style.tableBodyText} ps-4`} sm={2}>
+                      <Col className={`${style.tableBodyText} ps-md-4`} sm={3}>
                         {task.tech_mark + task.misc_mark}
                       </Col>
-                      <Col className={`${style.tableBodyText} ms-4`} sm={2}>
-                        14/05/2022
+                      <Col className={`${style.tableBodyText} ps-md-4`} sm={3}>
+                        {task.next_review}
                       </Col>
                     </Row>
                   </Accordion.Header>
                   <Accordion.Body className="bg">
                     <Table>
-                        <Link to="/advisor/group/manifest">
                             <Row>
                               <Col
                                 sm={12}
-                                className={`py-2 my-2  px-4 rounded-3 bginfo `}
+                                className={`py-0 my-2 px-4 rounded-3 bginfo `}
                               >
                                 <Row className="m-0 bginfo" xs={0}>
                                   <Col
                                     className={`${style.tableHeadText}`}
-                                    sm={3}
+                                    sm={4}
                                   >
                                     Remarks
                                   </Col>
                                   <Col
                                     className={`${style.tableHeadText}`}
-                                    sm={3}
+                                    sm={4}
                                   >
                                     Date
                                   </Col>
                                   <Col
                                     className={`${style.tableHeadText} `}
-                                    sm={3}
+                                    sm={4}
                                   >
                                     Reviewer
                                   </Col>
-
-                                  <Col
-                                    className={`${style.tableHeadText}`}
-                                    sm={3}
-                                  >
-                                    Next
-                                  </Col>
                                 </Row>
                               </Col>
-                              {task.reviews.map((review, index) => {
+                              {task.reviews.length != 0 ? task.reviews.map((review) => {
                                 return (
-                              <Col className="m-0 row">
-                                  <Link to="/advisor/group/manifest">
+                              <Col className="m-0 row" sm={12}
+                              onClick={()=>{setCurr_manifest(task.id)
+                                navigate(`/${user_is == "advisor" ? "advisor/group/manifest" : "manifest"}`)}}>
                                     <Col
                                       sm={12}
                                       className={`py-2 mb-2 cp rounded-3 ${style.tableBody}`}
@@ -115,36 +103,29 @@ function Tasks() {
                                       <Row className="m-0">
                                         <Col
                                           className={`${style.tableBodyText}`}
-                                          sm={3}
+                                          sm={4}
                                         >
                                           {review.remark}
                                         </Col>
                                         <Col
                                           className={`${style.tableBodyText}`}
-                                          sm={3}
+                                          sm={4}
                                         >
                                           {review.date}
                                         </Col>
                                         <Col
                                           className={`${style.tableBodyText}`}
-                                          sm={3}
+                                          sm={4}
                                         >
                                           {review.reviewer}
                                         </Col>
-
-                                        <Col
-                                          className={`${style.tableBodyText}`}
-                                          sm={3}
-                                        >
-                                          14/05/2022
-                                        </Col>
                                       </Row>
                                     </Col>
-                                  </Link>
-                              </Col>
-                                )})}
+                              </Col> 
+                                )}): <Col className="text-center h5 mt-3 mb-0" onClick={()=>{setCurr_manifest(task.id)
+                                  navigate(`/${user_is == "advisor" ? "advisor/group/manifest" : "manifest"}`)}}>No Reviews Yet,
+                                  <b className="text-dark">Go to Manifest</b> </Col>}
                             </Row>
-                        </Link>
                     </Table>
                   </Accordion.Body>
                 </Accordion.Item>
@@ -152,7 +133,6 @@ function Tasks() {
             </Row>
           </Col>
         )})}
-        </b>
       </Col>
     </Row>
   );

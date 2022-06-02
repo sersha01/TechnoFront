@@ -88,7 +88,7 @@ const Students = () => {
               </Col>
 
               <Col className={`${style.tableBodyText}`} sm={2}>
-                {student.advisor}
+                {student.advisor ? student.advisor : "No Group"}
               </Col>
               <Col className={`${style.tableBodyText} d-flex`} sm={3}>
                 <Button

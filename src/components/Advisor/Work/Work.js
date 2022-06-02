@@ -2,7 +2,6 @@ import React, {useEffect, useContext} from "react";
 // Bootstrap
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Link} from 'react-router-dom'
 
 // import style from "./Tasks.module.css"
 import style from "./Work.module.css";
@@ -10,10 +9,13 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import AuthContext from "../../../Context/AuthContext";
+import { useNavigate } from "react-router";
 
 const Work = () => {
 
-  const { getMyGroups, myGroups, getMyGroupDetails } = useContext(AuthContext);
+  const { getMyGroups, myGroups, setCurr_group } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getMyGroups();
@@ -67,8 +69,8 @@ const Work = () => {
               <Col
               sm={12}
               className={`py-2 mb-2 cp bglight rounded-3 ${style.tableBody}`}
-              onClick={() => {getMyGroupDetails(group.id)}}
-            >
+              onClick={() => {setCurr_group(group.id)
+              navigate('/advisor/group')}} >
               <Row className="m-0">
                 <Col className={`${style.tableBodyText}`} sm={1}>
                   #{index + 1}
@@ -86,7 +88,7 @@ const Work = () => {
                 <Col className={`${style.tableBodyText}`} sm={2}>
                   {group.domain}
                 </Col>
-                <Col className={`${style.tableBodyText} d-flex`} sm={3}>
+                <Col className={`${style.tableBodyText}`} sm={3}>
                   {Date().split(' ')[0]}
                 </Col>
               </Row>
