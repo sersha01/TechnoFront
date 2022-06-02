@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import "./Home.css";
 import GroupsIcon from "@mui/icons-material/Groups";
@@ -7,11 +7,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Login from "./Login";
 import Signup from "./Signup";
 import UserReg from "../../pages/User/UserLogin/UserReg";
-import AuthContext from '../../Context/AuthContext';
+import AuthContext from "../../Context/AuthContext";
 
 const Home = () => {
-  let { swap,swap2,setSwap,setSwap2 } = useContext(AuthContext);
- 
+  let { swap, swap2, setSwap, setSwap2 } = useContext(AuthContext);
+
   const theme = createTheme();
 
   const handleDarkMode = (e) => {
@@ -98,11 +98,10 @@ const Home = () => {
                   days.
                 </p>
                 <br />
-                <button id="btn1">
-                  <a href="https://brototype.in/application/index.html">
-                    Apply now
-                  </a>
-                </button>
+                {/* <button id="btn1"></button> */}
+                <a href="https://brototype.in/application/index.html">
+                  <Button variant="contained" id="btn1"> Apply now</Button>
+                </a>
                 <br />
                 <br />
                 <p id="a">
@@ -115,7 +114,7 @@ const Home = () => {
           </Container>
         )}
 
-        {swap2 === "signup" && <><Signup setSwap2={setSwap2} />  <UserReg/></>}
+        {swap2 === "signup" && <Signup setSwap2={setSwap2} />}
       </Container>
       <Container fluid className="c2 py-5">
         <h1 className="text-center mb-5">Features</h1>

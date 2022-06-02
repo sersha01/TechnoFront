@@ -6,7 +6,9 @@ import Container2 from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Logo from "./signuplogo.svg";
 import AuthContext from "../../Context/AuthContext";
-
+import Grid from '@mui/material/Grid';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -104,6 +106,14 @@ const Signup = ({ setSwap2 }) => {
                 {errors.cpassword && "Passwords doesn't match"}
               </label>
             </div>
+            <Grid item xs={12}>
+                <FormControlLabel
+                  control={
+                    <Checkbox value="allowExtraEmails" color="primary" />
+                  }
+                  label="I have read and agreed to all the terms and conditions"
+                />
+              </Grid>
 
             <div className="pt-2">
               <button type="submit" className="btn btn-primary btn-lg w-100">
