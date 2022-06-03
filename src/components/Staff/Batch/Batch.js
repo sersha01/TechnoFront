@@ -62,8 +62,8 @@ const Batch = () => {
               {batch.placement}
             </Col>
             <Col className="textdark d-flex" sm={3}>
-              <Button className="sendform mx-2">Edit</Button>
-              <Button className="coh" onClick={()=>{deleteBatch(batch.id)}}>Delete</Button>
+              <AddTask title="Edit" value="updateBatch" form={batch.id} />
+              <Button className="coh ms-3" onClick={()=>{deleteBatch(batch.id)}}>Delete</Button>
             </Col>
           </Row>
         </Col>

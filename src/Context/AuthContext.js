@@ -270,6 +270,27 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const updateBatch = async (batch, advisor) => {
+    await axios
+      .post(
+        "http://127.0.0.1:8000/batch/update/batch",
+        {
+          'advisor': advisor,
+          'id': batch,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        getBatches();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const getDomains = async () => {
     await axios
       .post(
@@ -355,6 +376,27 @@ export const AuthProvider = ({ children }) => {
         "http://127.0.0.1.:8000/user/create/domain",
         {
           name: domain,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        getDomains();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const updateDomain = async (domainId, domain) => {
+    await axios
+      .post(
+        "http://127.0.0.1.:8000/user/update/domain",
+        {
+          'id': domainId,
+          'new_name': domain,
         },
         {
           headers: { Authorization: `Bearer ${authTokens.access}` },
@@ -716,7 +758,7 @@ export const AuthProvider = ({ children }) => {
 
     signupUser,
     getAdvisorsNames,
-    getMyProfile,
+    getProfile,
     getGroups,
     getGroupDetails,
     getMyStudents,
@@ -778,7 +820,9 @@ export const AuthProvider = ({ children }) => {
     curr_student,
     reviewers,
     setStudentManifest,
-    getProfile,
+    getMyProfile,
+    updateDomain,
+    updateBatch,
   };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>
