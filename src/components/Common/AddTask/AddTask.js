@@ -31,6 +31,7 @@ const AddTask = ({ title, value, form }) => {
     reviewRepeated,
     updateDomain,
     updateBatch,
+    studentManage,
   } = useContext(AuthContext);
 
   const [open, setOpen] = useState(false);
@@ -47,12 +48,15 @@ const AddTask = ({ title, value, form }) => {
   const handleClickOpen = () => {
     if (value === "batch") {
       getAdvisors();
-    } else if (value === "addgroup") {
+    } else if (value === "addgroup" ) {
       getAdvisors();
       getDomains();
       getBatches();
     } else if (value === "completed" || value === "repeated") {
       getReviewers()
+    } else if (value === "st_manage") {
+      getBatches();
+      getDomains();
     }
     setName("");
     setDomain("");
@@ -108,6 +112,8 @@ const AddTask = ({ title, value, form }) => {
       updateDomain(form, domain)
     }else if (value === "updateBatch") {
       updateBatch(form, advisor)
+    }else if (value === "st_manage") {
+      studentManage(form, batch, domain)
     }
     setOpen(false);
   };
@@ -147,7 +153,6 @@ const AddTask = ({ title, value, form }) => {
               )}
               {value === "st_manage" && (
                 <Row className="my-2">
-                  
                   <FormControl className="my-1">
                     <InputLabel id="demo-simple-select-autowidth-label">
                       Batch
@@ -157,6 +162,8 @@ const AddTask = ({ title, value, form }) => {
                       id="demo-simple-select-autowidth"
                       autoWidth
                       maxHeight="200px"
+                      value={batch}
+                      onChange={(e) => {setBatch(e.target.value)}}
                       label="Batch"
                       MenuProps={MenuProps}
                     >
@@ -175,15 +182,17 @@ const AddTask = ({ title, value, form }) => {
                     <Select
                       labelId="demo-simple-select-autowidth-label"
                       id="demo-simple-select-autowidth"
+                      value={domain}
+                      onChange={(e) => setDomain(e.target.value)}
                       autoWidth
                       maxHeight="200px"
                       label="Domain"
                       MenuProps={MenuProps}
                     >
-                      {advisors &&
-                        advisors.map((advisor) => (
-                          <MenuItem key={advisor.id} value={advisor.id}>
-                            {advisor.username}
+                      {domains &&
+                        domains.map((domain) => (
+                          <MenuItem key={domain.id} value={domain.id}>
+                            {domain.name}
                           </MenuItem>
                         ))}
                     </Select>

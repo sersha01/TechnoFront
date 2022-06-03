@@ -17,8 +17,8 @@ function Profile({by}) {
   const { profile, getMyProfile, updateProfile, user_is, getDomains, domains } = useContext(AuthContext);
 
   useEffect(() => {
+    getDomains();
     if (user_is !== "lead") {
-      getDomains();
       getMyProfile();
     }
   },[]);
