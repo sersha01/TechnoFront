@@ -29,6 +29,8 @@ const AddTask = ({ title, value, form }) => {
     getReviewers,
     reviewPassed,
     reviewRepeated,
+    updateDomain,
+    updateBatch,
   } = useContext(AuthContext);
 
   const [open, setOpen] = useState(false);
@@ -102,6 +104,10 @@ const AddTask = ({ title, value, form }) => {
       reviewPassed(form, reviewer, remark, date)
     } else if (value === "repeated") {
       reviewRepeated(form, reviewer, remark, date)
+    } else if (value === "updateDomain") {
+      updateDomain(form, domain)
+    }else if (value === "updateBatch") {
+      updateBatch(form, advisor)
     }
     setOpen(false);
   };
@@ -128,6 +134,18 @@ const AddTask = ({ title, value, form }) => {
               style={{ width: "500px", height: "fit-content" }}
             >
               {value === "domain" && (
+                <Row className="my-2">
+                  <TextField
+                    id="outlined-basic"
+                    label="Domain name"
+                    variant="outlined"
+                    value={domain}
+                    onChange={(e) => setDomain(e.target.value)}
+                    placeholder="Enter domain name here"
+                  />
+                </Row>
+              )}
+              {value === "updateDomain" && (
                 <Row className="my-2">
                   <TextField
                     id="outlined-basic"
@@ -179,11 +197,11 @@ const AddTask = ({ title, value, form }) => {
                 <Row className="my-2">
                   <TextField
                     id="outlined-basic"
-                    label="Batch number"
+                    label="Batch name"
                     variant="outlined"
                     value={batch}
                     onChange={(e) => setBatch(e.target.value)}
-                    placeholder="Enter batch number here.."
+                    placeholder="Enter batch name here.."
                   />
                   <FormControl className="my-4">
                     <InputLabel id="demo-simple-select-autowidth-label">
@@ -223,6 +241,32 @@ const AddTask = ({ title, value, form }) => {
                       <MenuItem value={"calicut"}>Calicut</MenuItem>
                       <MenuItem value={"trivandrum"}>Trivandrum</MenuItem>
                       <MenuItem value={"dubai"}>Dubai</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Row>
+              )}
+              {value === "updateBatch" && (
+                <Row className="my-2">
+                  <FormControl className="my-4">
+                    <InputLabel id="demo-simple-select-autowidth-label">
+                      Advisor
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-autowidth-label"
+                      id="demo-simple-select-autowidth"
+                      value={advisor}
+                      onChange={(e) => setAdvisor(e.target.value)}
+                      autoWidth
+                      label="Advisor"
+                      maxHeight="200px"
+                      MenuProps={MenuProps}
+                    >
+                      {advisors &&
+                        advisors.map((advisor) => (
+                          <MenuItem key={advisor.id} value={advisor.id}>
+                            {advisor.username}
+                          </MenuItem>
+                        ))}
                     </Select>
                   </FormControl>
                 </Row>
