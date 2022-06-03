@@ -2,17 +2,19 @@ import React,{useContext,useEffect} from "react";
 import ManageSearchRoundedIcon from "@mui/icons-material/ManageSearchRounded";
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import AddTask from "../../Common/AddTask/AddTask";
 import TextField from "@mui/material/TextField";
 import style from "./Students.module.css";
 import AuthContext from "../../../Context/AuthContext";
+import { useNavigate } from "react-router";
 
 const Students = () => {
 
 
-  const { viewStudents , students } = useContext(AuthContext); 
+  const { viewStudents , students, getProfile } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     viewStudents();
@@ -77,7 +79,9 @@ const Students = () => {
       <Col className="m-0 row ">
 
       { students ? students.map((student, index) => (
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bggreen">
+        <Col sm={12} className="py-3 mb-2 cp mt-1 rounded-3 bg"
+        onClick={ async () => {await getProfile(student.id)
+          navigate("/lead/student/profile")}}>
         <Row className="m-0">
           <Col className="textdark" sm={2}>
           #{index + 1}
@@ -86,199 +90,20 @@ const Students = () => {
             {student.name}
           </Col>
           <Col className="textdark" sm={2}>
-            Python
+            {student.domain}
           </Col>
           <Col className="textdark" sm={2}>
-            22
+            {student.week}
           </Col>
           <Col className="textdark" sm={2}>
-            20A
+            {student.group ? student.group : "Not Assigned"}
           </Col>
-
           <Col className="textdark d-flex" sm={2}>
-            Aneesha
+            {student.advisor}
           </Col>
         </Row>
       </Col>
       ) ) : null }
-          
-        
-        
-          
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bgred">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #1
-            </Col>
-            <Col className="textdark" sm={2}>
-              Wafi
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              22
-            </Col>
-            <Col className="textdark" sm={2}>
-              20A
-            </Col>
-
-            <Col className="textdark d-flex" sm={2}>
-              Aneesha
-            </Col>
-          </Row>
-        </Col>
-        
-          
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #1
-            </Col>
-            <Col className="textdark" sm={2}>
-              Wafi
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              22
-            </Col>
-            <Col className="textdark" sm={2}>
-              20A
-            </Col>
-
-            <Col className="textdark d-flex" sm={2}>
-              Aneesha
-            </Col>
-          </Row>
-        </Col>
-        
-          
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #1
-            </Col>
-            <Col className="textdark" sm={2}>
-              Wafi
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              22
-            </Col>
-            <Col className="textdark" sm={2}>
-              20A
-            </Col>
-
-            <Col className="textdark d-flex" sm={2}>
-              Aneesha
-            </Col>
-          </Row>
-        </Col>
-        
-          
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #1
-            </Col>
-            <Col className="textdark" sm={2}>
-              Wafi
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              22
-            </Col>
-            <Col className="textdark" sm={2}>
-              20A
-            </Col>
-
-            <Col className="textdark d-flex" sm={2}>
-              Aneesha
-            </Col>
-          </Row>
-        </Col>
-        
-          
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bgyellow">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #1
-            </Col>
-            <Col className="textdark" sm={2}>
-              Wafi
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              22
-            </Col>
-            <Col className="textdark" sm={2}>
-              20A
-            </Col>
-
-            <Col className="textdark d-flex" sm={2}>
-              Aneesha
-            </Col>
-          </Row>
-        </Col>
-        
-          
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bgyellow">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #1
-            </Col>
-            <Col className="textdark" sm={2}>
-              Wafi
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              22
-            </Col>
-            <Col className="textdark" sm={2}>
-              20A
-            </Col>
-
-            <Col className="textdark d-flex" sm={2}>
-              Aneesha
-            </Col>
-          </Row>
-        </Col>
-        
-          
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #1
-            </Col>
-            <Col className="textdark" sm={2}>
-              Wafi
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              22
-            </Col>
-            <Col className="textdark" sm={2}>
-              20A
-            </Col>
-
-            <Col className="textdark d-flex" sm={2}>
-              Aneesha
-            </Col>
-          </Row>
-        </Col>
-        
          
       </Col>
     </Row>

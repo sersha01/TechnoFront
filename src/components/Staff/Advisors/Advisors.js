@@ -3,15 +3,17 @@ import React, { useContext, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import style from "./Tasks.module.css"
-import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import AddTask from "../../Common/AddTask/AddTask";
 
 import AuthContext from "../../../Context/AuthContext";
+import { useNavigate } from "react-router";
 
 const Advisors = () => {
 
-  const { getAdvisors, advisors } = useContext(AuthContext);
+  const { getAdvisors, advisors, getProfile } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getAdvisors();
@@ -51,7 +53,9 @@ const Advisors = () => {
 
       <Col className="m-0 row ">
       {advisors && advisors.map((advisor, index) => (
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg"
+        onClick={ async () => {await getProfile(advisor.id)
+          navigate("/lead/advisor/profile")}}>
           <Row className="m-0">
             <Col className="textdark" sm={2}>
               #{index + 1}

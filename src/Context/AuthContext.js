@@ -173,7 +173,7 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  const getProfile = async () => {
+  const getMyProfile = async () => {
     await axios
       .post(
         "http://127.0.0.1:8000/user/view/profile",
@@ -190,12 +190,28 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const getProfile = async (userId) => {
+    await axios
+      .post(
+        "http://127.0.0.1:8000/user/view/profile",
+        {
+          "userId": userId,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        setProfile(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const addTask = async (task) => {
     await axios.post("http://127.0.0.1:8000/manifest/add/task", {
       'task':task,
-      // 'batch':curr_batch,
-      // 'group':curr_group,
-      // 'student':curr_student,
       'manifest':curr_manifest
     },{
       headers: { Authorization: `Bearer ${authTokens.access}` },
@@ -616,6 +632,13 @@ export const AuthProvider = ({ children }) => {
     e.preventDefault();
     console.log("present here");
     console.log(e.target);
+    var dob = null
+    var domain = null
+    if (user_is == "student"){
+      var dob = e.target.dob.value
+      var domain = e.target.domain.value
+    }
+    
 
     await axios
       .post(
@@ -623,8 +646,8 @@ export const AuthProvider = ({ children }) => {
         {
           first_name: e.target.first_name.value,
           last_name: e.target.last_name.value,
-          domain: e.target.domain.value,
-          dob: e.target.dob.value,
+          dob: dob,
+          domain: domain,
           address: e.target.address.value,
           education: e.target.education.value,
           college: e.target.college.value,
@@ -670,7 +693,7 @@ export const AuthProvider = ({ children }) => {
 
     signupUser,
     getAdvisorsNames,
-    getProfile,
+    getMyProfile,
     getGroups,
     getGroupDetails,
     getMyStudents,
@@ -718,19 +741,21 @@ export const AuthProvider = ({ children }) => {
     setSwap,
     swap2,
     setSwap2,
-      setCurr_manifest,
-      setCurr_group,
-      setCurr_student,
-      addTask,
-      taskComplete,
-      getReviewers,
-      reviewPassed,
-      reviewRepeated,
-      advisorsNames,
-      curr_manifest,
-      curr_group,
-      curr_student,
-      reviewers,
+    setCurr_manifest,
+    setCurr_group,
+    setCurr_student,
+    addTask,
+    taskComplete,
+    getReviewers,
+    reviewPassed,
+    reviewRepeated,
+    advisorsNames,
+    curr_manifest,
+    curr_group,
+    curr_student,
+    reviewers,
+    setStudentManifest,
+    getProfile,
   };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>

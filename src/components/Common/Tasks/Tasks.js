@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 
 function Tasks() {
 
-  const { studentTasks, user_is, getStudentTasks, setCurr_manifest, curr_student } = useContext(AuthContext);
+  const { studentTasks, user_is, getStudentTasks, setCurr_manifest, curr_student, getStudentManifest } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -94,8 +94,9 @@ function Tasks() {
                               {task.reviews.length != 0 ? task.reviews.map((review) => {
                                 return (
                               <Col className="m-0 row" sm={12}
-                              onClick={()=>{setCurr_manifest(task.id)
-                                navigate(`/${user_is == "advisor" ? "advisor/group/manifest" : "manifest"}`)}}>
+                              onClick={async ()=>{setCurr_manifest(task.id)
+                                      await getStudentManifest(task.id);
+                                      navigate(`/${user_is == "advisor" ? "advisor/group/manifest" : "manifest"}`)}}>
                                     <Col
                                       sm={12}
                                       className={`py-2 mb-2 cp rounded-3 ${style.tableBody}`}

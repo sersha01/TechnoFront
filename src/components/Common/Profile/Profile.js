@@ -7,13 +7,20 @@ import wafi from "./wafi.jpg";
 import Button from "@mui/material/Button";
 import { useContext, useEffect } from "react";
 import AuthContext from "../../../Context/AuthContext";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
 
-function Profile() {
+function Profile({by}) {
 
-  const { profile, getProfile, updateProfile } = useContext(AuthContext);
+  const { profile, getMyProfile, updateProfile, user_is, getDomains, domains } = useContext(AuthContext);
 
   useEffect(() => {
-    getProfile();
+    if (user_is !== "lead") {
+      getDomains();
+      getMyProfile();
+    }
   },[]);
 
   return (
@@ -39,104 +46,133 @@ function Profile() {
         </div>
       </Col>
 
-      <form className="row m-0" onSubmit={(e) => updateProfile(e)}>
-        <Col
-          xs={12}
-          className={`py-1 pb-3 my-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
-        >
-          <label className={`${style.label}`}>First name</label>
-          <input type="text" name='first_name' className={`w-100 ${style.input}`} defaultValue={profile && profile.first_name }/>
-        </Col>
-        <Col
-          xs={12}
-          className={`py-1 pb-3 my-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
-        >
-          <label className={`${style.label}`}>Last name</label>
-          <input type="text" name='last_name' className={`w-100 ${style.input}`} defaultValue={profile && profile.last_name}/>
-        </Col>
-        <Col xs={12} md={6} className="my-1 pb-3 ps-0 pe-1">
+      <form className="row m-0" onSubmit={(e) => {
+        e.preventDefault();
+        updateProfile(e)}}>
+        <Col xs={12} md={6} className="py-1 px-0 pe-md-1">
           <Col
             className={`py-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
           >
-            <label className={`${style.label}`}>Domain</label>
-            <input type="text"  name='domain' className={`w-100  ${style.input}`} defaultValue={profile && profile.domain && profile.domain.name} />
+            <label className={`${style.label}`}>First name</label>
+            <input type="text" name='first_name' className={`w-100 ${style.input}`} defaultValue={profile && profile.first_name }/>
           </Col>
         </Col>
-        <Col xs={12} md={6} className="my-1 pb-3 ps-1 pe-0">
+        <Col xs={12} md={6} className="py-1 ps-md-1 px-0">
+          <Col
+            className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
+          >
+            <label className={`${style.label}`}>Last name</label>
+            <input type="text" name='last_name' className={`w-100 ${style.input}`} defaultValue={profile && profile.last_name}/>
+          </Col>
+        </Col>
+        <Col xs={12} md={6} className="py-1 px-0 pe-md-1">
+          <Col
+            className={`py-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
+          >
+            <label className={`${style.label}`}>Email</label>
+            <input type="email" name='email' className={`w-100 ${style.input}`} defaultValue={profile && profile.email} />
+          </Col>
+        </Col>
+        <Col xs={12} md={6} className="py-1 ps-md-1 px-0">
+          <Col
+            className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
+          >
+            <label className={`${style.label}`}>Mobile</label>
+            <input type="tel" name='mobile' className={`w-100 ${style.input}`} defaultValue={profile && profile.mobile} />
+          </Col>
+        </Col>
+        <Col xs={12} md={(user_is != "advisor" && by != "advisor") && 6} className={`py-1 px-0 ${(user_is != "advisor" && by != "advisor") ? "pe-md-1" : "pe-0"}`}>
+          <Col
+            className={`py-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
+          >
+            <label className={`${style.label}`}>Address</label>
+            <textarea
+              rows="4"
+              name='address'
+              className={`w-100 ${(style.input, style.textarea)}`}
+              defaultValue={profile && profile.address}
+            />
+          </Col>
+        </Col>
+        {(user_is != "advisor" && by != "advisor") && <Col xs={12} md={6} className="py-1 ps-md-1 px-0">
+          <Col
+            className={`py-2 text-start px-3 rounded-3 mb-2 ${style.inputField}`}
+          >
+            <FormControl className="w-100">
+                    <InputLabel id="demo-simple-select-autowidth-label">
+                      Domain
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-autowidth-label"
+                      id="demo-simple-select-autowidth"
+                      name="domain"
+                      defaultValue={profile && profile.domain && profile.domain.id}
+                      autoWidth
+                      label="Domain name"
+                      maxHeight="200px"
+                    >
+                      {domains && domains.map((domain) => (
+                          <MenuItem key={domain.id} value={domain.id}>
+                            {domain.name}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+          </Col>
           <Col
             className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
           >
             <label className={`${style.label}`}>Date of Birth</label>
             <input type="text"  name='dob' className={`w-100 ${style.input}`} defaultValue={profile && profile.dob} />
           </Col>
+        </Col>}
+        <Col xs={12} md={6} className="py-1 px-0 pe-md-1">
+          <Col
+            className={`py-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
+          >
+            <label className={`${style.label}`}>Village</label>
+            <input type="text" name='village' className={`w-100 ${style.input}`} defaultValue={profile && profile.village} />
+          </Col>
         </Col>
-        <Col
-          xs={12}
-          className={`py-1 my-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
-        >
-          <label className={`${style.label}`}>Address</label>
-          <textarea
-            rows="4"
-            name='address'
-            className={`w-100 ${(style.input, style.textarea)}`}
-            defaultValue={profile && profile.address}
-          />
+        <Col xs={12} md={6} className="py-1 ps-md-1 px-0">
+          <Col
+            className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
+          >
+            <label className={`${style.label}`}>Education</label>
+            <input type="text" name='education' className={`w-100 ${style.input}`} defaultValue={profile && profile.education} />
+          </Col>
         </Col>
-        <Col
-          xs={12}
-          className={`py-1 my-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
-        >
-          <label className={`${style.label}`}>Village</label>
-          <input type="text" name='village' className={`w-100 ${style.input}`} defaultValue={profile && profile.village} />
+        <Col xs={12} md={6} className="py-1 px-0 pe-md-1">
+          <Col
+            className={`py-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
+          >
+            <label className={`${style.label}`}>College</label>
+            <input type="text" name='college' className={`w-100 ${style.input}`} defaultValue={profile && profile.college} />
+          </Col>
         </Col>
-        <Col
-          xs={12}
-          className={`py-1 my-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
-        >
-          <label className={`${style.label}`}>Education</label>
-          <input type="text" name='education' className={`w-100 ${style.input}`} defaultValue={profile && profile.education} />
+        <Col xs={12} md={6} className="py-1 ps-md-1 px-0">
+          <Col
+            className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
+          >
+            <label className={`${style.label}`}>Experience</label>
+            <input type="text" name='experience' className={`w-100 ${style.input}`} defaultValue={profile && profile.experience} />
+          </Col>
         </Col>
-        <Col
-          xs={12}
-          className={`py-1 my-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
-        >
-          <label className={`${style.label}`}>College</label>
-          <input type="text" name='college' className={`w-100 ${style.input}`} defaultValue={profile && profile.college} />
+        <Col xs={12} md={6} className="py-1 px-0 pe-md-1">
+          <Col
+            className={`py-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
+          >
+            <label className={`${style.label}`}>Company</label>
+            <input type="text" name='company' className={`w-100 ${style.input}`} defaultValue={profile && profile.company} />
+          </Col>
         </Col>
-        <Col
-          xs={12}
-          className={`py-1 my-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
-        >
-          <label className={`${style.label}`}>Experience</label>
-          <input type="text" name='experience' className={`w-100 ${style.input}`} defaultValue={profile && profile.experience} />
-        </Col>
-        <Col
-          xs={12}
-          className={`py-1 my-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
-        >
-          <label className={`${style.label}`}>Company</label>
-          <input type="text" name='company' className={`w-100 ${style.input}`} defaultValue={profile && profile.company} />
-        </Col>
-        <Col
-          xs={12}
-          className={`py-1 my-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
-        >
-          <label className={`${style.label}`}>Designation</label>
-          <input type="text" name='designation' className={`w-100 ${style.input}`} defaultValue={profile && profile.designation} />
-        </Col>
-        <Col
-          xs={12}
-          className={`py-1 my-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
-        >
-          <label className={`${style.label}`}>Email</label>
-          <input type="email" name='email' className={`w-100 ${style.input}`} defaultValue={profile && profile.email} />
-        </Col>
-        <Col
-          xs={12}
-          className={`py-1 my-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
-        >
-          <label className={`${style.label}`}>Mobile</label>
-          <input type="tel" name='mobile' className={`w-100 ${style.input}`} defaultValue={profile && profile.mobile} />
+        <Col xs={12} md={6} className="py-1 ps-md-1 px-0">
+          <Col
+            className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
+          >
+            <label className={`${style.label}`}>Designation</label>
+            <input type="text" name='designation' className={`w-100 ${style.input}`} defaultValue={profile && profile.designation} />
+          </Col>
         </Col>
         <Col className="m-0 p-0">
           <div className="submitProfileDiv mt-3">

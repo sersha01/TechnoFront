@@ -141,7 +141,6 @@ const AddTask = ({ title, value, form }) => {
               )}
               {(value === "completed" || value === "repeated") && (
                 <Row className="my-2">
-                  {console.log(reviewers)}
                   <FormControl className="my-4">
                     <InputLabel id="demo-simple-select-autowidth-label">
                       Reviewer

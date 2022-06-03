@@ -160,6 +160,12 @@ function App() {
                 }
               />
               <Route
+                path="/lead/student/profile"
+                element={
+                  <Lead child={<Profile by="student" />}/>
+                }
+              />
+              <Route
                 path="/lead/groups"
                 element={
                   <Lead child={<Group />}/>
@@ -175,6 +181,12 @@ function App() {
                 path="/lead/advisors"
                 element={
                   <Lead child={<Advisors />}/>
+                }
+              />
+              <Route
+                path="/lead/advisor/profile"
+                element={
+                  <Lead child={<Profile by="advisor" />}/>
                 }
               />
               <Route
