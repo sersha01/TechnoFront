@@ -139,6 +139,52 @@ const AddTask = ({ title, value, form }) => {
                   />
                 </Row>
               )}
+              {value === "st_manage" && (
+                <Row className="my-2">
+                  
+                  <FormControl className="my-1">
+                    <InputLabel id="demo-simple-select-autowidth-label">
+                      Batch
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-autowidth-label"
+                      id="demo-simple-select-autowidth"
+                      autoWidth
+                      maxHeight="200px"
+                      label="Batch"
+                      MenuProps={MenuProps}
+                    >
+                       {batches &&
+                        batches.map((batch) => (
+                          <MenuItem key={batch.id} value={batch.id}>
+                            {batch.name}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                  <FormControl className="my-4">
+                    <InputLabel id="demo-simple-select-autowidth-label">
+                      Domain
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-autowidth-label"
+                      id="demo-simple-select-autowidth"
+                      autoWidth
+                      maxHeight="200px"
+                      label="Domain"
+                      MenuProps={MenuProps}
+                    >
+                      {advisors &&
+                        advisors.map((advisor) => (
+                          <MenuItem key={advisor.id} value={advisor.id}>
+                            {advisor.username}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                  
+                </Row>
+              )}
               {(value === "completed" || value === "repeated") && (
                 <Row className="my-2">
                   <FormControl className="my-4">

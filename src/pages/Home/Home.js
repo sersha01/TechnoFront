@@ -8,6 +8,9 @@ import Login from "./Login";
 import Signup from "./Signup";
 import UserReg from "../../pages/User/UserLogin/UserReg";
 import AuthContext from "../../Context/AuthContext";
+import Header from "../../components/Common/Header/Header";
+import Code from "../../components/Common/Code/AddTask";
+
 
 const Home = () => {
   let { swap, swap2, setSwap, setSwap2 } = useContext(AuthContext);
@@ -25,38 +28,7 @@ const Home = () => {
   return (
     <div className="m-0 p-0 bglight">
       <Container fluid className="bglight m-0 p-0 mb-5">
-        <div className="pt-3 bs  p-0 pb-3 m-0 ps-5 d-flex justify-content-between">
-          <div className="ps-5">
-            <h2
-              className="cp"
-              onClick={() => {
-                setSwap("video");
-                setSwap2("video");
-              }}
-            >
-              <span id="h11">BROCAMP (SPS)</span>
-              <span id="sub">
-                by <span id="bro">BRO</span>TOTYPE
-              </span>
-            </h2>
-          </div>
-          <div className="pe-5 d-flex">
-            <input type="checkbox" id="checkbox" onChange={handleDarkMode} />
-            <Button
-              color="warning"
-              variant="contained"
-              onClick={() => {
-                if (swap === "video") {
-                  setSwap("login");
-                } else {
-                  setSwap("video");
-                }
-              }}
-            >
-              Sign in to the Console
-            </Button>
-          </div>
-        </div>
+        <Header />
 
         {swap2 === "video" && (
           <Container fluid className="p-4 pb-5">
@@ -98,10 +70,23 @@ const Home = () => {
                   days.
                 </p>
                 <br />
-                {/* <button id="btn1"></button> */}
-                <a href="https://brototype.in/application/index.html">
-                  <Button variant="contained" id="btn1"> Apply now</Button>
-                </a>
+
+                
+                <div className="d-flex"> <Button
+                  className="bgdark accordion-body mx-2"
+                  variant="contained"
+                  onClick={() => {
+                    if (swap === "video") {
+                      setSwap("login");
+                    } else {
+                      setSwap("video");
+                    }
+                  }}
+                >
+                  Sign in to the Console
+                </Button>
+                <Code setSwap2={setSwap2} value="btn" /></div>
+
                 <br />
                 <br />
                 <p id="a">

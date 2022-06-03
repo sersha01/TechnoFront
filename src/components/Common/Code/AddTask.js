@@ -11,7 +11,7 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 
 
-const AddTask = ({ setSwap2 }) => {
+const AddTask = ({ setSwap2,value }) => {
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -31,9 +31,19 @@ const AddTask = ({ setSwap2 }) => {
 
   return (
     <div>
-      <p onClick={handleClickOpen} className="cp">
+      { value === "btn" ? ( <Button
+                  color="warning"
+                  variant="contained"
+                  className="bginfo"
+                  onClick={handleClickOpen} 
+                  >
+                  Have a code? Signup here
+                </Button>) : (<p onClick={handleClickOpen} className="cp">
         Have a code? Signup here
-      </p>
+      </p>) }
+      
+
+      
       <Dialog
         open={open}
         onClose={handleClose}

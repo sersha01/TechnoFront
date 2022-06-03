@@ -39,6 +39,7 @@ const Signup = ({ setSwap2 }) => {
 
   return (
     <Container2 component="main" className="bglight signupbox">
+     
       <Box
         className="bg p-5 w-100 rounded-3 "
         sx={{
@@ -128,6 +129,7 @@ const Signup = ({ setSwap2 }) => {
           </div>
         </form>
       </Box>
+      
     </Container2>
   );
 };

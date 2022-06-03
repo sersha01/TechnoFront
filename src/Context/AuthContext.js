@@ -62,6 +62,29 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const signupAdvisor = async ({ username, email, password, batch }) => {
+    console.log(username, email, password);
+    await axios
+      .post("http://127.0.0.1:8000/user/signup", {
+        username: username,
+        email: email,
+        password: password,
+        batch: 1,
+        is_student: false,
+        is_staff: true,
+      })
+      .then((res) => {
+        console.log(res.data);
+        navigate("/home");
+        setSwap("video");
+        setSwap2("video");
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        console.log(err);
+      });
+  };
+
   const userDept = async (link) => {
     console.log(link.access);
     await axios
