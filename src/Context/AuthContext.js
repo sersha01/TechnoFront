@@ -22,8 +22,8 @@ export const AuthProvider = ({ children }) => {
   // const [groupDetails, setGroupDetails] = useState(null);
   // const [groupLessers, setGroupLessers] = useState(null);
   // const [advisors, setAdvisors] = useState(null);
-  const [myStudents, setMyStudents] = useState(null);
-  const [myGroups, setMyGroups] = useState(null);
+  // const [myStudents, setMyStudents] = useState(null);
+  // const [myGroups, setMyGroups] = useState(null);
   const [myGroupDetails, setMyGroupDetails] = useState(null);
   // const [students, setStudents] = useState(null);
   const [studentTasks, setStudentTasks] = useState(null);
@@ -228,20 +228,20 @@ export const AuthProvider = ({ children }) => {
   //     });
   // };
 
-  const addTask = async (task) => {
-    await axios.post("http://127.0.0.1:8000/manifest/add/task", {
-      'task':task,
-      'manifest':curr_manifest
-    },{
-      headers: { Authorization: `Bearer ${authTokens.access}` },
-    }).then(res=>{
-      getStudentManifest(curr_manifest);
-      console.log(res.data)
-    }).catch(err=>{
-      console.log(err.response.data);
-      console.log(err)
-    })
-  }
+  // const addTask = async (task) => {
+  //   await axios.post("http://127.0.0.1:8000/manifest/add/task", {
+  //     'task':task,
+  //     'manifest':curr_manifest
+  //   },{
+  //     headers: { Authorization: `Bearer ${authTokens.access}` },
+  //   }).then(res=>{
+  //     getStudentManifest(curr_manifest);
+  //     console.log(res.data)
+  //   }).catch(err=>{
+  //     console.log(err.response.data);
+  //     console.log(err)
+  //   })
+  // }
 
   // const createBatch = async (batch, advisor, location) => {
   //   console.log(advisor, location, batch);
@@ -476,41 +476,41 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  const reviewPassed = async (form, reviewer, remark, date) => {
-    await axios.post("http://127.0.0.1:8000/manifest/review/passed", {
-      'form':form,
-      'reviewer':reviewer,
-      'remark':remark,
-      'next_review':date,
-      'manifest':curr_manifest
-    },{
-      headers: { Authorization: `Bearer ${authTokens.access}` },
-    }).then(res=>{
-      getStudentManifest(curr_manifest);
-      console.log(res.data)
-    }).catch(err=>{
-      console.log(err.response.data);
-      console.log(err)
-    })
-  }
+  // const reviewPassed = async (form, reviewer, remark, date) => {
+  //   await axios.post("http://127.0.0.1:8000/manifest/review/passed", {
+  //     'form':form,
+  //     'reviewer':reviewer,
+  //     'remark':remark,
+  //     'next_review':date,
+  //     'manifest':curr_manifest
+  //   },{
+  //     headers: { Authorization: `Bearer ${authTokens.access}` },
+  //   }).then(res=>{
+  //     getStudentManifest(curr_manifest);
+  //     console.log(res.data)
+  //   }).catch(err=>{
+  //     console.log(err.response.data);
+  //     console.log(err)
+  //   })
+  // }
 
-  const reviewRepeated = async (form, reviewer, remark, date) => {
-    await axios.post("http://127.0.0.1:8000/manifest/review/repeated", {
-      'form':form,
-      'reviewer':reviewer,
-      'remark':remark,
-      'next_review':date,
-      'manifest':curr_manifest
-    },{
-      headers: { Authorization: `Bearer ${authTokens.access}` },
-    }).then(res=>{
-      getStudentManifest(curr_manifest);
-      console.log(res.data)
-    }).catch(err=>{
-      console.log(err.response.data);
-      console.log(err)
-    })
-  }
+  // const reviewRepeated = async (form, reviewer, remark, date) => {
+  //   await axios.post("http://127.0.0.1:8000/manifest/review/repeated", {
+  //     'form':form,
+  //     'reviewer':reviewer,
+  //     'remark':remark,
+  //     'next_review':date,
+  //     'manifest':curr_manifest
+  //   },{
+  //     headers: { Authorization: `Bearer ${authTokens.access}` },
+  //   }).then(res=>{
+  //     getStudentManifest(curr_manifest);
+  //     console.log(res.data)
+  //   }).catch(err=>{
+  //     console.log(err.response.data);
+  //     console.log(err)
+  //   })
+  // }
 
   // const deleteDomain = async (domainId) => {
   //   await axios
@@ -530,41 +530,41 @@ export const AuthProvider = ({ children }) => {
   //     });
   // };
 
-  const getMyStudents = async () => {
-    await axios
-      .post(
-        "http://127.0.0.1:8000/student/view/mystudents",
-        {},
-        {
-          headers: { Authorization: `Bearer ${authTokens.access}` },
-        }
-      )
-      .then((res) => {
-        setMyStudents(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const getMyStudents = async () => {
+  //   await axios
+  //     .post(
+  //       "http://127.0.0.1:8000/student/view/mystudents",
+  //       {},
+  //       {
+  //         headers: { Authorization: `Bearer ${authTokens.access}` },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       setMyStudents(res.data);
+  //       console.log(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
-  const getMyGroupDetails = async (groupId) => {
-    await axios
-      .post(
-        "http://127.0.0.1:8000/batch/view/mygroup/details",
-        { id: groupId },
-        {
-          headers: { Authorization: `Bearer ${authTokens.access}` },
-        }
-      )
-      .then((res) => {
-        setMyGroupDetails(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const getMyGroupDetails = async (groupId) => {
+  //   await axios
+  //     .post(
+  //       "http://127.0.0.1:8000/batch/view/mygroup/details",
+  //       { id: groupId },
+  //       {
+  //         headers: { Authorization: `Bearer ${authTokens.access}` },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       setMyGroupDetails(res.data);
+  //       console.log(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   const getStudentTasks = async (studentId) => {
     await axios.post('http://127.0.0.1:8000/manifest/view/tasklist',{'id':studentId},{
@@ -582,23 +582,23 @@ export const AuthProvider = ({ children }) => {
     })
   }
 
-  const getMyGroups = async () => {
-    await axios
-      .post(
-        "http://127.0.0.1:8000/batch/view/mygroups",
-        {},
-        {
-          headers: { Authorization: `Bearer ${authTokens.access}` },
-        }
-      )
-      .then((res) => {
-        setMyGroups(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const getMyGroups = async () => {
+  //   await axios
+  //     .post(
+  //       "http://127.0.0.1:8000/batch/view/mygroups",
+  //       {},
+  //       {
+  //         headers: { Authorization: `Bearer ${authTokens.access}` },
+  //       }
+  //     )
+  //     .then((res) => {
+  //       setMyGroups(res.data);
+  //       console.log(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   const getStudentManifest = async (manifestId) => {
     await axios.post('http://127.0.0.1:8000/manifest/view/manifest',{'id':manifestId},{
@@ -713,16 +713,16 @@ export const AuthProvider = ({ children }) => {
   //     });
   // };
 
-  const taskComplete = async (taskId) => {
-    await axios.post('http://127.0.0.1:8000/manifest/complete/task',{'task':taskId},{
-        headers: {Authorization : `Bearer ${authTokens.access}`}
-    }).then(res=>{
-        console.log(res.data)
-        getStudentManifest(curr_manifest)
-    }).catch(err=>{
-        console.log(err)
-    })
-  }
+  // const taskComplete = async (taskId) => {
+  //   await axios.post('http://127.0.0.1:8000/manifest/complete/task',{'task':taskId},{
+  //       headers: {Authorization : `Bearer ${authTokens.access}`}
+  //   }).then(res=>{
+  //       console.log(res.data)
+  //       getStudentManifest(curr_manifest)
+  //   }).catch(err=>{
+  //       console.log(err)
+  //   })
+  // }
 
   const updateProfile = async (e) => {
     e.preventDefault();
@@ -792,14 +792,14 @@ export const AuthProvider = ({ children }) => {
     // getProfile,
     // getGroups,
     // getGroupDetails,
-    getMyStudents,
+    // getMyStudents,
     updateProfile,
     // deleteBatch,
     // createDomain,
-    getMyGroups,
+    // getMyGroups,
     // addInGroup,
     // rmFromGroup,
-    getMyGroupDetails,
+    // getMyGroupDetails,
     getStudentTasks,
     getStudentManifest,
     // deleteDomain,
@@ -820,12 +820,12 @@ export const AuthProvider = ({ children }) => {
     // advisorsNames,
     studentTasks,
     studentManifest,
-    myStudents,
-    myGroups,
+    // myStudents,
+    // myGroups,
     // batches,
     domains,
     // advisors,
-    myGroupDetails,
+    // myGroupDetails,
     // groupDetails,
     // groupLessers,
     // groups,
@@ -840,11 +840,11 @@ export const AuthProvider = ({ children }) => {
     setCurr_manifest,
     setCurr_group,
     setCurr_student,
-    addTask,
-    taskComplete,
+    // addTask,
+    // taskComplete,
     getReviewers,
-    reviewPassed,
-    reviewRepeated,
+    // reviewPassed,
+    // reviewRepeated,
     // advisorsNames,
     curr_manifest,
     curr_group,

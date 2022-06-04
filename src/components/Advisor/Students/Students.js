@@ -8,11 +8,11 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
-import AuthContext from "../../../Context/AuthContext";
+import AdvisorContext from "../../../Context/AdvisorContext";
 
 const Students = () => {
 
-  const { getMyStudents, myStudents } = useContext(AuthContext);
+  const { getMyStudents, myStudents } = useContext(AdvisorContext);
 
   useEffect(() => {
     getMyStudents();

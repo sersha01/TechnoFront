@@ -9,11 +9,13 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import AuthContext from "../../../Context/AuthContext";
+import AdvisorContext from "../../../Context/AdvisorContext";
 import { useNavigate } from "react-router";
 
 const Work = () => {
 
-  const { getMyGroups, myGroups, setCurr_group } = useContext(AuthContext);
+  const { setCurr_group } = useContext(AuthContext);
+  const { getMyGroups, myGroups } = useContext(AdvisorContext);
 
   const navigate = useNavigate();
 
