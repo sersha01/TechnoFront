@@ -13,26 +13,34 @@ import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import AuthContext from "../../../Context/AuthContext";
+import LeadContext from "../../../Context/LeadContext";
+import AdvisorContext from "../../../Context/AdvisorContext";
 
 const AddTask = ({ title, value, form }) => {
   const {
-    getAdvisors,
-    getDomains,
-    getBatches,
-    advisors,
-    reviewers,
     domains,
+    reviewers,
+    getDomains,
+    getReviewers,
+  } = useContext(AuthContext) ;
+
+  const {
+    reviewPassed,
+    reviewRepeated,
+  } = useContext(AdvisorContext);
+  
+  const {
+    advisors,
     batches,
     createBatch,
     createDomain,
     createGroup,
-    getReviewers,
-    reviewPassed,
-    reviewRepeated,
+    getAdvisors,
+    getBatches,
+    studentManage,
     updateDomain,
     updateBatch,
-    studentManage,
-  } = useContext(AuthContext);
+  } = useContext(LeadContext);
 
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");

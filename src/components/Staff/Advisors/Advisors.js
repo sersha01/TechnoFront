@@ -6,12 +6,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "@mui/material/Button";
 import AddTask from "../../Common/AddTask/AddTask";
 
-import AuthContext from "../../../Context/AuthContext";
+import LeadContext from "../../../Context/LeadContext";
 import { useNavigate } from "react-router";
 
 const Advisors = () => {
 
-  const { getAdvisors, advisors, getProfile, deleteAdvisor } = useContext(AuthContext);
+  const { getAdvisors, advisors, getProfile, deleteAdvisor } = useContext(LeadContext);
 
   const navigate = useNavigate();
 

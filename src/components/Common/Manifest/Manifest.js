@@ -9,6 +9,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import style from './Manifest.module.css';
 import { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../../Context/AuthContext';
+import AdvisorContext from "../../../Context/AdvisorContext";
 import AddTask from '../AddTask/AddTask';
 
 function Manifest() {
@@ -18,7 +19,9 @@ function Manifest() {
   const [personal_score, setPersonal_score] = useState(null);
   const [technical_score, setTechnical_score] = useState(null);
 
-  const { getStudentManifest, studentManifest, curr_manifest, user_is, addTask, taskComplete } = useContext(AuthContext);
+  const { getStudentManifest, studentManifest, curr_manifest, user_is } = useContext(AuthContext);
+  const { addTask, taskComplete } = useContext(AdvisorContext);
+
 
   useEffect(()=>{
       getStudentManifest(curr_manifest);

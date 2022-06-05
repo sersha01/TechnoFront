@@ -7,11 +7,12 @@ import Button from "@mui/material/Button";
 import AddTask from "../../Common/AddTask/AddTask";
 import TextField from "@mui/material/TextField";
 import style from "./Groups.module.css";
-import AuthContext from "../../../Context/AuthContext";
+// import AuthContext from "../../../Context/AuthContext";
+import LeadContext from "../../../Context/LeadContext";
 
 const Groups = () => {
 
-  const { deleteGroup, groupDetails, getGroupLess, groupLessers, addInGroup, rmFromGroup } = useContext(AuthContext);
+  const { deleteGroup, groupDetails, getGroupLess, groupLessers, addInGroup, rmFromGroup } = useContext(LeadContext);
 
   const [add, setAdd] = useState("dont");
 

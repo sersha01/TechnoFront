@@ -11,10 +11,12 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import AuthContext from "../../../Context/AuthContext";
+import AdvisorContext from "../../../Context/AdvisorContext";
 
 const Work = () => {
 
-  const { myGroupDetails, setCurr_student, getMyGroupDetails, curr_group } = useContext(AuthContext);
+  const { setCurr_student, curr_group } = useContext(AuthContext);
+  const { myGroupDetails, getMyGroupDetails } = useContext(AdvisorContext);
   
   const navigate = useNavigate();
 

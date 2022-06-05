@@ -158,22 +158,6 @@ function Profile({by}) {
             <input type="text" name='experience' className={`w-100 ${style.input}`} defaultValue={profile && profile.experience} />
           </Col>
         </Col>
-        <Col xs={12} md={6} className="py-1 px-0 pe-md-1">
-          <Col
-            className={`py-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
-          >
-            <label className={`${style.label}`}>Company</label>
-            <input type="text" name='company' className={`w-100 ${style.input}`} defaultValue={profile && profile.company} />
-          </Col>
-        </Col>
-        <Col xs={12} md={6} className="py-1 ps-md-1 px-0">
-          <Col
-            className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
-          >
-            <label className={`${style.label}`}>Designation</label>
-            <input type="text" name='designation' className={`w-100 ${style.input}`} defaultValue={profile && profile.designation} />
-          </Col>
-        </Col>
         <Col className="m-0 p-0">
           <div className="submitProfileDiv mt-3">
             <Button

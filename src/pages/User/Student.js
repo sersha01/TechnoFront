@@ -8,7 +8,7 @@ import { PrivateRouteStudent } from "../../Utils/PrivateRoute";
 
 const Lead = ({child}) => {
   return (
-    // <PrivateRouteStudent>
+    <PrivateRouteStudent>
     <Container fluid className="mx-0 p-0">
       <Header />
       <Header2 />
@@ -29,7 +29,7 @@ const Lead = ({child}) => {
         {child}
       </Row>
     </Container>
-    // </PrivateRouteStudent>
+    </PrivateRouteStudent>
   );
 };
 

@@ -6,11 +6,12 @@ import Button from "@mui/material/Button";
 import AddTask from "../../Common/AddTask/AddTask";
 import TextField from "@mui/material/TextField";
 import style from "./Students.module.css";
-import AuthContext from "../../../Context/AuthContext";
+// import AuthContext from "../../../Context/AuthContext";
 import { useNavigate } from "react-router";
+import LeadContext from "../../../Context/LeadContext";
 
 const Students = () => {
-  const { viewStudents, students, getProfile } = useContext(AuthContext);
+  const { viewStudents, students, getProfile } = useContext(LeadContext);
 
   const navigate = useNavigate();
 

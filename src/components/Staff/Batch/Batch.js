@@ -5,11 +5,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import AddTask from "../../Common/AddTask/AddTask";
-import AuthContext from "../../../Context/AuthContext";
+// import AuthContext from "../../../Context/AuthContext";
+import LeadContext from "../../../Context/LeadContext";
+
 
 const Batch = () => {
 
-  const { getBatches, batches, deleteBatch } = useContext(AuthContext);
+  const { getBatches, batches, deleteBatch } = useContext(LeadContext);
 
   useEffect(() => {
     getBatches();
