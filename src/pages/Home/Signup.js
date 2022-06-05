@@ -38,6 +38,7 @@ const Signup = ({ setSwap2 }) => {
   });
 
   return (
+    
     <Container2 component="main" className="bglight signupbox">
      
       <Box

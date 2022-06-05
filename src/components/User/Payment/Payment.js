@@ -5,8 +5,51 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import style from "./Payment.module.css";
 import { useState } from "react";
 
+const loadScript = (src) => {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = src;
+
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+};
+
+const displayRazorpay = async (price) => {
+  const response = await loadScript(
+    "https://checkout.razorpay.com/v1/checkout.js"
+  );
+  if (!response) {
+    alert("You are offline");
+    return;
+  }
+
+  const options = {
+    key: "rzp_test_aRq4XkP2vJ58Xt",
+    currency: "INR",
+    amount: 400000,
+    name: "BrotoType",
+    description: "Paying your coworking rent ",
+    image: "https://i.imgur.com/3g7nmJC.png",
+
+    handler: function (response) {
+      alert("Payment Successful");
+      alert(response.razorpay_payment_id);
+    },
+
+    prefill: {
+      name: "Michu",
+    },
+  };
+
+  const paymentObject = new window.Razorpay(options);
+  paymentObject.open();
+};
+
 function Payment() {
   const [btn, setBtn] = useState("True");
+  const [price, setPrice] = useState(0);
 
   return (
     <Row className={`m-0 rounded-2 px-3 ${style.payment}`}>
@@ -32,7 +75,11 @@ function Payment() {
         {btn === "True" && (
           <Row className="mx-0 my-2 paybutton">
             <Col xs={4}>
-              <Button size="lg" className={`w-100 ${style.btn}`}>
+              <Button
+                size="lg"
+                onClick={() => displayRazorpay(price)}
+                className={`w-100 ${style.btn}`}
+              >
                 UPI
               </Button>
             </Col>
@@ -54,7 +101,6 @@ function Payment() {
             </Col>
           </Row>
         )}
-        
 
         {btn === "False" && (
           <Row className="mx-0 amount">
@@ -74,7 +120,11 @@ function Payment() {
             </Col>
             <Col className="row m-0" md={4} xs={12}>
               <Col className="ps-0 pe-1" md={6} xs={6}>
-                <Button size="lg" className={`w-100 ${style.btn}`}>
+                <Button
+                  size="lg"
+                  onClick={() => displayRazorpay(price)}
+                  className={`w-100 ${style.btn}`}
+                >
                   Submit
                 </Button>
               </Col>
@@ -92,7 +142,6 @@ function Payment() {
             </Col>
           </Row>
         )}
-
       </Col>
       <Col
         xs={12}
