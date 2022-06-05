@@ -14,14 +14,20 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import AuthContext from "../../../Context/AuthContext";
 import LeadContext from "../../../Context/LeadContext";
+import AdvisorContext from "../../../Context/AdvisorContext";
 
 const AddTask = ({ title, value, form }) => {
   const {
-    getDomains,
     domains,
+    reviewers,
+    getDomains,
+    getReviewers,
+  } = useContext(AuthContext) ;
+
+  const {
     reviewPassed,
     reviewRepeated,
-  } = useContext(AuthContext);
+  } = useContext(AdvisorContext);
   
   const {
     advisors,
@@ -30,9 +36,7 @@ const AddTask = ({ title, value, form }) => {
     createDomain,
     createGroup,
     getAdvisors,
-    getReviewers,
     getBatches,
-    reviewers,
     studentManage,
     updateDomain,
     updateBatch,

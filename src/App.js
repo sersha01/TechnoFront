@@ -70,12 +70,6 @@ function App() {
                   }
                 />
                 <Route
-                  path="/manifest"
-                  element={
-                    <Student child={<><Manifest /><Pending /></>} />
-                  }
-                />
-                <Route
                   path="/profile"
                   element={
                     <Student child={<Profile />} />
@@ -88,6 +82,16 @@ function App() {
                   }
                 />
               </Routes>
+              <AdvisorProvider>
+                <Routes>
+                <Route
+                  path="/manifest"
+                  element={
+                    <Student child={<><Manifest /><Pending /></>} />
+                  }
+                />
+                </Routes>
+              </AdvisorProvider>
             </StudentProvider>
 
             {/* ADVISOR */}
@@ -144,74 +148,76 @@ function App() {
 
             {/* LEAD */}
             <LeadProvider>
-              <Routes>
-                <Route
-                  path="/lead"
-                  element={
-                    <Lead child={<AdvisorSpace />}/>
-                  }
-                />
-                <Route
-                  path="/lead/payments"
-                  element={
-                    <Lead child={<Payments />}/>
-                  }
-                />
-                <Route
-                  path="/lead/batch"
-                  element={
-                    <Lead child={<Batch />}/>
-                  }
-                />
-                <Route
-                  path="/lead/domain"
-                  element={
-                    <Lead child={<DomainComponent />}/>
-                  }
-                />
-                <Route
-                  path="/lead/students"
-                  element={
-                    <Lead child={<Students />}/>
-                  }
-                />
-                <Route
-                  path="/lead/student/profile"
-                  element={
-                    <Lead child={<Profile by="student" />}/>
-                  }
-                />
-                <Route
-                  path="/lead/groups"
-                  element={
-                    <Lead child={<Group />}/>
-                  }
-                />
-                <Route
-                  path="/lead/groups/manage"
-                  element={
-                    <Lead child={<GroupManage />}/>
-                  }
-                />
-                <Route
-                  path="/lead/advisors"
-                  element={
-                    <Lead child={<Advisors />}/>
-                  }
-                />
-                <Route
-                  path="/lead/advisor/profile"
-                  element={
-                    <Lead child={<Profile by="advisor" />}/>
-                  }
-                />
-                <Route
-                  path="/lead/placements"
-                  element={
-                    <Lead child={<Placement />}/>
-                  }
-                />
-              </Routes>
+              <AdvisorProvider>
+                <Routes>
+                  <Route
+                    path="/lead"
+                    element={
+                      <Lead child={<AdvisorSpace />}/>
+                    }
+                  />
+                  <Route
+                    path="/lead/payments"
+                    element={
+                      <Lead child={<Payments />}/>
+                    }
+                  />
+                  <Route
+                    path="/lead/batch"
+                    element={
+                      <Lead child={<Batch />}/>
+                    }
+                  />
+                  <Route
+                    path="/lead/domain"
+                    element={
+                      <Lead child={<DomainComponent />}/>
+                    }
+                  />
+                  <Route
+                    path="/lead/students"
+                    element={
+                      <Lead child={<Students />}/>
+                    }
+                  />
+                  <Route
+                    path="/lead/student/profile"
+                    element={
+                      <Lead child={<Profile by="student" />}/>
+                    }
+                  />
+                  <Route
+                    path="/lead/groups"
+                    element={
+                      <Lead child={<Group />}/>
+                    }
+                  />
+                  <Route
+                    path="/lead/groups/manage"
+                    element={
+                      <Lead child={<GroupManage />}/>
+                    }
+                  />
+                  <Route
+                    path="/lead/advisors"
+                    element={
+                      <Lead child={<Advisors />}/>
+                    }
+                  />
+                  <Route
+                    path="/lead/advisor/profile"
+                    element={
+                      <Lead child={<Profile by="advisor" />}/>
+                    }
+                  />
+                  <Route
+                    path="/lead/placements"
+                    element={
+                      <Lead child={<Placement />}/>
+                    }
+                  />
+                </Routes>
+              </AdvisorProvider>
             </LeadProvider>
           </StyleProvider>
         </AuthProvider>
