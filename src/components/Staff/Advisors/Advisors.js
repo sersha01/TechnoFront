@@ -11,7 +11,7 @@ import { useNavigate } from "react-router";
 
 const Advisors = () => {
 
-  const { getAdvisors, advisors, getProfile } = useContext(AuthContext);
+  const { getAdvisors, advisors, getProfile, deleteAdvisor } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -53,9 +53,7 @@ const Advisors = () => {
 
       <Col className="m-0 row ">
       {advisors && advisors.map((advisor, index) => (
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg"
-        onClick={ async () => {await getProfile(advisor.id)
-          navigate("/lead/advisor/profile")}}>
+        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
               #{index + 1}
@@ -71,8 +69,9 @@ const Advisors = () => {
             </Col>
 
             <Col className="textdark d-flex" sm={3}>
-              <AddTask title="Edit" value="advisor" />
-              <Button className="coh mx-2">Profile</Button>
+              <Button variant="contained" className="mx-1" color="error" onClick={() => {deleteAdvisor(advisor.id)}}>Delete</Button>
+              <Button className="coh mx-1" onClick={ async () => {await getProfile(advisor.id)
+          navigate("/lead/advisor/profile")}}>Profile</Button>
             </Col>
           </Row>
         </Col>

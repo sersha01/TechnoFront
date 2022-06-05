@@ -92,7 +92,7 @@ const Students = () => {
                     {student.group ? student.group : "Not Assigned"}
                   </Col>
                   <Col className="textdark d-flex" sm={2}>
-                    <AddTask title="Manage" value="st_manage" />
+                    <AddTask title="Manage" value="st_manage" form={student.id}/>
                     <Button
                       variant="contained"
                       className="mx-2 px-5"

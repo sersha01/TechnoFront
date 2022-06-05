@@ -29,6 +29,9 @@ const AddTask = ({ title, value, form }) => {
     getReviewers,
     reviewPassed,
     reviewRepeated,
+    updateDomain,
+    updateBatch,
+    studentManage,
   } = useContext(AuthContext);
 
   const [open, setOpen] = useState(false);
@@ -45,12 +48,15 @@ const AddTask = ({ title, value, form }) => {
   const handleClickOpen = () => {
     if (value === "batch") {
       getAdvisors();
-    } else if (value === "addgroup") {
+    } else if (value === "addgroup" ) {
       getAdvisors();
       getDomains();
       getBatches();
     } else if (value === "completed" || value === "repeated") {
       getReviewers()
+    } else if (value === "st_manage") {
+      getBatches();
+      getDomains();
     }
     setName("");
     setDomain("");
@@ -102,6 +108,12 @@ const AddTask = ({ title, value, form }) => {
       reviewPassed(form, reviewer, remark, date)
     } else if (value === "repeated") {
       reviewRepeated(form, reviewer, remark, date)
+    } else if (value === "updateDomain") {
+      updateDomain(form, domain)
+    }else if (value === "updateBatch") {
+      updateBatch(form, advisor)
+    }else if (value === "st_manage") {
+      studentManage(form, batch, domain)
     }
     setOpen(false);
   };
@@ -141,7 +153,6 @@ const AddTask = ({ title, value, form }) => {
               )}
               {value === "st_manage" && (
                 <Row className="my-2">
-                  
                   <FormControl className="my-1">
                     <InputLabel id="demo-simple-select-autowidth-label">
                       Batch
@@ -151,6 +162,8 @@ const AddTask = ({ title, value, form }) => {
                       id="demo-simple-select-autowidth"
                       autoWidth
                       maxHeight="200px"
+                      value={batch}
+                      onChange={(e) => {setBatch(e.target.value)}}
                       label="Batch"
                       MenuProps={MenuProps}
                     >
@@ -169,20 +182,33 @@ const AddTask = ({ title, value, form }) => {
                     <Select
                       labelId="demo-simple-select-autowidth-label"
                       id="demo-simple-select-autowidth"
+                      value={domain}
+                      onChange={(e) => setDomain(e.target.value)}
                       autoWidth
                       maxHeight="200px"
                       label="Domain"
                       MenuProps={MenuProps}
                     >
-                      {advisors &&
-                        advisors.map((advisor) => (
-                          <MenuItem key={advisor.id} value={advisor.id}>
-                            {advisor.username}
+                      {domains &&
+                        domains.map((domain) => (
+                          <MenuItem key={domain.id} value={domain.id}>
+                            {domain.name}
                           </MenuItem>
                         ))}
                     </Select>
                   </FormControl>
-                  
+                  </Row>
+              )}
+              {value === "updateDomain" && (
+                <Row className="my-2">
+                  <TextField
+                    id="outlined-basic"
+                    label="Domain name"
+                    variant="outlined"
+                    value={domain}
+                    onChange={(e) => setDomain(e.target.value)}
+                    placeholder="Enter domain name here"
+                  />
                 </Row>
               )}
               {(value === "completed" || value === "repeated") && (
@@ -225,11 +251,11 @@ const AddTask = ({ title, value, form }) => {
                 <Row className="my-2">
                   <TextField
                     id="outlined-basic"
-                    label="Batch number"
+                    label="Batch name"
                     variant="outlined"
                     value={batch}
                     onChange={(e) => setBatch(e.target.value)}
-                    placeholder="Enter batch number here.."
+                    placeholder="Enter batch name here.."
                   />
                   <FormControl className="my-4">
                     <InputLabel id="demo-simple-select-autowidth-label">
@@ -269,6 +295,32 @@ const AddTask = ({ title, value, form }) => {
                       <MenuItem value={"calicut"}>Calicut</MenuItem>
                       <MenuItem value={"trivandrum"}>Trivandrum</MenuItem>
                       <MenuItem value={"dubai"}>Dubai</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Row>
+              )}
+              {value === "updateBatch" && (
+                <Row className="my-2">
+                  <FormControl className="my-4">
+                    <InputLabel id="demo-simple-select-autowidth-label">
+                      Advisor
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-autowidth-label"
+                      id="demo-simple-select-autowidth"
+                      value={advisor}
+                      onChange={(e) => setAdvisor(e.target.value)}
+                      autoWidth
+                      label="Advisor"
+                      maxHeight="200px"
+                      MenuProps={MenuProps}
+                    >
+                      {advisors &&
+                        advisors.map((advisor) => (
+                          <MenuItem key={advisor.id} value={advisor.id}>
+                            {advisor.username}
+                          </MenuItem>
+                        ))}
                     </Select>
                   </FormControl>
                 </Row>

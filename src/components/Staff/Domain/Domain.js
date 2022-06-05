@@ -54,8 +54,8 @@ const Domain = () => {
               </Col>
 
               <Col className="textdark d-flex justify-content-center" sm={6}>
-                <Button className="sendform me-2 px-4">Edit</Button>
-                <Button className="coh px-4" onClick={()=>{deleteDomain(domain.id)}}>Delete</Button>
+                <AddTask title="Edit" value="updateDomain" form={domain.id} />
+                <Button className="coh px-4 ms-2" onClick={()=>{deleteDomain(domain.id)}}>Delete</Button>
               </Col>
             </Row>
           </Col>

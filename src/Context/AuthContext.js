@@ -269,6 +269,43 @@ export const AuthProvider = ({ children }) => {
         console.log(err);
       });
   };
+  
+  const studentManage = async (student, batch, domain) => {
+    await axios.post("http://127.0.0.1:8000/student/manage/student", {
+      'student':student,
+      'batch':batch,
+      'domain':domain
+    },{
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+    }).then(res=>{
+      console.log(res.data)
+      viewStudents();
+    }).catch(err=>{
+      console.log(err.response.data);
+      console.log(err)
+    })
+  }
+
+  const updateBatch = async (batch, advisor) => {
+    await axios
+      .post(
+        "http://127.0.0.1:8000/batch/update/batch",
+        {
+          'advisor': advisor,
+          'id': batch,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        getBatches();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const getDomains = async () => {
     await axios
@@ -369,6 +406,27 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const updateDomain = async (domainId, domain) => {
+    await axios
+      .post(
+        "http://127.0.0.1.:8000/user/update/domain",
+        {
+          'id': domainId,
+          'new_name': domain,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        getDomains();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const getAdvisors = async () => {
     await axios
       .post(
@@ -380,6 +438,25 @@ export const AuthProvider = ({ children }) => {
       )
       .then((res) => {
         setAdvisors(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const deleteAdvisor = async (advisorId) => {
+    await axios
+      .post(
+        "http://127.0.0.1:8000/admins/delete/advisor",
+        {
+          'id': advisorId,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        getAdvisors();
       })
       .catch((err) => {
         console.log(err);
@@ -716,7 +793,7 @@ export const AuthProvider = ({ children }) => {
 
     signupUser,
     getAdvisorsNames,
-    getMyProfile,
+    getProfile,
     getGroups,
     getGroupDetails,
     getMyStudents,
@@ -778,7 +855,11 @@ export const AuthProvider = ({ children }) => {
     curr_student,
     reviewers,
     setStudentManifest,
-    getProfile,
+    getMyProfile,
+    updateDomain,
+    updateBatch,
+    deleteAdvisor,
+    studentManage,
   };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>
