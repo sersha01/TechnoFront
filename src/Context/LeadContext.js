@@ -20,6 +20,7 @@ export const LeadProvider = ({ children }) => {
   const [groups, setGroups] = useState(null);
   const [groupDetails, setGroupDetails] = useState(null);
   const [groupLessers, setGroupLessers] = useState(null);
+  const [placements, setPlacements] = useState(null);
   const [students, setStudents] = useState(null);
 
 
@@ -169,6 +170,18 @@ export const LeadProvider = ({ children }) => {
         }
       ).then((res) => {
         setGroupLessers(res.data);
+        console.log("datas", res.data);
+      }).catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getPlacements = async () => {
+    await axios.get("http://127.0.0.1:8000/student/view/placements",
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }).then((res) => {
+        setPlacements(res.data);
         console.log("datas", res.data);
       }).catch((err) => {
         console.log(err);
@@ -370,6 +383,7 @@ export const LeadProvider = ({ children }) => {
     getGroups,
     getGroupDetails,
     getGroupLess,
+    getPlacements,
     getProfile,
     viewStudents,
 
@@ -395,6 +409,7 @@ export const LeadProvider = ({ children }) => {
     setGroups,
     setGroupDetails,
     setGroupLessers,
+    setPlacements,
     setStudents,
 
     //State variables
@@ -404,6 +419,7 @@ export const LeadProvider = ({ children }) => {
     groups,
     groupDetails,
     groupLessers,
+    placements,
     students
   };
   return (
