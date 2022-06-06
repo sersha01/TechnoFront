@@ -127,6 +127,8 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("authTokens");
     localStorage.removeItem("user_is");
     localStorage.removeItem("notification");
+    setSwap("video");
+    setSwap2("video");
     navigate("/signin");
   };
 

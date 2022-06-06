@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import ManageSearchRoundedIcon from "@mui/icons-material/ManageSearchRounded";
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,8 +7,16 @@ import Button from "@mui/material/Button";
 import AddTask from "../../Common/AddTask/AddTask";
 import TextField from "@mui/material/TextField";
 import style from "./Placement.module.css";
+import LeadContext from "../../../Context/LeadContext";
 
 const Placement = () => {
+
+  const { getPlacements, placements } = useContext(LeadContext);
+
+  useEffect(() => {
+    getPlacements();
+  },[])
+
   return (
     <Row className="m-0 px-3 rounded-2 bglight py-3">
       <Col sm={12} className="d-flex justify-content-between mb-2">
@@ -60,150 +68,36 @@ const Placement = () => {
           <Col className="bgdark" sm={2}>
             Designation
           </Col>
-
-        
         </Row>
       </Col>
 
       <Col className="m-0 row ">
+        {placements && placements.map((placement) => {
+          return (
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
-              #20
+              #{placement.student.batch.name}
             </Col>
             <Col className="textdark" sm={2}>
-              Wafi
+              {placement.student.user.username}
             </Col>
             <Col className="textdark" sm={2}>
-              Python
+              {placement.student.profile.domain.name}
             </Col>
             <Col className="textdark" sm={2}>
-              8.2
+              {placement.LPA}
             </Col>
             <Col className="textdark" sm={2}>
-              Banglore
+              {placement.location}
             </Col>
-
             <Col className="textdark d-flex" sm={2}>
-              Full-Stack
+             {placement.position}
             </Col>
           </Row>
         </Col>
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #20
-            </Col>
-            <Col className="textdark" sm={2}>
-              Wafi
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              8.2
-            </Col>
-            <Col className="textdark" sm={2}>
-              Banglore
-            </Col>
-
-            <Col className="textdark d-flex" sm={2}>
-              Full-Stack
-            </Col>
-          </Row>
-        </Col>
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #20
-            </Col>
-            <Col className="textdark" sm={2}>
-              Wafi
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              8.2
-            </Col>
-            <Col className="textdark" sm={2}>
-              Banglore
-            </Col>
-
-            <Col className="textdark d-flex" sm={2}>
-              Full-Stack
-            </Col>
-          </Row>
-        </Col>
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #20
-            </Col>
-            <Col className="textdark" sm={2}>
-              Wafi
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              8.2
-            </Col>
-            <Col className="textdark" sm={2}>
-              Banglore
-            </Col>
-
-            <Col className="textdark d-flex" sm={2}>
-              Full-Stack
-            </Col>
-          </Row>
-        </Col>
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #20
-            </Col>
-            <Col className="textdark" sm={2}>
-              Wafi
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              8.2
-            </Col>
-            <Col className="textdark" sm={2}>
-              Banglore
-            </Col>
-
-            <Col className="textdark d-flex" sm={2}>
-              Full-Stack
-            </Col>
-          </Row>
-        </Col>
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #20
-            </Col>
-            <Col className="textdark" sm={2}>
-              Wafi
-            </Col>
-            <Col className="textdark" sm={2}>
-              Python
-            </Col>
-            <Col className="textdark" sm={2}>
-              8.2
-            </Col>
-            <Col className="textdark" sm={2}>
-              Banglore
-            </Col>
-
-            <Col className="textdark d-flex" sm={2}>
-              Full-Stack
-            </Col>
-          </Row>
-        </Col>
+          )
+        })}
          
          
       </Col>
