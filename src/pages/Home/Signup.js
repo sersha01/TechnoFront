@@ -27,7 +27,7 @@ const schema = yup.object().shape({
 });
 
 const Signup = ({ setSwap2 }) => {
-  let { signupUser, errUser } = useContext(AuthContext);
+  const { signupUser, errUser } = useContext(AuthContext);
 
   const {
     register,

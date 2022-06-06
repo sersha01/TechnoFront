@@ -1,21 +1,20 @@
-import * as React from "react";
+import React, { useContext, useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
+import AuthContext from "../../../Context/AuthContext";
 
 
 const AddTask = ({ setSwap2,value }) => {
-  const [open, setOpen] = React.useState(false);
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const [open, setOpen] = useState(false);
+  const [code, setCode] = useState("");
 
+  const { isCodeValid, setSignUpBatch, setUser_is } = useContext(AuthContext);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -24,9 +23,22 @@ const AddTask = ({ setSwap2,value }) => {
     setOpen(false);
   };
 
-  const handleSubmit = () => {
-    setOpen(false);
-    setSwap2("signup");
+  const handleSubmit = async () => {
+    await isCodeValid(code).then((res) => {
+      console.log(res.data);
+      if (res.data.status !== 400) {
+        if (res.data.message === "student") {
+          setSignUpBatch(res.data.batch);
+        }
+        setUser_is(res.data.message);
+        setOpen(false);
+        setSwap2("signup");
+      }else{
+        alert("Invalid Code");
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
   };
 
   return (
@@ -70,6 +82,8 @@ const AddTask = ({ setSwap2,value }) => {
                 fullWidth
                 name="code"
                 label="Code"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
                 type="text"
                 id="code"
               />

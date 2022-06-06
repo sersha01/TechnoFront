@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
   const [notification, setNotification] = useState(()=>localStorage.getItem('notification') ? JSON.parse(localStorage.getItem('notification')) : null);
   const [profile, setProfile] = useState(null);
   const [domains, setDomains] = useState(null);
+  const [signUpBatch, setSignUpBatch] = useState(null);
   const [studentTasks, setStudentTasks] = useState(null);
   const [studentManifest, setStudentManifest] = useState(null);
   const [curr_manifest, setCurr_manifest] = useState(null);
@@ -26,21 +27,20 @@ export const AuthProvider = ({ children }) => {
   const [swap2, setSwap2] = useState("video");
 
   
-  const signupUser = async ({ username, email, password, batch }) => {
+  const signupUser = async ({ username, email, password}) => {
+    const check = user_is === "advisor" ? true : false;
+    const batch = signUpBatch ? signUpBatch : 0;
     await axios
       .post("http://127.0.0.1:8000/user/signup", {
         username: username,
         email: email,
         password: password,
         batch: batch,
-        is_student: true,
-        is_staff: false,
+        is_staff: check,
       })
       .then((res) => {
         console.log(res.data);
-        navigate("/home");
-        setSwap("video");
-        setSwap2("video");
+        stndingData(username, password);
       })
       .catch((err) => {
         console.log(err.response.data);
@@ -61,9 +61,7 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => {
         console.log(res.data);
-        navigate("/home");
-        setSwap("video");
-        setSwap2("video");
+        stndingData(username, password);
       })
       .catch((err) => {
         console.log(err.response.data);
@@ -103,20 +101,24 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const stndingData = async (username, password) => {
+    await axios
+    .post("http://127.0.0.1:8000/user/token", { username, password })
+    .then((res) => {
+      setAuthTokens(res.data);
+      console.log(JSON.stringify(res.data));
+      console.log(jwt_decode(JSON.stringify(res.data)).position);
+      setUser(jwt_decode(JSON.stringify(res.data)));
+      localStorage.setItem("authTokens", JSON.stringify(res.data));
+      userDept(res.data);
+    });
+  }
+
   const loginUser = async (e) => {
     e.preventDefault();
     const username = e.target.username.value;
     const password = e.target.password.value;
-    await axios
-      .post("http://127.0.0.1:8000/user/token", { username, password })
-      .then((res) => {
-        setAuthTokens(res.data);
-        console.log(JSON.stringify(res.data));
-        console.log(jwt_decode(JSON.stringify(res.data)).position);
-        setUser(jwt_decode(JSON.stringify(res.data)));
-        localStorage.setItem("authTokens", JSON.stringify(res.data));
-        userDept(res.data);
-      });
+    stndingData(username, password);
   };
 
   const logoutUser = async () => {
@@ -207,6 +209,11 @@ export const AuthProvider = ({ children }) => {
     })
 
   };
+
+  const isCodeValid = async (code) => {
+    const res = await axios.post('http://127.0.0.1:8000/user/validate/code',{'code':code},{})
+    return res
+  }
 
   const updateProfile = async (e) => {
     e.preventDefault();
@@ -303,6 +310,9 @@ export const AuthProvider = ({ children }) => {
     getMyProfile,
     authTokens,
     setProfile,
+    isCodeValid,
+    setSignUpBatch,
+    setUser_is,
   };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>

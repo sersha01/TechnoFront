@@ -53,10 +53,10 @@ function App() {
           <StyleProvider>
             <StudentProvider>
               <Routes>
-                <Route path="/signup" element={<UserReg />} />
-                <Route path="/signin" element={<UserLogin />} />
+                {/* <Route path="/signup" element={<UserReg />} />
+                <Route path="/signin" element={<UserLogin />} /> */}
 
-                <Route path="/home" element={<Home />} />
+                <Route path="/signin" element={<Home />} />
                 <Route
                   path="/"
                   element={
