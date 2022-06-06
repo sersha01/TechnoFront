@@ -9,11 +9,27 @@ export default AuthContext;
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
-  const [authTokens, setAuthTokens] = useState(()=>localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
-  const [user, setUser] = useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null);
+  const [authTokens, setAuthTokens] = useState(() =>
+    localStorage.getItem("authTokens")
+      ? JSON.parse(localStorage.getItem("authTokens"))
+      : null
+  );
+  const [user, setUser] = useState(() =>
+    localStorage.getItem("authTokens")
+      ? jwt_decode(localStorage.getItem("authTokens"))
+      : null
+  );
   const [errUser, setErrUser] = useState(false);
-  const [user_is, setUser_is] = useState(()=>localStorage.getItem('user_is') ? JSON.parse(localStorage.getItem('user_is')) :null);
-  const [notification, setNotification] = useState(()=>localStorage.getItem('notification') ? JSON.parse(localStorage.getItem('notification')) : null);
+  const [user_is, setUser_is] = useState(() =>
+    localStorage.getItem("user_is")
+      ? JSON.parse(localStorage.getItem("user_is"))
+      : null
+  );
+  const [notification, setNotification] = useState(() =>
+    localStorage.getItem("notification")
+      ? JSON.parse(localStorage.getItem("notification"))
+      : null
+  );
   const [profile, setProfile] = useState(null);
   const [domains, setDomains] = useState(null);
   const [studentTasks, setStudentTasks] = useState(null);
@@ -25,7 +41,6 @@ export const AuthProvider = ({ children }) => {
   const [swap, setSwap] = useState("video");
   const [swap2, setSwap2] = useState("video");
 
-  
   const signupUser = async ({ username, email, password, batch }) => {
     await axios
       .post("http://127.0.0.1:8000/user/signup", {
@@ -48,7 +63,7 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  const signupAdvisor = async ({ username, email, password}) => {
+  const signupAdvisor = async ({ username, email, password }) => {
     console.log(username, email, password);
     await axios
       .post("http://127.0.0.1:8000/user/signup", {
@@ -181,44 +196,56 @@ export const AuthProvider = ({ children }) => {
   };
 
   const getStudentTasks = async (studentId) => {
-    await axios.post('http://127.0.0.1:8000/manifest/view/tasklist',{'id':studentId},{
-        headers: {Authorization : `Bearer ${authTokens.access}`}
-    }).then(res=>{
-        setStudentTasks(res.data)
-        console.log(res.data)
-        if (user_is == "student") {
-          navigate('/taskslist')
-        }else {
-        navigate('/advisor/group/taskslist')
+    await axios
+      .post(
+        "http://127.0.0.1:8000/manifest/view/tasklist",
+        { id: studentId },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
         }
-    }).catch(err=>{
-        console.log(err)
-    })
+      )
+      .then((res) => {
+        setStudentTasks(res.data);
+        console.log(res.data);
+        if (user_is == "student") {
+          navigate("/taskslist");
+        } else {
+          navigate("/advisor/group/taskslist");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const getStudentManifest = async (manifestId) => {
-    await axios.post('http://127.0.0.1:8000/manifest/view/manifest',{'id':manifestId},{
-        headers: {Authorization : `Bearer ${authTokens.access}`}
-    }).then(res=>{
-        setStudentManifest(res.data)
-        console.log(res.data)
-    }).catch(err=>{
-        console.log(err)
-    })
-
+    await axios
+      .post(
+        "http://127.0.0.1:8000/manifest/view/manifest",
+        { id: manifestId },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        setStudentManifest(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const updateProfile = async (e) => {
     e.preventDefault();
     console.log("present here");
     console.log(e.target);
-    var dob = null
-    var domain = null
-    if (user_is == "student"){
-      var dob = e.target.dob.value
-      var domain = e.target.domain.value
+    var dob = null;
+    var domain = null;
+    if (user_is == "student") {
+      var dob = e.target.dob.value;
+      var domain = e.target.domain.value;
     }
-    
 
     await axios
       .post(
@@ -251,6 +278,35 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const[amount, setAmount] = useState(0);
+  const[month, setMonth] = useState(0);
+  let year =  new Date().getFullYear();
+  const [paid, setPaid] = useState(0);
+  const [status, setStatus] = useState(0);
+
+  const showPayment = async () => {
+    await axios.post(
+      "http://127.0.0.1:8000/payment/pay",
+      {},
+      { headers: { Authorization: `Bearer ${authTokens.access}` } },
+    ).then((res) => {
+      console.log(res.data);
+
+      if (res.data == "Negative") {
+        console.log("No payments pending")
+      }
+      else{
+        setAmount(res.data.amount);
+        setMonth(res.data.month);
+        setStatus(res.data.status);
+
+        console.log("Month is ", res.data.amount);
+        console.log("Amount is ", res.data.month);
+      }
+      
+    })
+  }
+
   const get_data = async () => {
     axios
       .post(
@@ -270,7 +326,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const contextData = {
-
     signupUser,
     updateProfile,
     getStudentTasks,
@@ -303,6 +358,11 @@ export const AuthProvider = ({ children }) => {
     getMyProfile,
     authTokens,
     setProfile,
+    showPayment,
+    amount,
+    month,
+    year,
+    status,
   };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>

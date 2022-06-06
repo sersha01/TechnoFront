@@ -24,7 +24,7 @@ function Profile({by}) {
   },[]);
 
   return (
-    <Row className={`m-0 px-3 py-3 rounded-2 ${style.profile}`}>
+    <Row className={`m-0 px-3 py-3  rounded-2 ${style.profile}`}>
       <Col className="text-start ps-2" xs={12}>
         <h2>My Profile</h2>
       </Col>

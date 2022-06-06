@@ -21,7 +21,7 @@ const Lead = ({child}) => {
             <Notification />
           </Row>
         </Col>
-        <Col md={8} className="bg rounded-3 p-0 mx-5 me-0 pb-5 mb-3 bs">
+        <Col md={8} className="bglight rounded-3 p-0 mx-5 me-0 pb-5 mb-3 bs">
             {child} 
         </Col>
       </Row>
