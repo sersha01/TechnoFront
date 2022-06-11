@@ -10,18 +10,20 @@ import style from "./Placement.module.css";
 import LeadContext from "../../../Context/LeadContext";
 
 const Placement = () => {
-
   const { getPlacements, placements } = useContext(LeadContext);
 
   useEffect(() => {
     getPlacements();
-  },[])
+  }, []);
 
   return (
     <Row className="m-0 px-3 rounded-2 bglight py-3">
       <Col sm={12} className="d-flex justify-content-between mb-2">
         <div className="d-flex">
           <h2 className="me-4">Placements</h2>
+          <Button variant="contained" className="bgdark textlight w-100 h-50">
+            Add
+          </Button>
         </div>
 
         <div className="d-flex justify-content-end textlight">
@@ -32,7 +34,7 @@ const Placement = () => {
             <label className={`${style.label}`}>Name</label>
             <input type="text" className={`w-100 ${style.input}`} />
           </Col>
-          
+
           <Col
             xs={4}
             className={`py-1 textwhite my-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
@@ -64,7 +66,7 @@ const Placement = () => {
           <Col className="bgdark" sm={2}>
             Location
           </Col>
-          
+
           <Col className="bgdark" sm={2}>
             Designation
           </Col>
@@ -72,37 +74,36 @@ const Placement = () => {
       </Col>
 
       <Col className="m-0 row ">
-        {placements && placements.map((placement) => {
-          return (
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #{placement.student.batch.name}
-            </Col>
-            <Col className="textdark" sm={2}>
-              {placement.student.user.username}
-            </Col>
-            <Col className="textdark" sm={2}>
-              {placement.student.profile.domain.name}
-            </Col>
-            <Col className="textdark" sm={2}>
-              {placement.LPA}
-            </Col>
-            <Col className="textdark" sm={2}>
-              {placement.location}
-            </Col>
-            <Col className="textdark d-flex" sm={2}>
-             {placement.position}
-            </Col>
-          </Row>
-        </Col>
-          )
-        })}
-         
-         
+        {placements &&
+          placements.map((placement) => {
+            return (
+              <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+                <Row className="m-0">
+                  <Col className="textdark" sm={2}>
+                    #{placement.student.batch.name}
+                  </Col>
+                  <Col className="textdark" sm={2}>
+                    {placement.student.user.username}
+                  </Col>
+                  <Col className="textdark" sm={2}>
+                    {placement.student.profile.domain.name}
+                  </Col>
+                  <Col className="textdark" sm={2}>
+                    {placement.LPA}
+                  </Col>
+                  <Col className="textdark" sm={2}>
+                    {placement.location}
+                  </Col>
+                  <Col className="textdark d-flex" sm={2}>
+                    {placement.position}
+                  </Col>
+                </Row>
+              </Col>
+            );
+          })}
       </Col>
     </Row>
-  )
-}
+  );
+};
 
-export default Placement
+export default Placement;

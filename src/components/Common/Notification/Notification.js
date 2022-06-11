@@ -6,11 +6,12 @@ import style from "./Notification.module.css";
 import { FaBell } from 'react-icons/fa'
 import { useContext } from "react";
 import AuthContext from "../../../Context/AuthContext";
+import {Link} from 'react-router-dom'
 
 
 function Notification() {
 
-  const { notification } = useContext(AuthContext);
+  const { notification,user_is } = useContext(AuthContext);
 
   return (
     <Row className="m-0 rounded-3 py-4  ">
@@ -18,7 +19,7 @@ function Notification() {
         <h5 className="ms-3 mb-3">Notifications <FaBell/></h5>
       </Col>
 
-      {notification && notification.map((notification, index) => {
+      {notification && notification.slice(0,2).map((notification, index) => {
         return (
           <Col
             className={`text-center ${style.hoverdiv}  cp pt-4`}
@@ -45,7 +46,7 @@ function Notification() {
       >
         <Row className="m-0">
           <Col className="text-center pb-3" xs={12}>
-            <h6 className="m-0">See all</h6>
+            <Link to={`${ user_is==="student" ? "/notifications" : `/${user_is}/notifications`}`}><h6 className="m-0">See all</h6></Link>
           </Col>
         </Row>
       </Col>

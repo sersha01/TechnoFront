@@ -7,16 +7,27 @@ import Profile from "./components/Common/Profile/Profile";
 import Manifest from "./components/Common/Manifest/Manifest";
 import Tasks from "./components/Common/Tasks/Tasks"; 
 import Pending from "./components/Common/Pending/Pending";
+import Notifications from './components/Common/Notifications/Notifications';
+////////////////////////////////////
+
+
 ////////////////////////////////////
 import Student from "./pages/User/Student";
 import StudentSpace from "./components/User/Space/MySpace";
 import MyPayment from "./components/User/Payment/Payment"
+////////////////////////////////////
+
+
+
 ////////////////////////////////////
 import Advisor from "./pages/Advisor/Advisor";
 import MyGroup from "./components/Advisor/Group/Group";
 import AdvisorSpace from "./components/Advisor/Space/MySpace";
 import MyStudents from "./components/Advisor/Students/Students";
 import Work from "./components/Advisor/Work/Work";
+////////////////////////////////////
+
+
 ////////////////////////////////////
 import Lead from "./pages/Lead/Lead";
 import Advisors from "./components/Staff/Advisors/Advisors";
@@ -81,6 +92,12 @@ function App() {
                     <Student child={<MyPayment />} />
                   }
                 />
+                <Route
+                  path="/notifications"
+                  element={
+                    <Student child={<Notifications />} />
+                  }
+                />
               </Routes>
               <AdvisorProvider>
                 <Routes>
@@ -113,6 +130,12 @@ function App() {
                   path="/advisor/students"
                   element={
                     <Advisor child={<MyStudents />}/>
+                  }
+                />
+                <Route
+                  path="/advisor/notifications"
+                  element={
+                    <Advisor child={<Notifications />}/>
                   }
                 />
                 <Route
@@ -172,6 +195,12 @@ function App() {
                     path="/lead/domain"
                     element={
                       <Lead child={<DomainComponent />}/>
+                    }
+                  />
+                  <Route
+                    path="/lead/notifications"
+                    element={
+                      <Lead child={<Notifications />}/>
                     }
                   />
                   <Route

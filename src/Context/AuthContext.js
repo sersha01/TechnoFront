@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { set } from "react-hook-form";
 
 const AuthContext = createContext();
 export default AuthContext;
@@ -41,10 +42,13 @@ export const AuthProvider = ({ children }) => {
   const [reviewers, setReviewers] = useState(null);
   const [swap, setSwap] = useState("video");
   const [swap2, setSwap2] = useState("video");
+  const [types, setTypes] = useState(null);
 
+  const [rent, setRent] = useState(false);
+  const [shiftpay, setShiftpay] = useState(false);
+  const [upfront, setUpfront] = useState(false);
 
-  
-  const signupUser = async ({ username, email, password}) => {
+  const signupUser = async ({ username, email, password }) => {
     const check = user_is === "advisor" ? true : false;
     const batch = signUpBatch ? signUpBatch : 0;
     await axios
@@ -120,16 +124,16 @@ export const AuthProvider = ({ children }) => {
 
   const stndingData = async (username, password) => {
     await axios
-    .post("http://127.0.0.1:8000/user/token", { username, password })
-    .then((res) => {
-      setAuthTokens(res.data);
-      console.log(JSON.stringify(res.data));
-      console.log(jwt_decode(JSON.stringify(res.data)).position);
-      setUser(jwt_decode(JSON.stringify(res.data)));
-      localStorage.setItem("authTokens", JSON.stringify(res.data));
-      userDept(res.data);
-    });
-  }
+      .post("http://127.0.0.1:8000/user/token", { username, password })
+      .then((res) => {
+        setAuthTokens(res.data);
+        console.log(JSON.stringify(res.data));
+        console.log(jwt_decode(JSON.stringify(res.data)).position);
+        setUser(jwt_decode(JSON.stringify(res.data)));
+        localStorage.setItem("authTokens", JSON.stringify(res.data));
+        userDept(res.data);
+      });
+  };
 
   const loginUser = async (e) => {
     e.preventDefault();
@@ -243,9 +247,13 @@ export const AuthProvider = ({ children }) => {
   };
 
   const isCodeValid = async (code) => {
-    const res = await axios.post('http://127.0.0.1:8000/user/validate/code',{'code':code},{})
-    return res
-  }
+    const res = await axios.post(
+      "http://127.0.0.1:8000/user/validate/code",
+      { code: code },
+      {}
+    );
+    return res;
+  };
 
   const updateProfile = async (e) => {
     e.preventDefault();
@@ -289,35 +297,6 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  const[amount, setAmount] = useState(0);
-  const[month, setMonth] = useState(0);
-  let year =  new Date().getFullYear();
-  const [paid, setPaid] = useState(0);
-  const [status, setStatus] = useState(0);
-
-  const showPayment = async () => {
-    await axios.post(
-      "http://127.0.0.1:8000/payment/pay",
-      {},
-      { headers: { Authorization: `Bearer ${authTokens.access}` } },
-    ).then((res) => {
-      console.log(res.data);
-
-      if (res.data == "Negative") {
-        console.log("No payments pending")
-      }
-      else{
-        setAmount(res.data.amount);
-        setMonth(res.data.month);
-        setStatus(res.data.status);
-
-        console.log("Month is ", res.data.amount);
-        console.log("Amount is ", res.data.month);
-      }
-      
-    })
-  }
-
   const get_data = async () => {
     axios
       .post(
@@ -333,6 +312,263 @@ export const AuthProvider = ({ children }) => {
       })
       .catch(function (response) {
         console.log(response);
+      });
+  };
+
+  const getNotificationsTypes = async () => {
+    await axios
+      .post(
+        "http://127.0.0.1:8000/user/types",
+        {},
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        setTypes(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const createNotifications = async (type, content) => {
+    await axios
+      .post(
+        "http://127.0.0.1:8000/user/create/notification",
+        {
+          type: type,
+          content: content,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const deleteNotifications = async (id) => {
+    await axios
+      .post(
+        "http://127.0.0.1:8000/user/delete/notification",
+        { id: id },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const [amount, setAmount] = useState(0);
+  const [status, setStatus] = useState(0);
+  const [rentid, setRentId] = useState(0);
+
+  const showPayment = async () => {
+    await axios
+      .get("http://127.0.0.1:8000/payment/pay", {
+        headers: { Authorization: `Bearer ${authTokens.access}` },
+      })
+      .then((res) => {
+        if (res.data.status == "Paid") {
+          setRent(false);
+        } else {
+          setAmount(res.data.amount);
+          setStatus(res.data.status);
+          setRentId(res.data.id);
+          setRent(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const [upfrontstatus, setUpfrontstatus] = useState(0);
+  const [upfrontamount, setUpfrontamount] = useState(0);
+  const [upfrontid, setUpfrontId] = useState(0);
+
+  const showUpFront = async () => {
+    await axios
+      .get("http://127.0.0.1:8000/payment/upfrontpay", {
+        headers: { Authorization: `Bearer ${authTokens.access}` },
+      })
+      .then((res) => {
+        if (res.data.status == "Paid") {
+          setUpfront(false);
+        } else {
+          setUpfrontamount(res.data.amount);
+          setUpfrontstatus(res.data.status);
+          setUpfrontId(res.data.id);
+          setUpfront(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const [shiftamount, setShiftamount] = useState(0);
+  const [shiftstatus, setShiftstatus] = useState(0);
+  const [shiftid, setShiftId] = useState(0);
+
+  const showShiftPayment = async () => {
+    await axios
+      .get("http://127.0.0.1:8000/payment/shiftpay", {
+        headers: { Authorization: `Bearer ${authTokens.access}` },
+      })
+      .then((res) => {
+        if (res.data.status != "Paid") {
+          setShiftamount(res.data.amount);
+          setShiftstatus(res.data.status);
+          setShiftId(res.data.id);
+          setShiftpay(true);
+        } else {
+          setShiftpay(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  const displayRazorpay = async (amount, type, id) => {
+    const response = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+    if (!response) {
+      alert("You are offline");
+      return;
+    }
+
+    const options = {
+      key: "rzp_test_aRq4XkP2vJ58Xt",
+      currency: "INR",
+      amount: amount * 100,
+      name: "BrotoType",
+      description: "Paying your Co-working rent ",
+
+      handler: function (response) {
+        payRent(amount, type, id);
+      },
+
+      prefill: {
+        name: "Michu",
+        email: "m4michu123@gmail.com",
+        contact: "9207404868",
+      },
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  };
+
+  const payRent = async (amount, type, id) => {
+    await axios
+      .post(
+        "http://127.0.0.1:8000/payment/paying",
+        {
+          id: id,
+          amount: amount,
+          type: type,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        if (res.status == "Paid") {
+          myPayments();
+          if (type == "Rent") {
+            setRent(false);
+          } else if (type == "Upfront") {
+            setUpfront(false);
+          } else if (type == "BatchShift") {
+            setShiftpay(false);
+          }
+        } else {
+          if (type == "Rent") {
+            showPayment();
+          } else if (type == "Upfront") {
+            showUpFront();
+          } else if (type == "BatchShift") {
+            showShiftPayment();
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const [mypay, setMypay] = useState(false);
+
+  const myPayments = async () => {
+    await axios
+      .get("http://127.0.0.1:8000/payment/myPayments", {
+        headers: { Authorization: `Bearer ${authTokens.access}` },
+      })
+      .then((res) => {
+        setMypay(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const [allpending, setAllpending] = useState(false);
+
+  const allPendingPayments = async () => {
+    await axios
+      .get("http://127.0.0.1:8000/payment/pending", {
+        headers: { Authorization: `Bearer ${authTokens.access}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setAllpending(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const cashpaid = async (id) => {
+    await axios
+      .post(
+        "http://127.0.0.1:8000/payment/cashpaid",
+        {
+          id: id,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -371,12 +607,34 @@ export const AuthProvider = ({ children }) => {
     setProfile,
     showPayment,
     amount,
-    month,
-    year,
     status,
     isCodeValid,
     setSignUpBatch,
     setUser_is,
+    getNotificationsTypes,
+    createNotifications,
+    types,
+    deleteNotifications,
+    showUpFront,
+    rent,
+    shiftpay,
+    upfront,
+    showShiftPayment,
+    showUpFront,
+    upfrontamount,
+    upfrontstatus,
+    shiftamount,
+    shiftstatus,
+    loadScript,
+    displayRazorpay,
+    rentid,
+    upfrontid,
+    shiftid,
+    myPayments,
+    mypay,
+    allpending,
+    allPendingPayments,
+    cashpaid,
   };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>
