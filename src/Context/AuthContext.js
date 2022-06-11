@@ -572,6 +572,26 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const sendForm = async (id) => {
+    await axios
+      .post(
+        "http://127.0.0.1:8000/payment/sendform",
+        {
+          id: id,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        allPendingPayments();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const contextData = {
     signupUser,
     updateProfile,
@@ -635,6 +655,7 @@ export const AuthProvider = ({ children }) => {
     allpending,
     allPendingPayments,
     cashpaid,
+    sendForm,
   };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>

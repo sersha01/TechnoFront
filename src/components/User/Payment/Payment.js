@@ -53,7 +53,6 @@ function Payment() {
 
   return (
     <Row className={`m-0 rounded-2 px-3 ${style.payment}`}>
-      <h1>Hello</h1>
       <Col className="text-start pt-4 pb-2" xs={12}>
         <h3>My Payments</h3>
       </Col>
@@ -350,8 +349,8 @@ function Payment() {
                   type="text"
                   className={`w-100 ps-2 pt-2 pb-3 rounded-3 ${style.input}`}
                   placeholder="Enter UPI Amount"
-                  value={shiftprice}
-                  onChange={(e) => setShiftPrice(e.target.value)}
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
                 />
               </Col>
               <Col md={4} xs={6}>
@@ -359,16 +358,23 @@ function Payment() {
                   type="text"
                   className={`w-100 ps-2 pt-2 pb-3 rounded-3 ${style.input}`}
                   placeholder="Enter Cash Amount"
-                  value={shiftcash}
-                  onChange={(e) => setShiftCash(e.target.value)}
+                  value={cash}
+                  onChange={(e) => setCash(e.target.value)}
                 />
               </Col>
               <Col className="row m-0" md={4} xs={12}>
                 <Col className="ps-0 pe-1" md={6} xs={6}>
                   <Button
                     size="lg"
-                    onClick={() => displayRazorpay(price)}
                     className={`w-100 ${style.btn}`}
+                    onClick={() => {
+                      if (price + cash > shiftamount) {
+                        alert("Amount is greater than the shift amount");
+                      } else {
+                        displayRazorpay(price + cash, "BatchShift", shiftid);
+                        setBtn("True");
+                      }
+                    }}
                   >
                     Submit
                   </Button>

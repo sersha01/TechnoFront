@@ -9,11 +9,11 @@ import Button from "@mui/material/Button";
 import AuthContext from "../../../Context/AuthContext";
 
 const Pending = () => {
-  const { allPendingPayments, allpending, cashpaid } = useContext(AuthContext);
+  const { allPendingPayments, allpending, cashpaid, sendForm } =
+    useContext(AuthContext);
 
   useEffect(() => {
     allPendingPayments();
-
   }, []);
 
   return (
@@ -44,44 +44,73 @@ const Pending = () => {
       <Col className="m-0 row">
         {allpending &&
           allpending.map((pending, index) => {
-            return (
-              <Col sm={12} className="py-2 mb-2 cp bg rounded-3">
-                <Row className="m-0">
-                  <Col sm={1}>{pending.batch}</Col>
-                  <Col sm={2}> {pending.student} </Col>
-                  <Col sm={2}>{pending.types}</Col>
-                  <Col sm={2}>
-                    {pending.status}
-                  </Col>
-                  <Col sm={2} className="text-danger">
-                    {pending.amount}
-                  </Col>
+            if (pending.status === "Expired") {
+              return (
+                <Col sm={12} className="py-2 mb-2 cp bg rounded-3">
+                  <Row className="m-0">
+                    <Col sm={1}>{pending.batch}</Col>
+                    <Col sm={2}> {pending.student} </Col>
+                    <Col sm={2}>{pending.types}</Col>
+                    <Col sm={2}>{pending.status}</Col>
+                    <Col sm={2} className="text-danger">
+                      {pending.amount}
+                    </Col>
 
-                  <Col sm={3}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      className="mx-1 sendform"
-                    >
-                      Send Form
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      className="coh"
-                      onClick={() => {
-                        cashpaid(pending.id);
-                      }}
-                    >
-                      Paid
-                    </Button>
-                  </Col>
-                </Row>
-              </Col>
-            );
+                    <Col sm={3} className="d-flex justify-content-end">
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        className="mx-1 sendform"
+                        onClick={() => {
+                          sendForm(pending.id);
+                        }}
+                      >
+                        Send Form
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        className="coh"
+                        onClick={() => {
+                          cashpaid(pending.id);
+                        }}
+                      >
+                        Paid
+                      </Button>
+                    </Col>
+                  </Row>
+                </Col>
+              );
+            } else {
+              return (
+                <Col sm={12} className="py-2 mb-2 cp bg rounded-3">
+                  <Row className="m-0">
+                    <Col sm={1}>{pending.batch}</Col>
+                    <Col sm={2}> {pending.student} </Col>
+                    <Col sm={2}>{pending.types}</Col>
+                    <Col sm={2}>{pending.status}</Col>
+                    <Col sm={2} className="text-danger">
+                      {pending.amount}
+                    </Col>
+
+                    <Col sm={3} className="d-flex justify-content-end">
+                     
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        className="coh"
+                        onClick={() => {
+                          cashpaid(pending.id);
+                        }}
+                      >
+                        Paid
+                      </Button>
+                    </Col>
+                  </Row>
+                </Col>
+              );
+            }
           })}
-
-        
       </Col>
     </>
   );

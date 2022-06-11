@@ -8,9 +8,7 @@ import { useContext, useEffect, useState } from "react";
 import { ShowChart } from "@mui/icons-material";
 import AuthContext from "../../../Context/AuthContext";
 
-
 const MyPayements = () => {
-
   const { myPayments, mypay } = useContext(AuthContext);
 
   useEffect(() => {
@@ -21,31 +19,60 @@ const MyPayements = () => {
     <>
       {mypay &&
         mypay.map((item, index) => {
-          console.log(mypay);
-          return (
-            <Col
-              xs={12}
-              key={index}
-              className={`rounded-3 pt-4 pb-2 px-3 py-5 pb-3 row mx-0 my-2 ${style.crDiv}`}
-            >
-              <Col className="text-start " xs={4}>
-                <h6 className={` ${style.crMonth}`}> {item.month} 2022</h6>
-                <h3 className={`${style.crCash}`}>${item.totalamt}</h3>
+          if (item.status === "Expired") {
+            return (
+              <Col
+                xs={12}
+                key={index}
+                className={`rounded-3 pt-4 pb-2 px-3 py-5 pb-3 row mx-0 my-2 ${style.crDiv}`}
+              >
+                <Col className="text-start " xs={4}>
+                  <h6 className={` ${style.crMonth}`}> {item.month} 2022</h6>
+                  <h3 className={`${style.crCash}`}>${item.totalamt}</h3>
+                </Col>
+                <Col className="text-start " xs={4}>
+                  <h6 className={` ${style.crMonth}`}>Status</h6>
+                  <h6 className="h3 text-danger">{item.status}</h6>
+                  
+                </Col>
+                <Col className="text-start " xs={4}>
+                  <h6 className={` ${style.crMonth}`}>Type</h6>
+                  <h6 className={` ${style.lastDate} textinfo`}>
+                    {item.types}
+                  </h6>
+                  <h5 className="text-danger">Contact your advisor/lead with immediate effect</h5>
+
+                </Col>
               </Col>
-              <Col className="text-start " xs={4}>
-                <h6 className={` ${style.crMonth}`}>Status</h6>
-                <h6 className={` ${style.status}`}>{item.status}</h6>
-                <h6 className={` ${style.crMonth}`}>Date :</h6>
-                <h6 className={` ${style.lastDate} textinfo`}>
-                  {item.paid_date}
-                </h6>
+            );
+          } else {
+            return (
+              <Col
+                xs={12}
+                key={index}
+                className={`rounded-3 pt-4 pb-2 px-3 py-5 pb-3 row mx-0 my-2 ${style.crDiv}`}
+              >
+                <Col className="text-start " xs={4}>
+                  <h6 className={` ${style.crMonth}`}> {item.month} 2022</h6>
+                  <h3 className={`${style.crCash}`}>${item.totalamt}</h3>
+                </Col>
+                <Col className="text-start " xs={4}>
+                  <h6 className={` ${style.crMonth}`}>Status</h6>
+                  <h6 className={` ${style.status}`}>{item.status}</h6>
+                  <h6 className={` ${style.crMonth}`}>Date :</h6>
+                  <h6 className={` ${style.lastDate} textinfo`}>
+                    {item.paid_date}
+                  </h6>
+                </Col>
+                <Col className="text-start " xs={4}>
+                  <h6 className={` ${style.crMonth}`}>Type</h6>
+                  <h6 className={` ${style.lastDate} textinfo`}>
+                    {item.types}
+                  </h6>
+                </Col>
               </Col>
-              <Col className="text-start " xs={4}>
-                <h6 className={` ${style.crMonth}`}>Type</h6>
-                <h6 className={` ${style.lastDate} textinfo`}>{item.types}</h6>
-              </Col>
-            </Col>
-          );
+            );
+          }
         })}
     </>
   );
