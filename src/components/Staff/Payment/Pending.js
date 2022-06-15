@@ -7,10 +7,13 @@ import style from "./Payment.module.css";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import AuthContext from "../../../Context/AuthContext";
+import StyleContext from "../../../Context/StyleContext";
 
 const Pending = () => {
   const { allPendingPayments, allpending, cashpaid, sendForm } =
     useContext(AuthContext);
+  const {infoToast} = useContext(StyleContext);
+
 
   useEffect(() => {
     allPendingPayments();
@@ -63,6 +66,7 @@ const Pending = () => {
                         className="mx-1 sendform"
                         onClick={() => {
                           sendForm(pending.id);
+                          infoToast("Form Sent to the Student");
                         }}
                       >
                         Send Form
@@ -73,6 +77,7 @@ const Pending = () => {
                         className="coh"
                         onClick={() => {
                           cashpaid(pending.id);
+                          infoToast("Payment Received in hand");
                         }}
                       >
                         Paid

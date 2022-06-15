@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import { ShowChart } from "@mui/icons-material";
 import AuthContext from "../../../Context/AuthContext";
 import MyPays from "./MyPayements";
+import StyleContext from "../../../Context/StyleContext";
 
 function Payment() {
   const {
@@ -30,6 +31,8 @@ function Payment() {
     mypay,
   } = useContext(AuthContext);
 
+  const {infoToast} = useContext(StyleContext);
+
   const [btn, setBtn] = useState("True");
   const [upfrontbtn, setUpfrontBtn] = useState("True");
   const [shiftbtn, setShiftBtn] = useState("True");
@@ -43,6 +46,14 @@ function Payment() {
   const today = new Date();
   let month = today.toLocaleString("default", { month: "long" });
   let year = new Date().getFullYear();
+
+  var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0,
+  });
+
+  
 
   useEffect(() => {
     showPayment();
@@ -64,7 +75,7 @@ function Payment() {
               <h5 className={`${style.crMonth}`}>
                 {month} {year}
               </h5>
-              <h3 className={`${style.crCash}`}>₹{amount}</h3>
+              <h3 className={`${style.crCash}`}>{formatter.format(amount)}</h3>
             </Col>
             <Col xs={8} className={`text-start d-flex ps-md-4`}>
               <Col xs={6} className={`text-start ps-md-4`}>
@@ -96,7 +107,9 @@ function Payment() {
                 </Button>
               </Col>
               <Col xs={4}>
-                <Button size="lg" className={`w-100 ${style.btn}`}>
+                <Button size="lg" onClick={()=>{
+                  infoToast("Payment will be successfull when lead confirms your payment")
+                }} className={`w-100 ${style.btn}`}>
                   Cash
                 </Button>
               </Col>
@@ -119,7 +132,7 @@ function Payment() {
               <Col md={4} xs={6}>
                 <input
                   type="text"
-                  className={`w-100 ps-2 pt-2 pb-3 rounded-3 ${style.input}`}
+                  className={`w-100 ps-2 pt-2 pb-3 textdark rounded-3 ${style.input}`}
                   placeholder="Enter UPI Amount"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
@@ -128,7 +141,7 @@ function Payment() {
               <Col md={4} xs={6}>
                 <input
                   type="text"
-                  className={`w-100 ps-2 pt-2 pb-3 rounded-3 ${style.input}`}
+                  className={`w-100 ps-2 pt-2 pb-3 textdark rounded-3 ${style.input}`}
                   placeholder="Enter Cash Amount"
                   value={cash}
                   onChange={(e) => setCash(e.target.value)}
@@ -140,7 +153,7 @@ function Payment() {
                     size="lg"
                     onClick={() => {
                       if (price + cash > amount) {
-                        alert("Amount is greater than the rent amount");
+                        infoToast("Enter a value lower the amount");
                       } else {
                         displayRazorpay(price + cash, "Rent", rentid);
                         setBtn("True");
@@ -174,7 +187,7 @@ function Payment() {
               <h5 className={`${style.crMonth}`}>
                 {month} {year}
               </h5>
-              <h3 className={`${style.crCash}`}>₹{upfrontamount}</h3>
+              <h3 className={`${style.crCash}`}>{formatter.format(upfrontamount)}</h3>
             </Col>
             <Col xs={8} className={`text-start d-flex ps-md-4`}>
               <Col xs={6} className={`text-start ps-md-4`}>
@@ -208,7 +221,9 @@ function Payment() {
                 </Button>
               </Col>
               <Col xs={4}>
-                <Button size="lg" className={`w-100 ${style.btn}`}>
+                <Button size="lg" onClick={()=>{
+                  infoToast("Payment will be successfull when lead confirms your payment")
+                }} className={`w-100 ${style.btn}`}>
                   Cash
                 </Button>
               </Col>
@@ -231,7 +246,7 @@ function Payment() {
               <Col md={4} xs={6}>
                 <input
                   type="text"
-                  className={`w-100 ps-2 pt-2 pb-3 rounded-3 ${style.input}`}
+                  className={`w-100 ps-2 pt-2 pb-3 textdark rounded-3 ${style.input}`}
                   placeholder="Enter UPI Amount"
                   value={upfrontprice}
                   onChange={(e) => setUpfrontPrice(e.target.value)}
@@ -240,7 +255,7 @@ function Payment() {
               <Col md={4} xs={6}>
                 <input
                   type="text"
-                  className={`w-100 ps-2 pt-2 pb-3 rounded-3 ${style.input}`}
+                  className={`w-100 ps-2 pt-2 pb-3 textdark rounded-3 ${style.input}`}
                   placeholder="Enter Cash Amount"
                   value={upfrontcash}
                   onChange={(e) => setUpfrontCash(e.target.value)}
@@ -252,7 +267,7 @@ function Payment() {
                     size="lg"
                     onClick={() => {
                       if (upfrontprice + upfrontcash > upfrontamount) {
-                        alert("Amount is greater than the upfront amount");
+                        infoToast("Amount is greater than the upfront amount");
                       } else {
                         displayRazorpay(
                           upfrontprice + upfrontcash,
@@ -290,7 +305,7 @@ function Payment() {
               <h5 className={`${style.crMonth}`}>
                 {month} {year}
               </h5>
-              <h3 className={`${style.crCash}`}>₹{shiftamount}</h3>
+              <h3 className={`${style.crCash}`}>{formatter.format(shiftamount)}</h3>
             </Col>
             <Col xs={8} className={`text-start d-flex ps-md-4`}>
               <Col xs={6} className={`text-start ps-md-4`}>
@@ -324,7 +339,9 @@ function Payment() {
                 </Button>
               </Col>
               <Col xs={4}>
-                <Button size="lg" className={`w-100 ${style.btn}`}>
+                <Button size="lg" onClick={()=>{
+                  infoToast("Payment will be successfull when lead confirms your payment")
+                }} className={`w-100 ${style.btn}`}>
                   Cash
                 </Button>
               </Col>
@@ -347,7 +364,7 @@ function Payment() {
               <Col md={4} xs={6}>
                 <input
                   type="text"
-                  className={`w-100 ps-2 pt-2 pb-3 rounded-3 ${style.input}`}
+                  className={`w-100 ps-2 pt-2 pb-3 textdark rounded-3 ${style.input}`}
                   placeholder="Enter UPI Amount"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
@@ -356,7 +373,7 @@ function Payment() {
               <Col md={4} xs={6}>
                 <input
                   type="text"
-                  className={`w-100 ps-2 pt-2 pb-3 rounded-3 ${style.input}`}
+                  className={`w-100 ps-2 pt-2 pb-3 textdark rounded-3 ${style.input}`}
                   placeholder="Enter Cash Amount"
                   value={cash}
                   onChange={(e) => setCash(e.target.value)}
@@ -369,7 +386,7 @@ function Payment() {
                     className={`w-100 ${style.btn}`}
                     onClick={() => {
                       if (price + cash > shiftamount) {
-                        alert("Amount is greater than the shift amount");
+                        infoToast("Amount is greater than the shift amount");
                       } else {
                         displayRazorpay(price + cash, "BatchShift", shiftid);
                         setBtn("True");

@@ -15,6 +15,12 @@ const MyPayements = () => {
     myPayments();
   }, []);
 
+  var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0,
+  });
+
   return (
     <>
       {mypay &&
@@ -28,7 +34,7 @@ const MyPayements = () => {
               >
                 <Col className="text-start " xs={4}>
                   <h6 className={` ${style.crMonth}`}> {item.month} 2022</h6>
-                  <h3 className={`${style.crCash}`}>${item.totalamt}</h3>
+                  <h3 className={`${style.crCash}`}>{formatter.format(item.amount)}</h3>
                 </Col>
                 <Col className="text-start " xs={4}>
                   <h6 className={` ${style.crMonth}`}>Status</h6>
@@ -54,7 +60,7 @@ const MyPayements = () => {
               >
                 <Col className="text-start " xs={4}>
                   <h6 className={` ${style.crMonth}`}> {item.month} 2022</h6>
-                  <h3 className={`${style.crCash}`}>${item.totalamt}</h3>
+                  <h3 className={`${style.crCash}`}>{formatter.format(item.totalamt)}</h3>
                 </Col>
                 <Col className="text-start " xs={4}>
                   <h6 className={` ${style.crMonth}`}>Status</h6>

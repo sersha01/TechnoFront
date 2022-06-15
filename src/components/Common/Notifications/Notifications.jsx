@@ -44,6 +44,7 @@ const Notifications = () => {
                 ></div>
               </Col>
               <Col xs={6} className="my-auto">
+                <p className="notitype">{notification.type}</p>
                 {notification.content}
               </Col>
               <Col xs={2} className="my-auto d-flex justify-content-end">
@@ -60,6 +61,10 @@ const Notifications = () => {
                   </Button>
                 )}
               </Col>
+              {user_is === "lead" && (
+              <span class="tooltiptext">{notification.creator}</span>
+        )}
+
             </Row>
           );
         })}

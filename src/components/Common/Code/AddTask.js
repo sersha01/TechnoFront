@@ -8,11 +8,13 @@ import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import AuthContext from "../../../Context/AuthContext";
+import StyleContext from "../../../Context/StyleContext";
 
 
 const AddTask = ({ setSwap2,value }) => {
   const [open, setOpen] = useState(false);
   const [code, setCode] = useState("");
+  const {errorToast} = useContext(StyleContext);
 
   const { isCodeValid, setSignUpBatch, setUser_is } = useContext(AuthContext);
   const handleClickOpen = () => {
@@ -34,7 +36,7 @@ const AddTask = ({ setSwap2,value }) => {
         setOpen(false);
         setSwap2("signup");
       }else{
-        alert("Invalid Code");
+        errorToast("Invalid Code");
       }
     }).catch((err) => {
       console.log(err);

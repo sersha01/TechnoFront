@@ -1,15 +1,18 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { set } from "react-hook-form";
+import StyleContext from "./StyleContext";
 
 const AuthContext = createContext();
+
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
+  const { successToast, warningToast, infoToast } = useContext(StyleContext);
   const [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem("authTokens")
       ? JSON.parse(localStorage.getItem("authTokens"))
@@ -380,6 +383,7 @@ export const AuthProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${authTokens.access}` },
       })
       .then((res) => {
+        console.log(res.data);
         if (res.data.status == "Paid") {
           setRent(false);
         } else {
@@ -407,6 +411,7 @@ export const AuthProvider = ({ children }) => {
         if (res.data.status == "Paid") {
           setUpfront(false);
         } else {
+          console.log(res.data);
           setUpfrontamount(res.data.amount);
           setUpfrontstatus(res.data.status);
           setUpfrontId(res.data.id);
@@ -453,12 +458,19 @@ export const AuthProvider = ({ children }) => {
     });
   };
 
+  var formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 0,
+  });
+
   const displayRazorpay = async (amount, type, id) => {
+    debugger;
     const response = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
     if (!response) {
-      alert("You are offline");
+      warningToast("You are offline");
       return;
     }
 
@@ -471,6 +483,8 @@ export const AuthProvider = ({ children }) => {
 
       handler: function (response) {
         payRent(amount, type, id);
+        successToast("Payment Successful");
+        infoToast("You have paid " + formatter.format(amount));
       },
 
       prefill: {
@@ -553,6 +567,23 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const [allpaid, setAllpaid] = useState(false);
+
+  const allCompletedPayments = async () => {
+    await axios
+      .get("http://127.0.0.1:8000/payment/completed", {
+        headers: { Authorization: `Bearer ${authTokens.access}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+        console.log("Hello");
+        setAllpaid(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const cashpaid = async (id) => {
     await axios
       .post(
@@ -566,6 +597,7 @@ export const AuthProvider = ({ children }) => {
       )
       .then((res) => {
         console.log(res.data);
+        allPendingPayments();
       })
       .catch((err) => {
         console.log(err);
@@ -656,6 +688,8 @@ export const AuthProvider = ({ children }) => {
     allPendingPayments,
     cashpaid,
     sendForm,
+    allpaid,
+    allCompletedPayments,
   };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>

@@ -28,8 +28,20 @@ function Notification() {
           >
             <Row className="m-0">
               <Col xs={2}>
-                <svg height={30} width={30}>
-                  <circle cx="15" cy="15" r="15" />
+                <svg height={30} width={30} >
+                  <circle cx="15" cy="15" r="15" className={`vertical ${
+                    notification.type === "Placement"
+                      ? `bggreen`
+                      : notification.type === "Message"
+                      ? `bgyellow`
+                      : notification.type === "Termination"
+                      ? `bgred`
+                      : notification.type === "AdvisorChange"
+                      ? `bgblue`
+                      : notification.type === "BatchShift"
+                      ? `bginfo`
+                      : `bginfo`
+                  }`} />
                 </svg>
               </Col>
               <Col className="text-start" xs={10}>

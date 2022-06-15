@@ -27,6 +27,7 @@
 .btnCancel {
     background: var(--dark);
     font-weight: 600;
+    color: var(--light);
 }
 
 .btn:hover {
@@ -37,6 +38,8 @@
 .btnCancel:hover {
     background: var(--dark);
     opacity: 0.9;
+    color: var(--light);
+
 }
 
 .input {
