@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import AuthContext from "../../../Context/AuthContext";
 import Button from "@mui/material/Button";
-import Add from "../AddTask/AddTask";
+import Add from "../../Staff/AddTask/AddTask";
 
 const Notifications = () => {
   const { notification, user_is, deleteNotifications } =

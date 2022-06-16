@@ -1,18 +1,26 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 // Bootstrap
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import style from "./Tasks.module.css"
 import style from "./Students.module.css";
-import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import AdvisorContext from "../../../Context/AdvisorContext";
+import AddTask from "../AddTask/AddTask";
+import AuthContext from "../../../Context/AuthContext";
+import { useNavigate } from "react-router";
 
 const Students = () => {
 
-  const { getMyStudents, myStudents } = useContext(AdvisorContext);
+  const { setCurr_student } = useContext(AuthContext)
+  const { getMyStudents, myStudents, sendTerminateRequest } = useContext(AdvisorContext);
+
+  const navigate = useNavigate();
+
+  const [batch, setBatch] = useState('');
+  const [name, setName] = useState('');
 
   useEffect(() => {
     getMyStudents();
@@ -27,13 +35,17 @@ const Students = () => {
         <div className="d-flex">
           <TextField
             id="outlined-basic"
-            label="Group"
+            label="Advisor"
+            value={name} 
+            onChange={(e)=>{setName(e.target.value)}}
             variant="outlined"
             className="mx-2 h-100"
           />
           <TextField
             id="outlined-basic"
             label="Batch"
+            value={batch} 
+            onChange={(e)=>{setBatch(e.target.value)}} 
             variant="outlined"
           />
           <Button variant="contained" color="primary" className="mx-2 h-100">
@@ -68,78 +80,46 @@ const Students = () => {
       <Col className="m-0 row">
         <>
           {myStudents && myStudents.map((student, index) => {
+            if ((name !== '' && batch !== '' && student.advisor.includes(name) && student.batch.includes(batch)) || ((name !== '' && batch === '' && student.advisor.includes(name)) || (name === '' && batch !== '' &&  student.batch.includes(batch))) || (name === '' && batch === '')) {
             return(
             <Col
             sm={12}
             className={`py-2 mb-2 cp bglight rounded-3 ${style.tableBody}`}
+            key={index}
+            onClick={(e)=>{
+              e.preventDefault()
+              if ("navTo" === e.target.className.slice(0,5)) {
+                setCurr_student(student.id)
+                navigate('/advisor/group/taskslist')
+              }
+            }}
           >
-            <Row className="m-0">
-              <Col className={`${style.tableBodyText}`} sm={1}>
+            <Row className="navTo m-0">
+              <Col className={`navTo ${style.tableBodyText}`} sm={1}>
                 #{index + 1}
               </Col>
-              <Col className={`${style.tableBodyText}`} sm={2}>
+              <Col className={`navTo ${style.tableBodyText}`} sm={2}>
                 {student.name}
               </Col>
-              <Col className={`${style.tableBodyText}`} sm={2}>
+              <Col className={`navTo ${style.tableBodyText}`} sm={2}>
                 {student.week}
               </Col>
-              <Col className={`${style.tableBodyText}`} sm={2}>
+              <Col className={`navTo ${style.tableBodyText}`} sm={2}>
                 {student.pending}
               </Col>
 
-              <Col className={`${style.tableBodyText}`} sm={2}>
-                {student.advisor ? student.advisor : "No Group"}
+              <Col className={`navTo ${style.tableBodyText}`} sm={2}>
+                {student.advisor}
               </Col>
-              <Col className={`${style.tableBodyText} d-flex`} sm={3}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className="mx-1 my-auto"
-                >
-                  Shift
-                </Button>
-                <Button variant="contained" color="error">
+              <Col className={`navTo ${style.tableBodyText} d-flex`} sm={3}>
+                <AddTask title="SHIFT" value="shift" form={student.id}/>
+                <Button variant="contained" color="error" onClick={()=>{sendTerminateRequest(student.id)}}>
                   Terminate
                 </Button>
               </Col>
             </Row>
           </Col>
-          )})}
-          {/* <Col
-            sm={12}
-            className={`py-2 mb-2 cp bgred rounded-3 ${style.tableBody}`}
-          >
-            <Row className="m-0">
-              <Col className={`${style.tableBodyText}`} sm={1}>
-                #1
-              </Col>
-              <Col className={`${style.tableBodyText}`} sm={2}>
-                Hrishi
-              </Col>
-              <Col className={`${style.tableBodyText}`} sm={2}>
-                17
-              </Col>
-              <Col className={`${style.tableBodyText}`} sm={2}>
-                4
-              </Col>
-
-              <Col className={`${style.tableBodyText}`} sm={2}>
-                Aneesha
-              </Col>
-              <Col className={`${style.tableBodyText} d-flex`} sm={3}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className="mx-1 my-auto"
-                >
-                  Shift
-                </Button>
-                <Button variant="contained" color="error">
-                  Terminate
-                </Button>
-              </Col>
-            </Row>
-          </Col> */}
+          )}})}
         </>
       </Col>
     </Row>

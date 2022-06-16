@@ -43,7 +43,7 @@ export const AdvisorProvider = ({ children }) => {
       });
   };
 
-  const reviewPassed = async (form, reviewer, remark, date) => {
+  const reviewPassed = async (form, reviewer, remark, date, status) => {
     await axios
       .post(
         "http://127.0.0.1:8000/manifest/review/passed",
@@ -53,6 +53,7 @@ export const AdvisorProvider = ({ children }) => {
           remark: remark,
           next_review: date,
           manifest: curr_manifest,
+          status: status,
         },
         {
           headers: { Authorization: `Bearer ${authTokens.access}` },
@@ -68,7 +69,7 @@ export const AdvisorProvider = ({ children }) => {
       });
   };
 
-  const reviewRepeated = async (form, reviewer, remark, date) => {
+  const reviewRepeated = async (form, reviewer, remark, date, status) => {
     await axios
       .post(
         "http://127.0.0.1:8000/manifest/review/repeated",
@@ -78,6 +79,7 @@ export const AdvisorProvider = ({ children }) => {
           remark: remark,
           next_review: date,
           manifest: curr_manifest,
+          status: status,
         },
         {
           headers: { Authorization: `Bearer ${authTokens.access}` },
@@ -151,22 +153,44 @@ export const AdvisorProvider = ({ children }) => {
   //Update function
 
   const taskComplete = async (taskId) => {
-    await axios
-      .post(
-        "http://127.0.0.1:8000/manifest/complete/task",
-        { task: taskId },
-        {
-          headers: { Authorization: `Bearer ${authTokens.access}` },
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-        getStudentManifest(curr_manifest);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+    await axios.post('http://127.0.0.1:8000/manifest/complete/task',{'task':taskId},{
+        headers: {Authorization : `Bearer ${authTokens.access}`}
+    }).then(res=>{
+        console.log(res.data)
+        getStudentManifest(curr_manifest)
+    }).catch(err=>{
+        console.log(err)
+    })
+  }
+  // Other function
+
+  const sendShiftRequest = async (studentId, shiftTo) => {
+    await axios.post('http://127.0.0.1:8000/student/request/shift',{
+        'student':studentId,
+        'shift_to':shiftTo,
+      },{
+        headers: {Authorization : `Bearer ${authTokens.access}`}
+    }).then(res=>{
+        console.log(res.data)
+        getMyStudents()
+    }).catch(err=>{
+        console.log(err)
+    })
+  }
+
+  const sendTerminateRequest = async (studentId) => {
+    await axios.post('http://127.0.0.1:8000/student/request/terminate',{
+        'student':studentId,
+      },{
+        headers: {Authorization : `Bearer ${authTokens.access}`}
+    }).then(res=>{
+        console.log(res.data)
+        getMyStudents()
+    }).catch(err=>{
+        console.log(err)
+    })
+  }
+
 
   const getLocations = async () => {
     await axios
@@ -255,6 +279,7 @@ export const AdvisorProvider = ({ children }) => {
 
 
 
+// >>>>>>> main
   const contextData = {
     //Create
     addTask,
@@ -268,6 +293,10 @@ export const AdvisorProvider = ({ children }) => {
 
     //Update
     taskComplete,
+
+    //Send request
+    sendShiftRequest,
+    sendTerminateRequest,
 
     //State functions
     setMyStudents,

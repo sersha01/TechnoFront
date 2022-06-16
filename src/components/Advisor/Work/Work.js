@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from "react";
+import React, {useEffect, useContext, useState} from "react";
 // Bootstrap
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -19,6 +19,8 @@ const Work = () => {
 
   const navigate = useNavigate();
 
+  const [batch, setBatch] = useState("");
+
   useEffect(() => {
     getMyGroups();
   },[])
@@ -33,6 +35,8 @@ const Work = () => {
         <TextField
             id="outlined-basic"
             label="Batch"
+            value={batch}
+            onChange={(e) => setBatch(e.target.value)}
             variant="outlined"
           />
           <Button variant="contained" color="primary" className="mx-2 h-100">
@@ -67,6 +71,7 @@ const Work = () => {
       <Col className="m-0 row">
         <>
             {myGroups && myGroups.map((group, index) => {
+              if ((batch !== '' && group.batch.includes(batch)) || batch === '') {
               return (
               <Col
               sm={12}
@@ -95,7 +100,7 @@ const Work = () => {
                 </Col>
               </Row>
             </Col>
-            )})}
+            )}})}
         </>
       </Col>
     </Row>

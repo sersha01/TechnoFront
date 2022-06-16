@@ -9,9 +9,19 @@ import { useNavigate } from "react-router";
 
 function Tasks() {
 
-  const { studentTasks, user_is, getStudentTasks, setCurr_manifest, curr_student, getStudentManifest } = useContext(AuthContext);
+  const { studentTasks, user, getStudentTasks, setCurr_manifest, curr_student, getStudentManifest } = useContext(AuthContext);
 
   const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    if (user.position === "Lead"){
+      navigate("/lead/student/manifest")
+    }else if(user.position === "Advisor"){
+      navigate("/advisor/group/manifest")
+    } else {
+      navigate("/manifest")
+    }
+  }
 
   useEffect(() => {
     getStudentTasks(curr_student);
@@ -96,7 +106,8 @@ function Tasks() {
                               <Col className="m-0 row" sm={12}
                               onClick={async ()=>{setCurr_manifest(task.id)
                                       await getStudentManifest(task.id);
-                                      navigate(`/${user_is == "advisor" ? "advisor/group/manifest" : "manifest"}`)}}>
+                                      handleNavigate()
+                                      }}>
                                     <Col
                                       sm={12}
                                       className={`py-2 mb-2 cp rounded-3 ${style.tableBody}`}
@@ -112,7 +123,7 @@ function Tasks() {
                                           className={`${style.tableBodyText}`}
                                           sm={4}
                                         >
-                                          {review.date}
+                                          {review.created}#edited
                                         </Col>
                                         <Col
                                           className={`${style.tableBodyText}`}
@@ -124,7 +135,8 @@ function Tasks() {
                                     </Col>
                               </Col> 
                                 )}): <Col className="text-center h5 mt-3 mb-0" onClick={()=>{setCurr_manifest(task.id)
-                                  navigate(`/${user_is == "advisor" ? "advisor/group/manifest" : "manifest"}`)}}>No Reviews Yet,
+                                  handleNavigate()
+                                  }}>No Reviews Yet,
                                   <b className="text-dark">Go to Manifest</b> </Col>}
                             </Row>
                     </Table>

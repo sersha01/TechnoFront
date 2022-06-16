@@ -2,12 +2,9 @@ import React, { useContext, useState } from "react";
 import ManageSearchRoundedIcon from "@mui/icons-material/ManageSearchRounded";
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
-import AddTask from "../../Common/AddTask/AddTask";
-import TextField from "@mui/material/TextField";
+import AddTask from "../../Staff/AddTask/AddTask";
 import style from "./Groups.module.css";
-// import AuthContext from "../../../Context/AuthContext";
 import LeadContext from "../../../Context/LeadContext";
 
 const Groups = () => {
@@ -73,7 +70,8 @@ const Groups = () => {
       </Col>
 
       <Col className="m-0 row ">
-        { groupDetails ? groupDetails.student.map((student, index) => (
+        { groupDetails ? groupDetails.student.map((student, index) =>{
+          return (
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
@@ -94,7 +92,7 @@ const Groups = () => {
             </Col>
           </Row>
         </Col>
-            )): null}
+            )}): null}
       </Col>
       <Row>
         <Col className="m-0 my-3 row d-flex justify-content-end">
@@ -112,7 +110,8 @@ const Groups = () => {
 
       {add === "show" && (
         <Col className="m-0 row ">
-          { groupLessers && groupLessers.map((student, index) => (
+          { groupLessers && groupLessers.map((student, index) =>{
+            return (
             <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
             <Row className="m-0">
               <Col className="textdark" sm={2}>
@@ -134,7 +133,7 @@ const Groups = () => {
               </Col>
             </Row>
           </Col>
-          ))}
+          )})}
           {/* <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
             <Row className="m-0">
               <Col className="textdark" sm={2}>
