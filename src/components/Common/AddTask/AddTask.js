@@ -121,19 +121,23 @@ const AddTask = ({ title, value, form }) => {
       createGroup(batch, name, advisor, domain);
     } else if (value === "completed") {
       reviewPassed(form, reviewer, remark, date);
-    } else if (value === "repeated") {
+    } 
+    else if (value === "repeated") {
       reviewRepeated(form, reviewer, remark, date);
-    } else if (value === "updateDomain") {
-
+    }
+    else if (value === "st_manage") {
       updateDomain(form, domain);
     } else if (value === "updateBatch") {
       updateBatch(form, advisor);
     } else if (value === "st_manage") {
       studentManage(form, batch, domain);
     } else if (value === "addnotifications") {
-      createNotifications(type, content);
-
+      createNotifications(form, type, content);
     }
+      }
+
+
+
     setOpen(false);
   };
 
@@ -543,6 +547,6 @@ const AddTask = ({ title, value, form }) => {
       </Dialog>
     </div>
   );
-};
-
+  
+  
 export default AddTask;
