@@ -28,7 +28,7 @@ body {
   --grey: #f5f5f5;
   --secondary: #7cb4c5;
   --dark: #334a52;
-  --black: #000;
+  --black: #fff;
   --placeholder: #798a8f;
   background-color: var(--light);
 }
@@ -44,6 +44,7 @@ body.dark{
   --dark: #E9F1F3;
   --black: #fff;
   color: #E9F1F3;
+  --black: rgb(22, 22, 22);
 }
 
 .colors {

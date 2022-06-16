@@ -255,6 +255,24 @@ export const LeadProvider = ({ children }) => {
         console.log(err);
       });
   };
+
+  const updateGroup = async (groupId, name, advisor) => {
+    await axios.post("http://127.0.0.1.:8000/batch/update/group",
+        {
+          'id': groupId,
+          'new_name': name,
+          'advisor': advisor
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      ).then((res) => {
+        console.log(res.data);
+        getDomains();
+      }).catch((err) => {
+        console.log(err);
+      });
+  };
   
   //Delete function
 
@@ -391,6 +409,7 @@ export const LeadProvider = ({ children }) => {
     //Update
     updateBatch,
     updateDomain,
+    updateGroup,
 
     //Delete
     deleteAdvisor,

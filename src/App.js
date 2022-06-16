@@ -5,18 +5,26 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 //////////////########//////////////
 import Profile from "./components/Common/Profile/Profile";
 import Manifest from "./components/Common/Manifest/Manifest";
-import Tasks from "./components/Common/Tasks/Tasks"; 
+import Tasks from "./components/Common/Tasks/Tasks";
 import Pending from "./components/Common/Pending/Pending";
+import Notifications from "./components/Common/Notifications/Notifications";
+////////////////////////////////////
+
 ////////////////////////////////////
 import Student from "./pages/User/Student";
 import StudentSpace from "./components/User/Space/MySpace";
-import MyPayment from "./components/User/Payment/Payment"
+import MyPayment from "./components/User/Payment/Payment";
+////////////////////////////////////
+
 ////////////////////////////////////
 import Advisor from "./pages/Advisor/Advisor";
 import MyGroup from "./components/Advisor/Group/Group";
 import AdvisorSpace from "./components/Advisor/Space/MySpace";
 import MyStudents from "./components/Advisor/Students/Students";
 import Work from "./components/Advisor/Work/Work";
+import AllStudents from "./components/Advisor/AllStudents/AllStudents"
+////////////////////////////////////
+
 ////////////////////////////////////
 import Lead from "./pages/Lead/Lead";
 import Advisors from "./components/Staff/Advisors/Advisors";
@@ -35,8 +43,6 @@ import Finance from "./pages/Finance/Finance";
 import Placement from "./pages/Placement/Placement";
 ////////////////////////////////////
 
-import ProfilePic from "./components/Common/Crop/Crop";
-
 //Context Providers
 import { AuthProvider } from "./Context/AuthContext";
 import { StyleProvider } from "./Context/StyleContext";
@@ -48,7 +54,8 @@ import UserLogin from "./pages/User/UserLogin/UserLogin";
 import UserReg from "./pages/User/UserLogin/UserReg";
 
 import "./App.css";
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Home from "./pages/Home/Home";
 
@@ -56,104 +63,92 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <AuthProvider>
-          <Routes>
-            <Route
-              path="/admin"
-              element={
-                <h1> U R the Main .'</h1>
-              }
-            />
-          </Routes>
-          <StyleProvider>
+        <StyleProvider>
+          <AuthProvider>
             <StudentProvider>
               <Routes>
-                {/* <Route path="/signup" element={<UserReg />} />
-                <Route path="/signin" element={<UserLogin />} /> */}
-                {/* <Route path="/test" element={<AddTask2 content={{props:[{element:"input", label:"success", placeholder:"success"},
-                {element:"select", label:"name", placeholder:"name", options:[{value:"1", label:"1"},{value:"2", label:"2"}]},
-                {element:"select", label:"name", placeholder:"name", options:[{value:"5", label:"ser"},{value:"3", label:"sha"}]},
-              ]}}/>} />  */}
-
                 <Route path="/signin" element={<Home />} />
                 <Route
                   path="/"
-                  element={
-                    <Student child={<StudentSpace />} />
-                  }
+                  element={<Student child={<StudentSpace />} />}
                 />
                 <Route
                   path="/taskslist"
                   element={
-                    <Student child={<><Tasks /><Pending /></>} />
+                    <Student
+                      child={
+                        <>
+                          <Tasks />
+                          <Pending />
+                        </>
+                      }
+                    />
                   }
                 />
                 <Route
                   path="/profile"
-                  element={
-                    <Student child={<Profile />} />
-                  }
+                  element={<Student child={<Profile />} />}
                 />
                 <Route
                   path="/payment"
-                  element={
-                    <Student child={<MyPayment />} />
-                  }
+                  element={<Student child={<MyPayment />} />}
+                />
+                <Route
+                  path="/notifications"
+                  element={<Student child={<Notifications />} />}
                 />
               </Routes>
               <AdvisorProvider>
                 <Routes>
-                <Route
-                  path="/manifest"
-                  element={
-                    <Student child={<><Manifest /><Pending /></>} />
-                  }
-                />
+                  <Route
+                    path="/manifest"
+                    element={
+                      <Student
+                        child={
+                          <>
+                            <Manifest />
+                            <Pending />
+                          </>
+                        }
+                      />
+                    }
+                  />
                 </Routes>
               </AdvisorProvider>
             </StudentProvider>
+            <ToastContainer />
 
             {/* ADVISOR */}
             <AdvisorProvider>
               <Routes>
                 <Route
                   path="/advisor"
-                  element={
-                    <Advisor child={<AdvisorSpace />}/>
-                  }
+                  element={<Advisor child={<AdvisorSpace />} />}
                 />
                 <Route
                   path="/advisor/profile"
-                  element={
-                    <Advisor child={<Profile />}/>
-                  }
+                  element={<Advisor child={<Profile />} />}
                 />
                 <Route
                   path="/advisor/students"
-                  element={
-                    <Advisor child={<MyStudents />}/>
-                  }
+                  element={<Advisor child={<MyStudents />} />}
+                />
+                <Route
+                  path="/advisor/notifications"
+                  element={<Advisor child={<Notifications />} />}
                 />
                 <Route
                   path="/advisor/work"
-                  element={
-                    <Advisor child={<Work />}/>
-                  }
+                  element={<Advisor child={<Work />} />}
                 />
                 <Route
                   path="/advisor/group"
-                  element={
-                    <Advisor child={<MyGroup />}/>
-                  }
+                  element={<Advisor child={<MyGroup />} />}
                 />
                 <Route
                   path="/advisor/group/taskslist"
-                  element={
-                    <Advisor child={<Tasks />}/>
-                  }
+                  element={<Advisor child={<Tasks />} />}
                 />
-              </Routes>
-              <Routes>
                 <Route
                   path="/advisor/group/manifest"
                   element={
@@ -161,6 +156,14 @@ function App() {
                   }
                 />
               </Routes>
+              <LeadProvider>
+                <Routes>
+                  <Route
+                    path="/advisor/allStudents"
+                    element={<Advisor child={<AllStudents />} />}
+                  />
+                </Routes>
+              </LeadProvider>
             </AdvisorProvider>
 
             {/* LEAD */}
@@ -257,9 +260,33 @@ function App() {
                   }
                 />
               </Routes>
+              <AdvisorProvider>
+                <Routes>
+                <Route
+                  path="/lead/students/taskslist"
+                  element={<Lead child={
+                  <>
+                    <Tasks />
+                    <Pending />
+                  </>
+                } />}
+                />
+                <Route
+                  path="/lead/student/manifest"
+                  element={
+                    <Lead child={
+                      <>
+                        <Manifest />
+                        <Pending />
+                      </>
+                    }/>
+                  }
+                />
+                </Routes>
+              </AdvisorProvider>
             </LeadProvider>
-          </StyleProvider>
-        </AuthProvider>
+          </AuthProvider>
+        </StyleProvider>
       </BrowserRouter>
     </>
   );

@@ -19,11 +19,13 @@ const AddTask = ({ title, value, form }) => {
   const {
     domains,
     getDomains,
+    getNotificationsTypes,
+    createNotifications,
   } = useContext(AuthContext) ;
-  
   const {
     advisors,
     batches,
+    groupDetails,
     createBatch,
     createDomain,
     createGroup,
@@ -32,6 +34,7 @@ const AddTask = ({ title, value, form }) => {
     studentManage,
     updateDomain,
     updateBatch,
+    updateGroup,
   } = useContext(LeadContext);
 
   const [open, setOpen] = useState(false);
@@ -41,18 +44,23 @@ const AddTask = ({ title, value, form }) => {
   const [location, setLocation] = useState("");
   const [batch, setBatch] = useState("");
 
+  const [type, setType] = useState("");
+  const [content, setContent] = useState("");
 
   const handleClickOpen = () => {
     if (value === "batch" || value === "updateBatch" || value === "group") {
       getAdvisors();
-    } else if (value === "addgroup" ) {
+    } else if (value === "addgroup") {
       getAdvisors();
       getDomains();
       getBatches();
     } else if (value === "st_manage") {
       getBatches();
       getDomains();
+    } else if (value === "addnotifications") {
+      getNotificationsTypes();
     }
+
     setName("");
     setDomain("");
     setAdvisor("");
@@ -75,7 +83,6 @@ const AddTask = ({ title, value, form }) => {
   const handleClose = () => {
     setOpen(false);
   };
-
   const handleSubmit = () => {
     if (value === "batch") {
       createBatch(batch, advisor, location);
@@ -87,15 +94,22 @@ const AddTask = ({ title, value, form }) => {
       updateDomain(form, domain)
     }else if (value === "updateBatch") {
       updateBatch(form, advisor, batch)
+    }else if (value === "group") {
+      updateGroup(groupDetails.id, name, advisor)
     }else if (value === "st_manage") {
       studentManage(form, batch, domain)
+    } else if (value === "addnotifications") {
+      createNotifications(form, type, content);
     }
     setOpen(false);
-  };
+    }
+
+
+
 
   return (
     <div>
-      <Button variant="outlined" className="addtask" onClick={handleClickOpen}>
+      <Button variant="contained" className="addtask" onClick={handleClickOpen}>
         {title}
       </Button>
       <Dialog
@@ -114,6 +128,53 @@ const AddTask = ({ title, value, form }) => {
               className="d-block p-3 px-5"
               style={{ width: "500px", height: "fit-content" }}
             >
+              {value === "addnotifications" && (
+                <Row className="my-2">
+                  <FormControl className="my-4">
+                    <InputLabel id="demo-simple-select-autowidth-label">
+                      Type
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-autowidth-label"
+                      id="demo-simple-select-autowidth"
+                      value={type}
+                      onChange={(e) => setType(e.target.value)}
+                      autoWidth
+                      label="Type"
+                      maxHeight="200px"
+                      MenuProps={MenuProps}
+                    >
+
+                      
+                          <MenuItem key="Placement" value="Placement">
+                            Placement
+                          </MenuItem>
+                          <MenuItem key="AdvisorChange" value="AdvisorChange">
+                          AdvisorChange
+                          </MenuItem>
+                          <MenuItem key="BatchShift" value="BatchShift">
+                          BatchShift
+                          </MenuItem>
+                          <MenuItem key="Termination" value="Termination">
+                          Termination
+                          </MenuItem>
+                          <MenuItem key="Message" value="Message">
+                          Message
+                          </MenuItem>
+                        
+
+                    </Select>
+                  </FormControl>
+                  <textarea
+                    rows="4"
+                    value={content}
+                    className="w-100 noti-content"
+                    onChange={(e) => setContent(e.target.value)}
+                    placeholder="Enter content here.."
+                  />
+                </Row>
+              )}
+
               {value === "domain" && (
                 <Row className="my-2">
                   <TextField
@@ -126,6 +187,7 @@ const AddTask = ({ title, value, form }) => {
                   />
                 </Row>
               )}
+
               {value === "st_manage" && (
                 <Row className="my-2">
                   <FormControl className="my-1">
@@ -138,7 +200,9 @@ const AddTask = ({ title, value, form }) => {
                       autoWidth
                       maxHeight="200px"
                       value={batch}
-                      onChange={(e) => {setBatch(e.target.value)}}
+                      onChange={(e) => {
+                        setBatch(e.target.value);
+                      }}
                       label="Batch"
                       MenuProps={MenuProps}
                     >
@@ -174,7 +238,7 @@ const AddTask = ({ title, value, form }) => {
                         )})}
                     </Select>
                   </FormControl>
-                  </Row>
+                </Row>
               )}
               {value === "updateDomain" && (
                 <Row className="my-2">
@@ -273,7 +337,7 @@ const AddTask = ({ title, value, form }) => {
                     value={batch}
                     onChange={(e) => setBatch(e.target.value)}
                     placeholder="Enter name here.."
-                  />
+                    />
                 </Row>
               )}
               {value === "group" && (
@@ -282,6 +346,8 @@ const AddTask = ({ title, value, form }) => {
                     id="outlined-basic"
                     label="Name"
                     variant="outlined"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     placeholder="Enter name here.."
                   />
                   <FormControl className="my-4">

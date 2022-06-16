@@ -80,30 +80,28 @@ const Work = () => {
               className={`py-2 mb-2 cp bglight rounded-3 ${style.tableBody}`}
               onClick={(e) => {
                 e.preventDefault()
-                console.log(e.target.className.slice(0,7));
-              if ("nav" === e.target.className.slice(0,7)) {
-                alert('qwertyuiop')
-                // setCurr_student(student.id)
-                // navigate('/advisor/group/taskslist')
+              if ("navTo" === e.target.className.slice(0,5)) {
+                setCurr_student(student.id)
+                navigate('/advisor/group/taskslist')
               }}} >
-              <Row className="nav m-0">
-                <Col className={`nav ${style.tableBodyText}`} sm={1}>
+              <Row className="navTo m-0">
+                <Col className={`navTo ${style.tableBodyText}`} sm={1}>
                   #{index + 1}
                 </Col>
-                <Col className={`nav ${style.tableBodyText}`} sm={3}>
+                <Col className={`navTo ${style.tableBodyText}`} sm={3}>
                   {student.name}
                 </Col>
-                <Col className={`nav ${style.tableBodyText}`} sm={2}>
+                <Col className={`navTo ${style.tableBodyText}`} sm={2}>
                   {student.week}
                 </Col>
-                <Col className={`nav ${style.tableBodyText}`} sm={2}>
+                <Col className={`navTo ${style.tableBodyText}`} sm={2}>
                   {student.pending}
                 </Col>
                 
-                <Col className={`nav ${style.tableBodyText}`} sm={2}>
+                <Col className={`navTo ${style.tableBodyText}`} sm={2}>
                   {student.count}
                 </Col>
-                <Col className={`nav ${style.tableBodyText}`} sm={2}>
+                <Col className={`navTo ${style.tableBodyText}`} sm={2}>
                 <AddTask title="401" value="shift" form={student.id}/>
                 </Col>
               </Row>

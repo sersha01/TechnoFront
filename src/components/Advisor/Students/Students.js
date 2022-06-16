@@ -9,10 +9,15 @@ import TextField from "@mui/material/TextField";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import AdvisorContext from "../../../Context/AdvisorContext";
 import AddTask from "../AddTask/AddTask";
+import AuthContext from "../../../Context/AuthContext";
+import { useNavigate } from "react-router";
 
 const Students = () => {
 
+  const { setCurr_student } = useContext(AuthContext)
   const { getMyStudents, myStudents, sendTerminateRequest } = useContext(AdvisorContext);
+
+  const navigate = useNavigate();
 
   const [batch, setBatch] = useState('');
   const [name, setName] = useState('');
@@ -83,29 +88,30 @@ const Students = () => {
             key={index}
             onClick={(e)=>{
               e.preventDefault()
-              if ("nav" === e.target.className.slice(0,3)) {
-                alert('kayari')
+              if ("navTo" === e.target.className.slice(0,5)) {
+                setCurr_student(student.id)
+                navigate('/advisor/group/taskslist')
               }
             }}
           >
-            <Row className="nav m-0">
-              <Col className={`nav ${style.tableBodyText}`} sm={1}>
+            <Row className="navTo m-0">
+              <Col className={`navTo ${style.tableBodyText}`} sm={1}>
                 #{index + 1}
               </Col>
-              <Col className={`nav ${style.tableBodyText}`} sm={2}>
+              <Col className={`navTo ${style.tableBodyText}`} sm={2}>
                 {student.name}
               </Col>
-              <Col className={`nav ${style.tableBodyText}`} sm={2}>
+              <Col className={`navTo ${style.tableBodyText}`} sm={2}>
                 {student.week}
               </Col>
-              <Col className={`nav ${style.tableBodyText}`} sm={2}>
+              <Col className={`navTo ${style.tableBodyText}`} sm={2}>
                 {student.pending}
               </Col>
 
-              <Col className={`nav ${style.tableBodyText}`} sm={2}>
+              <Col className={`navTo ${style.tableBodyText}`} sm={2}>
                 {student.advisor}
               </Col>
-              <Col className={`nav ${style.tableBodyText} d-flex`} sm={3}>
+              <Col className={`navTo ${style.tableBodyText} d-flex`} sm={3}>
                 <AddTask title="SHIFT" value="shift" form={student.id}/>
                 <Button variant="contained" color="error" onClick={()=>{sendTerminateRequest(student.id)}}>
                   Terminate

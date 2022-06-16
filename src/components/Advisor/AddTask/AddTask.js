@@ -33,6 +33,7 @@ const AddTask = ({ title, value, form }) => {
   const [batch, setBatch] = useState(29);
   const [remark, setRemark] = useState(null);
   const [date, setDate] = useState(null);
+  const [status, setStatus] = useState(null);
 
 
   const handleClickOpen = () => {
@@ -42,6 +43,7 @@ const AddTask = ({ title, value, form }) => {
     setReviewer(null);
     setRemark(null);
     setDate(null);
+    setStatus(null);
     setOpen(true);
   };
 
@@ -62,9 +64,9 @@ const AddTask = ({ title, value, form }) => {
 
   const handleSubmit = (e) => {
     if (value === "completed" ) {
-      reviewPassed(form, reviewer, remark, date)
+      reviewPassed(form, reviewer, remark, date, status)
     } else if (value === "repeated") {
-      reviewRepeated(form, reviewer, remark, date)
+      reviewRepeated(form, reviewer, remark, date, status)
     } else if (value === "shift") {
       e.stopPropagation()
       sendShiftRequest(form, batch)
@@ -116,6 +118,29 @@ const AddTask = ({ title, value, form }) => {
                             {reviewer.name}
                           </MenuItem>
                         )})}
+                    </Select>
+                  </FormControl>
+                  <FormControl className="mb-4">
+                    <InputLabel id="demo-simple-select-autowidth-label">
+                      Status
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-autowidth-label"
+                      id="demo-simple-select-autowidth"
+                      value={status}
+                      onChange={(e) => setStatus(e.target.value)}
+                      autoWidth
+                      label="Status"
+                      maxHeight="200px"
+                      MenuProps={MenuProps}
+                    >
+                      { value === "completed" ?
+                      <MenuItem key={1} value={'Task Completed'}> Task Completed </MenuItem> :
+                      <MenuItem key={3} value={'Task Critical'}> Task Critical </MenuItem>}
+                      { value === "completed" ? 
+                      <MenuItem key={2} value={'Need Improvement'}> Need Improvement </MenuItem> :
+                      <MenuItem key={4} value={'Repeat Review'}> Repeat Review </MenuItem>}
+                      
                     </Select>
                   </FormControl>
                   <TextField

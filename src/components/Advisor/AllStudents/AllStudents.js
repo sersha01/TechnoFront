@@ -3,27 +3,30 @@ import ManageSearchRoundedIcon from "@mui/icons-material/ManageSearchRounded";
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "@mui/material/Button";
-import style from "./Placement.module.css";
+import style from "./Students.module.css";
+import { useNavigate } from "react-router";
 import LeadContext from "../../../Context/LeadContext";
+import AuthContext from "../../../Context/AuthContext";
 
-const Placement = () => {
-  const { getPlacements, placements } = useContext(LeadContext);
+const AllStudents = () => {
+
+  const { setCurr_student } = useContext(AuthContext)
+  const { viewStudents, students } = useContext(LeadContext);
+
+  const navigate = useNavigate();
 
   const [batch, setBatch] = useState('');
   const [name, setName] = useState('');
 
   useEffect(() => {
-    getPlacements();
+    viewStudents();
   }, []);
 
   return (
-    <Row className="m-0 p-3 rounded-2 pb-0">
+    <Row className="m-0 px-3 rounded-2 bglight py-3">
       <Col sm={12} className="d-flex justify-content-between mb-2">
         <div className="d-flex">
-          <h2 className="me-4">Placements</h2>
-          <Button variant="contained" className="bgdark textlight w-100 h-50">
-            Add
-          </Button>
+          <h2 className="me-4">Students</h2>
         </div>
 
         <div className="d-flex justify-content-end textlight">
@@ -51,7 +54,7 @@ const Placement = () => {
 
       <Col sm={12} className="py-2 my-2 bgdark  px-4 rounded-3">
         <Row className="m-0 textlight" xs={0}>
-          <Col className="bgdark" sm={2}>
+          <Col className="bgdark" sm={1}>
             Batch
           </Col>
           <Col className="bgdark" sm={2}>
@@ -61,48 +64,54 @@ const Placement = () => {
             Domain
           </Col>
           <Col className="bgdark" sm={2}>
-            LPA
+            Week
           </Col>
           <Col className="bgdark" sm={2}>
-            Location
+            Group
           </Col>
-
           <Col className="bgdark" sm={2}>
-            Designation
+            Actions
           </Col>
         </Row>
       </Col>
 
       <Col className="m-0 row ">
-        {placements && placements.map((placement) => {
-          if ((name !== '' && batch !== '' && placement.student.user.username.includes(name) && placement.student.batch.name.includes(batch)) || ((name !== '' && batch === '' && placement.student.user.username.includes(name)) || (name === '' && batch !== '' &&  placement.student.batch.name.includes(batch))) || (name === '' && batch === '')) {
-          return (
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #{placement.student.batch.name}
-            </Col>
-            <Col className="textdark" sm={2}>
-              {placement.student.user.username}
-            </Col>
-            <Col className="textdark" sm={2}>
-              {placement.student.profile.domain.name}
-            </Col>
-            <Col className="textdark" sm={2}>
-              {placement.LPA}
-            </Col>
-            <Col className="textdark" sm={2}>
-              {placement.location}
-            </Col>
-            <Col className="textdark d-flex" sm={2}>
-             {placement.position}
-            </Col>
-          </Row>
-        </Col>
-          )}})}
+        {students
+          ? students.map((student) =>{
+            if ((name !== '' && batch !== '' && student.name.includes(name) && student.batch.includes(batch)) || ((name !== '' && batch === '' && student.name.includes(name)) || (name === '' && batch !== '' &&  student.batch.includes(batch))) || (name === '' && batch === '')) {
+            return (
+              <Col sm={12} className="py-3 mb-2 cp mt-1 rounded-3 bg"
+              onClick={(e)=>{
+                e.preventDefault()
+                setCurr_student(student.id)
+                navigate('/advisor/group/taskslist')
+              }}>
+                <Row className="m-0">
+                  <Col className="textdark" sm={1}>
+                    {student.batch}
+                  </Col>
+                  <Col className="textdark" sm={2}>
+                    {student.name}
+                  </Col>
+                  <Col className="textdark" sm={2}>
+                    {student.domain}
+                  </Col>
+                  <Col className="textdark" sm={2}>
+                    {student.week}
+                  </Col>
+                  <Col className="textdark" sm={2}>
+                    {student.group}
+                  </Col>
+                  <Col className="textdark d-flex" sm={2}>
+                    {student.advisor}
+                  </Col>
+                </Row>
+              </Col>
+            )}})
+          : null}
       </Col>
     </Row>
   );
 };
 
-export default Placement;
+export default AllStudents;

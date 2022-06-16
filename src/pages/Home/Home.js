@@ -11,7 +11,6 @@ import AuthContext from "../../Context/AuthContext";
 import Header from "../../components/Common/Header/Header";
 import Code from "../../components/Common/Code/AddTask";
 
-
 const Home = () => {
   let { swap, swap2, setSwap, setSwap2 } = useContext(AuthContext);
 
@@ -71,21 +70,23 @@ const Home = () => {
                 </p>
                 <br />
 
-                
-                <div className="d-flex"> <Button
-                  className="bgdark accordion-body mx-2"
-                  variant="contained"
-                  onClick={() => {
-                    if (swap === "video") {
-                      setSwap("login");
-                    } else {
-                      setSwap("video");
-                    }
-                  }}
-                >
-                  Sign in to the Console
-                </Button>
-                <Code setSwap2={setSwap2} value="btn" /></div>
+                <div className="d-flex">
+                  {" "}
+                  <Button
+                    className="bgdark accordion-body mx-2"
+                    variant="contained"
+                    onClick={() => {
+                      if (swap === "video") {
+                        setSwap("login");
+                      } else {
+                        setSwap("video");
+                      }
+                    }}
+                  >
+                    Sign in to the Console
+                  </Button>
+                  <Code setSwap2={setSwap2} value="btn" />
+                </div>
 
                 <br />
                 <br />

@@ -7,8 +7,11 @@ import AddTask from "../../Staff/AddTask/AddTask";
 import style from "./Students.module.css";
 import { useNavigate } from "react-router";
 import LeadContext from "../../../Context/LeadContext";
+import AuthContext from "../../../Context/AuthContext";
 
 const Students = () => {
+
+  const { setCurr_student } = useContext(AuthContext)
   const { viewStudents, students, getProfile } = useContext(LeadContext);
 
   const navigate = useNavigate();
@@ -78,24 +81,31 @@ const Students = () => {
           ? students.map((student) =>{
             if ((name !== '' && batch !== '' && student.name.includes(name) && student.batch.includes(batch)) || ((name !== '' && batch === '' && student.name.includes(name)) || (name === '' && batch !== '' &&  student.batch.includes(batch))) || (name === '' && batch === '')) {
             return (
-              <Col sm={12} className="py-3 mb-2 cp mt-1 rounded-3 bg">
-                <Row className="m-0">
-                  <Col className="textdark" sm={1}>
+              <Col sm={12} className="py-3 mb-2 cp mt-1 rounded-3 bg"
+              onClick={(e)=>{
+                e.preventDefault()
+                if ("navTo" === e.target.className.slice(0,5)) {
+                  setCurr_student(student.id)
+                  navigate('/lead/students/taskslist')
+                }
+              }}>
+                <Row className="navTo m-0">
+                  <Col className="navTo textdark" sm={1}>
                     {student.batch}
                   </Col>
-                  <Col className="textdark" sm={2}>
+                  <Col className="navTo textdark" sm={2}>
                     {student.name}
                   </Col>
-                  <Col className="textdark" sm={2}>
+                  <Col className="navTo textdark" sm={2}>
                     {student.domain}
                   </Col>
-                  <Col className="textdark" sm={2}>
+                  <Col className="navTo textdark" sm={2}>
                     {student.week}
                   </Col>
-                  <Col className="textdark" sm={2}>
+                  <Col className="navTo textdark" sm={2}>
                     {student.group ? student.group : "Not Assigned"}
                   </Col>
-                  <Col className="textdark d-flex" sm={2}>
+                  <Col className="navTo textdark d-flex" sm={2}>
                     <AddTask title="Manage" value="st_manage" form={student.id}/>
                     <Button
                       variant="contained"
