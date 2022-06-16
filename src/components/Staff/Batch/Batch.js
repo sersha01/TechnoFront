@@ -30,11 +30,14 @@ const Batch = () => {
 
       <Col sm={12} className="py-2 my-2 bgdark  px-4 rounded-3">
         <Row className="m-0 textlight" xs={0}>
-          <Col className="bgdark" sm={2}>
+          <Col className="bgdark" sm={1}>
             Batch
           </Col>
-          <Col className="bgdark" sm={3}>
+          <Col className="bgdark" sm={2}>
             Advisor
+          </Col>
+          <Col className="bgdark" sm={2}>
+            Code
           </Col>
           <Col className="bgdark" sm={2}>
             Students
@@ -51,11 +54,14 @@ const Batch = () => {
       {batches && batches.map((batch) => (
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg" key={batch.id}>
           <Row className="m-0">
-            <Col className="textdark" sm={2}>
+            <Col className="textdark" sm={1}>
               {batch.name}
             </Col>
-            <Col className="textdark" sm={3}>
+            <Col className="textdark" sm={2}>
               {batch.advisor}
+            </Col>
+            <Col className="textdark" sm={2}>
+              {batch.code}
             </Col>
             <Col className="textdark" sm={2}>
               {batch.student}

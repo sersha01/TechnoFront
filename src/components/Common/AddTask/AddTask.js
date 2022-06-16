@@ -56,7 +56,7 @@ const AddTask = ({ title, value, form }) => {
   const [content, setContent] = useState("");
 
   const handleClickOpen = () => {
-    if (value === "batch") {
+    if (value === "batch" || value === "updateBatch") {
       getAdvisors();
     } else if (value === "addgroup") {
       getAdvisors();
@@ -124,6 +124,7 @@ const AddTask = ({ title, value, form }) => {
     } else if (value === "repeated") {
       reviewRepeated(form, reviewer, remark, date);
     } else if (value === "updateDomain") {
+
       updateDomain(form, domain);
     } else if (value === "updateBatch") {
       updateBatch(form, advisor);
@@ -131,6 +132,7 @@ const AddTask = ({ title, value, form }) => {
       studentManage(form, batch, domain);
     } else if (value === "addnotifications") {
       createNotifications(type, content);
+
     }
     setOpen(false);
   };
@@ -396,6 +398,14 @@ const AddTask = ({ title, value, form }) => {
                         ))}
                     </Select>
                   </FormControl>
+                  <TextField
+                    id="outlined-basic"
+                    label="Batch code"
+                    variant="outlined"
+                    value={batch}
+                    onChange={(e) => setBatch(e.target.value)}
+                    placeholder="Enter name here.."
+                  />
                 </Row>
               )}
               {value === "advisor" && (

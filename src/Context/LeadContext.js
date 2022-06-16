@@ -221,11 +221,12 @@ export const LeadProvider = ({ children }) => {
   //Update function
 
 
-  const updateBatch = async (batch, advisor) => {
+  const updateBatch = async (batch, advisor, code) => {
     await axios.post("http://127.0.0.1:8000/batch/update/batch",
         {
           'advisor': advisor,
           'id': batch,
+          'code': code,
         },
         {
           headers: { Authorization: `Bearer ${authTokens.access}` },
