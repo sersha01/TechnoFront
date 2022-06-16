@@ -11,7 +11,8 @@ export const AdvisorProvider = ({ children }) => {
   //Asign the useNavigate hook to a variable
   const navigate = useNavigate();
 
-  const { authTokens, curr_manifest, getStudentManifest } = useContext(AuthContext);
+  const { authTokens, curr_manifest, getStudentManifest } =
+    useContext(AuthContext);
 
   //Define the state of the context
   const [myStudents, setMyStudents] = useState(null);
@@ -20,60 +21,79 @@ export const AdvisorProvider = ({ children }) => {
 
   //Create function
 
-
   const addTask = async (task) => {
-    await axios.post("http://127.0.0.1:8000/manifest/add/task", {
-      'task':task,
-      'manifest':curr_manifest
-    },{
-      headers: { Authorization: `Bearer ${authTokens.access}` },
-    }).then(res=>{
-      getStudentManifest(curr_manifest);
-      console.log(res.data)
-    }).catch(err=>{
-      console.log(err.response.data);
-      console.log(err)
-    })
-  }
+    await axios
+      .post(
+        "http://127.0.0.1:8000/manifest/add/task",
+        {
+          task: task,
+          manifest: curr_manifest,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        getStudentManifest(curr_manifest);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        console.log(err);
+      });
+  };
 
   const reviewPassed = async (form, reviewer, remark, date) => {
-    await axios.post("http://127.0.0.1:8000/manifest/review/passed", {
-      'form':form,
-      'reviewer':reviewer,
-      'remark':remark,
-      'next_review':date,
-      'manifest':curr_manifest
-    },{
-      headers: { Authorization: `Bearer ${authTokens.access}` },
-    }).then(res=>{
-      getStudentManifest(curr_manifest);
-      console.log(res.data)
-    }).catch(err=>{
-      console.log(err.response.data);
-      console.log(err)
-    })
-  }
+    await axios
+      .post(
+        "http://127.0.0.1:8000/manifest/review/passed",
+        {
+          form: form,
+          reviewer: reviewer,
+          remark: remark,
+          next_review: date,
+          manifest: curr_manifest,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        getStudentManifest(curr_manifest);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        console.log(err);
+      });
+  };
 
   const reviewRepeated = async (form, reviewer, remark, date) => {
-    await axios.post("http://127.0.0.1:8000/manifest/review/repeated", {
-      'form':form,
-      'reviewer':reviewer,
-      'remark':remark,
-      'next_review':date,
-      'manifest':curr_manifest
-    },{
-      headers: { Authorization: `Bearer ${authTokens.access}` },
-    }).then(res=>{
-      getStudentManifest(curr_manifest);
-      console.log(res.data)
-    }).catch(err=>{
-      console.log(err.response.data);
-      console.log(err)
-    })
-  }
+    await axios
+      .post(
+        "http://127.0.0.1:8000/manifest/review/repeated",
+        {
+          form: form,
+          reviewer: reviewer,
+          remark: remark,
+          next_review: date,
+          manifest: curr_manifest,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        getStudentManifest(curr_manifest);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        console.log(err);
+      });
+  };
 
   //Read function
-
 
   const getMyGroups = async () => {
     await axios
@@ -131,17 +151,110 @@ export const AdvisorProvider = ({ children }) => {
   //Update function
 
   const taskComplete = async (taskId) => {
-    await axios.post('http://127.0.0.1:8000/manifest/complete/task',{'task':taskId},{
-        headers: {Authorization : `Bearer ${authTokens.access}`}
-    }).then(res=>{
-        console.log(res.data)
-        getStudentManifest(curr_manifest)
-    }).catch(err=>{
-        console.log(err)
-    })
-  }
+    await axios
+      .post(
+        "http://127.0.0.1:8000/manifest/complete/task",
+        { task: taskId },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        getStudentManifest(curr_manifest);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  
+  const getLocations = async () => {
+    await axios
+      .get("http://127.0.0.1:8000/manifest/complete/task", {
+        headers: { Authorization: `Bearer ${authTokens.access}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+
+  const getLocation = async () => {
+    await axios
+      .get("http://127.0.0.1:8000/manifest/complete/task", {
+        headers: { Authorization: `Bearer ${authTokens.access}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+
+  const getBranch = async (id) => {
+    await axios
+      .post("http://127.0.0.1:8000/manifest/complete/task",{
+        id: id
+      }, {
+        headers: { Authorization: `Bearer ${authTokens.access}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getBranchStudents = async (id) => {
+    await axios
+      .post("http://127.0.0.1:8000/manifest/complete/task",{
+        id: id
+      }, {
+        headers: { Authorization: `Bearer ${authTokens.access}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+
+
+
+
+
+
+
+  const getBranches = async (id) => {
+    await axios
+      .post(
+        "http://127.0.0.1:8000/manifest/complete/task",
+        {
+          id: id,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+
+
+
   const contextData = {
     //Create
     addTask,
@@ -164,10 +277,11 @@ export const AdvisorProvider = ({ children }) => {
     //State variables
     myStudents,
     myGroups,
-    myGroupDetails
-
+    myGroupDetails,
   };
   return (
-    <AdvisorContext.Provider value={contextData}>{children}</AdvisorContext.Provider>
+    <AdvisorContext.Provider value={contextData}>
+      {children}
+    </AdvisorContext.Provider>
   );
 };

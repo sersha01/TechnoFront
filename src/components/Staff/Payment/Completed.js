@@ -1,25 +1,32 @@
 // Bootstrap
-import React from 'react';
+import React, { useContext, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import style from "./Tasks.module.css"
 import style from "./Payment.module.css";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
+import AuthContext from "../../../Context/AuthContext";
 
 const Completed = () => {
+  const { allpaid, allCompletedPayments } = useContext(AuthContext);
+  
+  useEffect(() => {
+    allCompletedPayments();
+  },[]);
+
   return (
     <>
       <Col sm={12} className="py-2 my-2  px-4 rounded-3 bgdark">
         <Row className="m-0" xs={0}>
           <Col className="bgdark textlight" sm={1}>
-            ID
+            Batch
           </Col>
           <Col className="bgdark textlight" sm={3}>
             Name
           </Col>
           <Col className="bgdark textlight" sm={2}>
-            Batch
+            Date
           </Col>
           <Col className="bgdark textlight" sm={2}>
             Type
@@ -35,71 +42,22 @@ const Completed = () => {
 
       <Col className="m-0 row">
         <>
-          
-            <Col sm={12} className="py-2 mb-2 cp bg rounded-3">
-              <Row className="m-0">
-                <Col sm={1}>#1 </Col>
-                <Col sm={3}>Wafi </Col>
-                <Col sm={2}>20</Col>
-                <Col sm={2}>Rent</Col>
-                <Col sm={2}>4400</Col>
+          {allpaid &&
+            allpaid.map((paid, index) => {
+              return (
+                <Col sm={12} className="py-2 mb-2 cp bg rounded-3">
+                  <Row className="m-0">
+                    <Col sm={1}>#{paid.batch} </Col>
+                    <Col sm={3}>{paid.student} </Col>
+                    <Col sm={2}>{paid.paid_date}</Col>
+                    <Col sm={2}>{paid.types}</Col>
+                    <Col sm={2}>{paid.paid}</Col>
+                    <Col sm={2}>{paid.status}</Col>
+                  </Row>
+                </Col>
+              );
+            })}
 
-                <Col sm={2}>Completed</Col>
-              </Row>
-            </Col>
-          
-          
-            <Col sm={12} className="py-2 mb-2 cp bg rounded-3">
-              <Row className="m-0">
-                <Col sm={1}>#1 </Col>
-                <Col sm={3}>Wafi </Col>
-                <Col sm={2}>20</Col>
-                <Col sm={2}>Rent</Col>
-                <Col sm={2}>4400</Col>
-
-                <Col sm={2}>Completed</Col>
-              </Row>
-            </Col>
-          
-          
-            <Col sm={12} className="py-2 mb-2 cp bg rounded-3">
-              <Row className="m-0">
-                <Col sm={1}>#1 </Col>
-                <Col sm={3}>Wafi </Col>
-                <Col sm={2}>20</Col>
-                <Col sm={2}>Rent</Col>
-                <Col sm={2}>4400</Col>
-
-                <Col sm={2}>Completed</Col>
-              </Row>
-            </Col>
-          
-          
-            <Col sm={12} className="py-2 mb-2 cp bg rounded-3">
-              <Row className="m-0">
-                <Col sm={1}>#1 </Col>
-                <Col sm={3}>Wafi </Col>
-                <Col sm={2}>20</Col>
-                <Col sm={2}>Rent</Col>
-                <Col sm={2}>4400</Col>
-
-                <Col sm={2}>Completed</Col>
-              </Row>
-            </Col>
-          
-          
-            <Col sm={12} className="py-2 mb-2 cp bg rounded-3">
-              <Row className="m-0">
-                <Col sm={1}>#1 </Col>
-                <Col sm={3}>Wafi </Col>
-                <Col sm={2}>20</Col>
-                <Col sm={2}>Rent</Col>
-                <Col sm={2}>4400</Col>
-
-                <Col sm={2}>Completed</Col>
-              </Row>
-            </Col>
-          
         </>
       </Col>
     </>
