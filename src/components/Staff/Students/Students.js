@@ -1,12 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ManageSearchRoundedIcon from "@mui/icons-material/ManageSearchRounded";
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "@mui/material/Button";
-import AddTask from "../../Common/AddTask/AddTask";
-import TextField from "@mui/material/TextField";
+import AddTask from "../../Staff/AddTask/AddTask";
 import style from "./Students.module.css";
-// import AuthContext from "../../../Context/AuthContext";
 import { useNavigate } from "react-router";
 import LeadContext from "../../../Context/LeadContext";
 
@@ -14,6 +12,9 @@ const Students = () => {
   const { viewStudents, students, getProfile } = useContext(LeadContext);
 
   const navigate = useNavigate();
+
+  const [batch, setBatch] = useState('');
+  const [name, setName] = useState('');
 
   useEffect(() => {
     viewStudents();
@@ -32,7 +33,7 @@ const Students = () => {
             className={`py-1 my-1 textwhite mx-2 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
           >
             <label className={`${style.label}`}>Name</label>
-            <input type="text" className={`w-100 ${style.input}`} />
+            <input type="text" value={name} onChange={(e)=>{setName(e.target.value)}} className={`w-100 ${style.input}`} />
           </Col>
 
           <Col
@@ -40,7 +41,7 @@ const Students = () => {
             className={`py-1 textwhite my-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
           >
             <label className={`${style.label}`}>Batch</label>
-            <input type="text" className={`w-100 ${style.input}`} />
+            <input type="text" value={batch} onChange={(e)=>{setBatch(e.target.value)}} className={`w-100 ${style.input}`} />
           </Col>
 
           <Button className=" mx-1 searchbtn">
@@ -74,7 +75,9 @@ const Students = () => {
 
       <Col className="m-0 row ">
         {students
-          ? students.map((student, index) => (
+          ? students.map((student) =>{
+            if ((name !== '' && batch !== '' && student.name.includes(name) && student.batch.includes(batch)) || ((name !== '' && batch === '' && student.name.includes(name)) || (name === '' && batch !== '' &&  student.batch.includes(batch))) || (name === '' && batch === '')) {
+            return (
               <Col sm={12} className="py-3 mb-2 cp mt-1 rounded-3 bg">
                 <Row className="m-0">
                   <Col className="textdark" sm={1}>
@@ -107,7 +110,7 @@ const Students = () => {
                   </Col>
                 </Row>
               </Col>
-            ))
+            )}})
           : null}
       </Col>
     </Row>

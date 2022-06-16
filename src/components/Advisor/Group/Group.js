@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from "react";
+import React, {useEffect, useContext, useState} from "react";
 // Bootstrap
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -12,6 +12,7 @@ import TextField from "@mui/material/TextField";
 import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import AuthContext from "../../../Context/AuthContext";
 import AdvisorContext from "../../../Context/AdvisorContext";
+import AddTask from "../AddTask/AddTask";
 
 const Work = () => {
 
@@ -19,6 +20,8 @@ const Work = () => {
   const { myGroupDetails, getMyGroupDetails } = useContext(AdvisorContext);
   
   const navigate = useNavigate();
+
+  const [name, setName] = useState('');
 
   useEffect(() => {
     getMyGroupDetails(curr_group)
@@ -33,7 +36,9 @@ const Work = () => {
         <div>
         <TextField
             id="outlined-basic"
-            label="Batch"
+            label="Student"
+            value={name}
+            onChange={(e)=>{setName(e.target.value)}}
             variant="outlined"
           />
           <Button variant="contained" color="primary" className="mx-2 h-100">
@@ -68,37 +73,42 @@ const Work = () => {
       <Col className="m-0 row">
         <>
             {myGroupDetails && myGroupDetails.map((student, index) => {
+              if ((name !== '' && student.name.includes(name)) || (name === '')) {
               return (
               <Col
               sm={12}
               className={`py-2 mb-2 cp bglight rounded-3 ${style.tableBody}`}
-              onClick={() => {setCurr_student(student.id)
-              navigate('/advisor/group/taskslist')}} >
-              <Row className="m-0">
-                <Col className={`${style.tableBodyText}`} sm={1}>
+              onClick={(e) => {
+                e.preventDefault()
+                console.log(e.target.className.slice(0,7));
+              if ("nav" === e.target.className.slice(0,7)) {
+                alert('qwertyuiop')
+                // setCurr_student(student.id)
+                // navigate('/advisor/group/taskslist')
+              }}} >
+              <Row className="nav m-0">
+                <Col className={`nav ${style.tableBodyText}`} sm={1}>
                   #{index + 1}
                 </Col>
-                <Col className={`${style.tableBodyText}`} sm={3}>
+                <Col className={`nav ${style.tableBodyText}`} sm={3}>
                   {student.name}
                 </Col>
-                <Col className={`${style.tableBodyText}`} sm={2}>
+                <Col className={`nav ${style.tableBodyText}`} sm={2}>
                   {student.week}
                 </Col>
-                <Col className={`${style.tableBodyText}`} sm={2}>
+                <Col className={`nav ${style.tableBodyText}`} sm={2}>
                   {student.pending}
                 </Col>
                 
-                <Col className={`${style.tableBodyText}`} sm={2}>
+                <Col className={`nav ${style.tableBodyText}`} sm={2}>
                   {student.count}
                 </Col>
-                <Col className={`${style.tableBodyText}`} sm={2}>
-                  <Button variant="contained" color="error" className="mx-2 h-100" 
-                  onClick={() => {alert('button clickedd')}}
-                  >401</Button>
+                <Col className={`nav ${style.tableBodyText}`} sm={2}>
+                <AddTask title="401" value="shift" form={student.id}/>
                 </Col>
               </Row>
             </Col>
-            )})}
+            )}})}
         </>
       </Col>
     </Row>

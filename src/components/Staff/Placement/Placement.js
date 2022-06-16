@@ -1,11 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ManageSearchRoundedIcon from "@mui/icons-material/ManageSearchRounded";
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
-import AddTask from "../../Common/AddTask/AddTask";
-import TextField from "@mui/material/TextField";
 import style from "./Placement.module.css";
 import LeadContext from "../../../Context/LeadContext";
 
@@ -13,12 +10,15 @@ const Placement = () => {
 
   const { getPlacements, placements } = useContext(LeadContext);
 
+  const [batch, setBatch] = useState('');
+  const [name, setName] = useState('');
+
   useEffect(() => {
     getPlacements();
   },[])
 
   return (
-    <Row className="m-0 px-3 rounded-2 bglight py-3">
+    <Row className="m-0 p-3 rounded-2 pb-0">
       <Col sm={12} className="d-flex justify-content-between mb-2">
         <div className="d-flex">
           <h2 className="me-4">Placements</h2>
@@ -30,7 +30,7 @@ const Placement = () => {
             className={`py-1 my-1 textwhite mx-2 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
           >
             <label className={`${style.label}`}>Name</label>
-            <input type="text" className={`w-100 ${style.input}`} />
+            <input type="text" value={name} onChange={(e)=>{setName(e.target.value)}} className={`w-100 ${style.input}`} />
           </Col>
           
           <Col
@@ -38,7 +38,7 @@ const Placement = () => {
             className={`py-1 textwhite my-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
           >
             <label className={`${style.label}`}>Batch</label>
-            <input type="text" className={`w-100 ${style.input}`} />
+            <input type="text" value={batch} onChange={(e)=>{setBatch(e.target.value)}} className={`w-100 ${style.input}`} />
           </Col>
 
           <Button className=" mx-1 searchbtn">
@@ -73,6 +73,7 @@ const Placement = () => {
 
       <Col className="m-0 row ">
         {placements && placements.map((placement) => {
+          if ((name !== '' && batch !== '' && placement.student.user.username.includes(name) && placement.student.batch.name.includes(batch)) || ((name !== '' && batch === '' && placement.student.user.username.includes(name)) || (name === '' && batch !== '' &&  placement.student.batch.name.includes(batch))) || (name === '' && batch === '')) {
           return (
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
@@ -96,8 +97,7 @@ const Placement = () => {
             </Col>
           </Row>
         </Col>
-          )
-        })}
+          )}})}
          
          
       </Col>

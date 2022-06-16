@@ -15,7 +15,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Logo from "./login.svg";
 
 const Login = () => {
-  let { loginUser,setSwap,setSwap2 } = useContext(AuthContext);
+  let { loginUser,setSwap,setSwap2, errUser } = useContext(AuthContext);
   return (
     <Container>
       <Row className="d-flex justify-content-center">
@@ -51,7 +51,7 @@ const Login = () => {
                   placeholder="Enter username"
                 />
               </div>
-              <div className="form-group mb-3">
+              <div className="form-group">
                 <label>Password</label>
                 <input
                   name="password"
@@ -60,8 +60,8 @@ const Login = () => {
                   placeholder="Password"
                 />
               </div>
-
-              <div className="d-flex justify-content-center ">
+              {errUser && <small className="text-danger"> {errUser} </small>}
+              <div className="d-flex justify-content-center mt-3">
                 <button type="submit" className="btn btn-info mt-1">
                   Submit
                 </button>

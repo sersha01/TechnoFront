@@ -19,17 +19,7 @@ export const AuthProvider = ({ children }) => {
       ? jwt_decode(localStorage.getItem("authTokens"))
       : null
   );
-  const [errUser, setErrUser] = useState(false);
-  const [user_is, setUser_is] = useState(() =>
-    localStorage.getItem("user_is")
-      ? JSON.parse(localStorage.getItem("user_is"))
-      : null
-  );
-  const [notification, setNotification] = useState(() =>
-    localStorage.getItem("notification")
-      ? JSON.parse(localStorage.getItem("notification"))
-      : null
-  );
+  const [errUser, setErrUser] = useState();
   const [profile, setProfile] = useState(null);
   const [domains, setDomains] = useState(null);
   const [signUpBatch, setSignUpBatch] = useState(null);
@@ -39,20 +29,20 @@ export const AuthProvider = ({ children }) => {
   const [curr_student, setCurr_student] = useState(null);
   const [curr_group, setCurr_group] = useState(null);
   const [reviewers, setReviewers] = useState(null);
+  const [chartData, setChartData] = useState([]);
   const [swap, setSwap] = useState("video");
   const [swap2, setSwap2] = useState("video");
 
 
   
   const signupUser = async ({ username, email, password}) => {
-    const check = user_is === "advisor" ? true : false;
-    const batch = signUpBatch ? signUpBatch : 0;
+    const check = signUpBatch === 0 ? true : false;
     await axios
       .post("http://127.0.0.1:8000/user/signup", {
         username: username,
         email: email,
         password: password,
-        batch: batch,
+        batch: signUpBatch,
         is_staff: check,
       })
       .then((res) => {
@@ -65,70 +55,32 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  const signupAdvisor = async ({ username, email, password }) => {
-    console.log(username, email, password);
-    await axios
-      .post("http://127.0.0.1:8000/user/signup", {
-        username: username,
-        email: email,
-        password: password,
-        batch: null,
-        is_student: false,
-        is_staff: true,
-      })
-      .then((res) => {
-        console.log(res.data);
-        stndingData(username, password);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        console.log(err);
-      });
-  };
-
-  const userDept = async (link) => {
-    console.log(link.access);
-    await axios
-      .post(
-        "http://127.0.0.1:8000/user/notification",
-        {},
-        {
-          headers: { Authorization: `Bearer ${link.access}` },
-        }
-      )
-      .then((res) => {
-        setUser_is(res.data.dept);
-        setNotification(res.data.notification);
-        localStorage.setItem("user_is", JSON.stringify(res.data.dept));
-        localStorage.setItem(
-          "notification",
-          JSON.stringify(res.data.notification)
-        );
-        if (res.data.dept == "lead") {
-          navigate("/lead");
-        } else if (res.data.dept == "advisor") {
-          navigate("/advisor");
-        } else if (res.data.dept == "student") {
-          navigate("/");
-        }
-      })
-      .catch((err) => {
-        console.log("error called");
-        console.log(err);
-      });
-  };
-
   const stndingData = async (username, password) => {
     await axios
     .post("http://127.0.0.1:8000/user/token", { username, password })
     .then((res) => {
       setAuthTokens(res.data);
-      console.log(JSON.stringify(res.data));
-      console.log(jwt_decode(JSON.stringify(res.data)).position);
-      setUser(jwt_decode(JSON.stringify(res.data)));
+      setUser(jwt_decode(res.data.access));
       localStorage.setItem("authTokens", JSON.stringify(res.data));
-      userDept(res.data);
-    });
+      const position = jwt_decode(res.data.access).position
+      if (position === "Admin") {
+        navigate("/admin");
+      } else if (position === "Advisor") {
+        navigate("/advisor");
+      } else if (position === "Communication") {
+        navigate("/");
+      } else if (position === "Finance") {
+        navigate("/finance");
+      } else if (position === "Lead") {
+        navigate("/lead");
+      } else if (position === "Placement") {
+        navigate("/placement");
+      } else if (position === "Student") {
+        navigate("/");
+      }
+    }).catch((err) => {
+      setErrUser("Username or Password is incorrect");
+    })
   }
 
   const loginUser = async (e) => {
@@ -142,7 +94,6 @@ export const AuthProvider = ({ children }) => {
     setAuthTokens(null);
     setUser(null);
     localStorage.removeItem("authTokens");
-    localStorage.removeItem("user_is");
     localStorage.removeItem("notification");
     setSwap("video");
     setSwap2("video");
@@ -159,6 +110,7 @@ export const AuthProvider = ({ children }) => {
         }
       )
       .then((res) => {
+        console.log(res.data);
         setProfile(res.data);
       })
       .catch((err) => {
@@ -213,7 +165,7 @@ export const AuthProvider = ({ children }) => {
       .then((res) => {
         setStudentTasks(res.data);
         console.log(res.data);
-        if (user_is == "student") {
+        if (user.position == "Student") {
           navigate("/taskslist");
         } else {
           navigate("/advisor/group/taskslist");
@@ -223,6 +175,15 @@ export const AuthProvider = ({ children }) => {
         console.log(err);
       });
   };
+
+  const getChartData = async () => {
+    await axios.get('http://127.0.0.1:8000/manifest/view/chartdata', {
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+    }).then((res) => {
+      setChartData(res.data);
+    }).catch((err) => {
+      console.log(err);
+    })}
 
   const getStudentManifest = async (manifestId) => {
     await axios
@@ -249,35 +210,39 @@ export const AuthProvider = ({ children }) => {
 
   const updateProfile = async (e) => {
     e.preventDefault();
-    console.log("present here");
-    console.log(e.target);
-    var dob = null;
     var domain = null;
-    if (user_is == "student") {
-      var dob = e.target.dob.value;
+    if (user.position == "Student") {
       var domain = e.target.domain.value;
     }
-
     await axios
       .post(
         "http://127.0.0.1:8000/user/update/profile",
         {
           first_name: e.target.first_name.value,
           last_name: e.target.last_name.value,
-          dob: dob,
+          dob: e.target.dob.value,
           domain: domain,
+          gender: e.target.gender.value,
+          email: e.target.email.value,
+          mobile: e.target.mobile.value,
+          father: e.target.father.value,
+          father_contact: e.target.father_contact.value,
+          mother: e.target.mother.value,
+          mother_contact: e.target.mother_contact.value,
+          guardian: e.target.guardian.value,
+          relation: e.target.relation.value,
           address: e.target.address.value,
+          village: e.target.village.value,
+          taluk: e.target.taluk.value,
           education: e.target.education.value,
           college: e.target.college.value,
           experience: e.target.experience.value,
           company: e.target.company.value,
-          email: e.target.email.value,
-          mobile: e.target.mobile.value,
-          village: e.target.village.value,
           designation: e.target.designation.value,
-        },
+        }
+        ,
         {
-          headers: { Authorization: `Bearer ${authTokens.access}` },
+          headers: { Authorization: `Bearer ${authTokens.access}`, "Content-Type": "application/json" },
         }
       )
       .then((res) => {
@@ -345,13 +310,11 @@ export const AuthProvider = ({ children }) => {
     loginUser,
     logoutUser,
     get_data,
-    notification,
     studentTasks,
     studentManifest,
     domains,
     errUser,
     profile,
-    user_is,
     user,
     swap,
     setSwap,
@@ -374,9 +337,10 @@ export const AuthProvider = ({ children }) => {
     month,
     year,
     status,
+    getChartData,
+    chartData,
     isCodeValid,
     setSignUpBatch,
-    setUser_is,
   };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>

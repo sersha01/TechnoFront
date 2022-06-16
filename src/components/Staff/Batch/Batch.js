@@ -1,11 +1,8 @@
 import React, { useContext, useEffect } from "react";
-// Bootstrap
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
-import AddTask from "../../Common/AddTask/AddTask";
-// import AuthContext from "../../../Context/AuthContext";
+import AddTask from "../../Staff/AddTask/AddTask";
 import LeadContext from "../../../Context/LeadContext";
 
 
@@ -51,7 +48,8 @@ const Batch = () => {
         </Row>
       </Col>
 
-      {batches && batches.map((batch) => (
+      {batches && batches.map((batch) =>{
+        return (
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg" key={batch.id}>
           <Row className="m-0">
             <Col className="textdark" sm={1}>
@@ -75,7 +73,7 @@ const Batch = () => {
             </Col>
           </Row>
         </Col>
-      ))}
+      )})}
     </Row>
   );
 };

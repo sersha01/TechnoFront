@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Row, Accordion, Table } from "react-bootstrap";
-import draw from "./draw.svg";
+import Chart from "../../Common/Chart/Chart";
+import AuthContext from "../../../Context/AuthContext";
 
 const MySpace = () => {
+  const { chartData, getChartData } = useContext(AuthContext);
+  useEffect(() => {
+    getChartData();
+  },[]);
   return (
     <div>
-      <Row className="mt-5">
-        <img width="500px" height="500px" src={draw} />
-        <h1 className="text-center mt-5">
-          Welcome to <br></br> Django + React{" "}
-        </h1>
-      </Row>
-      
+      {chartData && (
+      <Row className="mt-5 bg">
+        <Chart data={chartData}/>
+      </Row>)}
     </div>
   );
 };

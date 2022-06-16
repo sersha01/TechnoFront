@@ -2,13 +2,12 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Header from "../../components/Common/Header/Header";
 import Header2 from "../../components/Common/Header2/Header2";
-import NavBox from "../../components/User/NavBox/NavBox";
+import NavBox from "../../components/Staff/NavBox/NavBox";
 // import Notification from "../../components/Common/Notification/Notification";
-import { PrivateRouteStudent } from "../../Utils/PrivateRoute";
-
-const Lead = ({child}) => {
+import { PrivateRouteFinance } from "../../Utils/PrivateRoute";
+const Finance = ({child}) => {
   return (
-    <PrivateRouteStudent>
+    <PrivateRouteFinance>
     <Container fluid className="mx-0 p-0">
       <Header />
       <Header2 />
@@ -21,7 +20,7 @@ const Lead = ({child}) => {
             {/* <Notification /> */}
           </Row>
         </Col>
-        <Col md={8} className="bglight rounded-3 p-0 mx-5 me-0 pb-0 mb-3 bs">
+        <Col md={8} className="bglight rounded-3 p-0 mx-5 me-0 pb-5 mb-3 bs">
             {child} 
         </Col>
       </Row>
@@ -29,8 +28,8 @@ const Lead = ({child}) => {
         {child}
       </Row>
     </Container>
-    </PrivateRouteStudent>
+    </PrivateRouteFinance>
   );
 };
 
-export default Lead;
+export default Finance;

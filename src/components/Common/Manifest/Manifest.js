@@ -10,7 +10,7 @@ import style from './Manifest.module.css';
 import { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../../Context/AuthContext';
 import AdvisorContext from "../../../Context/AdvisorContext";
-import AddTask from '../AddTask/AddTask';
+import AddTask from '../../Advisor/AddTask/AddTask';
 
 function Manifest() {
 
@@ -19,7 +19,7 @@ function Manifest() {
   const [personal_score, setPersonal_score] = useState(null);
   const [technical_score, setTechnical_score] = useState(null);
 
-  const { getStudentManifest, studentManifest, curr_manifest, user_is } = useContext(AuthContext);
+  const { getStudentManifest, studentManifest, curr_manifest, user } = useContext(AuthContext);
   const { addTask, taskComplete } = useContext(AdvisorContext);
 
 
@@ -44,16 +44,16 @@ function Manifest() {
                 <h6 className={`ps-3 ${style.label}`}>Tasks</h6>
             </Col>
             <Col className={`row`} xs={8}>
-                {studentManifest && studentManifest.tasks && studentManifest.tasks.map((task) => {
+                {studentManifest && studentManifest.tasks && studentManifest.tasks.map((task, index) => {
                     return (
-                        <Col xs={11} className={`rounded-3 py-2 my-1 ${style.todoDiv}`}><input type="text" value={task.taskname} className={`col-11 ${style.input}`} disabled />
+                        <Col xs={11} className={`rounded-3 py-2 my-1 ${style.todoDiv}`} key={index}><input type="text" value={task.taskname} className={`col-11 ${style.input}`} disabled />
                 {task.status == true ? <CheckCircleIcon className='col-1'/> :<CheckCircleOutlineIcon className='col-1' onClick={()=>{
                     taskComplete(task.id);
                 }}/>}
                 </Col>
                 )})}
                 <Col xs={11} className={`rounded-3 py-2 my-1 ${style.todoDiv}`}><input type="text" placeholder={'Add New Task'} className={`col-11 ${style.input}`} value={task} onChange={(e)=>{setTask(e.target.value)}}/>
-                {user_is != "student" && (studentManifest && studentManifest.is_complete != true) && <AddCircleOutlineRoundedIcon className='col-1' onClick={()=>{addTask(task)
+                {user.position != "Student" && (studentManifest && studentManifest.is_complete != true) && <AddCircleOutlineRoundedIcon className='col-1' onClick={()=>{addTask(task)
                 setTask('')}} />}
                 </Col>
             </Col>
@@ -88,7 +88,7 @@ function Manifest() {
 
 
 
-        {user_is != "student" && (studentManifest && studentManifest.is_complete != true) && <div className='d-flex justify-content-center'>
+        {user.position != "Student" && (studentManifest && studentManifest.is_complete != true) && <div className='d-flex justify-content-center'>
             <div><AddTask title="Repeat" value="repeated" form={formData}/></div>
             <div> <AddTask title="Completed" value="completed" form={formData}/></div>
         </div>}

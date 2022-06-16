@@ -140,6 +140,34 @@ export const AdvisorProvider = ({ children }) => {
         console.log(err)
     })
   }
+  // Other function
+
+  const sendShiftRequest = async (studentId, shiftTo) => {
+    await axios.post('http://127.0.0.1:8000/student/request/shift',{
+        'student':studentId,
+        'shift_to':shiftTo,
+      },{
+        headers: {Authorization : `Bearer ${authTokens.access}`}
+    }).then(res=>{
+        console.log(res.data)
+        getMyStudents()
+    }).catch(err=>{
+        console.log(err)
+    })
+  }
+
+  const sendTerminateRequest = async (studentId) => {
+    await axios.post('http://127.0.0.1:8000/student/request/terminate',{
+        'student':studentId,
+      },{
+        headers: {Authorization : `Bearer ${authTokens.access}`}
+    }).then(res=>{
+        console.log(res.data)
+        getMyStudents()
+    }).catch(err=>{
+        console.log(err)
+    })
+  }
 
   
   const contextData = {
@@ -155,6 +183,10 @@ export const AdvisorProvider = ({ children }) => {
 
     //Update
     taskComplete,
+
+    //Send request
+    sendShiftRequest,
+    sendTerminateRequest,
 
     //State functions
     setMyStudents,
