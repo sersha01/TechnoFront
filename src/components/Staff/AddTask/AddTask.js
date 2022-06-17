@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -8,30 +8,24 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Row } from "react-bootstrap";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import AuthContext from "../../../Context/AuthContext";
 import LeadContext from "../../../Context/LeadContext";
-import AdvisorContext from "../../../Context/AdvisorContext";
 
 const AddTask = ({ title, value, form }) => {
   const {
     domains,
-    reviewers,
     getDomains,
-    getReviewers,
     getNotificationsTypes,
     createNotifications,
-    types,
-  } = useContext(AuthContext);
-
-  const { reviewPassed, reviewRepeated } = useContext(AdvisorContext);
-
+  } = useContext(AuthContext) ;
   const {
     advisors,
     batches,
+    groupDetails,
     createBatch,
     createDomain,
     createGroup,
@@ -40,6 +34,7 @@ const AddTask = ({ title, value, form }) => {
     studentManage,
     updateDomain,
     updateBatch,
+    updateGroup,
   } = useContext(LeadContext);
 
   const [open, setOpen] = useState(false);
@@ -48,22 +43,17 @@ const AddTask = ({ title, value, form }) => {
   const [advisor, setAdvisor] = useState("");
   const [location, setLocation] = useState("");
   const [batch, setBatch] = useState("");
-  const [reviewer, setReviewer] = useState("");
-  const [remark, setRemark] = useState("");
-  const [date, setDate] = useState("");
 
   const [type, setType] = useState("");
   const [content, setContent] = useState("");
 
   const handleClickOpen = () => {
-    if (value === "batch" || value === "updateBatch") {
+    if (value === "batch" || value === "updateBatch" || value === "group") {
       getAdvisors();
     } else if (value === "addgroup") {
       getAdvisors();
       getDomains();
       getBatches();
-    } else if (value === "completed" || value === "repeated") {
-      getReviewers();
     } else if (value === "st_manage") {
       getBatches();
       getDomains();
@@ -76,11 +66,6 @@ const AddTask = ({ title, value, form }) => {
     setAdvisor("");
     setLocation("");
     setBatch("");
-    setReviewer("");
-    setRemark("");
-    setDate("");
-    setType("");
-    setContent("");
     setOpen(true);
   };
 
@@ -99,7 +84,6 @@ const AddTask = ({ title, value, form }) => {
     setOpen(false);
   };
 
-
   const handleSubmit = () => {
     if (value === "batch") {
       createBatch(batch, advisor, location);
@@ -107,25 +91,20 @@ const AddTask = ({ title, value, form }) => {
       createDomain(domain);
     } else if (value === "addgroup") {
       createGroup(batch, name, advisor, domain);
-    } else if (value === "completed") {
-      reviewPassed(form, reviewer, remark, date);
-    } 
-    else if (value === "repeated") {
-      reviewRepeated(form, reviewer, remark, date);
-    }
-    else if (value === "st_manage") {
-      updateDomain(form, domain);
-    } else if (value === "updateBatch") {
-      updateBatch(form, advisor);
-    } else if (value === "st_manage") {
-      studentManage(form, batch, domain);
+    } else if (value === "updateDomain") {
+      updateDomain(form, domain)
+    }else if (value === "updateBatch") {
+      updateBatch(form, advisor, batch)
+    }else if (value === "group") {
+      updateGroup(groupDetails.id, name, advisor)
+    }else if (value === "st_manage") {
+      studentManage(form, batch, domain)
     } else if (value === "addnotifications") {
       createNotifications(form, type, content);
     }
-      }
-
       setOpen(false); 
-  
+    }
+
   return (
     <div>
       <Button variant="contained" className="addtask" onClick={handleClickOpen}>
@@ -225,12 +204,13 @@ const AddTask = ({ title, value, form }) => {
                       label="Batch"
                       MenuProps={MenuProps}
                     >
-                      {batches &&
-                        batches.map((batch) => (
+                       {batches &&
+                        batches.map((batch) =>{
+                          return (
                           <MenuItem key={batch.id} value={batch.id}>
                             {batch.name}
                           </MenuItem>
-                        ))}
+                        )})}
                     </Select>
                   </FormControl>
                   <FormControl className="my-4">
@@ -248,11 +228,12 @@ const AddTask = ({ title, value, form }) => {
                       MenuProps={MenuProps}
                     >
                       {domains &&
-                        domains.map((domain) => (
+                        domains.map((domain) =>{
+                          return (
                           <MenuItem key={domain.id} value={domain.id}>
                             {domain.name}
                           </MenuItem>
-                        ))}
+                        )})}
                     </Select>
                   </FormControl>
                 </Row>
@@ -267,48 +248,6 @@ const AddTask = ({ title, value, form }) => {
                     onChange={(e) => setDomain(e.target.value)}
                     placeholder="Enter domain name here"
                   />
-                </Row>
-              )}
-              {(value === "completed" || value === "repeated") && (
-                <Row className="my-2">
-                  <FormControl className="my-4">
-                    <InputLabel id="demo-simple-select-autowidth-label">
-                      Reviewer
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-autowidth-label"
-                      id="demo-simple-select-autowidth"
-                      value={reviewer}
-                      onChange={(e) => setReviewer(e.target.value)}
-                      autoWidth
-                      label="Reviewer name"
-                      maxHeight="200px"
-                      MenuProps={MenuProps}
-                    >
-                      {reviewers &&
-                        reviewers.map((reviewer) => (
-                          <MenuItem key={reviewer.id} value={reviewer.id}>
-                            {reviewer.name}
-                          </MenuItem>
-                        ))}
-                    </Select>
-                  </FormControl>
-                  <TextField
-                    id="outlined-basic"
-                    label="Remark"
-                    variant="outlined"
-                    value={remark}
-                    onChange={(e) => setRemark(e.target.value)}
-                    placeholder="Enter remark here"
-                  />
-                  <input
-                    type="date"
-                    className="mt-4 py-3 rounded border-1"
-                    value={date}
-                    onChange={(e) => {
-                      setDate(e.target.value);
-                    }}
-                  ></input>
                 </Row>
               )}
               {value === "batch" && (
@@ -336,11 +275,12 @@ const AddTask = ({ title, value, form }) => {
                       MenuProps={MenuProps}
                     >
                       {advisors &&
-                        advisors.map((advisor) => (
+                        advisors.map((advisor) =>{
+                          return (
                           <MenuItem key={advisor.id} value={advisor.id}>
                             {advisor.username}
                           </MenuItem>
-                        ))}
+                        )})}
                     </Select>
                   </FormControl>
                   <FormControl className="mb-4">
@@ -380,11 +320,12 @@ const AddTask = ({ title, value, form }) => {
                       MenuProps={MenuProps}
                     >
                       {advisors &&
-                        advisors.map((advisor) => (
+                        advisors.map((advisor) =>{
+                          return (
                           <MenuItem key={advisor.id} value={advisor.id}>
                             {advisor.username}
                           </MenuItem>
-                        ))}
+                        )})}
                     </Select>
                   </FormControl>
                   <TextField
@@ -394,17 +335,7 @@ const AddTask = ({ title, value, form }) => {
                     value={batch}
                     onChange={(e) => setBatch(e.target.value)}
                     placeholder="Enter name here.."
-                  />
-                </Row>
-              )}
-              {value === "advisor" && (
-                <Row className="my-2">
-                  <TextField
-                    id="outlined-basic"
-                    label="Advisor"
-                    variant="outlined"
-                    placeholder="Enter name here.."
-                  />
+                    />
                 </Row>
               )}
               {value === "group" && (
@@ -413,6 +344,8 @@ const AddTask = ({ title, value, form }) => {
                     id="outlined-basic"
                     label="Name"
                     variant="outlined"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     placeholder="Enter name here.."
                   />
                   <FormControl className="my-4">
@@ -430,11 +363,12 @@ const AddTask = ({ title, value, form }) => {
                       MenuProps={MenuProps}
                     >
                       {advisors &&
-                        advisors.map((advisor) => (
+                        advisors.map((advisor) =>{
+                          return (
                           <MenuItem key={advisor.id} value={advisor.id}>
                             {advisor.username}
                           </MenuItem>
-                        ))}
+                        )})}
                     </Select>
                   </FormControl>
                 </Row>
@@ -456,11 +390,12 @@ const AddTask = ({ title, value, form }) => {
                       MenuProps={MenuProps}
                     >
                       {batches &&
-                        batches.map((batch) => (
+                        batches.map((batch) =>{
+                          return (
                           <MenuItem key={batch.id} value={batch.id}>
                             {batch.name}
                           </MenuItem>
-                        ))}
+                        )})}
                     </Select>
                   </FormControl>
                   <TextField
@@ -487,11 +422,12 @@ const AddTask = ({ title, value, form }) => {
                       MenuProps={MenuProps}
                     >
                       {advisors &&
-                        advisors.map((advisor) => (
+                        advisors.map((advisor) =>{
+                          return (
                           <MenuItem key={advisor.id} value={advisor.id}>
                             {advisor.username}
                           </MenuItem>
-                        ))}
+                        )})}
                     </Select>
                   </FormControl>
                   <FormControl className="my-4">
@@ -509,17 +445,16 @@ const AddTask = ({ title, value, form }) => {
                       MenuProps={MenuProps}
                     >
                       {domains &&
-                        domains.map((domain) => (
+                        domains.map((domain) =>{
+                          return (
                           <MenuItem key={domain.id} value={domain.id}>
                             {domain.name}
                           </MenuItem>
-                        ))}
+                        )})}
                     </Select>
                   </FormControl>
                 </Row>
               )}
-
-              <Row className=""></Row>
             </Box>
           </DialogContentText>
         </DialogContent>
@@ -534,6 +469,4 @@ const AddTask = ({ title, value, form }) => {
   );
 };
 
-
-  
 export default AddTask;

@@ -16,7 +16,7 @@ const AddTask = ({ setSwap2,value }) => {
   const [code, setCode] = useState("");
   const {errorToast} = useContext(StyleContext);
 
-  const { isCodeValid, setSignUpBatch, setUser_is } = useContext(AuthContext);
+  const { isCodeValid, setSignUpBatch } = useContext(AuthContext);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -31,8 +31,9 @@ const AddTask = ({ setSwap2,value }) => {
       if (res.data.status !== 400) {
         if (res.data.message === "student") {
           setSignUpBatch(res.data.batch);
+        }else {
+          setSignUpBatch(0);
         }
-        setUser_is(res.data.message);
         setOpen(false);
         setSwap2("signup");
       }else{

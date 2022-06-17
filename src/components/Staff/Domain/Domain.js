@@ -1,10 +1,8 @@
 import React, { useContext, useEffect } from "react";
-// Bootstrap
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
-import AddTask from "../../Common/AddTask/AddTask"
+import AddTask from "../../Staff/AddTask/AddTask"
 import AuthContext from "../../../Context/AuthContext";
 
 const Domain = () => {
@@ -42,8 +40,9 @@ const Domain = () => {
         </Row>
       </Col>
 
-      {domains && domains.map((domain, index) => (
-        <Col className="m-0" sm={12}>
+      {domains && domains.map((domain, index) =>{
+        return (
+        <Col className="m-0" sm={12} key={index}>
           <Col sm={9} className="py-2 mb-2 cp rounded-3 bg">
             <Row className="m-0">
               <Col className="textdark" sm={2}>
@@ -60,7 +59,7 @@ const Domain = () => {
             </Row>
           </Col>
         </Col>
-      ))}
+      )})}
       
     </Row>
   );
