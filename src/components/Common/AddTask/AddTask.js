@@ -99,18 +99,6 @@ const AddTask = ({ title, value, form }) => {
     setOpen(false);
   };
 
-  // const handleDate = (date) => {
-  //   console.log(date);
-  //   var d = new Date(date),
-  //       month = '' + (d.getMonth() + 1),
-  //       day = '' + d.getDate(),
-  //       year = d.getFullYear();
-  //   if (month.length < 2)
-  //       month = '0' + month;
-  //   if (day.length < 2)
-  //       day = '0' + day;
-  //   return [day, month, year].join('/');
-  // };
 
   const handleSubmit = () => {
     if (value === "batch") {
@@ -136,11 +124,8 @@ const AddTask = ({ title, value, form }) => {
     }
       }
 
-
-
-    setOpen(false);
-  };
-
+      setOpen(false); 
+  
   return (
     <div>
       <Button variant="contained" className="addtask" onClick={handleClickOpen}>
@@ -547,6 +532,8 @@ const AddTask = ({ title, value, form }) => {
       </Dialog>
     </div>
   );
-  
+};
+
+
   
 export default AddTask;

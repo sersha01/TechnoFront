@@ -12,6 +12,7 @@ import { useContext, useState } from "react";
 import AuthContext from "../../../Context/AuthContext";
 import Button from "@mui/material/Button";
 import StyleContext from "../../../Context/StyleContext";
+import AccountMenu from "./AccountMenu";
 
 
 
@@ -69,9 +70,10 @@ function Header() {
           
           <Col md={5} className="d-flex justify-content-between px-3 p-0">
             <input type="checkbox" id="checkbox"  onChange={handleDarkMode}  />
-            <svg height={40} width={40} onClick={ logoutUser }>
+            <AccountMenu/>
+            {/* <svg height={40} width={40} onClick={ logoutUser }>
               <circle cx="20" cy="20" r="20"  />
-            </svg>
+            </svg> */}
           </Col>
         </Row>
       </Col>
