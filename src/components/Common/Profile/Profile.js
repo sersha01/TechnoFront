@@ -12,9 +12,11 @@ import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import ProfilePic from "../Crop/Crop";
+import StyleContext from "../../../Context/StyleContext";
 
 function Profile({ by }) {
   const { profile, getMyProfile, updateProfile, user, getDomains, domains } = useContext(AuthContext);
+  const {infoToast,errorToast } = useContext(StyleContext);
 
   const [image, setImage] = useState(null);
 
@@ -43,7 +45,11 @@ function Profile({ by }) {
             <Col className="d-flex justify-content-end pe-3 pt-1">
             <label htmlFor="upload_image" >
               <button className={` px-4 py-2 rounded-3 ${style.button}`}
-                onClick={()=>{alert("settakkan und monues")}}>
+                onClick={()=>{
+                  alert("settakkan und monues")
+                  infoToast("Sheri mone")
+                  errorToast("Pettenn aykotee")
+                  }}>
                 Change
               </button>
             </label>
@@ -79,31 +85,35 @@ function Profile({ by }) {
                 />
               </Col>
             </Col>
+            
+            
             <Col xs={12} className="py-1 px-0">
+              
               <Col
-                className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
-              >
-                <label className={`${style.label}`}>Date of Birth</label>
-                <input
-                  type="text"
-                  name="dob"
-                  className={`w-100 ${style.input}`}
-                  defaultValue={profile && profile.dob}
-                />
-              </Col>
+              className={`py-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
+            >
+              <label className={`${style.label}`}>Email</label>
+              <input
+                type="email"
+                name="email"
+                className={`w-100 ${style.input}`}
+                defaultValue={profile && profile.email}
+              />
+            </Col>
             </Col>
             <Col xs={12} className="py-1 px-0">
-              <Col
-                className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
-              >
-                <label className={`${style.label}`}>Gender</label>
-                <input
-                  type="text"
-                  name="gender"
-                  className={`w-100 ${style.input}`}
-                  defaultValue={profile && profile.gender}
-                />
-              </Col>
+            <Col
+              className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
+            >
+              <label className={`${style.label}`}>Mobile</label>
+              <input
+                type="tel"
+                name="mobile"
+                className={`w-100 ${style.input}`}
+                defaultValue={profile && profile.mobile}
+              />
+            </Col>
+              
             </Col>
             {user.position !== "Advisor" &&
               by !== "advisor" &&
@@ -144,29 +154,29 @@ function Profile({ by }) {
           </Col>
           <Col xs={12} md={6} className="py-1 px-0 pe-md-1">
             <Col
-              className={`py-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
-            >
-              <label className={`${style.label}`}>Email</label>
-              <input
-                type="email"
-                name="email"
-                className={`w-100 ${style.input}`}
-                defaultValue={profile && profile.email}
-              />
-            </Col>
+                className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
+              >
+                <label className={`${style.label}`}>Gender</label>
+                <input
+                  type="text"
+                  name="gender"
+                  className={`w-100 ${style.input}`}
+                  defaultValue={profile && profile.gender}
+                />
+              </Col>
           </Col>
           <Col xs={12} md={6} className="py-1 ps-md-1 px-0">
-            <Col
-              className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
-            >
-              <label className={`${style.label}`}>Mobile</label>
-              <input
-                type="tel"
-                name="mobile"
-                className={`w-100 ${style.input}`}
-                defaultValue={profile && profile.mobile}
-              />
-            </Col>
+          <Col
+                className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
+              >
+                <label className={`${style.label}`}>Date of Birth</label>
+                <input
+                  type="text"
+                  name="dob"
+                  className={`w-100 ${style.input}`}
+                  defaultValue={profile && profile.dob}
+                />
+              </Col>
           </Col>
           <Col xs={12} md={6} className="p-0 pe-md-1">
             <Col xs={12} className="py-1 px-0">
