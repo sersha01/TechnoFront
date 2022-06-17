@@ -120,6 +120,19 @@ function NavBox() {
           </Col>
         </Col>
       </Link>
+      <Link to="/lead/requests">
+        <Col
+          className={`pe-0 row m-0 justify-content-end text-center position-relative cp ${style.navItems}`}
+          xs={12}
+        >
+          <Col className="my-2 p-0" xs={11}>
+            <p className="navitems">Requests</p>
+          </Col>
+          <Col className="ps-2 opacity-0 " xs={1}>
+            <div className={`px-2  ${style.navSelected}`}> </div>
+          </Col>
+        </Col>
+      </Link>
     </Row>
   );
 }

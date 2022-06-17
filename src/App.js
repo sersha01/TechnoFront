@@ -58,6 +58,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Home from "./pages/Home/Home";
+import Requests from "./components/Staff/Requests/Requests";
 
 function App() {
   return (
@@ -233,6 +234,12 @@ function App() {
                   path="/lead/placements"
                   element={
                     <Lead child={<Placements />}/>
+                  }
+                />
+                <Route
+                  path="/lead/requests"
+                  element={
+                    <Lead child={<Requests />}/>
                   }
                 />
                 <Route
