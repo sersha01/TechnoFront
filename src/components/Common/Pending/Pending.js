@@ -1,39 +1,31 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "./Pending.css";
+import AuthContext from "../../../Context/AuthContext";
 
 const Pending = () => {
+  
+  const { getPendings, pendings } = useContext(AuthContext);
+
+  useEffect(() => {
+    getPendings();
+  },[])
+
   return (
-    <div id="mySidenav" className="sidenav p-0">
-      <div id="about" className="p-3">
-        <div className="d-flex ">
-          <div className="justify-content-center my-auto ">
-            <h4 className="pendingt">Pending</h4>
-          </div>
-          <div className="pendings py-2 ms-5">
-              <h6>Hellooooooooo</h6>
-              <h6>Hello</h6>
-              <h6>Hello</h6>
-              <h6>Hello</h6>
-              <h6>Hello</h6>
-              <h6>Hello</h6>
-              <h6>Hello</h6>
-              <h6>Hellooooooooo</h6>
-              <h6>Hello</h6>
-              <h6>Hello</h6>
-              <h6>Hello</h6>
-              <h6>Hello</h6>
-              <h6>Hello</h6>
-              <h6>Hello</h6>
-              <h6>Hellooooooooo</h6>
-              <h6>Hello</h6>
-              <h6>Hello</h6>
-              <h6>Hello</h6>
-              <h6>Hello</h6>
-              <h6>Hello</h6>
-              <h6>Hello</h6>
-              <h6>Hellooooooooo</h6>
-          </div>
+    <div className="main-div">
+      <div className="contain-div">
+      { pendings.length > 0 ? <> 
+        <div className="view-div">
+          <h4 className="title-view">Pending</h4>
         </div>
+        <div className="content-div">
+           <h4 className="title-content">Pending</h4>
+          {pendings.map((pending) => {
+            return (<h6 key={pending.id}>{pending.taskname}</h6>
+          )})}
+        </div> </> :
+        <div className="view-div-2">
+            <h4 className="title-view">No Pendings</h4>
+        </div> }
       </div>
     </div>
   );

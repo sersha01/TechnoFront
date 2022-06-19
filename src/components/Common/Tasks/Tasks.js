@@ -123,7 +123,7 @@ function Tasks() {
                                           className={`${style.tableBodyText}`}
                                           sm={4}
                                         >
-                                          {review.created}#edited
+                                          {review.created}
                                         </Col>
                                         <Col
                                           className={`${style.tableBodyText}`}

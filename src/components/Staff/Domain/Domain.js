@@ -4,10 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "@mui/material/Button";
 import AddTask from "../../Staff/AddTask/AddTask"
 import AuthContext from "../../../Context/AuthContext";
+import LeadContext from "../../../Context/LeadContext";
 
 const Domain = () => {
 
-  const { getDomains, domains, deleteDomain } = useContext(AuthContext);
+  const { getDomains, domains } = useContext(AuthContext);
+  const { deleteDomain } = useContext(LeadContext);
 
   useEffect(() => {
     getDomains();

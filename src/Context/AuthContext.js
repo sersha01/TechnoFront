@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }) => {
   const [swap, setSwap] = useState("video");
   const [swap2, setSwap2] = useState("video");
   const [types, setTypes] = useState(null);
+  const [pendings, setPendings] = useState([]);
 
   const [rent, setRent] = useState(false);
   const [shiftpay, setShiftpay] = useState(false);
@@ -64,7 +65,6 @@ export const AuthProvider = ({ children }) => {
 
   const stndingData = async (username, password) => {
     await axios
-// <<<<<<< HEAD
     .post("http://127.0.0.1:8000/user/token", { username, password })
     .then((res) => {
       setAuthTokens(res.data);
@@ -196,6 +196,19 @@ export const AuthProvider = ({ children }) => {
     }).catch((err) => {
       console.log(err);
     })}
+
+  const getPendings = async () => {
+    await axios.post('http://127.0.0.1:8000/manifest/view/pendings', {
+      "student": curr_student,
+    }, {
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+    }).then((res) => {
+      console.log(res.data);
+      setPendings(res.data);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
 
   const getStudentManifest = async (manifestId) => {
     await axios
@@ -660,6 +673,8 @@ export const AuthProvider = ({ children }) => {
     sendForm,
     allpaid,
     allCompletedPayments,
+    getPendings,
+    pendings,
 // >>>>>>> main
   };
   return (
