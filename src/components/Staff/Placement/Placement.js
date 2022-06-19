@@ -6,6 +6,9 @@ import Button from "@mui/material/Button";
 import style from "./Placement.module.css";
 import LeadContext from "../../../Context/LeadContext";
 import AddTask from "../AddTask/AddTask";
+import Profile from './PlacementProfile'
+import PlacementProfile from "./PlacementProfile";
+import { Link } from "react-router-dom";
 
 const Placement = () => {
   const { getPlacements, placements } = useContext(LeadContext);
@@ -53,7 +56,7 @@ const Placement = () => {
 
       <Col sm={12} className="py-2 my-2 bgdark  px-4 rounded-3">
         <Row className="m-0 textlight" xs={0}>
-          <Col className="bgdark" sm={2}>
+          <Col className="bgdark" sm={1}>
             Batch
           </Col>
           <Col className="bgdark" sm={2}>
@@ -62,14 +65,14 @@ const Placement = () => {
           <Col className="bgdark" sm={2}>
             Domain
           </Col>
-          <Col className="bgdark" sm={2}>
+          <Col className="bgdark" sm={1}>
             LPA
           </Col>
           <Col className="bgdark" sm={2}>
             Location
           </Col>
 
-          <Col className="bgdark" sm={2}>
+          <Col className="bgdark" sm={4}>
             Designation
           </Col>
         </Row>
@@ -79,28 +82,30 @@ const Placement = () => {
         {placements && placements.map((placement) => {
           if ((name !== '' && batch !== '' && placement.student.user.username.includes(name) && placement.student.batch.name.includes(batch)) || ((name !== '' && batch === '' && placement.student.user.username.includes(name)) || (name === '' && batch !== '' &&  placement.student.batch.name.includes(batch))) || (name === '' && batch === '')) {
           return (
-        <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
-          <Row className="m-0">
-            <Col className="textdark" sm={2}>
-              #{placement.student.batch.name}
-            </Col>
-            <Col className="textdark" sm={2}>
-              {placement.student.user.username}
-            </Col>
-            <Col className="textdark" sm={2}>
-              {placement.student.profile.domain.name}
-            </Col>
-            <Col className="textdark" sm={2}>
-              {placement.LPA}
-            </Col>
-            <Col className="textdark" sm={2}>
-              {placement.location}
-            </Col>
-            <Col className="textdark d-flex" sm={2}>
-             {placement.position}
-            </Col>
-          </Row>
-        </Col>
+        <Link to="/lead/placements/info" style={{ textDecoration: 'none' }}>
+          <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
+            <Row className="m-0">
+              <Col className="textdark" sm={1}>
+                #{placement.student.batch.name}
+              </Col>
+              <Col className="textdark" sm={2}>
+                {placement.student.user.username}
+              </Col>
+              <Col className="textdark" sm={2}>
+                {placement.student.profile.domain.name}
+              </Col>
+              <Col className="textdark" sm={1}>
+                {placement.LPA}
+              </Col>
+              <Col className="textdark" sm={2}>
+                {placement.location}
+              </Col>
+              <Col className="textdark d-flex" sm={4}>
+              {placement.position}
+              </Col>
+            </Row>
+          </Col>
+        </Link>
           )}})}
       </Col>
     </Row>

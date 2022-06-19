@@ -193,7 +193,6 @@ const Requests = () => {
           <Col className="bgdark" sm={2}>
             Advisor
           </Col>
-
           <Col className="bgdark" sm={2}>
             By
           </Col>

@@ -1,58 +1,30 @@
-// Bootstrap
+import React from 'react'
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import './Profile.module.css';
 import style from "./Profile.module.css";
-import wafi from "./thor.jpg";
 import Button from "@mui/material/Button";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../../../Context/AuthContext";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
-import ProfilePic from "../Crop/Crop";
-import axios from "axios";
+import ProfilePic from "../../Common/Crop/Crop";
 import StyleContext from "../../../Context/StyleContext";
 
-function Profile({ by }) {
-  const { profile, getMyProfile, updateProfile, user, getDomains, domains } = useContext(AuthContext);
+const PlacementProfile = ({by}) => {
+
+    const { profile, getMyProfile, updateProfile, user, getDomains, domains } = useContext(AuthContext);
   const {infoToast,errorToast } = useContext(StyleContext);
 
   const [image, setImage] = useState(null);
 
-  useEffect(() => {
-    if (user.position === "Student") {
-      getDomains();
-    }
-    if (user.position !== "Lead") {
-      getMyProfile();
-    }
-  }, []);
-  useEffect(() => {
-    console.log(image);
-  },[image])
 
 
-  const uploadImage = ()=>{
-    const data = new FormData();
-data.append("file", image);
-data.append("upload_preset", "w5rfzcjg");
-   
-    data.append("cloud_name", "da3qthae5");
-    axios.post("https://api.cloudinary.com/v1_1/da3qthae5/image/upload",data)
-    .then((data) => {
-     console.log(data);
-    })
-    .catch((err) => {
-      console.log(err);
-      alert(err)
-    });
-  }
-
-
-    return (
-      <Row className={`m-0 p-3 rounded-2 ${style.profile}`}>
+  return (
+    <>
+    <Row className={`m-0 p-3 rounded-2 ${style.profile}`}>
         <Col className="text-start ps-2" xs={12}>
           <h2>My Profile</h2>
         </Col>
@@ -67,7 +39,11 @@ data.append("upload_preset", "w5rfzcjg");
             <Col className="d-flex justify-content-end pe-3 pt-1">
             <label htmlFor="upload_image" >
               <button className={` px-4 py-2 rounded-3 ${style.button}`}
-                onClick={uploadImage}>
+                onClick={()=>{
+                  alert("settakkan und monues")
+                  infoToast("Sheri mone")
+                  errorToast("Pettenn aykotee")
+                  }}>
                 Change
               </button>
             </label>
@@ -133,6 +109,21 @@ data.append("upload_preset", "w5rfzcjg");
             </Col>
               
             </Col>
+
+            <Col xs={12} className="py-1 px-0">
+            <Col
+              className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
+            >
+              <label className={`${style.label}`}>Batch</label>
+              <input
+                type="number"
+                name="batch"
+                className={`w-100 ${style.input}`}
+                
+              />
+            </Col>
+            </Col>
+
             {user.position !== "Advisor" &&
               by !== "advisor" &&
               profile &&
@@ -170,6 +161,197 @@ data.append("upload_preset", "w5rfzcjg");
                 </Col>
               )}
           </Col>
+
+
+          <Row className='mt-3'>
+            <h4>Placement Profile</h4>
+          <Col xs={12} md={6} className="py-1 px-0 pe-md-1">
+            <Col
+                className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
+              >
+                <label className={`${style.label}`}>Company name</label>
+                <input
+                  type="text"
+                  name="name"
+                  className={`w-100 ${style.input}`}
+                  
+                />
+              </Col>
+          </Col>
+          <Col xs={12} md={6} className="py-1 ps-md-1 px-0">
+          <Col
+                className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
+              >
+                <label className={`${style.label}`}>Designation</label>
+                <input
+                  type="text"
+                  name="position"
+                  className={`w-100 ${style.input}`}
+                />
+              </Col>
+          </Col>
+          
+          
+          <Col xs={12} md={6} className="py-1 px-0 pe-md-1">
+            <Col
+              className={`py-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
+            >
+              <label className={`${style.label}`}> Company Address</label>
+              <textarea
+                rows="4"
+                name="address"
+                className={`w-100 ${(style.input, style.textarea)}`}
+              />
+            </Col>
+          </Col>
+          <Col xs={12} md={6} className="py-1 px-0 ps-md-1">
+            <Col
+              className={`py-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
+            >
+              <label className={`${style.label}`}>LPA</label>
+              <input
+                type="number"
+                name="village"
+                className={`w-100 ${style.input}`}
+              />
+            </Col>
+            <Col
+              className={`py-1 pb-3 text-start ps-3 rounded-3 mt-2 ${style.inputField}`}
+            >
+              <label className={`${style.label}`}>Location</label>
+              <input
+                type="text"
+                name="location"
+                className={`w-100 ${style.input}`}
+                defaultValue={profile && profile.taluk}
+              />
+            </Col>
+          </Col>
+          <Col xs={12} md={6} className="py-1 pe-md-1 px-0">
+            <Col
+              className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
+            >
+              <label className={`${style.label}`}>Education</label>
+              <input
+                type="text"
+                name="education"
+                className={`w-100 ${style.input}`}
+                defaultValue={profile && profile.education}
+              />
+            </Col>
+          </Col>
+          <Col xs={12} md={6} className="py-1 px-0 ps-md-1">
+            <Col
+              className={`py-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
+            >
+              <label className={`${style.label}`}>College</label>
+              <input
+                type="text"
+                name="college"
+                className={`w-100 ${style.input}`}
+                defaultValue={profile && profile.college}
+              />
+            </Col>
+          </Col>
+          </Row>
+
+
+          <Row className='mt-3'>
+            <h4>Education</h4>
+          <Col xs={12} md={6} className="py-1 px-0 pe-md-1">
+            <Col
+                className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
+              >
+                <label className={`${style.label}`}>Company name</label>
+                <input
+                  type="text"
+                  name="name"
+                  className={`w-100 ${style.input}`}
+                />
+              </Col>
+          </Col>
+          <Col xs={12} md={6} className="py-1 ps-md-1 px-0">
+          <Col
+                className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
+              >
+                <label className={`${style.label}`}>Designation</label>
+                <input
+                  type="text"
+                  name="position"
+                  className={`w-100 ${style.input}`}
+                />
+              </Col>
+          </Col>
+          
+          <Col xs={12} md={6} className="py-1 px-0 pe-md-1">
+            <Col
+              className={`py-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
+            >
+              <label className={`${style.label}`}> Company Address</label>
+              <textarea
+                rows="4"
+                name="address"
+                className={`w-100 ${(style.input, style.textarea)}`}
+              />
+            </Col>
+          </Col>
+          <Col xs={12} md={6} className="py-1 px-0 ps-md-1">
+            <Col
+              className={`py-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
+            >
+              <label className={`${style.label}`}>LPA</label>
+              <input
+                type="number"
+                name="village"
+                className={`w-100 ${style.input}`}
+              />
+            </Col>
+            <Col
+              className={`py-1 pb-3 text-start ps-3 rounded-3 mt-2 ${style.inputField}`}
+            >
+              <label className={`${style.label}`}>Location</label>
+              <input
+                type="text"
+                name="location"
+                className={`w-100 ${style.input}`}
+                defaultValue={profile && profile.taluk}
+              />
+            </Col>
+          </Col>
+          
+          <Col xs={12} md={6} className="py-1 pe-md-1 px-0">
+            <Col
+              className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
+            >
+              <label className={`${style.label}`}>Education</label>
+              <input
+                type="text"
+                name="education"
+                className={`w-100 ${style.input}`}
+                defaultValue={profile && profile.education}
+              />
+            </Col>
+          </Col>
+          <Col xs={12} md={6} className="py-1 px-0 ps-md-1">
+            <Col
+              className={`py-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
+            >
+              <label className={`${style.label}`}>College</label>
+              <input
+                type="text"
+                name="college"
+                className={`w-100 ${style.input}`}
+                defaultValue={profile && profile.college}
+              />
+            </Col>
+          </Col>
+
+          
+          </Row>
+
+
+          <Row className='mt-4'>
+            <h4>Student Profile</h4>
           <Col xs={12} md={6} className="py-1 px-0 pe-md-1">
             <Col
                 className={`py-1 text-start pb-3 ps-3 rounded-3 ${style.inputField}`}
@@ -396,6 +578,8 @@ data.append("upload_preset", "w5rfzcjg");
               />
             </Col>
           </Col>
+          </Row>
+
           <Col className="m-0 p-0">
             <Col className="submitProfileDiv mt-3">
               <Button
@@ -415,8 +599,8 @@ data.append("upload_preset", "w5rfzcjg");
             </Col>
           </Col>
         </form>
-      </Row>
-    );
+      </Row></>
+  )
 }
 
-export default Profile;
+export default PlacementProfile
