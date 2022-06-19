@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import "./Header2.css";
 import {Link} from 'react-router-dom'
+import Demo from './demo'
 
 const Header2 = () => {
   return (
@@ -9,7 +10,8 @@ const Header2 = () => {
       <Row className="bg">
         <Col md={12} className="d-md-flex d-lg-none bg">
           <nav role="navigation">
-            <div id="menuToggle">
+            <Demo></Demo>
+            {/* <div id="menuToggle">
               <input type="checkbox" />
               <span></span>
               <span></span>
@@ -41,7 +43,7 @@ const Header2 = () => {
                   </li>
                 </Link>
               </ul>
-            </div>
+            </div> */}
           </nav>
         </Col>
       </Row>

@@ -64,7 +64,6 @@ export const AuthProvider = ({ children }) => {
 
   const stndingData = async (username, password) => {
     await axios
-// <<<<<<< HEAD
     .post("http://127.0.0.1:8000/user/token", { username, password })
     .then((res) => {
       setAuthTokens(res.data);
@@ -462,6 +461,7 @@ export const AuthProvider = ({ children }) => {
         email: "m4michu123@gmail.com",
         contact: "9207404868",
       },
+      
     };
 
     const paymentObject = new window.Razorpay(options);
