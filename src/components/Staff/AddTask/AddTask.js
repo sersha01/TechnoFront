@@ -14,6 +14,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import AuthContext from "../../../Context/AuthContext";
 import LeadContext from "../../../Context/LeadContext";
+import { set } from "react-hook-form";
 
 const AddTask = ({ title, value, form }) => {
   const {
@@ -26,11 +27,13 @@ const AddTask = ({ title, value, form }) => {
     advisors,
     batches,
     groupDetails,
+    students,
     createBatch,
     createDomain,
     createGroup,
     getAdvisors,
     getBatches,
+    getStudents,
     studentManage,
     updateDomain,
     updateBatch,
@@ -43,9 +46,11 @@ const AddTask = ({ title, value, form }) => {
   const [advisor, setAdvisor] = useState("");
   const [location, setLocation] = useState("");
   const [batch, setBatch] = useState("");
-
   const [type, setType] = useState("");
   const [content, setContent] = useState("");
+  const [designation, setDesignation] = useState("");
+  const [LPA, setLPA] = useState("");
+  const [count, setCount] = useState(0);
 
   const handleClickOpen = () => {
     if (value === "batch" || value === "updateBatch" || value === "group") {
@@ -59,13 +64,16 @@ const AddTask = ({ title, value, form }) => {
       getDomains();
     } else if (value === "addnotifications") {
       getNotificationsTypes();
+    } else if (value === "placement") {
+      getBatches();
+      getStudents();
     }
 
-    setName("");
-    setDomain("");
-    setAdvisor("");
-    setLocation("");
-    setBatch("");
+    setName(null);
+    setDomain(null);
+    setAdvisor(null);
+    setLocation(null);
+    setBatch(null);
     setOpen(true);
   };
 
@@ -101,6 +109,8 @@ const AddTask = ({ title, value, form }) => {
       studentManage(form, batch, domain)
     } else if (value === "addnotifications") {
       createNotifications(form, type, content);
+    } else if (value === "placement") {
+      alert("placement");
     }
       setOpen(false); 
     }
@@ -142,25 +152,21 @@ const AddTask = ({ title, value, form }) => {
                       maxHeight="200px"
                       MenuProps={MenuProps}
                     >
-
-                      
-                          <MenuItem key="Placement" value="Placement">
-                            Placement
-                          </MenuItem>
-                          <MenuItem key="AdvisorChange" value="AdvisorChange">
-                          AdvisorChange
-                          </MenuItem>
-                          <MenuItem key="BatchShift" value="BatchShift">
-                          BatchShift
-                          </MenuItem>
-                          <MenuItem key="Termination" value="Termination">
-                          Termination
-                          </MenuItem>
-                          <MenuItem key="Message" value="Message">
-                          Message
-                          </MenuItem>
-                        
-
+                      <MenuItem key="Placement" value="Placement">
+                        Placement
+                      </MenuItem>
+                      <MenuItem key="AdvisorChange" value="AdvisorChange">
+                      AdvisorChange
+                      </MenuItem>
+                      <MenuItem key="BatchShift" value="BatchShift">
+                      BatchShift
+                      </MenuItem>
+                      <MenuItem key="Termination" value="Termination">
+                      Termination
+                      </MenuItem>
+                      <MenuItem key="Message" value="Message">
+                      Message
+                      </MenuItem>
                     </Select>
                   </FormControl>
                   <textarea
@@ -453,6 +459,102 @@ const AddTask = ({ title, value, form }) => {
                         )})}
                     </Select>
                   </FormControl>
+                </Row>
+              )}
+              {value === "placement" && (
+                <Row className="my-2">
+                  <FormControl className="my-4">
+                    <InputLabel id="demo-simple-select-autowidth-label">
+                      Batch
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-autowidth-label"
+                      id="demo-simple-select-autowidth"
+                      value={batch}
+                      onChange={(e) => setBatch(e.target.value)}
+                      autoWidth
+                      label="Domain name"
+                      maxHeight="200px"
+                      MenuProps={MenuProps}
+                    >
+                      {batches &&
+                        batches.map((batch) =>{
+                          return (
+                          <MenuItem key={batch.id} value={batch.name}>
+                            {batch.name}
+                          </MenuItem>
+                        )})}
+                    </Select>
+                  </FormControl>
+                  <FormControl className="my-4">
+                    <InputLabel id="demo-simple-select-autowidth-label">
+                      Domain
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-autowidth-label"
+                      id="demo-simple-select-autowidth"
+                      value={domain}
+                      onChange={(e) => setDomain(e.target.value)}
+                      autoWidth
+                      label="Domain name"
+                      maxHeight="200px"
+                      MenuProps={MenuProps}
+                    >
+                      {students &&
+                        students.map((student) =>{
+                          if ((batch !== null && batch === student.batch) || batch === null ) {
+                          return (
+                          <MenuItem key={student.id} value={student.id}>
+                            {student.name}
+                          </MenuItem>
+                        )}})}
+                    </Select>
+                  </FormControl>
+                  <TextField
+                    id="outlined-basic"
+                    label="Name"
+                    variant="outlined"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter name here.."
+                    className="my-2"
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    label="Designation"
+                    variant="outlined"
+                    value={designation}
+                    onChange={(e) => setDesignation(e.target.value)}
+                    placeholder="Enter name here.."
+                    className="my-2"
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    label="Designation"
+                    variant="outlined"
+                    value={LPA}
+                    onChange={(e) => setLPA(e.target.value)}
+                    placeholder="Enter name here.."
+                    className="my-2"
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    label="Location"
+                    variant="outlined"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    placeholder="Enter name here.."
+                    className="my-2"
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    label="Number of placements"
+                    variant="outlined"
+                    value={count}
+                    onChange={(e) => setCount(e.target.value)}
+                    placeholder="Enter name here.."
+                    className="my-2"
+                  />
                 </Row>
               )}
             </Box>

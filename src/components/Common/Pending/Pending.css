@@ -1,40 +1,70 @@
-#mySidenav #about {
-  z-index: 1000;
-  position: fixed;
-  right: -250px;
-  transition: 0.3s;
-  padding: 15px;
-  width: 300px;
-  text-decoration: none;
-  font-size: 20px;
-  color: white;
-  border-radius: 5px 0 0 5px;
+.main-div {
+  height: 100vh;
+  z-index: 1;
+  position: absolute;
+  padding:0;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
 }
 
-#mySidenav #about:hover {
-  right: 0px;
+.view-div, .view-div-2 {
+  height: 40vh;
+  z-index: 2;
+  left: 0;
+  border-top-left-radius: 10px;
+  display: flex;
+  align-items: center;
+  border-bottom-left-radius: 10px;
+}
+.view-div {
+  background: var(--dark);
+}
+.contain-div:hover .view-div {
+  display: none;
 }
 
-#about {
-  top: 300px;
-  color: rgb(255, 255, 255);
-  background-color: var(--dark);
+.view-div-2 {
+  background: #4BB543;
 }
 
-.pendingt {
+.title-view {
   writing-mode: vertical-rl;
   color: var(--light);
-  position: absolute;
-  top: 50px;
-  left: -20px;
+  margin-block-start: 0.5em !important;
+  margin-block-end: 0.5em !important;
 }
 
-.pendings {
-  overflow-y: scroll;
-  height: 200px;
+.title-content {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  background: var(--dark);
+  padding-top: 0.5em !important;
+}
+
+.contain-div:hover .content-div {
   color: var(--light);
+  height: 40vh;
+  z-index: 2;
+  background: var(--dark);
+  border-top-left-radius: 10px;
+  display: block;
+  justify-content: start;
+  border-bottom-left-radius: 10px;
+  padding: .8em;
+  padding-top: 0;
+  overflow: scroll;
+  width: 15vw;
+  right: 0;
+  transition: 1.0s;
 }
-
-.pendings::-webkit-scrollbar {
+.content-div {
+  transition: 1.0s;
+  right: -15vw;
+  display: none;
+}
+.content-div::-webkit-scrollbar {
   display: none;
 }

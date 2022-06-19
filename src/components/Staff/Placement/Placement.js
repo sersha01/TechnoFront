@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "@mui/material/Button";
 import style from "./Placement.module.css";
 import LeadContext from "../../../Context/LeadContext";
+import AddTask from "../AddTask/AddTask";
 
 const Placement = () => {
   const { getPlacements, placements } = useContext(LeadContext);
@@ -21,9 +22,10 @@ const Placement = () => {
       <Col sm={12} className="d-flex justify-content-between mb-2">
         <div className="d-flex">
           <h2 className="me-4">Placements</h2>
-          <Button variant="contained" className="bgdark textlight w-100 h-50">
+          {/* <Button variant="contained" className="bgdark textlight w-100 h-50">
             Add
-          </Button>
+          </Button> */}
+          <AddTask title="Add" value="placement" />
         </div>
 
         <div className="d-flex justify-content-end textlight">

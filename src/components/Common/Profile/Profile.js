@@ -12,6 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import ProfilePic from "../Crop/Crop";
+import axios from "axios";
 
 function Profile({ by }) {
   const { profile, getMyProfile, updateProfile, user, getDomains, domains } = useContext(AuthContext);
@@ -26,6 +27,27 @@ function Profile({ by }) {
       getMyProfile();
     }
   }, []);
+  useEffect(() => {
+    console.log(image);
+  },[image])
+
+
+  const uploadImage = ()=>{
+    const data = new FormData();
+data.append("file", image);
+data.append("upload_preset", "w5rfzcjg");
+   
+    data.append("cloud_name", "da3qthae5");
+    axios.post("https://api.cloudinary.com/v1_1/da3qthae5/image/upload",data)
+    .then((data) => {
+     console.log(data);
+    })
+    .catch((err) => {
+      console.log(err);
+      alert(err)
+    });
+  }
+
 
     return (
       <Row className={`m-0 p-3 rounded-2 ${style.profile}`}>
@@ -43,7 +65,7 @@ function Profile({ by }) {
             <Col className="d-flex justify-content-end pe-3 pt-1">
             <label htmlFor="upload_image" >
               <button className={` px-4 py-2 rounded-3 ${style.button}`}
-                onClick={()=>{alert("settakkan und monues")}}>
+                onClick={uploadImage}>
                 Change
               </button>
             </label>
