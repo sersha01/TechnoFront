@@ -192,82 +192,6 @@ export const AdvisorProvider = ({ children }) => {
   }
 
 
-  const getLocations = async () => {
-    await axios
-      .get("http://127.0.0.1:8000/manifest/complete/task", {
-        headers: { Authorization: `Bearer ${authTokens.access}` },
-      })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const [allLocations,setAllLocations] = useState(null)
-  const [LocationId,setLocationId] = useState(0)
-
-  const getLocation = async () => {
-    await axios
-      .get("http://127.0.0.1:8000/user/getLocations", {
-        headers: { Authorization: `Bearer ${authTokens.access}` },
-      })
-      .then((res) => {
-        console.log(res.data);
-        setAllLocations(res.data)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const [allBranches,setAllBranches] = useState(null)
-  const [branchid,setBranchid] = useState(null)
-
-  const getBranch = async () => {
-    if (LocationId==0){
-      Navigate("/advisor");
-    }
-    else{
-      await axios
-      .post("http://127.0.0.1:8000/user/getBranches",{
-        'location' : LocationId,
-      }, {
-        headers: { Authorization: `Bearer ${authTokens.access}` },
-      })
-      .then((res) => {
-        console.log(res.data);
-        setAllBranches(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    }
-  };
-
-  const [branchStudents,setBranchStudents] = useState(null)
-
-  const getBranchStudents = async () => {
-    if (branchid==0){
-      Navigate("/advisor/group/taskslist");
-    }
-    else{
-      await axios
-      .post("http://127.0.0.1:8000/user/getBatchStudents",{
-        'branch': branchid
-      }, {
-        headers: { Authorization: `Bearer ${authTokens.access}` },
-      })
-      .then((res) => {
-        setBranchStudents(res.data)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    }
-  };
-
 
 
 
@@ -306,15 +230,7 @@ export const AdvisorProvider = ({ children }) => {
     myStudents,
     myGroups,
     myGroupDetails,
-    allLocations,
-    setAllLocations,
-    getLocation,
-    getBranch,
-    allBranches,
-    branchStudents,
-    getBranchStudents,
-    setLocationId,
-    setBranchid
+    
 
   };
   return (

@@ -5,14 +5,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "@mui/material/Button";
 import style from "./Placement.module.css";
 import { Link } from "react-router-dom";
-import AdvisorContext from "../../../Context/AdvisorContext";
+import AuthContext from "../../../Context/AuthContext";
 
 const Location = () => {
-  const { getLocation, allLocations, setLocationId } =
-    useContext(AdvisorContext);
+  const { getLocations, allLocations, setLocationId } =
+    useContext(AuthContext);
 
   useEffect(() => {
-    getLocation();
+    getLocations();
   }, []);
 
   return (

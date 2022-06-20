@@ -42,8 +42,8 @@ export const AuthProvider = ({ children }) => {
   const [rent, setRent] = useState(false);
   const [shiftpay, setShiftpay] = useState(false);
   const [upfront, setUpfront] = useState(false);
-  
-  const signupUser = async ({ username, email, password}) => {
+
+  const signupUser = async ({ username, email, password }) => {
     const check = signUpBatch === 0 ? true : false;
     await axios
       .post("http://127.0.0.1:8000/user/signup", {
@@ -65,33 +65,34 @@ export const AuthProvider = ({ children }) => {
 
   const stndingData = async (username, password) => {
     await axios
-    .post("http://127.0.0.1:8000/user/token", { username, password })
-    .then((res) => {
-      setAuthTokens(res.data);
-      setUser(jwt_decode(res.data.access));
-      localStorage.setItem("authTokens", JSON.stringify(res.data));
-      const position = jwt_decode(res.data.access).position
-      if (position === "Admin") {
-        navigate("/admin");
-      } else if (position === "Advisor") {
-        navigate("/advisor");
-      } else if (position === "Communication") {
-        navigate("/");
-      } else if (position === "Finance") {
-        navigate("/finance");
-      } else if (position === "Lead") {
-        navigate("/lead");
-      } else if (position === "Placement") {
-        navigate("/placement");
-      } else if (position === "Student") {
-        navigate("/");
-      } else if (position === "Outsider") {
-        logoutUser();
-      }
-    }).catch((err) => {
-      setErrUser("Username or Password is incorrect");
-    })
-  }
+      .post("http://127.0.0.1:8000/user/token", { username, password })
+      .then((res) => {
+        setAuthTokens(res.data);
+        setUser(jwt_decode(res.data.access));
+        localStorage.setItem("authTokens", JSON.stringify(res.data));
+        const position = jwt_decode(res.data.access).position;
+        if (position === "Admin") {
+          navigate("/admin");
+        } else if (position === "Advisor") {
+          navigate("/advisor");
+        } else if (position === "Communication") {
+          navigate("/");
+        } else if (position === "Finance") {
+          navigate("/finance");
+        } else if (position === "Lead") {
+          navigate("/lead");
+        } else if (position === "Placement") {
+          navigate("/placement");
+        } else if (position === "Student") {
+          navigate("/");
+        } else if (position === "Outsider") {
+          logoutUser();
+        }
+      })
+      .catch((err) => {
+        setErrUser("Username or Password is incorrect");
+      });
+  };
 
   const loginUser = async (e) => {
     e.preventDefault();
@@ -200,26 +201,37 @@ export const AuthProvider = ({ children }) => {
   };
 
   const getChartData = async () => {
-    await axios.get('http://127.0.0.1:8000/manifest/view/chartdata', {
-      headers: { Authorization: `Bearer ${authTokens.access}` },
-    }).then((res) => {
-      setChartData(res.data);
-    }).catch((err) => {
-      console.log(err);
-    })}
+    await axios
+      .get("http://127.0.0.1:8000/manifest/view/chartdata", {
+        headers: { Authorization: `Bearer ${authTokens.access}` },
+      })
+      .then((res) => {
+        setChartData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const getPendings = async () => {
-    await axios.post('http://127.0.0.1:8000/manifest/view/pendings', {
-      "student": curr_student,
-    }, {
-      headers: { Authorization: `Bearer ${authTokens.access}` },
-    }).then((res) => {
-      console.log(res.data);
-      setPendings(res.data);
-    }).catch((err) => {
-      console.log(err);
-    })
-  }
+    await axios
+      .post(
+        "http://127.0.0.1:8000/manifest/view/pendings",
+        {
+          student: curr_student,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        setPendings(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const getStudentManifest = async (manifestId) => {
     await axios
@@ -279,10 +291,12 @@ export const AuthProvider = ({ children }) => {
           experience: e.target.experience.value,
           company: e.target.company.value,
           designation: e.target.designation.value,
-        }
-        ,
+        },
         {
-          headers: { Authorization: `Bearer ${authTokens.access}`, "Content-Type": "application/json" },
+          headers: {
+            Authorization: `Bearer ${authTokens.access}`,
+            "Content-Type": "application/json",
+          },
         }
       )
       .then((res) => {
@@ -486,7 +500,6 @@ export const AuthProvider = ({ children }) => {
         email: "m4michu123@gmail.com",
         contact: "9207404868",
       },
-      
     };
 
     const paymentObject = new window.Razorpay(options);
@@ -619,6 +632,64 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const [allLocations, setAllLocations] = useState(null);
+  const [LocationId, setLocationId] = useState(0);
+
+  const getLocations = async () => {
+    await axios
+      .get("http://127.0.0.1:8000/user/getLocations", {})
+      .then((res) => {
+        console.log(res.data);
+        setAllLocations(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const [allBranches, setAllBranches] = useState(null);
+  const [branchid, setBranchid] = useState(null);
+
+  const getBranch = async () => {
+    console.log("Inside");
+    await axios
+      .post(
+        "http://127.0.0.1:8000/user/getBranches",
+        {
+          location: LocationId,
+        },
+        {}
+      )
+      .then((res) => {
+        console.log(res.data);
+        setAllBranches(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const [branchStudents, setBranchStudents] = useState(null);
+
+  const getBranchStudents = async () => {
+    await axios
+      .post(
+        "http://127.0.0.1:8000/user/getBatchStudents",
+        {
+          branch: branchid,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        setBranchStudents(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const contextData = {
     signupUser,
     updateProfile,
@@ -657,8 +728,8 @@ export const AuthProvider = ({ children }) => {
     chartData,
     isCodeValid,
     setSignUpBatch,
-// <<<<<<< HEAD
-// =======
+    // <<<<<<< HEAD
+    // =======
     getNotificationsTypes,
     createNotifications,
     types,
@@ -688,7 +759,16 @@ export const AuthProvider = ({ children }) => {
     getPendings,
     pendings,
     backendUpdate,
-// >>>>>>> main
+    allLocations,
+    setAllLocations,
+    getLocations,
+    getBranch,
+    allBranches,
+    branchStudents,
+    getBranchStudents,
+    setLocationId,
+    setBranchid,
+    LocationId,
   };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>

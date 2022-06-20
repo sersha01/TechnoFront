@@ -1,13 +1,13 @@
 import React, { useContext, useEffect } from 'react'
-import AdvisorContext from '../../../Context/AdvisorContext';
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import AuthContext from '../../../Context/AuthContext';
 
 
 const Branch = () => {
 
     const { getBranch, allBranches, setBranchid } =
-    useContext(AdvisorContext);
+    useContext(AuthContext);
 
   useEffect(() => {
     getBranch();
