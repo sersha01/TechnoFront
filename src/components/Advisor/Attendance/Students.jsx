@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from "react";
-import AdvisorContext from "../../../Context/AdvisorContext";
 import style from "./Placement.module.css";
 import { Row, Col } from "react-bootstrap";
 import Button from "@mui/material/Button";
 import ManageSearchRoundedIcon from "@mui/icons-material/ManageSearchRounded";
+import AuthContext from "../../../Context/AuthContext";
 
 const Students = () => {
-  const { getBranchStudents, branchStudents } = useContext(AdvisorContext);
+  const { getBranchStudents, branchStudents } = useContext(AuthContext);
 
   useEffect(() => {
     getBranchStudents();
@@ -53,7 +53,9 @@ const Students = () => {
           <Col className="bgdark" sm={2}>
             Batch
           </Col>
-          <Col className="bgdark" sm={1}></Col>
+          <Col className="bgdark" sm={1}>
+            Week
+          </Col>
           <Col className="bgdark" sm={2}></Col>
 
           <Col className="bgdark" sm={4}>
@@ -78,7 +80,9 @@ const Students = () => {
                   <Col className="textdark" sm={2}>
                     {student.batch.name}
                   </Col>
-                  <Col className="textdark" sm={1}></Col>
+                  <Col className="textdark" sm={1}>
+                    {student.week}
+                  </Col>
                   <Col className="textdark" sm={2}></Col>
                   <Col className="textdark d-flex" sm={4}></Col>
                 </Row>

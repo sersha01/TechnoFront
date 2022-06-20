@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -6,12 +6,14 @@ import Container2 from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Logo from "./signuplogo.svg";
 import AuthContext from "../../Context/AuthContext";
-import Grid from '@mui/material/Grid';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import Grid from "@mui/material/Grid";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Form from "react-bootstrap/Form";
 import * as yup from "yup";
+import AdvisorContext from "../../Context/AdvisorContext";
 
 const schema = yup.object().shape({
   username: yup
@@ -27,7 +29,17 @@ const schema = yup.object().shape({
 });
 
 const Signup = ({ setSwap2 }) => {
-  const { signupUser, errUser } = useContext(AuthContext);
+  const {
+    signupUser,
+    errUser,
+    getLocations,
+    allLocations,
+    allBranches,
+    setLocationId,
+    getBranch,
+    LocationId,
+    setBranchid,
+  } = useContext(AuthContext);
 
   const {
     register,
@@ -37,10 +49,14 @@ const Signup = ({ setSwap2 }) => {
     resolver: yupResolver(schema),
   });
 
+  const [selectedOption, setSelectedOption] = useState(0);
+
+  useEffect(() => {
+    getLocations();
+  }, []);
+
   return (
-    
     <Container2 component="main" className="bglight signupbox">
-     
       <Box
         className="bg p-5 w-100 rounded-3 "
         sx={{
@@ -108,14 +124,50 @@ const Signup = ({ setSwap2 }) => {
                 {errors.cpassword && "Passwords doesn't match"}
               </label>
             </div>
+            <div className="form-group mb-4">
+              <label>Location</label>
+              <Form.Select aria-label="Default select example" value={selectedOption} onChange={(e) => {
+                          setSelectedOption(e.target.value);
+                          setLocationId(selectedOption);
+                          getBranch();
+                        }}>
+                <option>Select</option>
+                {allLocations &&
+                  allLocations.map((place) => {
+                    return (
+                      <option
+                        value={place.id}
+                      >
+                        {place.place}
+                      </option>
+                    );
+                  })}
+              </Form.Select>
+            </div>
+            <div className="form-group mb-4">
+              <label>Location</label>
+              <Form.Select aria-label="Default select example">
+                {allBranches &&
+                  allBranches.map((place) => {
+                    return (
+                      <option
+                        value={place.id}
+                        onClick={() => {
+                          setBranchid(place.id);
+                        }}
+                      >
+                        {place.name}
+                      </option>
+                    );
+                  })}
+              </Form.Select>
+            </div>
             <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I have read and agreed to all the terms and conditions"
-                />
-              </Grid>
+              <FormControlLabel
+                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                label="I have read and agreed to all the terms and conditions"
+              />
+            </Grid>
 
             <div className="pt-2">
               <button type="submit" className="btn btn-primary btn-lg w-100">
@@ -130,118 +182,8 @@ const Signup = ({ setSwap2 }) => {
           </div>
         </form>
       </Box>
-      
     </Container2>
   );
 };
 
 export default Signup;
-
-{
-  /* <Box component="form" noValidate sx={{ mt: 5 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  inputRef={register}
-                  id="Username"
-                  sx={{ input: { color: "var(--dark)" } }}
-                  InputLabelProps={{
-                    style: { color: "var(--dark)" },
-                  }}
-                  label="Username"
-                  name="username"
-                  autoComplete="Username"
-                />
-                <label className="text-danger">
-                  {errUser}
-                  {errors.username?.message}
-                </label>
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  inputRef={register}
-                  sx={{ input: { color: "var(--dark)" } }}
-                  InputLabelProps={{
-                    style: { color: "var(--dark)" },
-                  }}
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-                <label className="text-danger">{errors.email?.message}</label>
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  inputRef={register}
-                  sx={{ input: { color: "var(--dark)" } }}
-                  InputLabelProps={{
-                    style: { color: "var(--dark)" },
-                  }}
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-                <label className="text-danger">
-                  {errors.password?.message}
-                </label>
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="cpassword"
-                  label="Re-Password"
-                  inputRef={register}
-                  sx={{ input: { color: "var(--dark)" } }}
-                  InputLabelProps={{
-                    style: { color: "var(--dark)" },
-                  }}
-                  type="password"
-                  id="password"
-                  autoComplete="re-password"
-                />
-                <label className="text-danger">
-                  {errors.cpassword && "Passwords doesn't match"}
-                </label>
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I have read and agreed to all the terms and conditions"
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign Up
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link
-                  href="#"
-                  variant="body2"
-                  onClick={() => {
-                    setSwap2("video");
-                  }}
-                >
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
-          </Box> */
-}
