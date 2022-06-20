@@ -60,6 +60,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import Home from "./pages/Home/Home";
 import Requests from "./components/Staff/Requests/Requests";
 import PlacementProfile from "./components/Staff/Placement/PlacementProfile";
+import Location from "./components/Advisor/Attendance/Location";
+import Branches from "./components/Advisor/Attendance/Branch";
+import BranchStudents from "./components/Advisor/Attendance/Students";
 
 function App() {
   return (
@@ -142,6 +145,18 @@ function App() {
                 <Route
                   path="/advisor/work"
                   element={<Advisor child={<Work />} />}
+                />
+                <Route
+                  path="/advisor/location"
+                  element={<Advisor child={<Location />} />}
+                />
+                <Route
+                  path="/advisor/branches"
+                  element={<Advisor child={<Branches />} />}
+                />
+                <Route
+                  path="/advisor/branches/students"
+                  element={<Advisor child={<BranchStudents />} />}
                 />
                 <Route
                   path="/advisor/group"

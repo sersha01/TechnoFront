@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Header from "../../components/Common/Header/Header";
 import Header2 from "../../components/Common/Header2/Header2";
-import NavBox from "../../components/Staff/NavBox/NavBox";
+import NavBox from "../../components/Common/NavBox/NavBox";
 // import Notification from "../../components/Common/Notification/Notification";
 import { PrivateRouteCommunication } from "../../Utils/PrivateRoute";
 const Communication = ({child}) => {

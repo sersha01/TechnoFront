@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import AuthContext from "./AuthContext";
 
 const AdvisorContext = createContext();
@@ -205,49 +205,67 @@ export const AdvisorProvider = ({ children }) => {
       });
   };
 
+  const [allLocations,setAllLocations] = useState(null)
+  const [LocationId,setLocationId] = useState(0)
 
   const getLocation = async () => {
     await axios
-      .get("http://127.0.0.1:8000/manifest/complete/task", {
+      .get("http://127.0.0.1:8000/user/getLocations", {
         headers: { Authorization: `Bearer ${authTokens.access}` },
       })
       .then((res) => {
         console.log(res.data);
+        setAllLocations(res.data)
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
+  const [allBranches,setAllBranches] = useState(null)
+  const [branchid,setBranchid] = useState(null)
 
-  const getBranch = async (id) => {
-    await axios
-      .post("http://127.0.0.1:8000/manifest/complete/task",{
-        id: id
+  const getBranch = async () => {
+    if (LocationId==0){
+      Navigate("/advisor");
+    }
+    else{
+      await axios
+      .post("http://127.0.0.1:8000/user/getBranches",{
+        'location' : LocationId,
       }, {
         headers: { Authorization: `Bearer ${authTokens.access}` },
       })
       .then((res) => {
         console.log(res.data);
+        setAllBranches(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
+    }
   };
 
-  const getBranchStudents = async (id) => {
-    await axios
-      .post("http://127.0.0.1:8000/manifest/complete/task",{
-        id: id
+  const [branchStudents,setBranchStudents] = useState(null)
+
+  const getBranchStudents = async () => {
+    if (branchid==0){
+      Navigate("/advisor/group/taskslist");
+    }
+    else{
+      await axios
+      .post("http://127.0.0.1:8000/user/getBatchStudents",{
+        'branch': branchid
       }, {
         headers: { Authorization: `Bearer ${authTokens.access}` },
       })
       .then((res) => {
-        console.log(res.data);
+        setBranchStudents(res.data)
       })
       .catch((err) => {
         console.log(err);
       });
+    }
   };
 
 
@@ -256,25 +274,6 @@ export const AdvisorProvider = ({ children }) => {
 
 
 
-
-  const getBranches = async (id) => {
-    await axios
-      .post(
-        "http://127.0.0.1:8000/manifest/complete/task",
-        {
-          id: id,
-        },
-        {
-          headers: { Authorization: `Bearer ${authTokens.access}` },
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
 
 
@@ -307,6 +306,16 @@ export const AdvisorProvider = ({ children }) => {
     myStudents,
     myGroups,
     myGroupDetails,
+    allLocations,
+    setAllLocations,
+    getLocation,
+    getBranch,
+    allBranches,
+    branchStudents,
+    getBranchStudents,
+    setLocationId,
+    setBranchid
+
   };
   return (
     <AdvisorContext.Provider value={contextData}>
