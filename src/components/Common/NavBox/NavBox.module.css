@@ -3,6 +3,12 @@
     color: var(--light);
 }
 
+.navItems:hover .css-i4bv87-MuiSvgIcon-root:hover{
+    color: var(--light) !important;
+  }
+
+
+
 .navSelected {
     height: 100%;
     background: var(--info);

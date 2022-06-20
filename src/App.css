@@ -6,6 +6,18 @@ body {
   background: var(--light);
 }
 
+.abcd{
+  color: var(--dark) !important;
+}
+
+.css-i4bv87-MuiSvgIcon-root{
+  color: var(--dark) !important;
+}
+
+.navdiv:hover .css-i4bv87-MuiSvgIcon-root{
+  color: var(--light) !important;
+}
+
 .bgred {
   background-color: rgb(255, 0, 0) !important;
 }

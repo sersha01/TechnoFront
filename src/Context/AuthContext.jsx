@@ -486,6 +486,7 @@ export const AuthProvider = ({ children }) => {
         email: "m4michu123@gmail.com",
         contact: "9207404868",
       },
+      
     };
 
     const paymentObject = new window.Razorpay(options);
