@@ -141,7 +141,7 @@ const PlacementProfile = ({by}) => {
                         id="demo-simple-select-autowidth"
                         name="domain"
                         defaultValue={
-                          profile && profile.domain && profile.domain.id
+                          profile && profile.domain 
                         }
                         autoWidth
                         label="Domain name"

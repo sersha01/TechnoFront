@@ -10,6 +10,10 @@ body {
   background-color: rgb(255, 0, 0) !important;
 }
 
+.bgorange {
+  background-color: rgb(255, 171, 37) !important;
+}
+
 .bggreen {
   background-color: rgb(21, 255, 0) !important;
 }

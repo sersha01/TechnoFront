@@ -149,12 +149,12 @@ function App() {
                 />
                 <Route
                   path="/advisor/group/taskslist"
-                  element={<Advisor child={<Tasks />} />}
+                  element={<Advisor child={<><Tasks /><Pending /></>} />}
                 />
                 <Route
                   path="/advisor/group/manifest"
                   element={
-                    <Advisor child={<Manifest />}/>
+                    <Advisor child={<><Manifest /><Pending /></>}/>
                   }
                 />
               </Routes>

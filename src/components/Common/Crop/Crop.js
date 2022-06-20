@@ -140,12 +140,13 @@ class ProfilePic extends PureComponent {
   render() {
     let fileInput = React.createRef();
     const { crop, croppedImageUrl, src } = this.state;
+    const { image:url } = this.props
     return (
       <>
         <div className='user-profile-pic-parent w-100 px-3'>
           {/* <> */}
           <span className="user-profile-pic flex-column rounded-circle w-100 d-flex justify-content-center" >
-              <img src={croppedImageUrl ? croppedImageUrl : defualtPic} alt="Profile pic" className="rounded-circle w-100" onClick={()=>fileInput.current.click()}/>
+              <img src={croppedImageUrl ? croppedImageUrl : url} alt="Profile pic" className="rounded-circle w-100" onClick={()=>fileInput.current.click()}/>
           </span>
           {/* </> */}
           <input type="file" ref={fileInput} name="photo" onChange={this.onSelectFile} className="d-none"/>
