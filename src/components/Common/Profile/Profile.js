@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import './Profile.module.css';
 import style from "./Profile.module.css";
-import wafi from "./thor.jpg";
+import wafi from "./defualtProPic.jpg";
 import Button from "@mui/material/Button";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../Context/AuthContext";
@@ -16,7 +16,7 @@ import axios from "axios";
 import StyleContext from "../../../Context/StyleContext";
 
 function Profile({ by }) {
-  const { profile, getMyProfile, updateProfile, user, getDomains, domains } = useContext(AuthContext);
+  const { profile, getMyProfile, updateProfile, user, getDomains, domains, backendUpdate } = useContext(AuthContext);
   const {infoToast,errorToast } = useContext(StyleContext);
 
   const [image, setImage] = useState(null);
@@ -43,6 +43,23 @@ data.append("upload_preset", "w5rfzcjg");
     axios.post("https://api.cloudinary.com/v1_1/da3qthae5/image/upload",data)
     .then((data) => {
      console.log(data);
+     backendUpdate({"secure_url":data.data.secure_url,"public_id":data.data.public_id, "signature":data.data.signature, "timestamp":data.data.created_at})
+    //  await setNewPic({"secure_url":data.data.secure_url,"public_id":data.data.public_id, "signature":data.data.signature, "timestamp":data.data.created_at})
+    //  if (profile.public_id !== '' && profile.signature !== '') {
+    // const data = new FormData();
+    // data.append("public_id", profile.public_id);
+    // data.append("api_key", "866188884763553");
+    // data.append("signature", profile.signature);
+    // data.append("timestamp", profile.timestamp);
+    // axios.post(`https://api.cloudinary.com/v1_1/da3qthae5/image/destroy/`,data)
+    //   .then((data) => {
+    //     console.log(data);
+    //     console.log("delete aayittund");
+    //     backendUpdate(new_pic)
+    //   })
+    //  } else {
+    //   backendUpdate(new_pic)
+    //  }
     })
     .catch((err) => {
       console.log(err);
@@ -73,7 +90,7 @@ data.append("upload_preset", "w5rfzcjg");
             </label>
             </Col>
             <Col className={`px-3 py-0 mb-4 d-flex justify-content-center`} >
-              <ProfilePic cropped={setImage} />
+              <ProfilePic cropped={setImage} image={profile ? profile.photo : wafi} />
             </Col>
           </Col>
           <Col xs={12} md={6} className="p-0">
@@ -150,7 +167,7 @@ data.append("upload_preset", "w5rfzcjg");
                         id="demo-simple-select-autowidth"
                         name="domain"
                         defaultValue={
-                          profile && profile.domain && profile.domain.id
+                          profile && profile.domain
                         }
                         autoWidth
                         label="Domain name"

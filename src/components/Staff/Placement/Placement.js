@@ -92,7 +92,7 @@ const Placement = () => {
                 {placement.student.user.username}
               </Col>
               <Col className="textdark" sm={2}>
-                {placement.student.profile.domain.name}
+                {placement.student.domain.name}
               </Col>
               <Col className="textdark" sm={1}>
                 {placement.LPA}

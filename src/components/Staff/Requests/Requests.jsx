@@ -10,6 +10,7 @@ import ManageSearchRoundedIcon from "@mui/icons-material/ManageSearchRounded";
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "@mui/material/Button";
+import LeadContext from "../../../Context/LeadContext";
 
 
 function TabPanel(props) {
@@ -47,11 +48,17 @@ function a11yProps(index) {
 
 const Requests = () => {
 
-    const [value, setValue] = React.useState(0);
+  const { getRequests, requests, terminateAccept, terminateReject, shiftAccept, shiftReject } = useContext(LeadContext);
+
+    const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
+
+    useEffect(() => {
+      getRequests();
+    },[])
 
   return (
     <>
@@ -102,45 +109,42 @@ const Requests = () => {
             Name
           </Col>
           <Col className="bgdark" sm={2}>
-            Domain
-          </Col>
-          <Col className="bgdark" sm={2}>
             Week
           </Col>
           <Col className="bgdark" sm={2}>
             Advisor
           </Col>
-
-          <Col className="bgdark" sm={2}>
-            By
+          <Col className="bgdark text-center" sm={4}>
+            Actions
           </Col>
         </Row>
       </Col>
 
       <Col className="m-0 row ">
-        
+        {requests && requests.shift.length > 0 ? requests.shift.map((request) => {
+          return (
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
-              #gdfg
+            {request.batch}
             </Col>
             <Col className="textdark" sm={2}>
-              dfgdf
+            {request.name}
             </Col>
             <Col className="textdark" sm={2}>
-              gdfgdfg
+            {request.week}
             </Col>
             <Col className="textdark" sm={2}>
-              fgdfg
-            </Col>
-            <Col className="textdark" sm={2}>
-              fdgdfg
+            {request.advisor}
             </Col>
             <Col className="textdark d-flex" sm={2}>
-             dfgd
+             <Button  onClick={()=>{shiftAccept(request.id)}}>Accept</Button>
+            </Col>
+            <Col className="textdark d-flex" sm={2}>
+             <Button onClick={()=>{shiftReject(request.id)}}>Reject</Button>
             </Col>
           </Row>
-        </Col>
+        </Col>)}) : null}
           
       </Col>
     </Row>
@@ -185,44 +189,42 @@ const Requests = () => {
             Name
           </Col>
           <Col className="bgdark" sm={2}>
-            Domain
-          </Col>
-          <Col className="bgdark" sm={2}>
             Week
           </Col>
           <Col className="bgdark" sm={2}>
             Advisor
           </Col>
-          <Col className="bgdark" sm={2}>
-            By
+          <Col className="bgdark text-center" sm={4}>
+            Actions
           </Col>
         </Row>
       </Col>
 
       <Col className="m-0 row ">
-        
+        {requests && requests.terminate.length > 0 ? requests.terminate.map((request) => {
+          return (
         <Col sm={12} className="py-2 mb-2 cp rounded-3 bg">
           <Row className="m-0">
             <Col className="textdark" sm={2}>
-              #gdfg
+              {request.batch}
             </Col>
             <Col className="textdark" sm={2}>
-              dfgdf
+            {request.name}
             </Col>
             <Col className="textdark" sm={2}>
-              gdfgdfg
+            {request.week}
             </Col>
             <Col className="textdark" sm={2}>
-              fgdfg
-            </Col>
-            <Col className="textdark" sm={2}>
-              fdgdfg
+            {request.advisor}
             </Col>
             <Col className="textdark d-flex" sm={2}>
-             dfgd
+             <Button onClick={()=>{terminateAccept(request.id)}}>Accept</Button>
+            </Col>
+            <Col className="textdark d-flex" sm={2}>
+             <Button onClick={()=>{terminateReject(request.id)}}>Reject</Button>
             </Col>
           </Row>
-        </Col>
+        </Col>)}) : null}
           
       </Col>
     </Row>

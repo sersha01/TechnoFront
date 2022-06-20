@@ -21,6 +21,7 @@ export const LeadProvider = ({ children }) => {
   const [groupDetails, setGroupDetails] = useState(null);
   const [groupLessers, setGroupLessers] = useState(null);
   const [placements, setPlacements] = useState(null);
+  const [requests, setRequests] = useState(null);
   const [students, setStudents] = useState(null);
 
 
@@ -202,6 +203,18 @@ export const LeadProvider = ({ children }) => {
         console.log(err);
       });
   };
+
+  const getRequests = async () => {
+    await axios.post("http://127.0.0.1:8000/student/view/requests", {},
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }).then((res) => {
+        setRequests(res.data);
+        console.log("datas", res.data);
+      }).catch((err) => {
+        console.log(err);
+      });
+  }
 
   const viewStudents = async () => {
     await axios.get("http://127.0.0.1:8000/student/view/students",
@@ -389,6 +402,58 @@ export const LeadProvider = ({ children }) => {
     })
   };
 
+  const shiftAccept = async (id) => {
+    await axios.post("http://127.0.0.1:8000/student/shift/accept", {
+      'id':id,
+    },{
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+    }).then(res=>{
+      getRequests()
+    }).catch(err=>{
+      console.log(err.response.data);
+      console.log(err)
+    })
+  }
+
+  const shiftReject = async (id) => {
+    await axios.post("http://127.0.0.1:8000/student/shift/reject", {
+      'id':id,
+    },{
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+    }).then(res=>{
+      getRequests()
+    }).catch(err=>{
+      console.log(err.response.data);
+      console.log(err)
+    })
+  }
+
+  const terminateAccept = async (id) => {
+    await axios.post("http://127.0.0.1:8000/student/terminate/accept", {
+      'id':id,
+    },{
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+    }).then(res=>{
+      getRequests()
+    }).catch(err=>{
+      console.log(err.response.data);
+      console.log(err)
+    })
+  }
+
+  const terminateReject = async (id) => {
+    await axios.post("http://127.0.0.1:8000/student/terminate/reject", {
+      'id':id,
+    },{
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+    }).then(res=>{
+      getRequests()
+    }).catch(err=>{
+      console.log(err.response.data);
+      console.log(err)
+    })
+  }
+
   const contextData = {
     //Create
     createBatch,
@@ -404,6 +469,7 @@ export const LeadProvider = ({ children }) => {
     getGroupLess,
     getPlacements,
     getProfile,
+    getRequests,
     viewStudents,
 
     //Update
@@ -421,6 +487,10 @@ export const LeadProvider = ({ children }) => {
     addInGroup,
     rmFromGroup,
     studentManage,
+    shiftAccept,
+    shiftReject,
+    terminateAccept,
+    terminateReject,
 
     //State functions
     setAdvisors,
@@ -430,6 +500,7 @@ export const LeadProvider = ({ children }) => {
     setGroupDetails,
     setGroupLessers,
     setPlacements,
+    setRequests,
     setStudents,
 
     //State variables
@@ -440,6 +511,7 @@ export const LeadProvider = ({ children }) => {
     groupDetails,
     groupLessers,
     placements,
+    requests,
     students
   };
   return (

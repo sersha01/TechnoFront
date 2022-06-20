@@ -147,6 +147,17 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const backendUpdate = async (data) => {
+    await axios.post("http://127.0.0.1:8000/user/update/profilephoto", data, {
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+    }).then((res) => {
+      console.log(res.data);
+      getMyProfile();
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
   const getReviewers = async () => {
     await axios
       .post(
@@ -747,8 +758,7 @@ export const AuthProvider = ({ children }) => {
     allCompletedPayments,
     getPendings,
     pendings,
-    // >>>>>>> main
-
+    backendUpdate,
     allLocations,
     setAllLocations,
     getLocations,

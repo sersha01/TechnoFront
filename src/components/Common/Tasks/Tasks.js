@@ -53,13 +53,13 @@ function Tasks() {
       <Col className="m-0 row">
           { studentTasks && studentTasks.map((task, index) => {
             return (
-          <Col sm={12} className={`py-2 mb-2 cp rounded-3 ${style.tableBody}`}>
+          <Col sm={12} className={`py-2 mb-2 cp rounded-3 bg ${style.tableBody}`}>
             <Row className="m-0 ">
               <Accordion defaultActiveKey={index == 0 && "0"} flush className="bg">
                 <Accordion.Item eventKey="0">
                   <Accordion.Header style={{ height: "fit-content" }}>
                     <Row className="m-0 w-100 bg">
-                      <Col className={`${style.tableBodyText}`} sm={3}>
+                      <Col className={`${style.tableBodyText} bg `} sm={3}>
                         {task.week}
                       </Col>
                       <Col className={`${style.tableBodyText}`} sm={3}>
