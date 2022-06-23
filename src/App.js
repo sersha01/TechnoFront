@@ -8,6 +8,7 @@ import Manifest from "./components/Common/Manifest/Manifest";
 import Tasks from "./components/Common/Tasks/Tasks";
 import Pending from "./components/Common/Pending/Pending";
 import Notifications from "./components/Common/Notifications/Notifications";
+import Signup from './pages/Home/Signup';
 ////////////////////////////////////
 
 ////////////////////////////////////
@@ -73,6 +74,7 @@ function App() {
             <StudentProvider>
               <Routes>
                 <Route path="/signin" element={<Home />} />
+                <Route path="/signup/:link" element={<Signup />} />
                 <Route
                   path="/"
                   element={<Student child={<StudentSpace />} />}

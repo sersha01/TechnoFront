@@ -17,7 +17,9 @@ import AdvisorContext from "../../../Context/AdvisorContext";
 
 const AddTask = ({ title, value, form }) => {
   const {
+    batches,
     reviewers,
+    getBatches,
     getReviewers,
   } = useContext(AuthContext) ;
 
@@ -39,6 +41,8 @@ const AddTask = ({ title, value, form }) => {
   const handleClickOpen = () => {
     if (value === "completed" || value === "repeated") {
       getReviewers()
+    } else if (value === "shift") {
+      getBatches()
     }
     setReviewer(null);
     setRemark(null);
@@ -171,11 +175,11 @@ const AddTask = ({ title, value, form }) => {
                       maxHeight="200px"
                       MenuProps={MenuProps}
                     >
-                      {reviewers &&
-                        reviewers.map((reviewer) =>{
+                      {batches &&
+                        batches.map((batch) =>{
                           return (
-                          <MenuItem key={reviewer.id} value={reviewer.id}>
-                            {reviewer.name}
+                          <MenuItem key={batch.id} value={batch.id}>
+                            {batch.name}
                           </MenuItem>
                         )})}
                     </Select>
