@@ -4,11 +4,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "@mui/material/Button";
 import AddTask from "../../Staff/AddTask/AddTask";
 import LeadContext from "../../../Context/LeadContext";
+import AuthContext from "../../../Context/AuthContext";
 
 
 const Batch = () => {
 
-  const { getBatches, batches, deleteBatch } = useContext(LeadContext);
+  const { batches, getBatches } = useContext(AuthContext);
+  const { deleteBatch } = useContext(LeadContext);
+
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text);
+  }
 
   useEffect(() => {
     getBatches();
@@ -34,15 +40,12 @@ const Batch = () => {
             Advisor
           </Col>
           <Col className="bgdark" sm={2}>
-            Code
-          </Col>
-          <Col className="bgdark" sm={2}>
             Students
           </Col>
           <Col className="bgdark" sm={2}>
             Placed
           </Col>
-          <Col className="bgdark text-center" sm={3}>
+          <Col className="bgdark text-center" sm={5}>
             Actions
           </Col>
         </Row>
@@ -59,15 +62,13 @@ const Batch = () => {
               {batch.advisor}
             </Col>
             <Col className="textdark" sm={2}>
-              {batch.code}
-            </Col>
-            <Col className="textdark" sm={2}>
               {batch.student}
             </Col>
             <Col className="textdark" sm={2}>
               {batch.placement}
             </Col>
-            <Col className="textdark d-flex" sm={3}>
+            <Col className="textdark d-flex" sm={5}>
+              <Button className="me-2" variant="contained" onClick={()=>{copyToClipboard(batch.code)}}>Link</Button>
               <AddTask title="Edit" value="updateBatch" form={batch.id} />
               <Button className="coh ms-3" onClick={()=>{deleteBatch(batch.id)}}>Delete</Button>
             </Col>

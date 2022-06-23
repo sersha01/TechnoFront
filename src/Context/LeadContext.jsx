@@ -11,12 +11,11 @@ export const LeadProvider = ({ children }) => {
   //Asign the useNavigate hook to a variable
   const navigate = useNavigate();
 
-  const { authTokens, getDomains, setProfile } = useContext(AuthContext);
+  const { authTokens, getDomains, setProfile, getBatches } = useContext(AuthContext);
 
   //Define the state of the context
   const [advisorsNames, setAdvisorsNames] = useState(null);
   const [advisors, setAdvisors] = useState(null);
-  const [batches, setBatches] = useState(null);
   const [groups, setGroups] = useState(null);
   const [groupDetails, setGroupDetails] = useState(null);
   const [groupLessers, setGroupLessers] = useState(null);
@@ -111,20 +110,6 @@ export const LeadProvider = ({ children }) => {
         }
       ).then((res) => {
         setAdvisorsNames(res.data);
-        console.log(res.data);
-      }).catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const getBatches = async () => {
-    await axios.post("http://127.0.0.1:8000/batch/view/batches",
-        {},
-        {
-          headers: { Authorization: `Bearer ${authTokens.access}` },
-        }
-      ).then((res) => {
-        setBatches(res.data);
         console.log(res.data);
       }).catch((err) => {
         console.log(err);
@@ -234,12 +219,11 @@ export const LeadProvider = ({ children }) => {
   //Update function
 
 
-  const updateBatch = async (batch, advisor, code) => {
+  const updateBatch = async (batch, advisor) => {
     await axios.post("http://127.0.0.1:8000/batch/update/batch",
         {
           'advisor': advisor,
           'id': batch,
-          'code': code,
         },
         {
           headers: { Authorization: `Bearer ${authTokens.access}` },
@@ -463,7 +447,6 @@ export const LeadProvider = ({ children }) => {
     //Read
     getAdvisors,
     getAdvisorsNames,
-    getBatches,
     getGroups,
     getGroupDetails,
     getGroupLess,
@@ -495,7 +478,6 @@ export const LeadProvider = ({ children }) => {
     //State functions
     setAdvisors,
     setAdvisorsNames,
-    setBatches,
     setGroups,
     setGroupDetails,
     setGroupLessers,
@@ -506,7 +488,6 @@ export const LeadProvider = ({ children }) => {
     //State variables
     advisors,
     advisorsNames,
-    batches,
     groups,
     groupDetails,
     groupLessers,

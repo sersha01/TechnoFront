@@ -18,21 +18,21 @@ import { set } from "react-hook-form";
 
 const AddTask = ({ title, value, form }) => {
   const {
+    batches,
     domains,
+    getBatches,
     getDomains,
     getNotificationsTypes,
     createNotifications,
   } = useContext(AuthContext) ;
   const {
     advisors,
-    batches,
     groupDetails,
     students,
     createBatch,
     createDomain,
     createGroup,
     getAdvisors,
-    getBatches,
     getStudents,
     studentManage,
     updateDomain,
@@ -102,7 +102,7 @@ const AddTask = ({ title, value, form }) => {
     } else if (value === "updateDomain") {
       updateDomain(form, domain)
     }else if (value === "updateBatch") {
-      updateBatch(form, advisor, batch)
+      updateBatch(form, advisor)
     }else if (value === "group") {
       updateGroup(groupDetails.id, name, advisor)
     }else if (value === "st_manage") {
@@ -334,14 +334,6 @@ const AddTask = ({ title, value, form }) => {
                         )})}
                     </Select>
                   </FormControl>
-                  <TextField
-                    id="outlined-basic"
-                    label="Batch code"
-                    variant="outlined"
-                    value={batch}
-                    onChange={(e) => setBatch(e.target.value)}
-                    placeholder="Enter name here.."
-                    />
                 </Row>
               )}
               {value === "group" && (
