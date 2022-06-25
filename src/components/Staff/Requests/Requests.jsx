@@ -12,6 +12,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "@mui/material/Button";
 import LeadContext from "../../../Context/LeadContext";
 
+//////////////////////////////////////////
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+// import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+//////////////////////////////////////////
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -138,7 +148,8 @@ const Requests = () => {
             {request.advisor}
             </Col>
             <Col className="textdark d-flex" sm={2}>
-             <Button  onClick={()=>{shiftAccept(request.id)}}>Accept</Button>
+             {/* <Button  onClick={()=>{shiftAccept(request.id)}}>Accept</Button> */}
+             <AmountModal title={'Accept'} action={shiftAccept} id={request.id}/>
             </Col>
             <Col className="textdark d-flex" sm={2}>
              <Button onClick={()=>{shiftReject(request.id)}}>Reject</Button>
@@ -236,3 +247,78 @@ const Requests = () => {
 }
 
 export default Requests
+
+
+const AmountModal = ({ title, action, id }) => {
+
+
+  const [open, setOpen] = useState(false);
+  const [amount, setAmount] = useState('');
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 450,
+      },
+    },
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleSubmit = () => {
+    action(id, amount);
+    setOpen(false);
+  }
+
+  return (
+    <div>
+      <Button onClick={handleClickOpen}>
+        {title}
+      </Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <Box
+              component="form"
+              noValidate
+              autoComplete="off"
+              className="d-block p-3 px-5"
+              style={{ width: "500px", height: "fit-content" }}
+            >
+                <Row className="my-2">
+                  <TextField
+                    id="outlined-basic"
+                    label="Amount"
+                    variant="outlined"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                    placeholder="Enter Amount"
+                  />
+                </Row>
+            </Box>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleSubmit} autoFocus>
+            Agree
+          </Button>
+          <Button onClick={handleClose}>Close</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  )
+}

@@ -169,7 +169,7 @@ const AddTask = ({ title, value, form }) => {
                       labelId="demo-simple-select-autowidth-label"
                       id="demo-simple-select-autowidth"
                       value={batch}
-                      onChange={(e) => setBatch(29)}
+                      onChange={(e) => setBatch(e.target.value)}
                       autoWidth
                       label="Reviewer name"
                       maxHeight="200px"

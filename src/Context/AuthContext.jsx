@@ -627,6 +627,12 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const folderSubmit = async (data) => {
+    await axios.post("http://127.0.0.1:8000/manifest/folder/submit", data, {
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+    });
+  }
+
   const sendForm = async (id) => {
     await axios
       .post(
@@ -788,6 +794,7 @@ export const AuthProvider = ({ children }) => {
     getBatches,
     setBatches,
     batches,
+    folderSubmit,
 
   };
   return (
