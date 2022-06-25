@@ -9,11 +9,13 @@ import Completed from "./Completed";
 import Pending from "./Pending";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../Context/AuthContext";
+import ManageSearchRoundedIcon from "@mui/icons-material/ManageSearchRounded";
 
 function Payment() {
   const { allPendingPayments, allCompletedPayments } = useContext(AuthContext);
  
-
+  const [batch, setBatch] = useState('');
+  const [name, setName] = useState('');
 
   useEffect(() => {
     allPendingPayments();
@@ -28,6 +30,27 @@ function Payment() {
         <div>
           {active === "Completed" && <h2>Payments</h2>}
           {active === "Pending" && <h2>Pending</h2>}
+        </div>
+        <div className="d-flex justify-content-end textlight">
+          <Col
+            xs={4}
+            className={`py-1 my-1 textwhite mx-2 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
+          >
+            <label className={`${style.label}`}>Name</label>
+            <input type="text" value={name} onChange={(e)=>{setName(e.target.value)}} className={`w-100 ${style.input}`} />
+          </Col>
+
+          <Col
+            xs={4}
+            className={`py-1 textwhite my-1 pb-3 text-start ps-3 rounded-3 ${style.inputField}`}
+          >
+            <label className={`${style.label}`}>Batch</label>
+            <input type="text" value={batch} onChange={(e)=>{setBatch(e.target.value)}} className={`w-100 ${style.input}`} />
+          </Col>
+
+          <Button className=" mx-1 searchbtn">
+            <ManageSearchRoundedIcon />
+          </Button>
         </div>
         <div>
           {active === "Completed" && (
@@ -52,8 +75,8 @@ function Payment() {
           )}
         </div>
       </Col>
-      {active === "Pending" && <Pending />}
-      {active === "Completed" && <Completed />}
+      {active === "Pending" && <Pending name={name} batch={batch} />}
+      {active === "Completed" && <Completed name={name} batch={batch} />}
     </Row>
   );
 }

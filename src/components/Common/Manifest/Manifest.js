@@ -11,14 +11,20 @@ import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../Context/AuthContext";
 import AdvisorContext from "../../../Context/AdvisorContext";
 import AddTask from '../../Advisor/AddTask/AddTask';
+import Button from "@mui/material/Button";
 
 function Manifest() {
   const [task, setTask] = useState(null);
   const [personal_wo, setPersonal_wo] = useState(null);
   const [personal_score, setPersonal_score] = useState(null);
   const [technical_score, setTechnical_score] = useState(null);
-  const { getStudentManifest, studentManifest, curr_manifest, user } = useContext(AuthContext);
+  const { getStudentManifest, studentManifest, curr_manifest, user, folderSubmit } = useContext(AuthContext);
   const { addTask, taskComplete } = useContext(AdvisorContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    folderSubmit({folder:e.target.folder.value, manifest:curr_manifest});
+  }
 
   useEffect(() => {
     getStudentManifest(curr_manifest);
@@ -118,22 +124,28 @@ function Manifest() {
           />
         </Col>
       </Col>
-      <Col className="mt-5 d-flex justify-content-center" xs={12}>
-        <Col xs={9}>
-          <input
-            type="text"
-            className={`w-100 py-2 rounded-3 ${style.input}`}
-          />
+      <form onSubmit={handleSubmit}>
+        <Col className="my-2 d-flex justify-content-center" xs={12}>
+          <Col xs={9} sm={8} md={7} className="px-md-0 px-2">
+            <input
+              defaultValue={studentManifest?.folder}
+              type="text"
+              name="folder"
+              className={`w-100 p-2 rounded-3 ${style.input}`}
+            />
+          </Col>
+          <Col xs={3} sm={2} className="px-md-2">
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              className={`w-100 py-2 rounded-3 ${style.button}`}
+            >
+              Save
+            </Button>
+          </Col>
         </Col>
-      </Col>
-      <Col className="my-2 d-flex justify-content-center" xs={12}>
-        <Col xs={9}>
-          <input
-            type="text"
-            className={`w-100 py-2 rounded-3 ${style.input}`}
-          />
-        </Col>
-      </Col>
+      </form>
         {user.position === "Advisor" && (studentManifest && studentManifest.is_complete !== true) && <div className='d-flex justify-content-center'>
             <div><AddTask title="Repeat" value="repeated" form={formData}/></div>
             <div> <AddTask title="Completed" value="completed" form={formData}/></div>

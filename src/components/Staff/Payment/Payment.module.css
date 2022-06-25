@@ -1,10 +1,14 @@
-
-
-
-
 .tableHeadText {
     color: var(--light);
     
 }
 
-
+.input {
+    border: none;
+    background: var(--white);
+    color: var(--dark);
+  }
+  
+  .input:focus {
+    outline: none;
+  }

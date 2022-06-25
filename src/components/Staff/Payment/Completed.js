@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import AuthContext from "../../../Context/AuthContext";
 
-const Completed = () => {
+const Completed = ({name, batch}) => {
   const { allpaid, allCompletedPayments } = useContext(AuthContext);
   
   useEffect(() => {
@@ -44,6 +44,7 @@ const Completed = () => {
         <>
           {allpaid &&
             allpaid.map((paid, index) => {
+              if ((name !== '' && batch !== '' && paid.student.includes(name) && paid.batch.includes(batch)) || ((name !== '' && batch === '' && paid.student.includes(name)) || (name === '' && batch !== '' &&  paid.batch.includes(batch))) || (name === '' && batch === '')) {
               return (
                 <Col sm={12} className="py-2 mb-2 cp bg rounded-3">
                   <Row className="m-0">
@@ -55,7 +56,7 @@ const Completed = () => {
                     <Col sm={2}>{paid.status}</Col>
                   </Row>
                 </Col>
-              );
+              )}
             })}
 
         </>
