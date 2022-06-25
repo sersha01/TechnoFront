@@ -97,7 +97,7 @@ function Payment() {
 
           {btn === "True" && (
             <Row className="mx-0 my-2 paybutton">
-              <Col xs={4}>
+              <Col xs={6}>
                 <Button
                   size="lg"
                   onClick={() => displayRazorpay(amount, "Rent", rentid)}
@@ -106,14 +106,8 @@ function Payment() {
                   UPI
                 </Button>
               </Col>
-              <Col xs={4}>
-                <Button size="lg" onClick={()=>{
-                  infoToast("Payment will be successfull when lead confirms your payment")
-                }} className={`w-100 ${style.btn}`}>
-                  Cash
-                </Button>
-              </Col>
-              <Col xs={4}>
+              
+              <Col xs={6}>
                 <Button
                   size="lg"
                   className={`w-100 ${style.btn}`}

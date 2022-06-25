@@ -5,6 +5,8 @@ import { useNavigate } from "react-router";
 import { set } from "react-hook-form";
 import StyleContext from "./StyleContext";
 
+import FormData from "form-data";
+
 const AuthContext = createContext();
 
 export default AuthContext;
@@ -148,15 +150,18 @@ export const AuthProvider = ({ children }) => {
   };
 
   const backendUpdate = async (data) => {
-    await axios.post("http://127.0.0.1:8000/user/update/profilephoto", data, {
-      headers: { Authorization: `Bearer ${authTokens.access}` },
-    }).then((res) => {
-      console.log(res.data);
-      getMyProfile();
-    }).catch((err) => {
-      console.log(err);
-    })
-  }
+    await axios
+      .post("http://127.0.0.1:8000/user/update/profilephoto", data, {
+        headers: { Authorization: `Bearer ${authTokens.access}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+        getMyProfile();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const getReviewers = async () => {
     await axios
@@ -482,17 +487,40 @@ export const AuthProvider = ({ children }) => {
       return;
     }
 
+    var bodyDatas = {
+      amount: amount,
+      type: type,
+      id: id,
+    };
+
+    console.log(bodyDatas);
+
+    const data = await axios({
+      url: "http://127.0.0.1:8000/payment/start_payment",
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${authTokens.access}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      data: bodyDatas,
+    }).then((res) => {
+      return res;
+    });
+
     const options = {
-      key: "rzp_test_aRq4XkP2vJ58Xt",
+      key: "rzp_test_KgiLdhTO6F4BS3",
       currency: "INR",
       amount: amount * 100,
       name: "BrotoType",
       description: "Paying your Co-working rent ",
+      order_id: id,
 
       handler: function (response) {
-        payRent(amount, type, id);
+        debugger;
+        console.log(response);
+        payRent(bodyDatas, response);
         successToast("Payment Successful");
-        infoToast("You have paid " + formatter.format(amount));
       },
 
       prefill: {
@@ -501,47 +529,55 @@ export const AuthProvider = ({ children }) => {
         contact: "9207404868",
       },
     };
-
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
   };
 
-  const payRent = async (amount, type, id) => {
-    await axios
-      .post(
-        "http://127.0.0.1:8000/payment/paying",
-        {
-          id: id,
-          amount: amount,
-          type: type,
+  const payRent = async (bodyDatas, response) => {
+    console.log(bodyDatas);
+    try {
+      let bodyData = new FormData();
+      bodyData.append("response", JSON.stringify(response));
+      console.log(bodyData);
+
+      await axios({
+        url: "http://127.0.0.1:8000/payment/paying",
+        method: "POST",
+        data: bodyData,
+        headers: {
+          Authorization: `Bearer ${authTokens.access}`,
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
-        {
-          headers: { Authorization: `Bearer ${authTokens.access}` },
-        }
-      )
-      .then((res) => {
-        if (res.status == "Paid") {
-          myPayments();
-          if (type == "Rent") {
-            setRent(false);
-          } else if (type == "Upfront") {
-            setUpfront(false);
-          } else if (type == "BatchShift") {
-            setShiftpay(false);
-          }
-        } else {
-          if (type == "Rent") {
-            showPayment();
-          } else if (type == "Upfront") {
-            showUpFront();
-          } else if (type == "BatchShift") {
-            showShiftPayment();
-          }
-        }
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          console.log("Everything is OK!");
+          console.log(bodyData);
+          if (res.status == "Paid") {
+            myPayments();
+            if (bodyDatas.type == "Rent") {
+              setRent(false);
+            } else if (bodyDatas.type == "Upfront") {
+              setUpfront(false);
+            } else if (bodyDatas.type == "BatchShift") {
+              setShiftpay(false);
+            }
+          } else {
+            if (bodyDatas.type == "Rent") {
+              showPayment();
+            } else if (bodyDatas.type == "Upfront") {
+              showUpFront();
+            } else if (bodyDatas.type == "BatchShift") {
+              showShiftPayment();
+            }
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (error) {
+      console.log(console.error());
+    }
   };
 
   const [mypay, setMypay] = useState(false);
