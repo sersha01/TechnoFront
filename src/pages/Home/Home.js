@@ -9,7 +9,6 @@ import Signup from "./Signup";
 import UserReg from "../../pages/User/UserLogin/UserReg";
 import AuthContext from "../../Context/AuthContext";
 import Header from "../../components/Common/Header/Header";
-import Code from "../../components/Common/Code/AddTask";
 
 const Home = () => {
   let { swap, swap2, setSwap, setSwap2 } = useContext(AuthContext);
@@ -85,7 +84,6 @@ const Home = () => {
                   >
                     Sign in to the Console
                   </Button>
-                  <Code setSwap2={setSwap2} value="btn" />
                 </div>
 
                 <br />

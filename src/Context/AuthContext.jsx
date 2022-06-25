@@ -40,6 +40,7 @@ export const AuthProvider = ({ children }) => {
   const [swap2, setSwap2] = useState("video");
   const [types, setTypes] = useState(null);
   const [pendings, setPendings] = useState([]);
+  const [batches, setBatches] = useState(null);
 
   const [rent, setRent] = useState(false);
   const [shiftpay, setShiftpay] = useState(false);
@@ -180,6 +181,20 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const getBatches = async () => {
+    await axios.post("http://127.0.0.1:8000/batch/view/batches",
+        {},
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      ).then((res) => {
+        setBatches(res.data);
+        console.log(res.data);
+      }).catch((err) => {
+        console.log(err);
+      });
+  };
+
   const getStudentTasks = async (studentId) => {
     await axios
       .post(
@@ -223,7 +238,7 @@ export const AuthProvider = ({ children }) => {
       .post(
         "http://127.0.0.1:8000/manifest/view/pendings",
         {
-          student: curr_student,
+          id: curr_student,
         },
         {
           headers: { Authorization: `Bearer ${authTokens.access}` },
@@ -256,10 +271,10 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  const isCodeValid = async (code) => {
+  const isLinkValid = async (link) => {
     const res = await axios.post(
-      "http://127.0.0.1:8000/user/validate/code",
-      { code: code },
+      "http://127.0.0.1:8000/user/validate/link",
+      { link: link },
       {}
     );
     return res;
@@ -762,8 +777,9 @@ export const AuthProvider = ({ children }) => {
     status,
     getChartData,
     chartData,
-    isCodeValid,
+    isLinkValid,
     setSignUpBatch,
+    signUpBatch,
     // <<<<<<< HEAD
     // =======
     getNotificationsTypes,
@@ -805,6 +821,10 @@ export const AuthProvider = ({ children }) => {
     setLocationId,
     setBranchid,
     LocationId,
+    getBatches,
+    setBatches,
+    batches,
+
   };
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>

@@ -9,7 +9,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import AuthContext from "../../Context/AuthContext";
 
-import Code from "../../components/Common/Code/AddTask";
 import Button from "@mui/material/Button";
 import { Col, Container, Row } from "react-bootstrap";
 import Logo from "./login.svg";
@@ -81,7 +80,6 @@ const Login = () => {
                 </Link>
               </Grid>
               <Grid item>
-                <Code setSwap2={setSwap2}></Code>
               </Grid>
             </Grid>
           </Box>

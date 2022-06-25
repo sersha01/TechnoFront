@@ -14,6 +14,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Form from "react-bootstrap/Form";
 import * as yup from "yup";
 import AdvisorContext from "../../Context/AdvisorContext";
+import { useNavigate, useParams } from "react-router";
+import StyleContext from "../../Context/StyleContext";
 
 const schema = yup.object().shape({
   username: yup
@@ -28,7 +30,7 @@ const schema = yup.object().shape({
   cpassword: yup.string().oneOf([yup.ref("password"), null]),
 });
 
-const Signup = ({ setSwap2 }) => {
+const Signup = () => {
   const {
     signupUser,
     errUser,
@@ -39,8 +41,11 @@ const Signup = ({ setSwap2 }) => {
     getBranch,
     LocationId,
     setBranchid,
+    signUpBatch, 
+    isLinkValid, 
+    setSignUpBatch
   } = useContext(AuthContext);
-
+  const { errorToast } = useContext(StyleContext);
   const {
     register,
     handleSubmit,
@@ -49,13 +54,35 @@ const Signup = ({ setSwap2 }) => {
     resolver: yupResolver(schema),
   });
 
-  const [selectedOption, setSelectedOption] = useState(0);
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const Params = useParams();
+  const navigate = useNavigate();
+  const validate = async (link) => {
+  await isLinkValid(link).then((res) => {
+      if (res.data.status === 200) {
+        if (res.data.message === "student") {
+          setSignUpBatch(res.data.batch);
+        }else {
+          setSignUpBatch(0);
+        }
+      }else{
+        errorToast("Invalid Link");
+        navigate("/");
+      }
+    }).catch((err) => {})
+  }
 
   useEffect(() => {
+    if (Params.link) {
+      validate(Params.link);
+    }
     getLocations();
   }, []);
 
   return (
+    <>
+    { signUpBatch !== null ? <>
     <Container2 component="main" className="bglight signupbox">
       <Box
         className="bg p-5 w-100 rounded-3 "
@@ -183,7 +210,11 @@ const Signup = ({ setSwap2 }) => {
         </form>
       </Box>
     </Container2>
-  );
+    </> : <>
+    <div>Loading...</div>
+    </>}
+    </>
+  )
 };
 
 export default Signup;
