@@ -4,10 +4,11 @@ import AuthContext from "../../../Context/AuthContext";
 
 const Pending = () => {
   
-  const { getPendings, pendings } = useContext(AuthContext);
+  const { getPendings, pendings, getNotifications } = useContext(AuthContext);
 
   useEffect(() => {
     getPendings();
+    getNotifications()
   },[])
 
   return (

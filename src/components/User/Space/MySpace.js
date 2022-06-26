@@ -5,9 +5,10 @@ import Chart from "../../Common/Chart/Chart";
 import AuthContext from "../../../Context/AuthContext";
 
 const MySpace = () => {
-  const { chartData, getChartData } = useContext(AuthContext);
+  const { chartData, getChartData, getNotifications } = useContext(AuthContext);
   useEffect(() => {
     getChartData();
+    getNotifications()
   },[]);
   return (
     <div>

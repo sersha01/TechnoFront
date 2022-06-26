@@ -1,13 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import AuthContext from "../../../Context/AuthContext";
 import Button from "@mui/material/Button";
 import Add from "../../Staff/AddTask/AddTask";
 
 const Notifications = () => {
-  const { notification, user_is, deleteNotifications } =
-    useContext(AuthContext);
+  const { notifications, user_is, deleteNotifications, getNotifications } = useContext(AuthContext);
   var bgColor;
+  useEffect(() => {
+    getNotifications()
+  },[])
   return (
     <Container fluid className="p-4 textdark">
       <div className="d-flex justify-content-between">
@@ -16,15 +18,15 @@ const Notifications = () => {
         {user_is === "lead" && <Add title="Add" value="addnotifications"></Add>}
       </div>
 
-      {notification &&
-        notification.map((notification, index) => {
+      {notifications &&
+        notifications.map((notification, index) => {
           return (
             <Row className="mx-2 mt-3 rounded-3 slides">
               <Col
                 xs={3}
                 className="my-auto d-flex justify-content-center text-muted"
               >
-                {notification.date}
+                {notification.created}
               </Col>
               <Col xs={1}>
                 <div

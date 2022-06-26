@@ -9,7 +9,7 @@ import AuthContext from "../../../Context/AuthContext";
 
 const Batch = () => {
 
-  const { batches, getBatches } = useContext(AuthContext);
+  const { batches, getBatches, getNotifications } = useContext(AuthContext);
   const { deleteBatch } = useContext(LeadContext);
 
   function copyToClipboard(text) {
@@ -18,6 +18,7 @@ const Batch = () => {
 
   useEffect(() => {
     getBatches();
+    getNotifications()
   },[])
 
   return (

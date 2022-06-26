@@ -17,7 +17,7 @@ import axios from "axios";
 import StyleContext from "../../../Context/StyleContext";
 
 function Profile({ by }) {
-  const { profile, getMyProfile, updateProfile, user, getDomains, domains, backendUpdate } = useContext(AuthContext);
+  const { profile, getMyProfile, updateProfile, user, getDomains, domains, backendUpdate, getNotifications } = useContext(AuthContext);
   const {infoToast,errorToast } = useContext(StyleContext);
 
   const [image, setImage] = useState(null);
@@ -30,6 +30,7 @@ function Profile({ by }) {
     if (user.position !== "Lead") {
       getMyProfile();
     }
+    getNotifications()
   }, []);
 
 

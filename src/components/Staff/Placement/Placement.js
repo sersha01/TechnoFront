@@ -9,15 +9,17 @@ import AddTask from "../AddTask/AddTask";
 import Profile from './PlacementProfile'
 import PlacementProfile from "./PlacementProfile";
 import { Link } from "react-router-dom";
+import AuthContext from "../../../Context/AuthContext";
 
 const Placement = () => {
   const { getPlacements, placements } = useContext(LeadContext);
-
+  const { getNotifications } = useContext(AuthContext);
   const [batch, setBatch] = useState('');
   const [name, setName] = useState('');
 
   useEffect(() => {
     getPlacements();
+    getNotifications()
   }, []);
 
   return (

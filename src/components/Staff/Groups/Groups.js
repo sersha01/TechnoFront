@@ -6,16 +6,18 @@ import Button from "@mui/material/Button";
 import AddTask from "../../Staff/AddTask/AddTask";
 import style from "./Groups.module.css";
 import LeadContext from "../../../Context/LeadContext";
+import AuthContext from "../../../Context/AuthContext";
 
 const Groups = () => {
 
   const { groups, getGroups, getGroupDetails } = useContext(LeadContext);
-
+  const { getNotifications } = useContext(AuthContext);
   const [advisor, setAdvisor] = useState('');
   const [batch, setBatch] = useState('');
 
   useEffect(() => {
     getGroups();
+    getNotifications()
   },[])
 
   return (

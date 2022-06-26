@@ -3,7 +3,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Header from "../../components/Common/Header/Header";
 import Header2 from "../../components/Common/Header2/Header2";
 import NavBox from "../../components/Common/NavBox/NavBox";
-// import Notification from "../../components/Common/Notification/Notification";
+import Notification from "../../components/Common/Notification/Notification";
 import { PrivateRoutePlacement } from "../../Utils/PrivateRoute";
 const Placement = ({child}) => {
   return (
@@ -17,7 +17,7 @@ const Placement = ({child}) => {
             <NavBox />
           </Row>
           <Row className="mt-4 bg rounded-3 mb-5 bs">
-            {/* <Notification /> */}
+            <Notification />
           </Row>
         </Col>
         <Col md={8} className="bglight rounded-3 p-0 mx-5 me-0 pb-5 mb-3 bs">

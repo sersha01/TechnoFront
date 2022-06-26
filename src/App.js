@@ -144,7 +144,7 @@ function App() {
                   element={<Advisor child={<MyStudents />} />}
                 />
                 <Route
-                  path="/advisor/notifications"
+                  path="/Advisor/notifications"
                   element={<Advisor child={<Notifications />} />}
                 />
                 <Route
@@ -228,6 +228,10 @@ function App() {
                   }
                 />
                 <Route
+                  path="/Lead/notifications"
+                  element={<Lead child={<Notifications />} />}
+                />
+                <Route
                   path="/lead/groups"
                   element={
                     <Lead child={<Group />}/>
@@ -282,6 +286,10 @@ function App() {
                   }
                 />
                 <Route
+                  path="/Finance/notifications"
+                  element={<Finance child={<Notifications />} />}
+                />
+                <Route
                   path="/placement"
                   element={
                     <Placement child={<AdvisorSpace />}/>
@@ -292,6 +300,10 @@ function App() {
                   element={
                     <Placement child={<Placement />}/>
                   }
+                />
+                <Route
+                  path="/Placement/notifications"
+                  element={<Placement child={<Notifications />} />}
                 />
               </Routes>
               <AdvisorProvider>
@@ -327,6 +339,10 @@ function App() {
                   element={
                     <Admin child={<AdminCreate />}/>
                   }
+                />
+                <Route
+                  path="/Admin/notifications"
+                  element={<Admin child={<Notifications />} />}
                 />
                 </Routes>
               </AdvisorProvider>

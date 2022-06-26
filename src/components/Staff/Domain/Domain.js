@@ -8,11 +8,12 @@ import LeadContext from "../../../Context/LeadContext";
 
 const Domain = () => {
 
-  const { getDomains, domains } = useContext(AuthContext);
+  const { getDomains, domains, getNotifications } = useContext(AuthContext);
   const { deleteDomain } = useContext(LeadContext);
 
   useEffect(() => {
     getDomains();
+    getNotifications()
   },[])
 
   return (
