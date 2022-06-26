@@ -76,7 +76,7 @@ const Pending = ({name, batch}) => {
                         color="primary"
                         className="mx-1 sendform"
                         onClick={() => {
-                          sendForm(pending.id);
+                          sendForm(pending.paymentid);
                           infoToast("Form Sent to the Student");
                         }}
                       >
@@ -88,7 +88,7 @@ const Pending = ({name, batch}) => {
                         color="secondary"
                         className="coh"
                         onClick={() => {
-                          cashpaid(pending.id);
+                          cashpaid(pending.paymentid);
                           infoToast("Payment Received in hand");
                         }}
                       >
@@ -117,7 +117,7 @@ const Pending = ({name, batch}) => {
                         color="secondary"
                         className="coh"
                         onClick={() => {
-                          cashpaid(pending.id);
+                          cashpaid(pending.paymentid);
                         }}
                       >
                         Paid
