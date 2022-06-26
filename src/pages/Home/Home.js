@@ -1,27 +1,15 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import "./Home.css";
 import GroupsIcon from "@mui/icons-material/Groups";
 import { Button } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Login from "./Login";
 import Signup from "./Signup";
-import UserReg from "../../pages/User/UserLogin/UserReg";
 import AuthContext from "../../Context/AuthContext";
 import Header from "../../components/Common/Header/Header";
 
 const Home = () => {
   let { swap, swap2, setSwap, setSwap2 } = useContext(AuthContext);
-
-  const theme = createTheme();
-
-  const handleDarkMode = (e) => {
-    if (e.target.checked) {
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
-    }
-  };
 
   return (
     <div className="m-0 p-0 bglight">

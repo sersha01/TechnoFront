@@ -49,13 +49,13 @@ function Manifest() {
                 {studentManifest && studentManifest.tasks && studentManifest.tasks.map((task, index) => {
                     return (
                         <Col xs={11} className={`rounded-3 py-2 my-1 ${style.todoDiv}`} key={index}><input type="text" value={task.taskname} className={`col-11 ${style.input}`} disabled />
-                {task.status == true ? <CheckCircleIcon className='col-1'/> :<CheckCircleOutlineIcon className='col-1' onClick={()=>{
+                {task.status === true ? <CheckCircleIcon className='col-1'/> :<CheckCircleOutlineIcon className='col-1' onClick={()=>{
                     taskComplete(task.id);
                 }}/>}
                 </Col>
                 )})}
                 <Col xs={11} className={`rounded-3 py-2 my-1 ${style.todoDiv}`}><input type="text" placeholder={'Add New Task'} className={`col-11 ${style.input}`} value={task} onChange={(e)=>{setTask(e.target.value)}}/>
-                {user.position != "Student" && (studentManifest && studentManifest.is_complete != true) && <AddCircleOutlineRoundedIcon className='col-1' onClick={()=>{addTask(task)
+                {user.position !== "Student" && (studentManifest && studentManifest.is_complete !== true) && <AddCircleOutlineRoundedIcon className='col-1' onClick={()=>{addTask(task)
                 setTask('')}} />}
                 </Col>
             </Col>

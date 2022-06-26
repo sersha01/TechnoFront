@@ -1,20 +1,14 @@
 import React, { useContext } from "react";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import AuthContext from "../../Context/AuthContext";
-
-import Button from "@mui/material/Button";
 import { Col, Container, Row } from "react-bootstrap";
 import Logo from "./login.svg";
 
 const Login = () => {
-  let { loginUser,setSwap,setSwap2, errUser } = useContext(AuthContext);
+  let { loginUser,setSwap, errUser } = useContext(AuthContext);
   return (
     <Container>
       <Row className="d-flex justify-content-center">
@@ -135,21 +129,5 @@ export default Login;
 //             >
 //               Sign In
 //             </Button>
-{/* <Grid container>
-  <Grid item xs>
-    <Link
-      href="#"
-      className="textdark"
-      variant="body2"
-      onClick={() => {
-        setSwap("video");
-      }}
-    >
-      Back
-    </Link>
-  </Grid>
-  <Grid item>
-    <Code setSwap2={setSwap2}></Code>
-  </Grid>
-</Grid>; */}
+
 //           </Box>

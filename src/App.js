@@ -51,8 +51,8 @@ import { StudentProvider } from "./Context/StudentContext";
 import { AdvisorProvider } from "./Context/AdvisorContext";
 import { LeadProvider } from "./Context/LeadContext";
 
-import UserLogin from "./pages/User/UserLogin/UserLogin";
-import UserReg from "./pages/User/UserLogin/UserReg";
+// import UserLogin from "./pages/User/UserLogin/UserLogin";
+// import UserReg from "./pages/User/UserLogin/UserReg";
 
 import "./App.css";
 import { ToastContainer } from 'react-toastify';

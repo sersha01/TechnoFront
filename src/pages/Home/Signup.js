@@ -3,7 +3,6 @@ import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container2 from "@mui/material/Container";
-import Button from "@mui/material/Button";
 import Logo from "./signuplogo.svg";
 import AuthContext from "../../Context/AuthContext";
 import Grid from "@mui/material/Grid";
@@ -13,7 +12,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Form from "react-bootstrap/Form";
 import * as yup from "yup";
-import AdvisorContext from "../../Context/AdvisorContext";
 import { useNavigate, useParams } from "react-router";
 import StyleContext from "../../Context/StyleContext";
 
@@ -94,7 +92,6 @@ const Signup = () => {
         }}
       >
         <img width="500px" height="100px" src={Logo} alt="" />
-
         <Typography component="h1" variant="h3">
           Sign up
         </Typography>
