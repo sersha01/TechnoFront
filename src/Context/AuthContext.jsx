@@ -2,7 +2,6 @@ import { createContext, useContext, useState } from "react";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { set } from "react-hook-form";
 import StyleContext from "./StyleContext";
 
 import FormData from "form-data";
@@ -48,6 +47,7 @@ export const AuthProvider = ({ children }) => {
 
   const signupUser = async ({ username, email, password }) => {
     const check = signUpBatch === 0 ? true : false;
+    
     await axios
       .post("http://127.0.0.1:8000/user/signup", {
         username: username,
@@ -207,11 +207,11 @@ export const AuthProvider = ({ children }) => {
       .then((res) => {
         setStudentTasks(res.data);
         console.log(res.data);
-        if (user.position == "Student") {
+        if (user.position === "Student") {
           navigate("/taskslist");
-        } else if (user.position == "Advisor") {
+        } else if (user.position === "Advisor") {
           navigate("/advisor/group/taskslist");
-        } else if (user.position == "Lead") {
+        } else if (user.position === "Lead") {
           navigate("/lead/students/taskslist");
         }
       })
@@ -283,7 +283,7 @@ export const AuthProvider = ({ children }) => {
   const updateProfile = async (e) => {
     e.preventDefault();
     var domain = null;
-    if (user.position == "Student") {
+    if (user.position === "Student") {
       var domain = e.target.domain.value;
     }
     await axios
@@ -412,7 +412,7 @@ export const AuthProvider = ({ children }) => {
       })
       .then((res) => {
         console.log(res.data);
-        if (res.data.status == "Paid") {
+        if (res.data.status === "Paid") {
           setRent(false);
         } else {
           setAmount(res.data.amount);
@@ -436,7 +436,7 @@ export const AuthProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${authTokens.access}` },
       })
       .then((res) => {
-        if (res.data.status == "Paid") {
+        if (res.data.status === "Paid") {
           setUpfront(false);
         } else {
           console.log(res.data);
@@ -461,7 +461,7 @@ export const AuthProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${authTokens.access}` },
       })
       .then((res) => {
-        if (res.data.status != "Paid") {
+        if (res.data.status !== "Paid") {
           setShiftamount(res.data.amount);
           setShiftstatus(res.data.status);
           setShiftId(res.data.id);
@@ -568,21 +568,21 @@ export const AuthProvider = ({ children }) => {
         .then((res) => {
           console.log("Everything is OK!");
           console.log(bodyData);
-          if (res.status == "Paid") {
+          if (res.status === "Paid") {
             myPayments();
-            if (bodyDatas.type == "Rent") {
+            if (bodyDatas.type === "Rent") {
               setRent(false);
-            } else if (bodyDatas.type == "Upfront") {
+            } else if (bodyDatas.type === "Upfront") {
               setUpfront(false);
-            } else if (bodyDatas.type == "BatchShift") {
+            } else if (bodyDatas.type === "BatchShift") {
               setShiftpay(false);
             }
           } else {
-            if (bodyDatas.type == "Rent") {
+            if (bodyDatas.type === "Rent") {
               showPayment();
-            } else if (bodyDatas.type == "Upfront") {
+            } else if (bodyDatas.type === "Upfront") {
               showUpFront();
-            } else if (bodyDatas.type == "BatchShift") {
+            } else if (bodyDatas.type === "BatchShift") {
               showShiftPayment();
             }
           }

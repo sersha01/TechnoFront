@@ -1,9 +1,7 @@
 // Bootstrap
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import style from "./Tasks.module.css"
 import style from "./Payment.module.css";
-import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Completed from "./Completed";
 import Pending from "./Pending";
