@@ -10,9 +10,13 @@ import { useNavigate } from "react-router";
 
 const Advisors = () => {
 
-  const { getAdvisors, advisors, getProfile, deleteAdvisor } = useContext(LeadContext);
+  const { getAdvisors, advisors, getProfile, deleteAdvisor, advisorLink } = useContext(LeadContext);
 
   const navigate = useNavigate();
+
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text);
+  }
 
   useEffect(() => {
     getAdvisors();
@@ -25,7 +29,8 @@ const Advisors = () => {
           <h2>Advisors</h2>
         </div>
         <div>
-          <Button></Button>
+          <Button 
+          onClick={()=>{copyToClipboard(advisorLink)}}>Copy Link</Button>
         </div>
       </Col>
 
