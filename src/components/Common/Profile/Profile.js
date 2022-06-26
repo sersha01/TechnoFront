@@ -60,7 +60,6 @@ function Profile({ by }) {
     //  }
     })
     .catch((err) => {
-      console.log(err);
       alert(err)
     });
   }
@@ -73,7 +72,6 @@ function Profile({ by }) {
     axios.post("https://api.cloudinary.com/v1_1/da3qthae5/image/upload",data).then((data) => {
       updateProfile(e, data.data.secure_url);
     }).catch((err) => {
-      console.log(err);
       alert(err)
     })
   }
