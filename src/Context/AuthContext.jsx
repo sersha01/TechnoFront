@@ -39,13 +39,14 @@ export const AuthProvider = ({ children }) => {
   const [types, setTypes] = useState(null);
   const [pendings, setPendings] = useState([]);
   const [batches, setBatches] = useState(null);
-
+  const [selectedPlace, setSelectedPlace] = useState(null);
   const [rent, setRent] = useState(false);
   const [shiftpay, setShiftpay] = useState(false);
   const [upfront, setUpfront] = useState(false);
 
   const signupUser = async ({ username, email, password }) => {
     const check = signUpBatch === 0 ? true : false;
+    console.log("selectedPlace",selectedPlace);
     await axios
       .post("http://127.0.0.1:8000/user/signup", {
         username: username,
@@ -53,6 +54,7 @@ export const AuthProvider = ({ children }) => {
         password: password,
         batch: signUpBatch,
         is_staff: check,
+        location: selectedPlace
       })
       .then((res) => {
         console.log(res.data);
@@ -654,7 +656,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const [allLocations, setAllLocations] = useState(null);
-  const [LocationId, setLocationId] = useState(0);
 
   const getLocations = async () => {
     await axios
@@ -671,23 +672,24 @@ export const AuthProvider = ({ children }) => {
   const [allBranches, setAllBranches] = useState(null);
   const [branchid, setBranchid] = useState(null);
 
+
   const getBranch = async () => {
-    console.log("Inside");
-    await axios
-      .post(
-        "http://127.0.0.1:8000/user/getBranches",
-        {
-          location: LocationId,
-        },
-        {}
-      )
-      .then((res) => {
-        console.log(res.data);
-        setAllBranches(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // console.log("Inside");
+    // await axios
+    //   .post(
+    //     "http://127.0.0.1:8000/user/getBranches",
+    //     {
+    //       location: LocationId,
+    //     },
+    //     {}
+    //   )
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     setAllBranches(res.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   const [branchStudents, setBranchStudents] = useState(null);
@@ -788,13 +790,13 @@ export const AuthProvider = ({ children }) => {
     allBranches,
     branchStudents,
     getBranchStudents,
-    setLocationId,
     setBranchid,
-    LocationId,
     getBatches,
     setBatches,
     batches,
     folderSubmit,
+    setAllBranches,
+    setSelectedPlace,
 
   };
   return (
