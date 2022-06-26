@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Row, Accordion, Table } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import Chart from "../../Common/Chart/Chart";
 import AuthContext from "../../../Context/AuthContext";
 
@@ -9,12 +9,12 @@ const MySpace = () => {
     getChartData();
   },[]);
   return (
-    <div>
+    <>
       {chartData && (
-      <Row className="mt-5 bg">
+      <Row className="mt-5 col-11 chartspage ">
         <Chart data={chartData}/>
       </Row>)}
-    </div>
+    </>
   );
 };
 

@@ -71,9 +71,7 @@ function Header() {
           <Col md={5} className="d-flex justify-content-between px-3 p-0">
             <input type="checkbox" id="checkbox"  onChange={handleDarkMode}  />
             <AccountMenu/>
-            {/* <svg height={40} width={40} onClick={ logoutUser }>
-              <circle cx="20" cy="20" r="20"  />
-            </svg> */}
+            
           </Col>
         </Row>
       </Col>

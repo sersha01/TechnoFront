@@ -1,3 +1,6 @@
+
+import { Row, Col } from "react-bootstrap";
+
 import {
     Chart as ChartJS,
     RadialLinearScale,
@@ -12,7 +15,9 @@ import {
     Tooltip,
     Legend,
   } from 'chart.js';
+
 import { Radar, Line, Doughnut, Bar, Pie } from 'react-chartjs-2';
+
 ChartJS.register(
     RadialLinearScale,
     CategoryScale,
@@ -94,6 +99,10 @@ function LineChart({data}) {
         title: {
           display: true,
           text: data.title,
+          fullSize: true,
+          font: {
+            size: 20
+        }
         },
       },
     };
@@ -117,6 +126,10 @@ function BarChart({data}) {
         title: {
           display: true,
           text: data.title,
+          fullSize: true,
+          font: {
+            size: 20
+        }
         },
       },
     };
@@ -134,26 +147,34 @@ function Chart({data}) {
     return(
     data.map((item) => {
         if (item.type === 'radar') {
-            return <RadarChart data={item.data} />
+            return 
+            (<Col md={6} className="bg my-3 p-2">
+              <RadarChart data={item.data} />
+              </Col>)
         } else if (item.type === 'doughnut') {
-            return <DoughnutChart data={item.data} />
+          return
+          (<Col md={6} className="bg my-3 p-2">
+             <DoughnutChart data={item.data} />
+              </Col>)
         } else if (item.type === 'pie') {
-            return <PieChart data={item.data}/>
+            return (
+              <Col md={5} className="bg my-3 p-4 mx-4">
+                <PieChart data={item.data}/>
+              </Col>
+            )
         } else if (item.type === 'line') {
-            return <LineChart data={item.data} />
+            return (
+            <Row  className="bg my-3 p-2">
+            <LineChart data={item.data} />
+            </Row>
+            )
         } else if (item.type === 'bar') {
-            return <BarChart data={item.data} />
+            return (
+            <Col className="bg my-3 p-2"><BarChart data={item.data} /></Col>
+            )
         }
     }))
 }
 
 export default Chart
 
-
-{/* 
-<Radar data={data1} />
-<Doughnut data={data2} />
-<Line options={options1} data={data3} />
-<Bar options={options1} data={data3} />
-<Pie data={data4} /> 
-*/}

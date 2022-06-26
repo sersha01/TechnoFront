@@ -29,8 +29,8 @@ const Advisors = () => {
           <h2>Advisors</h2>
         </div>
         <div>
-          <Button 
-          onClick={()=>{copyToClipboard(advisorLink)}}>Copy Link</Button>
+          <Button className="searchbtn w-75" 
+          onClick={()=>{copyToClipboard(advisorLink)}}>Link</Button>
         </div>
       </Col>
 

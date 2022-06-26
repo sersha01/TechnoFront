@@ -23,7 +23,7 @@ export default function AccountMenu() {
   };
   return (
     <React.Fragment>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }} >
         
         <Tooltip title="Account settings">
           <IconButton
@@ -34,7 +34,7 @@ export default function AccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar src={Pro} sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar src={user? user.photo : Pro} sx={{ width: 40, height: 40 }} className="position-absolute"></Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -60,8 +60,9 @@ export default function AccountMenu() {
               content: '""',
               display: 'block',
               position: 'absolute',
-              top: 0,
-              right: 14,
+
+              top: 10,
+              right: 1,
               width: 10,
               height: 10,
               bgcolor: 'background.paper',
@@ -74,10 +75,10 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <MenuItem>
-          <Avatar /> Profile
+          <Avatar>M</Avatar> My profile
         </MenuItem>
         <MenuItem>
-          <Avatar /> My account
+          <Avatar>P</Avatar> My payments
         </MenuItem>
         <Divider />
         

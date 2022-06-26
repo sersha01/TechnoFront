@@ -49,7 +49,7 @@ const Placement = () => {
           </Col>
 
           <Button className=" mx-1 searchbtn">
-            <ManageSearchRoundedIcon />
+            <ManageSearchRoundedIcon className="searchbtn" />
           </Button>
         </div>
       </Col>

@@ -257,3 +257,12 @@ body {
 .slides:hover .tooltiptext {
   visibility: visible;
 }
+
+.chartspage{
+  margin-left: 2.9rem !important;
+  margin-right: 0.3rem !important;
+}
+
+.header2{
+  height: 70px !important;
+}
