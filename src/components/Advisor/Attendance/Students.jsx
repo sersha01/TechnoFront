@@ -6,10 +6,10 @@ import ManageSearchRoundedIcon from "@mui/icons-material/ManageSearchRounded";
 import AuthContext from "../../../Context/AuthContext";
 
 const Students = () => {
-  const { getBranchStudents, branchStudents } = useContext(AuthContext);
-
+  const { getBranchStudents, branchStudents, getNotifications } = useContext(AuthContext);
   useEffect(() => {
     getBranchStudents();
+    getNotifications()
   }, []);
 
   return (

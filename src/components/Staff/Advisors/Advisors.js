@@ -10,7 +10,7 @@ import { useNavigate } from "react-router";
 
 const Advisors = () => {
 
-  const { getAdvisors, advisors, getProfile, deleteAdvisor, advisorLink } = useContext(LeadContext);
+  const { getAdvisors, advisors, getProfile, deleteAdvisor, advisorLink, getNotifications } = useContext(LeadContext);
 
   const navigate = useNavigate();
 
@@ -20,6 +20,7 @@ const Advisors = () => {
 
   useEffect(() => {
     getAdvisors();
+    getNotifications()
   },[])
 
   return (

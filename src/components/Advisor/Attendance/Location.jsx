@@ -8,11 +8,10 @@ import { Link } from "react-router-dom";
 import AuthContext from "../../../Context/AuthContext";
 
 const Location = () => {
-  const { getLocations, allLocations, setLocationId } =
-    useContext(AuthContext);
-
+  const { getLocations, allLocations, setLocationId, getNotifications } = useContext(AuthContext);
   useEffect(() => {
     getLocations();
+    getNotifications()
   }, []);
 
   return (

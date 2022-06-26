@@ -14,7 +14,7 @@ import { useNavigate } from "react-router";
 
 const Students = () => {
 
-  const { setCurr_student } = useContext(AuthContext)
+  const { setCurr_student, getNotifications } = useContext(AuthContext)
   const { getMyStudents, myStudents, sendTerminateRequest } = useContext(AdvisorContext);
 
   const navigate = useNavigate();
@@ -24,6 +24,7 @@ const Students = () => {
 
   useEffect(() => {
     getMyStudents();
+    getNotifications()
   },[])
 
   return (

@@ -29,6 +29,7 @@ function Payment() {
     shiftid,
     myPayments,
     mypay,
+    getNotifications,
   } = useContext(AuthContext);
 
   const {infoToast} = useContext(StyleContext);
@@ -60,6 +61,7 @@ function Payment() {
     showUpFront();
     showShiftPayment();
     myPayments();
+    getNotifications()
   }, []);
 
   return (

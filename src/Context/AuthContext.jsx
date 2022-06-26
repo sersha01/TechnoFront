@@ -330,22 +330,15 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  const get_data = async () => {
-    axios
-      .post(
-        "http://127.0.0.1:8000/don/",
-        {
-          username: "username",
-        },
-        { headers: { Authorization: `Bearer ${authTokens.access}` } }
-      )
-      .then(function (response) {
-        console.log(response.data);
-        console.log(response);
+  const [notifications, setNotifications] = useState([]);
+  const getNotifications = async () => {
+    axios.post("http://127.0.0.1:8000/user/view/notifications",{},{ headers: { Authorization: `Bearer ${authTokens.access}` } }
+      ).then((res) => {
+        console.log(res.data);
+        setNotifications(res.data);
+      }).catch((err) => {
+        console.log(err);
       })
-      .catch(function (response) {
-        console.log(response);
-      });
   };
 
   const getNotificationsTypes = async () => {
@@ -793,7 +786,6 @@ export const AuthProvider = ({ children }) => {
     getDomains,
     loginUser,
     logoutUser,
-    get_data,
     studentTasks,
     studentManifest,
     domains,
@@ -874,6 +866,8 @@ export const AuthProvider = ({ children }) => {
     createLead,
     deleteLead,
     getLeads,
+    getNotifications,
+    notifications,
 
   };
   return (

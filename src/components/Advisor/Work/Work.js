@@ -14,7 +14,7 @@ import { useNavigate } from "react-router";
 
 const Work = () => {
 
-  const { setCurr_group } = useContext(AuthContext);
+  const { setCurr_group, getNotifications } = useContext(AuthContext);
   const { getMyGroups, myGroups } = useContext(AdvisorContext);
 
   const navigate = useNavigate();
@@ -23,6 +23,7 @@ const Work = () => {
 
   useEffect(() => {
     getMyGroups();
+    getNotifications()
   },[])
 
   return (

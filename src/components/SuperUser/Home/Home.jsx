@@ -4,10 +4,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const AdminHome = () => {
-  const { leads, getLeads, deleteLead } = useContext(AuthContext);
+  const { leads, getLeads, deleteLead, getNotifications } = useContext(AuthContext);
 
   useEffect(() => {
     getLeads();
+    getNotifications()
   }, []);
 
 

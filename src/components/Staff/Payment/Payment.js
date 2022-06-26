@@ -11,13 +11,14 @@ import ManageSearchRoundedIcon from "@mui/icons-material/ManageSearchRounded";
 
 function Payment() {
   const { allPendingPayments, allCompletedPayments } = useContext(AuthContext);
- 
+  const { getNotifications } = useContext(AuthContext);
   const [batch, setBatch] = useState('');
   const [name, setName] = useState('');
 
   useEffect(() => {
     allPendingPayments();
     allCompletedPayments();
+    getNotifications()
   }, []);
 
   const [active, setActive] = useState("Completed");
