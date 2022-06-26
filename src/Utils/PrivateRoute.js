@@ -8,6 +8,8 @@ export function PrivateRouteStudent({ children }) {
     return <Navigate to="/signin" />
   } else if (user.position === "Student") {
     return children;
+  } else if (user.position === "Admin") {
+    return <Navigate to="/admin" />
   } else if (user.position === "Advisor") {
     return <Navigate to="/advisor" />
   } else if(user.position === "Lead"){
@@ -27,6 +29,8 @@ export function PrivateRouteAdvisor({ children }) {
     return <Navigate to="/signin" />
   } else if (user.position === "Advisor") {
     return children;
+  } else if (user.position === "Admin") {
+    return <Navigate to="/admin" />
   } else if(user.position === "Student"){
     return <Navigate to="/" />;
   } else if(user.position === "Lead"){
@@ -43,7 +47,9 @@ export function PrivateRouteLead({ children }) {
   if (user === null) {
     return <Navigate to="/signin" />
   } else if (user.position === "Lead") {
-  return children
+    return children
+  } else if (user.position === "Admin") {
+    return <Navigate to="/admin" />
   } else if (user.position === "Advisor") {
     return <Navigate to="/advisor" />
   } else if (user.position === "Student") {
@@ -62,7 +68,9 @@ export function PrivateRouteCommunication({ children }) {
   if (user === null) {
     return <Navigate to="/signin" />
   } else if (user.position === "Communication") {
-  return children
+    return children
+  } else if (user.position === "Admin") {
+    return <Navigate to="/admin" />
   } else if (user.position === "Advisor") {
     return <Navigate to="/advisor" />
   } else if (user.position === "Student") {
@@ -81,7 +89,9 @@ export function PrivateRouteFinance({ children }) {
   if (user === null) {
     return <Navigate to="/signin" />
   } else if (user.position === "Finance") {
-  return children
+    return children
+  } else if (user.position === "Admin") {
+    return <Navigate to="/admin" />
   } else if (user.position === "Advisor") {
     return <Navigate to="/advisor" />
   } else if (user.position === "Student") { 
@@ -100,7 +110,9 @@ export function PrivateRoutePlacement({ children }) {
   if (user === null) {
     return <Navigate to="/signin" />
   } else if (user.position === "Placement") {
-  return children
+    return children
+  } else if (user.position === "Admin") {
+    return <Navigate to="/admin" />
   } else if (user.position === "Advisor") {
     return <Navigate to="/advisor" />
   } else if (user.position === "Student") {
@@ -111,5 +123,26 @@ export function PrivateRoutePlacement({ children }) {
     return <Navigate to="/communication" />
   } else if (user.position === "Finance") {
     return <Navigate to="/finance" />
+  }
+}
+
+export function PrivateRouteAdmin({ children }) {
+  const { user } = useContext(AuthContext);
+  if (user === null) {
+    return <Navigate to="/signin" />
+  } else if (user.position === "Admin") {
+    return children
+  } else if (user.position === "Advisor") {
+    return <Navigate to="/advisor" />
+  } else if (user.position === "Student") {
+    return <Navigate to="/" />
+  } else if (user.position === "Lead") {
+    return <Navigate to="/lead" />
+  } else if (user.position === "Communication") {
+    return <Navigate to="/communication" />
+  } else if (user.position === "Finance") {
+    return <Navigate to="/finance" />
+  } else if (user.position === "Placement") {
+    return <Navigate to="/placement" />
   }
 }

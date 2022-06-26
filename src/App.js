@@ -43,6 +43,9 @@ import Finance from "./pages/Finance/Finance";
 ////////////////////////////////////
 import Placement from "./pages/Placement/Placement";
 ////////////////////////////////////
+import Admin from "./pages/Admin/Admin";
+import AdminHome from "./components/SuperUser/Home/Home";
+import AdminCreate from "./components/SuperUser/Create/Create";
 
 //Context Providers
 import { AuthProvider } from "./Context/AuthContext";
@@ -311,6 +314,18 @@ function App() {
                         <Pending />
                       </>
                     }/>
+                  }
+                />
+                <Route
+                  path="/admin"
+                  element={
+                    <Admin child={<AdminHome />}/>
+                  }
+                />
+                <Route
+                  path="/admin/create/lead"
+                  element={
+                    <Admin child={<AdminCreate />}/>
                   }
                 />
                 </Routes>

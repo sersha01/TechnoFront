@@ -44,6 +44,7 @@ export const AuthProvider = ({ children }) => {
   const [rent, setRent] = useState(false);
   const [shiftpay, setShiftpay] = useState(false);
   const [upfront, setUpfront] = useState(false);
+  const [leads, setLeads] = useState(null);
 
   const signupUser = async ({ username, email, password }) => {
     const check = signUpBatch === 0 ? true : false;
@@ -748,6 +749,42 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const getLeads = async () => {
+    await axios.post("http://127.0.0.1:8000/admins/view/leads", {}, {
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+      }).then((res) => {
+        console.log(res.data);
+        setLeads(res.data);
+      }).catch((err) => {
+        console.log(err);
+      })
+  }
+
+  const createLead = async (data) => {
+    await axios.post("http://127.0.0.1:8000/admins/create/lead", data, {
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+    }).then((res) => {
+      console.log(res.data);
+      getLeads();
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
+  const deleteLead = async (id) => {
+    await axios.post("http://127.0.0.1:8000/admins/delete/lead", {
+      id: id,
+    }, {
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+    }).then((res) => {
+      console.log(res.data);
+      getLeads();
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
+
   const contextData = {
     signupUser,
     updateProfile,
@@ -832,6 +869,11 @@ export const AuthProvider = ({ children }) => {
     folderSubmit,
     setAllBranches,
     setSelectedPlace,
+    leads,
+    setLeads,
+    createLead,
+    deleteLead,
+    getLeads,
 
   };
   return (
