@@ -35,12 +35,12 @@ const Signup = () => {
     getLocations,
     allLocations,
     allBranches,
-    setLocationId,
     getBranch,
     setBranchid,
     signUpBatch, 
     isLinkValid, 
-    setSignUpBatch
+    setSignUpBatch,
+    setSelectedPlace,
   } = useContext(AuthContext);
   const { errorToast } = useContext(StyleContext);
   const {
@@ -51,7 +51,8 @@ const Signup = () => {
     resolver: yupResolver(schema),
   });
 
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState();
+
 
   const Params = useParams();
   const navigate = useNavigate();
@@ -60,8 +61,10 @@ const Signup = () => {
       if (res.data.status === 200) {
         if (res.data.message === "student") {
           setSignUpBatch(res.data.batch);
+          setSelectedOption(res.data.branches);
         }else {
           setSignUpBatch(0);
+          setSelectedOption(res.data.branches);
         }
       }else{
         errorToast("Invalid Link");
@@ -74,7 +77,6 @@ const Signup = () => {
     if (Params.link) {
       validate(Params.link);
     }
-    getLocations();
   }, []);
 
   return (
@@ -149,37 +151,20 @@ const Signup = () => {
             </div>
             <div className="form-group mb-4">
               <label>Location</label>
-              <Form.Select aria-label="Default select example" value={selectedOption} onChange={(e) => {
-                          setSelectedOption(e.target.value);
-                          setLocationId(selectedOption);
-                          getBranch();
-                        }}>
-                <option>Select</option>
-                {allLocations &&
-                  allLocations.map((place) => {
+              <Form.Select aria-label="Default select example"
+              onChange={(e) => {
+                setSelectedPlace(e.target.value);
+              }}
+              >
+                <option value="">Select </option>
+                {selectedOption &&
+                  selectedOption.map((place) => {
                     return (
                       <option
                         value={place.id}
+                        // onClick={() => {setSelectedPlace(place.id)}}
                       >
-                        {place.place}
-                      </option>
-                    );
-                  })}
-              </Form.Select>
-            </div>
-            <div className="form-group mb-4">
-              <label>Location</label>
-              <Form.Select aria-label="Default select example">
-                {allBranches &&
-                  allBranches.map((place) => {
-                    return (
-                      <option
-                        value={place.id}
-                        onClick={() => {
-                          setBranchid(place.id);
-                        }}
-                      >
-                        {place.name}
+                        {place.name ? place.name : place.place}
                       </option>
                     );
                   })}
