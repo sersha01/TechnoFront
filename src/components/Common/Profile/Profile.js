@@ -3,7 +3,8 @@ import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import './Profile.module.css';
 import style from "./Profile.module.css";
-import wafi from "./defualtProPic.jpg";
+import pro from "./defualtProPic.jpg";
+import id from "./ID.jpg";
 import Button from "@mui/material/Button";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../Context/AuthContext";
@@ -20,6 +21,7 @@ function Profile({ by }) {
   const {infoToast,errorToast } = useContext(StyleContext);
 
   const [image, setImage] = useState(null);
+  const [proof, setProof] = useState(null);
 
   useEffect(() => {
     if (user.position === "Student") {
@@ -29,16 +31,12 @@ function Profile({ by }) {
       getMyProfile();
     }
   }, []);
-  useEffect(() => {
-    console.log(image);
-  },[image])
 
 
   const uploadImage = ()=>{
     const data = new FormData();
-data.append("file", image);
-data.append("upload_preset", "w5rfzcjg");
-   
+    data.append("file", image);
+    data.append("upload_preset", "w5rfzcjg");
     data.append("cloud_name", "da3qthae5");
     axios.post("https://api.cloudinary.com/v1_1/da3qthae5/image/upload",data)
     .then((data) => {
@@ -67,6 +65,18 @@ data.append("upload_preset", "w5rfzcjg");
     });
   }
 
+  const uploadProof = (e)=>{
+    const data = new FormData();
+    data.append("file", proof);
+    data.append("upload_preset", "w5rfzcjg");
+    data.append("cloud_name", "da3qthae5");
+    axios.post("https://api.cloudinary.com/v1_1/da3qthae5/image/upload",data).then((data) => {
+      updateProfile(e, data.data.secure_url);
+    }).catch((err) => {
+      console.log(err);
+      alert(err)
+    })
+  }
 
     return (
       <Row className={`m-0 p-3 rounded-2 ${style.profile}`}>
@@ -77,7 +87,7 @@ data.append("upload_preset", "w5rfzcjg");
           className="row m-0"
           onSubmit={(e) => {
             e.preventDefault();
-            updateProfile(e);
+            uploadProof(e)
           }}
         >
           <Col xs={12} md={6} className="p-0">
@@ -90,7 +100,7 @@ data.append("upload_preset", "w5rfzcjg");
             </label>
             </Col>
             <Col className={`px-3 py-0 mb-4 d-flex justify-content-center`} >
-              <ProfilePic cropped={setImage} image={profile ? profile.photo : wafi} />
+              <ProfilePic cropped={setImage} image={profile ? profile.photo : pro} aspect={1/1} className="rounded-circle w-100" />
             </Col>
           </Col>
           <Col xs={12} md={6} className="p-0">
@@ -153,7 +163,8 @@ data.append("upload_preset", "w5rfzcjg");
             {user.position !== "Advisor" &&
               by !== "advisor" &&
               profile &&
-              profile.domain && (
+              // profile.domain &&
+               (
                 <Col xs={12} className="py-1 px-0">
                   <Col
                     className={`py-2 text-start px-3 rounded-3 ${style.inputField}`}
@@ -406,11 +417,8 @@ data.append("upload_preset", "w5rfzcjg");
             <Col
               className={`p-2 text-start rounded-3 d-flex justify-content-center ${style.inputField} ${style.heightFull}`}
             >
-              <img
-                src={image}
-                alt="profikjklle"
-                className={`${style.proof} w-100`}
-              />
+              <ProfilePic cropped={setProof} image={profile ? profile.govtid ? profile.govtid: id : id} aspect={2/1} 
+              className="w-100" />
             </Col>
           </Col>
           <Col className="m-0 p-0">

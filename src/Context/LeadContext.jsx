@@ -22,6 +22,7 @@ export const LeadProvider = ({ children }) => {
   const [placements, setPlacements] = useState(null);
   const [requests, setRequests] = useState(null);
   const [students, setStudents] = useState(null);
+  const [advisorLink, setAdvisorLink] = useState(null);
 
 
   //Create function
@@ -95,7 +96,8 @@ export const LeadProvider = ({ children }) => {
         }
       )
       .then((res) => {
-        setAdvisors(res.data);
+        setAdvisors(res.data.advisors);
+        setAdvisorLink(res.data.link.code)
       })
       .catch((err) => {
         console.log(err);
@@ -478,6 +480,7 @@ export const LeadProvider = ({ children }) => {
     //State functions
     setAdvisors,
     setAdvisorsNames,
+    setAdvisorLink,
     setGroups,
     setGroupDetails,
     setGroupLessers,
@@ -488,6 +491,7 @@ export const LeadProvider = ({ children }) => {
     //State variables
     advisors,
     advisorsNames,
+    advisorLink,
     groups,
     groupDetails,
     groupLessers,

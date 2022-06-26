@@ -282,7 +282,7 @@ export const AuthProvider = ({ children }) => {
     return res;
   };
 
-  const updateProfile = async (e) => {
+  const updateProfile = async (e, govtid) => {
     e.preventDefault();
     var domain = null;
     if (user.position == "Student") {
@@ -313,6 +313,7 @@ export const AuthProvider = ({ children }) => {
           experience: e.target.experience.value,
           company: e.target.company.value,
           designation: e.target.designation.value,
+          govtid: govtid,
         },
         {
           headers: {
