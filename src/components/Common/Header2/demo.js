@@ -63,16 +63,16 @@ export default function SwipeableTemporaryDrawer() {
 <>
 <Divider />
 
-    <Navs title ="Home" link="/lead" icon={<HomeIcon />}  />
-    <Navs title ="Batches" link="/lead/batch" icon={<BatchPredictionIcon  />}  />
-    <Navs title ="Domains" link="/lead/domain" icon={<DnsIcon />}  />
-    <Navs title ="Advisors" link="/lead/advisors" icon={<CastForEducationIcon />}  />
-    <Navs title ="Groups" link="/lead/groups" icon={<GroupIcon />}  />
-    <Navs title ="Students" link="/lead/students" icon={<SchoolIcon />}  />
-    <Navs title ="Requests" link="/lead/requests" icon={<QuestionMarkIcon />}  />
+    <Navs title ="Home" link="/lead" icon={<HomeIcon  />}  />
+    <Navs title ="Batches" link="/lead/batch" icon={<BatchPredictionIcon   />}  />
+    <Navs title ="Domains" link="/lead/domain" icon={<DnsIcon  />}  />
+    <Navs title ="Advisors" link="/lead/advisors" icon={<CastForEducationIcon  />}  />
+    <Navs title ="Groups" link="/lead/groups" icon={<GroupIcon  />}  />
+    <Navs title ="Students" link="/lead/students" icon={<SchoolIcon  />}  />
+    <Navs title ="Requests" link="/lead/requests" icon={<QuestionMarkIcon  />}  />
     <Divider />
-    <Navs title ="Payments" link="/lead/payments" icon={<CurrencyRupeeIcon />}  />
-    <Navs title ="Placements" link="/lead/placements" icon={<WorkspacePremiumIcon />}  />
+    <Navs title ="Payments" link="/lead/payments" icon={<CurrencyRupeeIcon  />}  />
+    <Navs title ="Placements" link="/lead/placements" icon={<WorkspacePremiumIcon  />}  />
 </>
          )}
 
@@ -80,11 +80,11 @@ export default function SwipeableTemporaryDrawer() {
             <>
     <Divider />
 
-    <Navs title ="Home" link="/advisor" icon={<HomeIcon />}  />
-    <Navs title ="Profile" link="/advisor/profile" icon={<AccountCircleIcon />}  />
-    <Navs title ="My students" link="/advisor/students" icon={<SchoolIcon />}  />
-    <Navs title ="My Work" link="/advisor/work" icon={<GroupIcon />}  />
-    <Navs title ="Students" link="/advisor/allStudents" icon={<SchoolIcon />}  />
+    <Navs title ="Home" link="/advisor" icon={<HomeIcon   />}  />
+    <Navs title ="Profile" link="/advisor/profile" icon={<AccountCircleIcon   />}  />
+    <Navs title ="My students" link="/advisor/students" icon={<SchoolIcon   />}  />
+    <Navs title ="My Work" link="/advisor/work" icon={<GroupIcon   />}  />
+    <Navs title ="Students" link="/advisor/allStudents" icon={<SchoolIcon   />}  />
     <Divider />
 
             </>
@@ -95,10 +95,10 @@ export default function SwipeableTemporaryDrawer() {
     <Divider />
 
     <Navs title ="Home" link="/" icon={<HomeIcon />}  />
-    <Navs title ="Profile" link="/profile" icon={<AccountCircleIcon />}  />
-    <Navs title ="My Tasks" link="/taskslist" icon={<TaskAltIcon />}  />
-    <Navs title ="My Payments" link="/payment" icon={<CurrencyRupeeIcon />}  />
-    <Navs title ="Leave application" link="/" icon={<TimeToLeaveIcon />}  />
+    <Navs title ="Profile" link="/profile" icon={<AccountCircleIcon   />}  />
+    <Navs title ="My Tasks" link="/taskslist" icon={<TaskAltIcon   />}  />
+    <Navs title ="My Payments" link="/payment" icon={<CurrencyRupeeIcon   />}  />
+    <Navs title ="Leave application" link="/" icon={<TimeToLeaveIcon   />}  />
     <Divider />
 
             </>
