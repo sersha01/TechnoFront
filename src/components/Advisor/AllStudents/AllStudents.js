@@ -11,7 +11,7 @@ import AuthContext from "../../../Context/AuthContext";
 const AllStudents = () => {
 
   const { setCurr_student, getNotifications } = useContext(AuthContext)
-  const { viewStudents, students } = useContext(LeadContext);
+  const { getStudents, students } = useContext(LeadContext);
   
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const AllStudents = () => {
   const [name, setName] = useState('');
 
   useEffect(() => {
-    viewStudents();
+    getStudents();
     getNotifications()
   }, []);
 

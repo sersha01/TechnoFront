@@ -7,10 +7,12 @@ import Button from "@mui/material/Button";
 
 import LeadContext from "../../../Context/LeadContext";
 import { useNavigate } from "react-router";
+import AuthContext from "../../../Context/AuthContext";
 
 const Advisors = () => {
 
-  const { getAdvisors, advisors, getProfile, deleteAdvisor, advisorLink, getNotifications } = useContext(LeadContext);
+  const { getAdvisors, advisors, getProfile, deleteAdvisor, advisorLink } = useContext(LeadContext);
+  const { getNotifications } = useContext(AuthContext);
 
   const navigate = useNavigate();
 

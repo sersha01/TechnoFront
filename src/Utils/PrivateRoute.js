@@ -49,7 +49,7 @@ export function PrivateRouteLead({ children }) {
   } else if (user.position === "Lead") {
     return children
   } else if (user.position === "Admin") {
-    return <Navigate to="/admin" />
+    return children
   } else if (user.position === "Advisor") {
     return <Navigate to="/advisor" />
   } else if (user.position === "Student") {

@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("authTokens", JSON.stringify(res.data));
         const position = jwt_decode(res.data.access).position;
         if (position === "Admin") {
-          navigate("/admin");
+          navigate("/lead");
         } else if (position === "Advisor") {
           navigate("/advisor");
         } else if (position === "Communication") {
