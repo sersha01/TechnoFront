@@ -125,6 +125,50 @@ export const AuthProvider = ({ children }) => {
     infoToast("Logged Out Successfully");
   };
 
+  const reset_password = async (email) => {
+    console.log(email);
+    await axios
+      .post("http://127.0.0.1:8000/user/password_reset/done/", { email }, { headers: { "Content-Type": "application/json" } })
+      .then((res) => {
+        infoToast("Password reset link has been sent to your email");
+      }).catch((err) => {
+        warningToast("Email not found");
+      }).finally(() => {
+        setTimeout(() => {
+          navigate("/signin");
+        }, 3000);
+      }
+      );
+  }
+
+  const reset_password_confirm = async (e,uid,token,new_password,re_new_password) => {
+    e.preventDefault();
+    const password = e.target.password.value;
+    const confirm_password = e.target.confirm_password.value;
+    const body = {
+      uid: uid,
+      token: token,
+      new_password: new_password,
+      re_new_password: re_new_password
+    }
+    if (password === confirm_password) {
+      await axios
+        .post("http://127.0.0.1:8000/user/reset_password_confirm", body , { headers: { "Content-Type": "application/json" } })
+        .then((res) => {
+          infoToast("Password changed successfully");
+        }).catch((err) => {
+          warningToast("Password not changed");
+        }).finally(() => {
+          setTimeout(() => {
+            navigate("/signin");
+          }, 3000);
+        }
+        );
+    } else {
+      warningToast("Password not changed");
+    }
+  }
+
   const getMyProfile = async () => {
     await axios
       .post(
@@ -915,6 +959,8 @@ export const AuthProvider = ({ children }) => {
     getLeads,
     getNotifications,
     notifications,
+    reset_password,
+    reset_password_confirm,
 
   };
   return (

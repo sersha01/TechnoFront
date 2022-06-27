@@ -8,7 +8,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Logo from "./login.svg";
 
 const Login = () => {
-  let { loginUser,setSwap, errUser } = useContext(AuthContext);
+  let { loginUser, setSwap, errUser } = useContext(AuthContext);
   return (
     <Container>
       <Row className="d-flex justify-content-center">
@@ -33,7 +33,6 @@ const Login = () => {
               }}
               className=" my-3"
             >
-              
               <div className="form-group">
                 <label>Username</label>
                 <input
@@ -61,7 +60,7 @@ const Login = () => {
               </div>
             </form>
             <Grid container>
-              <Grid item xs>
+              <Grid item xs className="d-flex justify-content-between">
                 <Link
                   href="#"
                   className="textdark"
@@ -72,9 +71,18 @@ const Login = () => {
                 >
                   Back
                 </Link>
+                <Link
+                  href="#"
+                  className="textdark"
+                  variant="body2"
+                  onClick={() => {
+                    setSwap("reset");
+                  }}
+                >
+                  {/* Reset password */}
+                </Link>
               </Grid>
-              <Grid item>
-              </Grid>
+              <Grid item></Grid>
             </Grid>
           </Box>
         </Col>
