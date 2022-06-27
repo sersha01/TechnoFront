@@ -110,7 +110,8 @@ function Payment() {
           
         </div>
       </Col>
-        <Pending/>
+      <Completed name={name} batch={batch}/>
+        
       </TabPanel>
       <TabPanel value={value} index={1}>
       <Col sm={12} className="d-flex justify-content-between">
@@ -140,7 +141,7 @@ function Payment() {
         </div>
         
       </Col>
-        <Completed/>
+        <Pending name={name} batch={batch}/>
       </TabPanel>
       
     </Box>

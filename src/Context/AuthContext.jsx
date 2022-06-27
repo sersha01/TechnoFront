@@ -43,6 +43,7 @@ export const AuthProvider = ({ children }) => {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [rent, setRent] = useState(false);
   const [shiftpay, setShiftpay] = useState(false);
+  const [finepay, setFinepay] = useState(false);
   const [upfront, setUpfront] = useState(false);
   const [leads, setLeads] = useState(null);
 
@@ -77,20 +78,28 @@ export const AuthProvider = ({ children }) => {
         const position = jwt_decode(res.data.access).position;
         if (position === "Admin") {
           navigate("/admin");
+          infoToast("Welcome Admin");
         } else if (position === "Advisor") {
           navigate("/advisor");
+          infoToast("Welcome Advisor");
         } else if (position === "Communication") {
           navigate("/");
+          infoToast("Welcome Communication Team");
         } else if (position === "Finance") {
           navigate("/finance");
+          infoToast("Welcome Finance Head");
         } else if (position === "Lead") {
           navigate("/lead");
+          infoToast("Welcome Lead");
         } else if (position === "Placement") {
           navigate("/placement");
+          infoToast("Welcome Placement Cell");
         } else if (position === "Student") {
           navigate("/");
+          infoToast("Welcome Student");
         } else if (position === "Outsider") {
           logoutUser();
+          warningToast("You are not authorized to access this page");
         }
       })
       .catch((err) => {
@@ -113,6 +122,7 @@ export const AuthProvider = ({ children }) => {
     setSwap("video");
     setSwap2("video");
     navigate("/signin");
+    infoToast("Logged Out Successfully");
   };
 
   const getMyProfile = async () => {
@@ -477,6 +487,31 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const [fineamount, setFineamount] = useState(0);
+  const [finestatus, setFinestatus] = useState(0);
+  const [fineid, setFineId] = useState(0);
+
+  const showFinePayment = async () => {
+    await axios
+      .get("http://127.0.0.1:8000/payment/FinePayments", {
+        headers: { Authorization: `Bearer ${authTokens.access}` },
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.status !== "Paid") {
+          setFineamount(res.data.amount);
+          setFinestatus(res.data.status);
+          setFineId(res.data.id);
+          setFinepay(true);
+        } else {
+          setFinepay(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const loadScript = (src) => {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -579,6 +614,9 @@ export const AuthProvider = ({ children }) => {
             } else if (bodyDatas.type === "BatchShift") {
               setShiftpay(false);
             }
+            else if (bodyDatas.type === "Fine") {
+              setFinepay(false);
+            }
           } else {
             if (bodyDatas.type === "Rent") {
               showPayment();
@@ -586,6 +624,9 @@ export const AuthProvider = ({ children }) => {
               showUpFront();
             } else if (bodyDatas.type === "BatchShift") {
               showShiftPayment();
+            }
+            else if (bodyDatas.type === "Fine") {
+              showFinePayment();
             }
           }
         })
@@ -671,12 +712,13 @@ export const AuthProvider = ({ children }) => {
     });
   }
 
-  const sendForm = async (id) => {
+  const sendForm = async (id,amount) => {
     await axios
       .post(
         "http://127.0.0.1:8000/payment/sendform",
         {
           id: id,
+          amount: amount,
         },
         {
           headers: { Authorization: `Bearer ${authTokens.access}` },
@@ -836,7 +878,11 @@ export const AuthProvider = ({ children }) => {
     showShiftPayment,
     showUpFront,
     upfrontamount,
+    finepay,
     upfrontstatus,
+    fineamount,
+    finestatus,
+    fineid,
     shiftamount,
     shiftstatus,
     loadScript,
@@ -845,6 +891,7 @@ export const AuthProvider = ({ children }) => {
     upfrontid,
     shiftid,
     myPayments,
+    showFinePayment,
     mypay,
     allpending,
     allPendingPayments,

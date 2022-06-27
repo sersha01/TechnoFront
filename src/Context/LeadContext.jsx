@@ -372,11 +372,12 @@ export const LeadProvider = ({ children }) => {
       });
   };
 
-  const studentManage = async (student, batch, domain) => {
+  const studentManage = async (student, batch, domain,fee) => {
     await axios.post("http://127.0.0.1:8000/student/manage/student", {
       'student':student,
       'batch':batch,
-      'domain':domain
+      'domain':domain,
+      'fee':fee,
     },{
       headers: { Authorization: `Bearer ${authTokens.access}` },
     }).then(res=>{

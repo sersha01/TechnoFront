@@ -68,17 +68,7 @@ const Pending = ({name, batch}) => {
                     </Col>
 
                     <Col sm={3} className="d-flex justify-content-end">
-                      {/* <Button
-                        variant="contained"
-                        color="primary"
-                        className="mx-1 sendform"
-                        onClick={() => {
-                          sendForm(pending.paymentid);
-                          infoToast("Form Sent to the Student");
-                        }}
-                      >
-                        Send Form
-                      </Button> */}
+                      
                       <AmountModal title="Send Form" action={sendForm} id={pending.id} />
                       <Button
                         variant="contained"
@@ -138,7 +128,7 @@ const AmountModal = ({ title, action, id }) => {
   const {infoToast} = useContext(StyleContext);
 
   const [open, setOpen] = useState(false);
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState(0);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -175,6 +165,8 @@ const AmountModal = ({ title, action, id }) => {
               style={{ width: "500px", height: "fit-content" }}
             >
                 <Row className="my-2">
+                  Since the student has failed to pay the amount on time, Please enter the fine amount the student should pay apart from the amount he has to pay.
+                  <br/><br/>You can leave it blank if the student has been given excuse for this time.<br/><br/>
                   <TextField
                     id="outlined-basic"
                     label="Amount"

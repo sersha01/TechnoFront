@@ -43,6 +43,7 @@ const AddTask = ({ title, value, form }) => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [domain, setDomain] = useState("");
+  const [fee, setFee] = useState("");
   const [advisor, setAdvisor] = useState("");
   const [location, setLocation] = useState("");
   const [batch, setBatch] = useState("");
@@ -106,7 +107,7 @@ const AddTask = ({ title, value, form }) => {
     }else if (value === "group") {
       updateGroup(groupDetails.id, name, advisor)
     }else if (value === "st_manage") {
-      studentManage(form, batch, domain)
+      studentManage(form, batch, domain, fee)
     } else if (value === "addnotifications") {
       createNotifications(form, type, content);
     } else if (value === "placement") {
@@ -240,6 +241,28 @@ const AddTask = ({ title, value, form }) => {
                             {domain.name}
                           </MenuItem>
                         )})}
+                    </Select>
+                  </FormControl>
+                  <FormControl className="my-4">
+                    <InputLabel id="demo-simple-select-autowidth-label">
+                      Fee type
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-autowidth-label"
+                      id="demo-simple-select-autowidth"
+                      value={fee}
+                      onChange={(e) => setFee(e.target.value)}
+                      autoWidth
+                      maxHeight="200px"
+                      label="Domain"
+                      MenuProps={MenuProps}
+                    >
+                          <MenuItem value="ISI" key="ISI">
+                            ISI
+                          </MenuItem>
+                          <MenuItem value="Upfront" key="Upfront">
+                            Upfront
+                          </MenuItem>
                     </Select>
                   </FormControl>
                 </Row>

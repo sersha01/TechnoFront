@@ -16,6 +16,7 @@ function Payment() {
     status,
     rent,
     shiftpay,
+    rentpay,
     upfront,
     showUpFront,
     showShiftPayment,
@@ -29,6 +30,11 @@ function Payment() {
     shiftid,
     myPayments,
     mypay,
+    finepay,
+    fineamount,
+    finestatus,
+    fineid,
+    showFinePayment,
   } = useContext(AuthContext);
 
   const {infoToast} = useContext(StyleContext);
@@ -60,6 +66,7 @@ function Payment() {
     showUpFront();
     showShiftPayment();
     myPayments();
+    showFinePayment();
   }, []);
 
   return (
@@ -95,9 +102,9 @@ function Payment() {
             </Col>
           </Row>
 
-          {btn === "True" && (
+          
             <Row className="mx-0 my-2 paybutton">
-              <Col xs={6}>
+              <Col xs={12}>
                 <Button
                   size="lg"
                   onClick={() => displayRazorpay(amount, "Rent", rentid)}
@@ -107,71 +114,9 @@ function Payment() {
                 </Button>
               </Col>
               
-              <Col xs={6}>
-                <Button
-                  size="lg"
-                  className={`w-100 ${style.btn}`}
-                  onClick={() => {
-                    setBtn("False");
-                  }}
-                >
-                  Both
-                </Button>
-              </Col>
+            
             </Row>
-          )}
-
-          {btn === "False" && (
-            <Row className="mx-0 amount">
-              <Col md={4} xs={6}>
-                <input
-                  type="text"
-                  className={`w-100 ps-2 pt-2 pb-3 textdark rounded-3 ${style.input}`}
-                  placeholder="Enter UPI Amount"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                />
-              </Col>
-              <Col md={4} xs={6}>
-                <input
-                  type="text"
-                  className={`w-100 ps-2 pt-2 pb-3 textdark rounded-3 ${style.input}`}
-                  placeholder="Enter Cash Amount"
-                  value={cash}
-                  onChange={(e) => setCash(e.target.value)}
-                />
-              </Col>
-              <Col className="row m-0" md={4} xs={12}>
-                <Col className="ps-0 pe-1" md={6} xs={6}>
-                  <Button
-                    size="lg"
-                    onClick={() => {
-                      if (price + cash > amount) {
-                        infoToast("Enter a value lower the amount");
-                      } else {
-                        displayRazorpay(price + cash, "Rent", rentid);
-                        setBtn("True");
-                      }
-                    }}
-                    className={`w-100 ${style.btn}`}
-                  >
-                    Submit
-                  </Button>
-                </Col>
-                <Col className="ps-1 pe-0" md={6} xs={6}>
-                  <Button
-                    size="lg"
-                    className={`w-100 ${style.btnCancel}`}
-                    onClick={() => {
-                      setBtn("True");
-                    }}
-                  >
-                    Cancel
-                  </Button>
-                </Col>
-              </Col>
-            </Row>
-          )}
+          
         </Col>
       )}
       {upfront && (
@@ -201,9 +146,9 @@ function Payment() {
             </Col>
           </Row>
 
-          {upfrontbtn === "True" && (
+          
             <Row className="mx-0 my-2 paybutton">
-              <Col xs={4}>
+              <Col xs={12}>
                 <Button
                   size="lg"
                   onClick={() =>
@@ -214,82 +159,8 @@ function Payment() {
                   UPI
                 </Button>
               </Col>
-              <Col xs={4}>
-                <Button size="lg" onClick={()=>{
-                  infoToast("Payment will be successfull when lead confirms your payment")
-                }} className={`w-100 ${style.btn}`}>
-                  Cash
-                </Button>
-              </Col>
-              <Col xs={4}>
-                <Button
-                  size="lg"
-                  className={`w-100 ${style.btn}`}
-                  onClick={() => {
-                    setUpfrontBtn("False");
-                  }}
-                >
-                  Both
-                </Button>
-              </Col>
             </Row>
-          )}
-
-          {upfrontbtn === "False" && (
-            <Row className="mx-0 amount">
-              <Col md={4} xs={6}>
-                <input
-                  type="text"
-                  className={`w-100 ps-2 pt-2 pb-3 textdark rounded-3 ${style.input}`}
-                  placeholder="Enter UPI Amount"
-                  value={upfrontprice}
-                  onChange={(e) => setUpfrontPrice(e.target.value)}
-                />
-              </Col>
-              <Col md={4} xs={6}>
-                <input
-                  type="text"
-                  className={`w-100 ps-2 pt-2 pb-3 textdark rounded-3 ${style.input}`}
-                  placeholder="Enter Cash Amount"
-                  value={upfrontcash}
-                  onChange={(e) => setUpfrontCash(e.target.value)}
-                />
-              </Col>
-              <Col className="row m-0" md={4} xs={12}>
-                <Col className="ps-0 pe-1" md={6} xs={6}>
-                  <Button
-                    size="lg"
-                    onClick={() => {
-                      if (upfrontprice + upfrontcash > upfrontamount) {
-                        infoToast("Amount is greater than the upfront amount");
-                      } else {
-                        displayRazorpay(
-                          upfrontprice + upfrontcash,
-                          "Upfront",
-                          upfrontid
-                        );
-                        setUpfrontBtn("True");
-                      }
-                    }}
-                    className={`w-100 ${style.btn}`}
-                  >
-                    Submit
-                  </Button>
-                </Col>
-                <Col className="ps-1 pe-0" md={6} xs={6}>
-                  <Button
-                    size="lg"
-                    className={`w-100 ${style.btnCancel}`}
-                    onClick={() => {
-                      setUpfrontBtn("True");
-                    }}
-                  >
-                    Cancel
-                  </Button>
-                </Col>
-              </Col>
-            </Row>
-          )}
+         
         </Col>
       )}
       {shiftpay && (
@@ -319,9 +190,9 @@ function Payment() {
             </Col>
           </Row>
 
-          {shiftbtn === "True" && (
+          
             <Row className="mx-0 my-2 paybutton">
-              <Col xs={4}>
+              <Col xs={12}>
                 <Button
                   size="lg"
                   onClick={() =>
@@ -332,82 +203,53 @@ function Payment() {
                   UPI
                 </Button>
               </Col>
-              <Col xs={4}>
-                <Button size="lg" onClick={()=>{
-                  infoToast("Payment will be successfull when lead confirms your payment")
-                }} className={`w-100 ${style.btn}`}>
-                  Cash
-                </Button>
-              </Col>
-              <Col xs={4}>
-                <Button
-                  size="lg"
-                  className={`w-100 ${style.btn}`}
-                  onClick={() => {
-                    setShiftBtn("False");
-                  }}
-                >
-                  Both
-                </Button>
-              </Col>
             </Row>
-          )}
-
-          {shiftbtn === "False" && (
-            <Row className="mx-0 amount">
-              <Col md={4} xs={6}>
-                <input
-                  type="text"
-                  className={`w-100 ps-2 pt-2 pb-3 textdark rounded-3 ${style.input}`}
-                  placeholder="Enter UPI Amount"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                />
-              </Col>
-              <Col md={4} xs={6}>
-                <input
-                  type="text"
-                  className={`w-100 ps-2 pt-2 pb-3 textdark rounded-3 ${style.input}`}
-                  placeholder="Enter Cash Amount"
-                  value={cash}
-                  onChange={(e) => setCash(e.target.value)}
-                />
-              </Col>
-              <Col className="row m-0" md={4} xs={12}>
-                <Col className="ps-0 pe-1" md={6} xs={6}>
-                  <Button
-                    size="lg"
-                    className={`w-100 ${style.btn}`}
-                    onClick={() => {
-                      if (price + cash > shiftamount) {
-                        infoToast("Amount is greater than the shift amount");
-                      } else {
-                        displayRazorpay(price + cash, "BatchShift", shiftid);
-                        setBtn("True");
-                      }
-                    }}
-                  >
-                    Submit
-                  </Button>
-                </Col>
-                <Col className="ps-1 pe-0" md={6} xs={6}>
-                  <Button
-                    size="lg"
-                    className={`w-100 ${style.btnCancel}`}
-                    onClick={() => {
-                      setShiftBtn("True");
-                    }}
-                  >
-                    Cancel
-                  </Button>
-                </Col>
-              </Col>
-            </Row>
-          )}
+         
         </Col>
       )}
-
-      <MyPays></MyPays>
+      {finepay && (
+        <Col xs={12} className={`rounded-3 p-3  ${style.crDiv}`}>
+          <Row className="m-0">
+            <Col xs={4} className={`text-start ps-md-4`}>
+              <h5 className={`${style.crMonth}`}>
+                {month} {year}
+              </h5>
+              <h3 className={`${style.crCash}`}>{formatter.format(fineamount)}</h3>
+            </Col>
+            <Col xs={8} className={`text-start d-flex ps-md-4`}>
+              <Col xs={6} className={`text-start ps-md-4`}>
+                <h5 className={`${style.crMonth}`}>Last Date:</h5>
+                <h5 className={`${style.lastDate}`}>
+                  03/{month}/{year}
+                </h5>
+                <div className="mt-3">
+                  <h5 className={`${style.crMonth}`}>Type:</h5>
+                  <h5 className={`${style.lastDate} textinfo`}>Fine Amount</h5>
+                </div>
+              </Col>
+              <Col xs={6} className={`text-start ps-md-4`}>
+                <h5 className={`${style.crMonth}`}>Status: </h5>
+                <h5 className={` ${style.status}`}>{finestatus}</h5>
+              </Col>
+            </Col>
+          </Row>
+            <Row className="mx-0 my-2 paybutton">
+              <Col xs={12}>
+                <Button
+                  size="lg"
+                  onClick={() =>
+                    displayRazorpay(fineamount, "Fine", fineid)
+                  }
+                  className={`w-100 ${style.btn}`}
+                >
+                  UPI
+                </Button>
+              </Col>
+            </Row>
+         
+        </Col>
+      )}
+      <MyPays/>
     </Row>
   );
 }
