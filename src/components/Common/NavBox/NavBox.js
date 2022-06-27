@@ -28,55 +28,54 @@ function NavBox() {
 
 
   return (
-    <Row className="m-0 rounded-3 py-4">
+<Row className="m-0 rounded-3 py-4">
 
+  {(user.position === 'Lead' || user.position === 'Admin' || user.position === 'Placement' || user.position === 'Finance') && 
+    (<Navs title ="Home" link="/lead" icon={<HomeIcon   />}  />)}
 
-{(user.position === 'Lead' || user.position === 'Admin') && (
-<>
-
-    <Navs title ="Home" link="/lead" icon={<HomeIcon   />}  />
+  {(user.position === 'Lead' || user.position === 'Admin') && 
+    (<>
     <Navs title ="Batches" link="/lead/batch" icon={<BatchPredictionIcon    />}  />
     <Navs title ="Domains" link="/lead/domain" icon={<DnsIcon   />}  />
     <Navs title ="Advisors" link="/lead/advisors" icon={<CastForEducationIcon   />}  />
     <Navs title ="Groups" link="/lead/groups" icon={<GroupIcon   />}  />
     <Navs title ="Students" link="/lead/students" icon={<SchoolIcon   />}  />
     <Navs title ="Requests" link="/lead/requests" icon={<QuestionMarkIcon   />}  />
-    <Navs title ="Payments" link="/lead/payments" icon={<CurrencyRupeeIcon   />}  />
-    <Navs title ="Placements" link="/lead/placements" icon={<WorkspacePremiumIcon   />}  />
-</>
-         )}
+    </>)}
 
-    {user.position === 'Admin' && (
-      <>
-        <Navs title ="Leads" link="/admin" icon={<HomeIcon   />}  />
-      </>
-    )}
+  {(user.position === 'Lead' || user.position === 'Admin' || user.position === 'Finance') && 
+    (<Navs title ="Payments" link="/lead/payments" icon={<CurrencyRupeeIcon   />}  />)}
 
-          {user.position === 'Advisor' && (
-            <>
+  {(user.position === 'Lead' || user.position === 'Admin' || user.position === 'Placement') && 
+    (<Navs title ="Placements" link="/lead/placements" icon={<WorkspacePremiumIcon   />}  />)}
 
+  {(user.position === 'Admin') && 
+    (<Navs title ="Leads" link="/admin" icon={<HomeIcon   />}  />)}
+
+  {(user.position === 'Placement') && 
+    (<Navs title ="Students" link="/placement/students" icon={<HomeIcon   />}  />)}
+
+
+  {user.position === 'Advisor' &&
+  (<>
     <Navs title ="Home" link="/advisor" icon={<HomeIcon    />}  />
     <Navs title ="Profile" link="/advisor/profile" icon={<AccountCircleIcon   />}  />
     <Navs title ="My students" link="/advisor/students" icon={<SchoolIcon   />}  />
     <Navs title ="My Work" link="/advisor/work" icon={<GroupIcon   />}  />
     <Navs title ="All Students" link="/advisor/allStudents" icon={<SchoolIcon   />}  />
     <Navs title ="Location" link="/advisor/location" icon={<SchoolIcon   />}  />
+  </>)}
 
-            </>
-          )}
 
-          {user.position === 'Student' && (
-            <>
-
+  {user.position === 'Student' &&
+  (<>
     <Navs title ="Home" link="/" icon={<HomeIcon  />}  />
     <Navs title ="Profile" link="/profile" icon={<AccountCircleIcon   />}  />
     <Navs title ="My Tasks" link="/taskslist" icon={<TaskAltIcon   />}  />
     <Navs title ="My Payments" link="/payment" icon={<CurrencyRupeeIcon   />}  />
+  </>)}
 
-            </>
-          )}
-
-    </Row>
+</Row>
   );
 }
 
