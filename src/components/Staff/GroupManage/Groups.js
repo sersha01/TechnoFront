@@ -6,16 +6,19 @@ import Button from "@mui/material/Button";
 import AddTask from "../../Staff/AddTask/AddTask";
 import style from "./Groups.module.css";
 import LeadContext from "../../../Context/LeadContext";
+import AuthContext from "../../../Context/AuthContext";
 
 const Groups = () => {
 
   const { deleteGroup, groupDetails, getGroupLess, groupLessers, addInGroup, rmFromGroup } = useContext(LeadContext);
+  const { getNotifications } = useContext(AuthContext);
 
   const [add, setAdd] = useState("dont");
 
   const handleShow = () => {
     getGroupLess();
     setAdd("show");
+    getNotifications()
   };
 
   return (

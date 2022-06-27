@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import './Profile.module.css';
 import style from "./Profile.module.css";
 import Button from "@mui/material/Button";
-import { useContext, useState } from "react";
 import AuthContext from "../../../Context/AuthContext";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
@@ -15,12 +14,13 @@ import StyleContext from "../../../Context/StyleContext";
 
 const PlacementProfile = ({by}) => {
 
-    const { profile, getMyProfile, updateProfile, user, getDomains, domains } = useContext(AuthContext);
+    const { profile, getMyProfile, updateProfile, user, getDomains, domains, getNotifications } = useContext(AuthContext);
   const {infoToast,errorToast } = useContext(StyleContext);
-
   const [image, setImage] = useState(null);
 
-
+  useEffect(() => {
+    getNotifications()
+  },[])
 
   return (
     <>

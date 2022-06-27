@@ -35,6 +35,7 @@ function Payment() {
     finestatus,
     fineid,
     showFinePayment,
+    getNotifications,
   } = useContext(AuthContext);
 
   const {infoToast} = useContext(StyleContext);
@@ -67,6 +68,7 @@ function Payment() {
     showShiftPayment();
     myPayments();
     showFinePayment();
+    getNotifications()
   }, []);
 
   return (

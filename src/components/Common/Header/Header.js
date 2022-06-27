@@ -8,7 +8,7 @@ import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 // import style from Header.module.css
 import style from "./Header.module.css";
 import light from "./light.jpg";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../Context/AuthContext";
 import Button from "@mui/material/Button";
 import StyleContext from "../../../Context/StyleContext";

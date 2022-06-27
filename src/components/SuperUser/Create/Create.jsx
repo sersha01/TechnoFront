@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 
 const AdminCreate = () => {
-  const { createLead, allLocations, getLocations } = useContext(AuthContext);
+  const { createLead, allLocations, getLocations, getNotifications } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,6 +15,7 @@ const AdminCreate = () => {
 
   useEffect(() => {
     getLocations();
+    getNotifications()
   },[])
 
   return (

@@ -53,6 +53,7 @@ const schema = yup.object().shape({
 });
 
 function Profile({ by }) {
+<<<<<<< HEAD
   const {
     profile,
     getMyProfile,
@@ -63,6 +64,10 @@ function Profile({ by }) {
     backendUpdate,
   } = useContext(AuthContext);
   const { infoToast, errorToast } = useContext(StyleContext);
+=======
+  const { profile, getMyProfile, updateProfile, user, getDomains, domains, backendUpdate, getNotifications } = useContext(AuthContext);
+  const {infoToast,errorToast } = useContext(StyleContext);
+>>>>>>> e5d08081823b19e1509728bf90b87b1c8a30ff0f
 
   const [image, setImage] = useState(null);
   const [proof, setProof] = useState(null);
@@ -82,6 +87,7 @@ function Profile({ by }) {
     if (user.position !== "Lead") {
       getMyProfile();
     }
+    getNotifications()
   }, []);
 
   const uploadImage = () => {

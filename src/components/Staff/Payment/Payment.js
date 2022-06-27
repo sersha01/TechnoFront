@@ -52,7 +52,7 @@ function a11yProps(index) {
 
 function Payment() {
   const { allPendingPayments, allCompletedPayments } = useContext(AuthContext);
- 
+  const { getNotifications } = useContext(AuthContext);
   const [batch, setBatch] = useState('');
   const [name, setName] = useState('');
 
@@ -65,6 +65,7 @@ function Payment() {
   useEffect(() => {
     allPendingPayments();
     allCompletedPayments();
+    getNotifications()
   }, []);
 
   const [active, setActive] = useState("Completed");

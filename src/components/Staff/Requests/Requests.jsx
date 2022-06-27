@@ -21,6 +21,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 // import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 //////////////////////////////////////////
+import AuthContext from "../../../Context/AuthContext";
 
 
 function TabPanel(props) {
@@ -59,7 +60,7 @@ function a11yProps(index) {
 const Requests = () => {
 
   const { getRequests, requests, terminateAccept, terminateReject, shiftAccept, shiftReject } = useContext(LeadContext);
-
+  const { getNotifications } = useContext(AuthContext);
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
@@ -68,6 +69,7 @@ const Requests = () => {
 
     useEffect(() => {
       getRequests();
+      getNotifications()
     },[])
 
   return (

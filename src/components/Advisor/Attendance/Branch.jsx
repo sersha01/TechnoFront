@@ -6,11 +6,10 @@ import AuthContext from '../../../Context/AuthContext';
 
 const Branch = () => {
 
-    const { getBranch, allBranches, setBranchid } =
-    useContext(AuthContext);
-
+    const { getBranch, allBranches, setBranchid, getNotifications } = useContext(AuthContext);
   useEffect(() => {
     getBranch();
+    getNotifications()
   }, []);
 
   return (

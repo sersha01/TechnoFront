@@ -83,6 +83,27 @@ export const LeadProvider = ({ children }) => {
       });
   };
 
+  const createPlacement = async (student, name, location, designation, LPA, count) => {
+    console.log(student, name, location, designation, LPA, count);
+    await axios.post("http://127.0.0.1:8000/student/create/placement",
+        {
+          student: student,
+          name: name,
+          location: location,
+          designation: designation,
+          lpa: LPA,
+          count: count,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }).then((res) => {
+          console.log(res.data);
+          getPlacements();
+        }).catch((err) => {
+          console.log(err);
+        })
+  }
+
   //Read function
   
 
@@ -203,7 +224,7 @@ export const LeadProvider = ({ children }) => {
       });
   }
 
-  const viewStudents = async () => {
+  const getStudents = async () => {
     await axios.get("http://127.0.0.1:8000/student/view/students",
         {
           headers: { Authorization: `Bearer ${authTokens.access}` },
@@ -382,7 +403,7 @@ export const LeadProvider = ({ children }) => {
       headers: { Authorization: `Bearer ${authTokens.access}` },
     }).then(res=>{
       console.log(res.data)
-      viewStudents();
+      getStudents();
     }).catch(err=>{
       console.log(err.response.data);
       console.log(err)
@@ -446,6 +467,7 @@ export const LeadProvider = ({ children }) => {
     createBatch,
     createDomain,
     createGroup,
+    createPlacement,
 
     //Read
     getAdvisors,
@@ -456,7 +478,7 @@ export const LeadProvider = ({ children }) => {
     getPlacements,
     getProfile,
     getRequests,
-    viewStudents,
+    getStudents,
 
     //Update
     updateBatch,

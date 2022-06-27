@@ -11,7 +11,7 @@ import {Link} from 'react-router-dom'
 
 function Notification() {
 
-  const { notification,user_is } = useContext(AuthContext);
+  const { notifications, user } = useContext(AuthContext);
 
   return (
     <Row className="m-0 rounded-3 py-4  ">
@@ -19,7 +19,7 @@ function Notification() {
         <h5 className="ms-3 mb-3">Notifications <FaBell/></h5>
       </Col>
 
-      {notification && notification.slice(0,2).map((notification, index) => {
+      {notifications && notifications.slice(0,2).map((notification, index) => {
         return (
           <Col
             className={`text-center ${style.hoverdiv}  cp pt-4`}
@@ -58,7 +58,7 @@ function Notification() {
       >
         <Row className="m-0">
           <Col className="text-center pb-3" xs={12}>
-            <Link to={`${ user_is==="student" ? "/notifications" : `/${user_is}/notifications`}`}><h6 className="m-0">See all</h6></Link>
+            <Link to={`${ user.position ==="Student" ? "/notifications" : `/${user.position}/notifications`}`}><h6 className="m-0">See all</h6></Link>
           </Col>
         </Row>
       </Col>

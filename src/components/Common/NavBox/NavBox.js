@@ -31,7 +31,7 @@ function NavBox() {
     <Row className="m-0 rounded-3 py-4">
 
 
-{user.position === 'Lead' && (
+{(user.position === 'Lead' || user.position === 'Admin') && (
 <>
 
     <Navs title ="Home" link="/lead" icon={<HomeIcon   />}  />
@@ -45,6 +45,12 @@ function NavBox() {
     <Navs title ="Placements" link="/lead/placements" icon={<WorkspacePremiumIcon   />}  />
 </>
          )}
+
+    {user.position === 'Admin' && (
+      <>
+        <Navs title ="Leads" link="/admin" icon={<HomeIcon   />}  />
+      </>
+    )}
 
           {user.position === 'Advisor' && (
             <>

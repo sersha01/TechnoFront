@@ -16,7 +16,7 @@ import AddTask from "../AddTask/AddTask";
 
 const Work = () => {
 
-  const { setCurr_student, curr_group } = useContext(AuthContext);
+  const { setCurr_student, curr_group, getNotifications } = useContext(AuthContext);
   const { myGroupDetails, getMyGroupDetails } = useContext(AdvisorContext);
   
   const navigate = useNavigate();
@@ -25,6 +25,7 @@ const Work = () => {
 
   useEffect(() => {
     getMyGroupDetails(curr_group)
+    getNotifications()
   },[])
 
   return (

@@ -77,8 +77,8 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("authTokens", JSON.stringify(res.data));
         const position = jwt_decode(res.data.access).position;
         if (position === "Admin") {
-          navigate("/admin");
-          infoToast("Welcome Admin");
+          navigate("/lead");
+          infoToast("Welcome admin , Its Miras and Shafeeq of batch 20 who did this web application, Kindly assure our high salary placements");
         } else if (position === "Advisor") {
           navigate("/advisor");
           infoToast("Welcome Advisor");
@@ -340,22 +340,15 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
-  const get_data = async () => {
-    axios
-      .post(
-        "http://127.0.0.1:8000/don/",
-        {
-          username: "username",
-        },
-        { headers: { Authorization: `Bearer ${authTokens.access}` } }
-      )
-      .then(function (response) {
-        console.log(response.data);
-        console.log(response);
+  const [notifications, setNotifications] = useState([]);
+  const getNotifications = async () => {
+    axios.post("http://127.0.0.1:8000/user/view/notifications",{},{ headers: { Authorization: `Bearer ${authTokens.access}` } }
+      ).then((res) => {
+        console.log(res.data);
+        setNotifications(res.data);
+      }).catch((err) => {
+        console.log(err);
       })
-      .catch(function (response) {
-        console.log(response);
-      });
   };
 
   const getNotificationsTypes = async () => {
@@ -835,7 +828,6 @@ export const AuthProvider = ({ children }) => {
     getDomains,
     loginUser,
     logoutUser,
-    get_data,
     studentTasks,
     studentManifest,
     domains,
@@ -921,6 +913,8 @@ export const AuthProvider = ({ children }) => {
     createLead,
     deleteLead,
     getLeads,
+    getNotifications,
+    notifications,
 
   };
   return (
