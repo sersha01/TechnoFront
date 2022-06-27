@@ -32,6 +32,7 @@ const AddTask = ({ title, value, form }) => {
     createBatch,
     createDomain,
     createGroup,
+    createPlacement,
     getAdvisors,
     getStudents,
     studentManage,
@@ -50,6 +51,7 @@ const AddTask = ({ title, value, form }) => {
   const [content, setContent] = useState("");
   const [designation, setDesignation] = useState("");
   const [LPA, setLPA] = useState("");
+  const [student, setStudent] = useState("");
   const [count, setCount] = useState(0);
 
   const handleClickOpen = () => {
@@ -65,6 +67,7 @@ const AddTask = ({ title, value, form }) => {
     } else if (value === "addnotifications") {
       getNotificationsTypes();
     } else if (value === "placement") {
+      getDomains();
       getBatches();
       getStudents();
     }
@@ -88,6 +91,16 @@ const AddTask = ({ title, value, form }) => {
     },
   };
 
+  const findDomainName = (id) => {
+    let domainName = "";
+    domains.map((domain) => {
+      if (domain.id === id) {
+        domainName = domain.name;
+      }
+    });
+    return domainName;
+  }
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -110,7 +123,7 @@ const AddTask = ({ title, value, form }) => {
     } else if (value === "addnotifications") {
       createNotifications(form, type, content);
     } else if (value === "placement") {
-      alert("placement");
+      createPlacement(student, name, location, designation, LPA, count);
     }
       setOpen(false); 
     }
@@ -455,7 +468,7 @@ const AddTask = ({ title, value, form }) => {
               )}
               {value === "placement" && (
                 <Row className="my-2">
-                  <FormControl className="my-4">
+                  <FormControl className="my-2">
                     <InputLabel id="demo-simple-select-autowidth-label">
                       Batch
                     </InputLabel>
@@ -478,7 +491,7 @@ const AddTask = ({ title, value, form }) => {
                         )})}
                     </Select>
                   </FormControl>
-                  <FormControl className="my-4">
+                  <FormControl className="my-2">
                     <InputLabel id="demo-simple-select-autowidth-label">
                       Domain
                     </InputLabel>
@@ -492,9 +505,32 @@ const AddTask = ({ title, value, form }) => {
                       maxHeight="200px"
                       MenuProps={MenuProps}
                     >
+                      {domains &&
+                        domains.map((domain) =>{
+                          return (
+                          <MenuItem key={domain.id} value={domain.id}>
+                            {domain.name}
+                          </MenuItem>
+                        )})}
+                    </Select>
+                  </FormControl>
+                  <FormControl className="my-2">
+                    <InputLabel id="demo-simple-select-autowidth-label">
+                      Student
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-autowidth-label"
+                      id="demo-simple-select-autowidth"
+                      value={student}
+                      onChange={(e) => setStudent(e.target.value)}
+                      autoWidth
+                      label="Student name"
+                      maxHeight="200px"
+                      MenuProps={MenuProps}
+                    >
                       {students &&
                         students.map((student) =>{
-                          if ((batch !== null && batch === student.batch) || batch === null ) {
+                          if ((batch !== null && domain !== null && batch === student.batch && findDomainName(domain) === student.domain)) {
                           return (
                           <MenuItem key={student.id} value={student.id}>
                             {student.name}
@@ -504,11 +540,11 @@ const AddTask = ({ title, value, form }) => {
                   </FormControl>
                   <TextField
                     id="outlined-basic"
-                    label="Name"
+                    label="Company Name"
                     variant="outlined"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Enter name here.."
+                    placeholder="Enter company name here.."
                     className="my-2"
                   />
                   <TextField
@@ -517,16 +553,16 @@ const AddTask = ({ title, value, form }) => {
                     variant="outlined"
                     value={designation}
                     onChange={(e) => setDesignation(e.target.value)}
-                    placeholder="Enter name here.."
+                    placeholder="Enter designation here.."
                     className="my-2"
                   />
                   <TextField
                     id="outlined-basic"
-                    label="Designation"
+                    label="LPA"
                     variant="outlined"
                     value={LPA}
                     onChange={(e) => setLPA(e.target.value)}
-                    placeholder="Enter name here.."
+                    placeholder="Enter LPA here.."
                     className="my-2"
                   />
                   <TextField
@@ -535,7 +571,7 @@ const AddTask = ({ title, value, form }) => {
                     variant="outlined"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
-                    placeholder="Enter name here.."
+                    placeholder="Enter location here.."
                     className="my-2"
                   />
                   <TextField
@@ -544,7 +580,7 @@ const AddTask = ({ title, value, form }) => {
                     variant="outlined"
                     value={count}
                     onChange={(e) => setCount(e.target.value)}
-                    placeholder="Enter name here.."
+                    placeholder="Number of placements"
                     className="my-2"
                   />
                 </Row>

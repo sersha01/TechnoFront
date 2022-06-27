@@ -14,13 +14,12 @@ const AdminHome = () => {
 
   return (
     <>
-      <div className="container-fluid p-0 m-0 " style={{ height: "100vh" }}>
+      <div className="container-fluid p-0 m-0 ">
 
-        <div className="container" style={{ marginTop: "100px" }}>
+        <div className="container">
           <table
             className="table text-center"
             style={{
-              marginTop: "150px",
               borderRadius: "2px",
               boxShadow: "rgba(100, 100, 111, 0.4) 0px 7px 29px 0px",
             }}
@@ -42,7 +41,7 @@ const AdminHome = () => {
                 leads.map((lead, index) => {
                   return (
                     <tr key={index}>
-                      <th scope="row">{lead.id}</th>
+                      <th scope="row">#{index+1}</th>
                       <td>{lead.name}</td>
                       <td>{lead.user.username}</td>
                       <td className="d-flex justify-content-center">
