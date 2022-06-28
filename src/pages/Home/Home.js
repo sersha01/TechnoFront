@@ -7,6 +7,7 @@ import Login from "./Login";
 import Signup from "./Signup";
 import AuthContext from "../../Context/AuthContext";
 import Header from "../../components/Common/Header/Header";
+import Reset from "./Reset";
 
 const Home = () => {
   let { swap, swap2, setSwap, setSwap2 } = useContext(AuthContext);
@@ -35,6 +36,9 @@ const Home = () => {
                 {swap === "login" && (
                   <Login setSwap={setSwap} setSwap2={setSwap2} />
                 )}
+                {swap === "reset" && (
+                  <Reset setSwap={setSwap} setSwap2={setSwap2} />
+                )}
               </Col>
               <Col md={5}>
                 <br />
@@ -58,9 +62,8 @@ const Home = () => {
                 <br />
 
                 <div className="d-flex">
-                  {" "}
                   <Button
-                    className="bgdark accordion-body mx-2"
+                    className="bgdark accordion-body mx-2 textlight p-2 px-5 "
                     variant="contained"
                     onClick={() => {
                       if (swap === "video") {
@@ -70,7 +73,7 @@ const Home = () => {
                       }
                     }}
                   >
-                    Sign in to the Console
+                    <b>Sign in to the Console</b>
                   </Button>
                 </div>
 

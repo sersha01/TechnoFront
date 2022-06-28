@@ -152,7 +152,11 @@ const AddTask = ({ title, value, form }) => {
               style={{ width: "500px", height: "fit-content" }}
             >
               {value === "addnotifications" && (
+                 
                 <Row className="my-2">
+                  Enter the details accordingly to create a new notification.
+                 <br></br>
+                 <br></br>
                   <FormControl className="my-4">
                     <InputLabel id="demo-simple-select-autowidth-label">
                       Type
@@ -196,19 +200,26 @@ const AddTask = ({ title, value, form }) => {
 
               {value === "domain" && (
                 <Row className="my-2">
+                  Enter the domain name here to create a new domain.
+                 <br></br>
+                 <br></br>
                   <TextField
                     id="outlined-basic"
                     label="Domain name"
                     variant="outlined"
                     value={domain}
                     onChange={(e) => setDomain(e.target.value)}
-                    placeholder="Enter domain name here"
+                    placeholder="Domain name"
                   />
                 </Row>
               )}
 
               {value === "st_manage" && (
                 <Row className="my-2">
+                  Kindly select all the fields to update the student details.
+                  <br></br>
+                  <br></br>
+
                   <FormControl className="my-1">
                     <InputLabel id="demo-simple-select-autowidth-label">
                       Batch
@@ -219,6 +230,7 @@ const AddTask = ({ title, value, form }) => {
                       autoWidth
                       maxHeight="200px"
                       value={batch}
+                      required
                       onChange={(e) => {
                         setBatch(e.target.value);
                       }}
@@ -234,7 +246,7 @@ const AddTask = ({ title, value, form }) => {
                         )})}
                     </Select>
                   </FormControl>
-                  <FormControl className="my-4">
+                  <FormControl className="my-1">
                     <InputLabel id="demo-simple-select-autowidth-label">
                       Domain
                     </InputLabel>
@@ -242,6 +254,7 @@ const AddTask = ({ title, value, form }) => {
                       labelId="demo-simple-select-autowidth-label"
                       id="demo-simple-select-autowidth"
                       value={domain}
+                      required
                       onChange={(e) => setDomain(e.target.value)}
                       autoWidth
                       maxHeight="200px"
@@ -257,7 +270,7 @@ const AddTask = ({ title, value, form }) => {
                         )})}
                     </Select>
                   </FormControl>
-                  <FormControl className="my-4">
+                  <FormControl className="my-1">
                     <InputLabel id="demo-simple-select-autowidth-label">
                       Fee type
                     </InputLabel>
@@ -267,6 +280,7 @@ const AddTask = ({ title, value, form }) => {
                       value={fee}
                       onChange={(e) => setFee(e.target.value)}
                       autoWidth
+                      required
                       maxHeight="200px"
                       label="Domain"
                       MenuProps={MenuProps}
@@ -283,6 +297,9 @@ const AddTask = ({ title, value, form }) => {
               )}
               {value === "updateDomain" && (
                 <Row className="my-2">
+                  Enter the domain name here to update the domain.
+                 <br></br>
+                 <br></br>
                   <TextField
                     id="outlined-basic"
                     label="Domain name"
@@ -295,6 +312,9 @@ const AddTask = ({ title, value, form }) => {
               )}
               {value === "batch" && (
                 <Row className="my-2">
+                  Enter the details necessary here to create a new batch.
+                 <br></br>
+                 <br></br>
                   <TextField
                     id="outlined-basic"
                     label="Batch name"
@@ -348,6 +368,9 @@ const AddTask = ({ title, value, form }) => {
               )}
               {value === "updateBatch" && (
                 <Row className="my-2">
+                  Enter the details necessary here to update the batch.
+                  <br></br>
+                  <br></br>
                   <FormControl className="my-4">
                     <InputLabel id="demo-simple-select-autowidth-label">
                       Advisor
@@ -375,6 +398,9 @@ const AddTask = ({ title, value, form }) => {
               )}
               {value === "group" && (
                 <Row className="my-2">
+                  Enter the details necessary here to create a new group.
+                  <br></br>
+                  <br></br>
                   <TextField
                     id="outlined-basic"
                     label="Name"
@@ -410,6 +436,9 @@ const AddTask = ({ title, value, form }) => {
               )}
               {value === "addgroup" && (
                 <Row className="my-2">
+                  Enter the details necessary here to add a new group.
+                  <br></br>
+                  <br></br>
                   <FormControl className="my-4">
                     <InputLabel id="demo-simple-select-autowidth-label">
                       Batch
@@ -492,6 +521,9 @@ const AddTask = ({ title, value, form }) => {
               )}
               {value === "placement" && (
                 <Row className="my-2">
+                  Enter the details necessary here to add a new placement.
+                  <br></br>
+                  <br></br>
                   <FormControl className="my-2">
                     <InputLabel id="demo-simple-select-autowidth-label">
                       Batch

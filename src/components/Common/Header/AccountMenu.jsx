@@ -9,6 +9,21 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
 import AuthContext from '../../../Context/AuthContext';
+import Navs from './Navs';
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import BatchPredictionIcon from '@mui/icons-material/BatchPrediction';
+import GroupIcon from '@mui/icons-material/Group';
+import DnsIcon from '@mui/icons-material/Dns';
+import SchoolIcon from '@mui/icons-material/School';
+import CastForEducationIcon from '@mui/icons-material/CastForEducation';
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import HomeIcon from '@mui/icons-material/Home';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import TimeToLeaveIcon from '@mui/icons-material/TimeToLeave';
+
+
 import Pro from './pro.jpg';
 
 export default function AccountMenu() {
@@ -28,7 +43,7 @@ export default function AccountMenu() {
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
-            size="small"
+            size="large"
             sx={{ ml: 2 }}
             aria-controls={open ? 'account-menu' : undefined}
             aria-haspopup="true"
@@ -74,13 +89,55 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem>
-          <Avatar>M</Avatar> My profile
-        </MenuItem>
-        <MenuItem>
-          <Avatar>P</Avatar> My payments
-        </MenuItem>
-        <Divider />
+
+        
+
+        { user && user.position === 'Lead' && (
+<>
+<Divider />
+
+    <Navs title ="Home" link="/lead" icon={<HomeIcon  />}  />
+    <Navs title ="Batches" link="/lead/batch" icon={<BatchPredictionIcon   />}  />
+    <Navs title ="Domains" link="/lead/domain" icon={<DnsIcon  />}  />
+    <Navs title ="Advisors" link="/lead/advisors" icon={<CastForEducationIcon  />}  />
+    <Navs title ="Groups" link="/lead/groups" icon={<GroupIcon  />}  />
+    <Navs title ="Students" link="/lead/students" icon={<SchoolIcon  />}  />
+    <Navs title ="Requests" link="/lead/requests" icon={<QuestionMarkIcon  />}  />
+    <Divider />
+    <Navs title ="Payments" link="/lead/payments" icon={<CurrencyRupeeIcon  />}  />
+    <Navs title ="Placements" link="/lead/placements" icon={<WorkspacePremiumIcon  />}  />
+</>
+         )}
+
+          {user && user.position === 'Advisor' && (
+            <>
+    <Divider />
+
+    <Navs title ="Home" link="/advisor" icon={<HomeIcon   />}  />
+    <Navs title ="Profile" link="/advisor/profile" icon={<AccountCircleIcon   />}  />
+    <Navs title ="My students" link="/advisor/students" icon={<SchoolIcon   />}  />
+    <Navs title ="My Work" link="/advisor/work" icon={<GroupIcon   />}  />
+    <Navs title ="Students" link="/advisor/allStudents" icon={<SchoolIcon   />}  />
+    <Divider />
+
+            </>
+          )}
+
+          {user && user.position === 'Student' && (
+            <>
+    <Divider />
+
+    <Navs title ="Home" link="/" icon={<HomeIcon />}  />
+    <Navs title ="Profile" link="/profile" icon={<AccountCircleIcon   />}  />
+    <Navs title ="My Tasks" link="/taskslist" icon={<TaskAltIcon   />}  />
+    <Navs title ="My Payments" link="/payment" icon={<CurrencyRupeeIcon   />}  />
+    <Navs title ="Leave application" link="/" icon={<TimeToLeaveIcon   />}  />
+    <Divider />
+
+            </>
+          )}
+      
+      <Divider />
         
        
         <MenuItem onClick={ logoutUser }>
