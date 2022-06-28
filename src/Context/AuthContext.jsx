@@ -46,6 +46,8 @@ export const AuthProvider = ({ children }) => {
   const [finepay, setFinepay] = useState(false);
   const [upfront, setUpfront] = useState(false);
   const [leads, setLeads] = useState(null);
+  const [education, setEducation] = useState(null);
+  const [placement, setPlacement] = useState(null);
 
   const signupUser = async ({ username, email, password }) => {
     const check = signUpBatch === 0 ? true : false;
@@ -884,6 +886,30 @@ export const AuthProvider = ({ children }) => {
     })
   }
 
+  const updatePlacementProfile = async (data) => {
+    await axios.post("http://127.0.0.1:8000/student/update/placement", data, {
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+    }).then((res) => {
+      console.log(res.data);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
+  const getPlacementProfile = async (id) => {
+    await axios.post("http://127.0.0.1:8000/student/view/placement", {
+      student: id,
+    }, {
+      headers: { Authorization: `Bearer ${authTokens.access}` },
+    }).then((res) => {
+      console.log(res.data);
+      setPlacement(res.data.placement);
+      setEducation(res.data.education);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
 
   const contextData = {
     signupUser,
@@ -980,6 +1006,10 @@ export const AuthProvider = ({ children }) => {
     getLeads,
     getNotifications,
     notifications,
+    education,
+    placement,
+    updatePlacementProfile,
+    getPlacementProfile,
     reset_password,
     reset_password_confirm,
     deletePendings,

@@ -35,26 +35,28 @@ function NavBox() {
 
   {(user.position === 'Lead' || user.position === 'Admin') && 
     (<>
+    <Navs title ="Home" link="/lead" icon={<HomeIcon   />}  />
     <Navs title ="Batches" link="/lead/batch" icon={<BatchPredictionIcon    />}  />
     <Navs title ="Domains" link="/lead/domain" icon={<DnsIcon   />}  />
     <Navs title ="Advisors" link="/lead/advisors" icon={<CastForEducationIcon   />}  />
     <Navs title ="Groups" link="/lead/groups" icon={<GroupIcon   />}  />
     <Navs title ="Students" link="/lead/students" icon={<SchoolIcon   />}  />
     <Navs title ="Requests" link="/lead/requests" icon={<QuestionMarkIcon   />}  />
+    <Navs title ="Payments" link="/lead/payments" icon={<CurrencyRupeeIcon   />}  />
+    <Navs title ="Placements" link="/lead/placements" icon={<WorkspacePremiumIcon   />}  />
     </>)}
 
-  {(user.position === 'Lead' || user.position === 'Admin' || user.position === 'Finance') && 
-    (<Navs title ="Payments" link="/lead/payments" icon={<CurrencyRupeeIcon   />}  />)}
+  {(user.position === 'Finance') && 
+    (<Navs title ="Payments" link="/finance/payments" icon={<CurrencyRupeeIcon   />}  />)}
 
-  {(user.position === 'Lead' || user.position === 'Admin' || user.position === 'Placement') && 
-    (<Navs title ="Placements" link="/lead/placements" icon={<WorkspacePremiumIcon   />}  />)}
+  {(user.position === 'Placement') && 
+    (<>
+      <Navs title ="Placements" link="/placement/placements" icon={<WorkspacePremiumIcon   />}  />
+      <Navs title ="Students" link="/placement/students" icon={<HomeIcon   />}  />
+    </>)}
 
   {(user.position === 'Admin') && 
     (<Navs title ="Leads" link="/admin" icon={<HomeIcon   />}  />)}
-
-  {(user.position === 'Placement') && 
-    (<Navs title ="Students" link="/placement/students" icon={<HomeIcon   />}  />)}
-
 
   {user.position === 'Advisor' &&
   (<>

@@ -53,6 +53,7 @@ const AddTask = ({ title, value, form }) => {
   const [designation, setDesignation] = useState("");
   const [LPA, setLPA] = useState("");
   const [student, setStudent] = useState("");
+  const [address, setAddress] = useState("");
   const [count, setCount] = useState(0);
 
   const handleClickOpen = () => {
@@ -124,7 +125,7 @@ const AddTask = ({ title, value, form }) => {
     } else if (value === "addnotifications") {
       createNotifications(form, type, content);
     } else if (value === "placement") {
-      createPlacement(student, name, location, designation, LPA, count);
+      createPlacement(student, name, location, designation, LPA, address, count);
     }
       setOpen(false); 
     }
@@ -627,6 +628,16 @@ const AddTask = ({ title, value, form }) => {
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     placeholder="Enter location here.."
+                    className="my-2"
+                  />
+                  <TextField
+                    id="outlined-basic"
+                    label="Address"
+                    variant="outlined"
+                    rows={3}
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    placeholder="Enter address here.."
                     className="my-2"
                   />
                   <TextField

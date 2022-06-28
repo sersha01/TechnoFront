@@ -83,8 +83,7 @@ export const LeadProvider = ({ children }) => {
       });
   };
 
-  const createPlacement = async (student, name, location, designation, LPA, count) => {
-    console.log(student, name, location, designation, LPA, count);
+  const createPlacement = async (student, name, location, designation, LPA, address, count) => {
     await axios.post("http://127.0.0.1:8000/student/create/placement",
         {
           student: student,
@@ -92,6 +91,7 @@ export const LeadProvider = ({ children }) => {
           location: location,
           designation: designation,
           lpa: LPA,
+          address: address,
           count: count,
         },
         {
