@@ -84,6 +84,14 @@ const AdminCreate = () => {
               </select>
             </div>
             <div className="form-group">
+              <label>Staff</label>
+              <select className="form-control" name="staff">
+                <option value="Lead">Lead</option>
+                <option value="Placement">Placement</option>
+                <option value="Finance">Finance</option>
+              </select>
+            </div>
+            <div className="form-group">
               <label>Password</label>
               <input
                 name="password"

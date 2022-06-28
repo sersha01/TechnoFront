@@ -298,7 +298,13 @@ function App() {
                 <Route
                   path="/placement/placements"
                   element={
-                    <Placement child={<Placement />}/>
+                    <Placement child={<Placements />}/>
+                  }
+                />
+                <Route
+                  path="/placement/placements/info"
+                  element={
+                    <Placement child={<PlacementProfile />}/>
                   }
                 />
                 <Route
