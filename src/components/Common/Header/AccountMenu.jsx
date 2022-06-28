@@ -53,6 +53,8 @@ export default function AccountMenu() {
           </IconButton>
         </Tooltip>
       </Box>
+      {user &&
+
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
@@ -139,14 +141,14 @@ export default function AccountMenu() {
       
       <Divider />
         
-       
         <MenuItem onClick={ logoutUser }>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
           Logout
         </MenuItem>
-      </Menu>
+        
+      </Menu>}
     </React.Fragment>
   );
 }

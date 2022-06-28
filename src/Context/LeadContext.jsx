@@ -410,9 +410,10 @@ export const LeadProvider = ({ children }) => {
     })
   };
 
-  const shiftAccept = async (id) => {
+  const shiftAccept = async (id,amount) => {
     await axios.post("http://127.0.0.1:8000/student/shift/accept", {
       'id':id,
+      'amount':amount,
     },{
       headers: { Authorization: `Bearer ${authTokens.access}` },
     }).then(res=>{

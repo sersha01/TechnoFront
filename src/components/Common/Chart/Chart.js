@@ -148,29 +148,29 @@ function Chart({data}) {
     data.map((item) => {
         if (item.type === 'radar') {
             return 
-            (<Col md={6} className="bg my-3 p-2">
+            (<Col md={6} className="bg my-3 rounded-3 p-2">
               <RadarChart data={item.data} />
               </Col>)
         } else if (item.type === 'doughnut') {
           return
-          (<Col md={6} className="bg my-3 p-2">
+          (<Col md={6} className="bg my-3 rounded-3 p-2">
              <DoughnutChart data={item.data} />
               </Col>)
         } else if (item.type === 'pie') {
             return (
-              <Col md={5} className="bg my-3 p-4 mx-4">
+              <Col md={5} className="bg my-3 rounded-3 p-4 mx-4">
                 <PieChart data={item.data}/>
               </Col>
             )
         } else if (item.type === 'line') {
             return (
-            <Row  className="bg my-3 p-2">
+            <Row  className="bg my-3 rounded-3 p-2">
             <LineChart data={item.data} />
             </Row>
             )
         } else if (item.type === 'bar') {
             return (
-            <Col className="bg my-3 p-2"><BarChart data={item.data} /></Col>
+            <Col className="bg my-3 rounded-3 p-2"><BarChart data={item.data} /></Col>
             )
         }
     }))

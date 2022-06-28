@@ -10,7 +10,7 @@ import style from "./Manifest.module.css";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../Context/AuthContext";
 import AdvisorContext from "../../../Context/AdvisorContext";
-import AddTask from '../../Advisor/AddTask/AddTask';
+import AddTask from "../../Advisor/AddTask/AddTask";
 import Button from "@mui/material/Button";
 
 function Manifest() {
@@ -18,13 +18,19 @@ function Manifest() {
   const [personal_wo, setPersonal_wo] = useState(null);
   const [personal_score, setPersonal_score] = useState(null);
   const [technical_score, setTechnical_score] = useState(null);
-  const { getStudentManifest, studentManifest, curr_manifest, user, folderSubmit } = useContext(AuthContext);
+  const {
+    getStudentManifest,
+    studentManifest,
+    curr_manifest,
+    user,
+    folderSubmit,
+  } = useContext(AuthContext);
   const { addTask, taskComplete } = useContext(AdvisorContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    folderSubmit({folder:e.target.folder.value, manifest:curr_manifest});
-  }
+    folderSubmit({ folder: e.target.folder.value, manifest: curr_manifest });
+  };
 
   useEffect(() => {
     getStudentManifest(curr_manifest);
@@ -41,25 +47,63 @@ function Manifest() {
       <Col className={`text-center py-2 mb-4 rounded-3 ${style.head}`} xs={12}>
         {studentManifest ? studentManifest.title : "Week"}
       </Col>
-        <Col className={`row mx-0 my-3 text-start`} xs={12}>
-            <Col className={`py-2 ps-5`} xs={4}>
-                <h6 className={`ps-3 ${style.label}`}>Tasks</h6>
-            </Col>
-            <Col className={`row`} xs={8}>
-                {studentManifest && studentManifest.tasks && studentManifest.tasks.map((task, index) => {
-                    return (
-                        <Col xs={11} className={`rounded-3 py-2 my-1 ${style.todoDiv}`} key={index}><input type="text" value={task.taskname} className={`col-11 ${style.input}`} disabled />
-                {task.status === true ? <CheckCircleIcon className='col-1'/> :<CheckCircleOutlineIcon className='col-1' onClick={()=>{
-                    taskComplete(task.id);
-                }}/>}
-                </Col>
-                )})}
-                <Col xs={11} className={`rounded-3 py-2 my-1 ${style.todoDiv}`}><input type="text" placeholder={'Add New Task'} className={`col-11 ${style.input}`} value={task} onChange={(e)=>{setTask(e.target.value)}}/>
-                {user.position !== "Student" && (studentManifest && studentManifest.is_complete !== true) && <AddCircleOutlineRoundedIcon className='col-1' onClick={()=>{addTask(task)
-                setTask('')}} />}
-                </Col>
-            </Col>
+      <Col className={`row mx-0 my-3 text-start`} xs={12}>
+        <Col className={`py-2 ps-5`} xs={4}>
+          <h6 className={`ps-3 ${style.label}`}>Tasks</h6>
         </Col>
+        <Col className={`row`} xs={8}>
+          {studentManifest &&
+            studentManifest.tasks &&
+            studentManifest.tasks.map((task, index) => {
+              return (
+                <Col
+                  xs={11}
+                  className={`rounded-3 py-2 my-1 ${style.todoDiv}`}
+                  key={index}
+                >
+                  <input
+                    type="text"
+                    value={task.taskname}
+                    className={`col-11 ${style.input}`}
+                    disabled
+                  />
+                  {task.status === true ? (
+                    <CheckCircleIcon className="col-1" />
+                  ) : (
+                    <CheckCircleOutlineIcon
+                      className="col-1"
+                      onClick={() => {
+                        taskComplete(task.id);
+                      }}
+                    />
+                  )}
+                </Col>
+              );
+            })}
+          <Col xs={11} className={`rounded-3 py-2 my-1 ${style.todoDiv}`}>
+            <input
+              type="text"
+              placeholder={"Add New Task"}
+              className={`col-11 ${style.input}`}
+              value={task}
+              onChange={(e) => {
+                setTask(e.target.value);
+              }}
+            />
+            {user.position !== "Student" &&
+              studentManifest &&
+              studentManifest.is_complete !== true && (
+                <AddCircleOutlineRoundedIcon
+                  className="col-1"
+                  onClick={() => {
+                    addTask(task);
+                    setTask("");
+                  }}
+                />
+              )}
+          </Col>
+        </Col>
+      </Col>
       <Col className={`row mx-0 my-1 text-start`} xs={12}>
         <Col className={`py-2 ps-5`} xs={4}>
           <h6 className={`ps-3 ${style.label}`}>Personal Workout</h6>
@@ -134,22 +178,46 @@ function Manifest() {
               className={`w-100 p-2 rounded-3 ${style.input}`}
             />
           </Col>
-          <Col xs={3} sm={2} className="px-md-2">
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              className={`w-100 py-2 rounded-3 ${style.button}`}
-            >
-              Save
-            </Button>
-          </Col>
+          {user?.position === "Student" && (
+            <Col xs={3} sm={2} className="px-md-2">
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                className={`w-100 py-2 rounded-3 ${style.button}`}
+              >
+                Save
+              </Button>
+            </Col>
+          )}
+          {user?.position === "Advisor" && (
+            <Col xs={3} sm={2} className="px-md-2">
+              <a href={studentManifest?.folder} target="_blank" rel="noopener noreferrer">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={`w-100 py-2 rounded-3 ${style.button}`}
+                >
+                  Open link
+                </Button>
+              </a>
+            </Col>
+          )}
         </Col>
       </form>
-        {user.position === "Advisor" && (studentManifest && studentManifest.is_complete !== true) && <div className='d-flex justify-content-center'>
-            <div><AddTask title="Repeat" value="repeated" form={formData}/></div>
-            <div> <AddTask title="Completed" value="completed" form={formData}/></div>
-        </div>}
+      {user.position === "Advisor" &&
+        studentManifest &&
+        studentManifest.is_complete !== true && (
+          <div className="d-flex justify-content-center">
+            <div>
+              <AddTask title="Repeat" value="repeated" form={formData} />
+            </div>
+            <div>
+              {" "}
+              <AddTask title="Completed" value="completed" form={formData} />
+            </div>
+          </div>
+        )}
     </Row>
   );
 }

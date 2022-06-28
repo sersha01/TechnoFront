@@ -149,13 +149,11 @@ const Requests = () => {
             <Col className="textdark" sm={2}>
             {request.advisor}
             </Col>
-            <Col className="textdark d-flex" sm={2}>
-             {/* <Button  onClick={()=>{shiftAccept(request.id)}}>Accept</Button> */}
-             <AmountModal title={'Accept'} action={shiftAccept} id={request.id}/>
+            <Col className="textdark d-flex justify-content-end" sm={4}>
+             <AmountModal title={'Accept'} action={shiftAccept} id={request.id} />
+             <Button color="error" variant="contained" onClick={()=>{shiftReject(request.id)}}>Reject</Button>
             </Col>
-            <Col className="textdark d-flex" sm={2}>
-             <Button onClick={()=>{shiftReject(request.id)}}>Reject</Button>
-            </Col>
+           
           </Row>
         </Col>)}) : null}
           
@@ -230,12 +228,11 @@ const Requests = () => {
             <Col className="textdark" sm={2}>
             {request.advisor}
             </Col>
-            <Col className="textdark d-flex" sm={2}>
+            <Col className="textdark d-flex justify-content-end" sm={4}>
              <Button onClick={()=>{terminateAccept(request.id)}}>Accept</Button>
-            </Col>
-            <Col className="textdark d-flex" sm={2}>
              <Button onClick={()=>{terminateReject(request.id)}}>Reject</Button>
             </Col>
+            
           </Row>
         </Col>)}) : null}
           
@@ -255,7 +252,7 @@ const AmountModal = ({ title, action, id }) => {
 
 
   const [open, setOpen] = useState(false);
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState(0);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -271,7 +268,7 @@ const AmountModal = ({ title, action, id }) => {
 
   return (
     <div>
-      <Button onClick={handleClickOpen}>
+      <Button className='textlight bgdark mx-2 px-3' onClick={handleClickOpen}>
         {title}
       </Button>
       <Dialog
@@ -291,7 +288,12 @@ const AmountModal = ({ title, action, id }) => {
               style={{ width: "500px", height: "fit-content" }}
             >
                 <Row className="my-2">
+                  Payment slip will be listed on students payment page.<br/><br/>
+                  Enter the amount to be paid.<br/>
+                  Leave it blank if no fine exists.
+                  <br/>
                   <TextField
+                    className='mt-2'
                     id="outlined-basic"
                     label="Amount"
                     variant="outlined"

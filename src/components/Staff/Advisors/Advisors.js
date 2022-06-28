@@ -33,7 +33,7 @@ const Advisors = () => {
         </div>
         <div>
           <Button className="searchbtn w-75" 
-          onClick={()=>{copyToClipboard(advisorLink)}}>Link</Button>
+          onClick={()=>{copyToClipboard("http://localhost:3000/signup/"+advisorLink)}}>Link</Button>
         </div>
       </Col>
 

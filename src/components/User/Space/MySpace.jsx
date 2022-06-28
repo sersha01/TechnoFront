@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from "react";
-import { Row } from "react-bootstrap";
+import { Row,Col } from "react-bootstrap";
 import './MySpace.css'
 import Chart from "../../Common/Chart/Chart";
 import AuthContext from "../../../Context/AuthContext";
+import Accordion from './SimpleAccordion'
 
 const MySpace = () => {
   const { chartData, getChartData, getNotifications } = useContext(AuthContext);
@@ -13,8 +14,17 @@ const MySpace = () => {
   return (
     <div>
       {chartData && (
-      <Row className="mt-5 bg">
+      <Row className="mt-5 col-11 chartspage">
+        <Row>
+          <Col md={6}></Col>
+          <Col md={6}>
+            <Accordion/>
+          </Col>
+        </Row>
+        <div className="p-0 m-0 mb-4">
+        <h2 className="text-center">My Charts</h2>
         <Chart data={chartData}/>
+        </div>
       </Row>)}
     </div>
   );
