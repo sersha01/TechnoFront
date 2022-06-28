@@ -12,12 +12,23 @@ import AuthContext from "../../../Context/AuthContext";
 import AdvisorContext from "../../../Context/AdvisorContext";
 import AddTask from "../../Advisor/AddTask/AddTask";
 import Button from "@mui/material/Button";
+import StyleContext from "../../../Context/StyleContext";
+import { FaTrashAlt } from "react-icons/fa";
+
+
+
+
+
+
 
 function Manifest() {
   const [task, setTask] = useState(null);
   const [personal_wo, setPersonal_wo] = useState(null);
   const [personal_score, setPersonal_score] = useState(null);
   const [technical_score, setTechnical_score] = useState(null);
+  const {warningToast} = useContext(StyleContext);
+
+
   const {
     getStudentManifest,
     studentManifest,
@@ -25,7 +36,8 @@ function Manifest() {
     user,
     folderSubmit,
   } = useContext(AuthContext);
-  const { addTask, taskComplete } = useContext(AdvisorContext);
+  
+  const { addTask, taskComplete,deleteTask } = useContext(AdvisorContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,6 +53,8 @@ function Manifest() {
     misc_score: personal_score,
     technical_score: technical_score,
   };
+
+  
 
   return (
     <Row className={`m-0 ${style.manifest}`}>
@@ -64,18 +78,37 @@ function Manifest() {
                   <input
                     type="text"
                     value={task.taskname}
-                    className={`col-11 ${style.input}`}
+                    className={`col-10 ${style.input}`}
                     disabled
+                    
                   />
-                  {task.status === true ? (
-                    <CheckCircleIcon className="col-1" />
+                  {task.status === true ? (<>
+                    <CheckCircleIcon className="col-2   mx-2" />
+                    <FaTrashAlt
+                    onClick={(e)=>{
+                      e.preventDefault();
+                      deleteTask(task.id)
+                    }
+                  }
+                  
+                />
+                </>
                   ) : (
+                    <>
                     <CheckCircleOutlineIcon
-                      className="col-1"
+                      className="col-2 mx-2"
                       onClick={() => {
                         taskComplete(task.id);
                       }}
                     />
+                    <FaTrashAlt
+                    onClick={(e)=>{
+                      e.preventDefault();
+                      deleteTask(task.id)
+                    }
+                  }
+                />
+                </>
                   )}
                 </Col>
               );
@@ -88,18 +121,37 @@ function Manifest() {
               value={task}
               onChange={(e) => {
                 setTask(e.target.value);
+                
+              }}
+              onKeyUp={(e) => {
+                if(e.keyCode == 13){
+                    if(e.target.value!== ""){
+                      addTask(e.target.value)
+                      setTask("");
+                    }else {
+                        return warningToast("Enter a task")
+                    }
+                }
               }}
             />
             {user.position !== "Student" &&
               studentManifest &&
               studentManifest.is_complete !== true && (
+                <>
                 <AddCircleOutlineRoundedIcon
                   className="col-1"
                   onClick={() => {
-                    addTask(task);
-                    setTask("");
+                    if(task!== ""){
+                      addTask(task)
+                      setTask("");
+                    }else {
+                      warningToast("Enter a task")
+                    }
+                    
                   }}
                 />
+                
+                </>
               )}
           </Col>
         </Col>
@@ -117,6 +169,7 @@ function Manifest() {
             onChange={(e) => {
               setPersonal_wo(e.target.value);
             }}
+            
           />
         </Col>
       </Col>

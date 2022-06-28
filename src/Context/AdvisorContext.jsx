@@ -43,6 +43,27 @@ export const AdvisorProvider = ({ children }) => {
       });
   };
 
+  const deleteTask = async (id) => {
+    await axios
+      .post(
+        "http://127.0.0.1:8000/manifest/delete/task",
+        {
+          id: id,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        getStudentManifest(curr_manifest);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        console.log(err);
+      });
+  };
+
   const reviewPassed = async (form, reviewer, remark, date, status) => {
     await axios
       .post(
@@ -216,6 +237,7 @@ export const AdvisorProvider = ({ children }) => {
 
     //Update
     taskComplete,
+    deleteTask,
 
     //Send request
     sendShiftRequest,

@@ -308,6 +308,27 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const deletePendings = async (id) => {
+    await axios
+      .post(
+        "http://127.0.0.1:8000/manifest/delete/pendings",
+        {
+          id: id,
+        },
+        {
+          headers: { Authorization: `Bearer ${authTokens.access}` },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        setPendings(res.data);
+        getPendings();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const getStudentManifest = async (manifestId) => {
     await axios
       .post(
@@ -961,6 +982,7 @@ export const AuthProvider = ({ children }) => {
     notifications,
     reset_password,
     reset_password_confirm,
+    deletePendings,
 
   };
   return (
